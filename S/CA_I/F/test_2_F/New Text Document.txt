@@ -1,0 +1,8 @@
+⁃ Scene 1: យក Product ចំនួន២ (Assignment ចាស់) មក Animation ហោះចូលកាត់គ្នា ដោយបង្កើត Background ពណ៌ណាមួយ អោយស៊ីនឹង Product 
+(អាចបន្ថែម Cube circle ហោះអម តូចៗ)
+
+Scene 1 មានរយៈពេលប្រហែល 5s - 6s
+
+• Scene 2 Product 1 មានទឹកហោះឡើងជុំវិញ មានរយៈពេលប្រហែល 5s - 10s
+
+. Scene 3 Product 1 ទៀត មានគ្រឿងផ្សំហោះចេញពី Prodcut មានរយៈពេលប្រហែល 5s - 10s
