@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- Usage: <span th:replace="~{fragments/stars :: rating(${product.rating})}"></span> -->
+<span th:fragment="rating(value)" class="stars"
+      th:with="full=${value != null ? T(java.lang.Math).round(value) : 0}"
+      th:attr="aria-label=${'Rating ' + (value != null ? value : 0)}">
+  <th:block th:each="i : ${#numbers.sequence(1,5)}">
+    <span th:classappend="${i <= full} ? ' on'" th:text="'★'">★</span>
+  </th:block>
+</span>
+</body>
+</html>

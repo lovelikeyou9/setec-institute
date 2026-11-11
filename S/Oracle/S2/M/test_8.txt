@@ -1,0 +1,105 @@
+
+
+-- test_8
+-- on sys@localhost:orcl
+-- 1. Check User in Oracle
+SELECT * FROM DBA_USERS;
+
+-- Fullname: Chou Yamata - ( SV2.6 )
+-- 2. Create user SV26 with password 123 tablespace 10M
+CREATE USER SV26 IDENTIFIED BY "123"
+DEFAULT TABLESPACE USERS QUOTA 10M ON USERS;
+
+SELECT * FROM DBA_SYS_PRIVS
+WHERE UPPER(GRANTEE)=UPPER('SV26');
+
+-- 3. Check Role in ORACLE Database
+SELECT * FROM DBA_ROLES WHERE ROLE IN ('CONNECT','DBA','RESOURCE');
+
+-- 4. Assign Role CONNECT to user SV26 can login
+GRANT CONNECT TO SV26;
+
+-- 5. Check Role on user SV26
+SELECT * FROM DBA_ROLE_PRIVS
+WHERE GRANTEE='SV26';
+-- or
+SELECT * FROM DBA_ROLE_PRIVS
+WHERE UPPER(GRANTEE)=UPPER('SV26');
+
+
+-- New Connection
+click New Connection at left button box
+
+General
+Connection Type > choose TNS
+User: "SV26"
+Password: 123
+
+click Test Connection
+
+right on
+
+-- on SV26@localhost:orcl
+-- Create table users for test
+CREATE TABLE users(
+  userid NUMBER(10) PRIMARY KEY,
+  username VARCHAR(30) NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  created_at DATE DEFAULT SYSDATE
+);  -- not work
+
+-- on sys@localhost:orcl
+-- 6. Assign Role RESOURCE to user SV26 can create table
+GRANT RESOURCE TO SV26;
+
+-- on SV26@localhost:orcl
+-- Create table users for test
+CREATE TABLE users(
+  userid NUMBER(10) PRIMARY KEY,
+  username VARCHAR(30) NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  created_at DATE DEFAULT SYSDATE
+);  -- not work
+
+-- Create table users for test
+CREATE TABLE users(
+  userid NUMBER(10) PRIMARY KEY,
+  username VARCHAR(30) NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  created_at DATE DEFAULT SYSDATE
+);  -- close software then open back
+    -- or
+    -- at the left-side box: click Close Connection > 
+    -- +++ click Refresh > right click SV26@localhost:orcl > click Open 
+    -- work
+
+SELECT * FROM USERS;
+
+-- Add record into users
+INSERT INTO USERS(USERID, USERNAME, PASSWORD)
+VALUES (1, 'Leng Makara', 'admin@123');
+
+SELECT * FROM USERS;
+
+-- Create user channy with password 123 tablespace 5M
+CREATE USER channy IDENTIFIED BY "123"
+DEFAULT TABLESPACE USERS QUOTA 5M ON USERS; -- not work
+
+-- on sys@localhost:orcl
+-- 7. Pronote user SV26 to Super Admin
+GRANT DBA TO SV26;
+
+SELECT * FROM DBA_ROLE_PRIVS
+WHERE UPPER(GRANTEE)=UPPER('SV26');
+
+-- on SV26@localhost:orcl
+-- Create user channy with password 123 tablespace 5M
+CREATE USER channy IDENTIFIED BY "123"
+DEFAULT TABLESPACE USERS QUOTA 5M ON USERS;
+    -- close software then open back
+    -- or
+    -- at the left-side box: click Close Connection > click Refresh > right click SV26@localhost:orcl > click Open 
+    -- work
+
+SELECT * FROM DBA_USERS
+WHERE UPPER(USERNAME)=UPPER('CHANNY');

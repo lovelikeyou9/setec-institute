@@ -1,0 +1,7 @@
+<!-- Product Card -->
+<div class="row">
+    @for (product of products.getProducts(); track product.id) {
+    <app-product-card [product]="product" class="col-lg-3 col-md-3 col-sm-6 mt-4"></app-product-card>
+    }
+
+</div>

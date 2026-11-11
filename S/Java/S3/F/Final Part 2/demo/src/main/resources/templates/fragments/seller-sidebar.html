@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<aside class="dash-sidebar" th:fragment="sellerSidebar">
+  <div class="brand-block">
+    <strong>Seller Center</strong>
+    <span th:text="${seller != null ? seller.storeName : 'Store'}">Store</span>
+  </div>
+  <nav class="dash-nav">
+    <span class="dash-nav-label">Seller</span>
+    <a th:href="@{/seller-dashboard}" th:classappend="${activeNav == 'dashboard'} ? 'active'">Dashboard</a>
+
+    <div class="dash-nav-group"
+         th:classappend="${activeNav == 'products' or activeNav == 'categories' or activeNav == 'brands' or activeNav == 'add-product'} ? ' open'">
+      <button type="button" class="dash-nav-toggle"
+              th:classappend="${activeNav == 'products' or activeNav == 'categories' or activeNav == 'brands' or activeNav == 'add-product'} ? ' active'"
+              aria-expanded="false"
+              th:attr="aria-expanded=${activeNav == 'products' or activeNav == 'categories' or activeNav == 'brands' or activeNav == 'add-product'}">
+        <span>Products</span>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="dash-nav-sub">
+        <a th:href="@{/seller-dashboard/products}" th:classappend="${activeNav == 'products' or activeNav == 'add-product'} ? 'active'">Products List</a>
+        <a th:href="@{/seller-dashboard/categories}" th:classappend="${activeNav == 'categories'} ? 'active'">Category</a>
+        <a th:href="@{/seller-dashboard/brands}" th:classappend="${activeNav == 'brands'} ? 'active'">Brand</a>
+      </div>
+    </div>
+
+    <a th:href="@{/seller-dashboard/orders}" th:classappend="${activeNav == 'orders'} ? 'active'">Orders</a>
+    <a th:href="@{/seller-dashboard/reviews}" th:classappend="${activeNav == 'reviews'} ? 'active'">Reviews</a>
+    <a th:href="@{/seller-dashboard/earnings}" th:classappend="${activeNav == 'earnings'} ? 'active'">Earnings</a>
+    <a th:href="@{/seller-dashboard/settings}" th:classappend="${activeNav == 'settings'} ? 'active'">Settings</a>
+
+    <span class="dash-nav-label">Account</span>
+    <a th:href="@{/account/orders}" th:classappend="${activeNav == 'my-orders'} ? 'active'">My Orders</a>
+    <a th:href="@{/account/wishlist}" th:classappend="${activeNav == 'wishlist'} ? 'active'">Wishlist</a>
+    <a th:href="@{/account/cart}" th:classappend="${activeNav == 'cart'} ? 'active'">Cart</a>
+    <a th:href="@{/notifications}" th:classappend="${activeNav == 'notifications'} ? 'active'">Notifications</a>
+    <a th:href="@{/account/addresses}" th:classappend="${activeNav == 'addresses'} ? 'active'">Addresses</a>
+    <a th:href="@{/account/settings}" th:classappend="${activeNav == 'account-settings'} ? 'active'">Account Settings</a>
+  </nav>
+</aside>
+</body>
+</html>

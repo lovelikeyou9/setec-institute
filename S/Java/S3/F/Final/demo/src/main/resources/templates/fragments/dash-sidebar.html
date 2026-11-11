@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<!-- Role-aware sidebar: admin/seller keep their panel menu on account pages too -->
+<th:block th:fragment="sidebar">
+  <th:block sec:authorize="hasRole('ADMIN')">
+    <aside th:replace="~{fragments/admin-sidebar :: adminSidebar}"></aside>
+  </th:block>
+  <th:block sec:authorize="hasRole('SELLER') and !hasRole('ADMIN')">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+  </th:block>
+  <th:block sec:authorize="hasRole('CUSTOMER')">
+    <aside th:replace="~{fragments/account-sidebar :: accountSidebar}"></aside>
+  </th:block>
+</th:block>
+</body>
+</html>

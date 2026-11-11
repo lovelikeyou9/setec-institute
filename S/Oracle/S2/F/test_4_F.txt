@@ -1,0 +1,47 @@
+-- test_4_F
+-- on ora1@localhost:orcl
+-- Create complete view using group function
+-- MAX(), MIN(), AVG(), COUNT(), SUM()
+SELECT * FROM EMPLOYEES;
+
+SELECT 
+  SUM(SALARY) AS "Total Salary",
+  COUNT(*) AS "COUNT_EMPLOYEES",
+  MAX(SALARY) AS "Maximum Salary",
+  MIN(SALARY) AS "Minimun Salary",
+  AVG(SALARY) AS "Average Salary"
+FROM EMPLOYEES;
+
+CREATE OR REPLACE VIEW VIEW_GROUPFUNC AS
+SELECT 
+  SUM(SALARY) AS "Total Salary",
+  COUNT(*) AS "COUNT_EMPLOYEES",
+  MAX(SALARY) AS "Maximum Salary",
+  MIN(SALARY) AS "Minimun Salary",
+  AVG(SALARY) AS "Average Salary"
+FROM EMPLOYEES;
+
+-- Display view named VIEW_GROUPFUNC
+SELECT * FROM VIEW_GROUPFUNC;
+
+CREATE OR REPLACE VIEW VIEW_GROUPFUNC AS
+SELECT 
+  TO_CHAR(SUM(SALARY), '$99,999,999.00' ) AS "Total Salary",
+  COUNT(*) AS "COUNT_EMPLOYEES",
+  MAX(SALARY) AS "Maximum Salary",
+  MIN(SALARY) AS "Minimun Salary",
+  AVG(SALARY) AS "Average Salary"
+FROM EMPLOYEES;
+
+SELECT * FROM VIEW_GROUPFUNC;
+
+CREATE OR REPLACE VIEW VIEW_GROUPFUNC AS
+SELECT 
+  TO_CHAR(SUM(SALARY), 'fm$99,999,999.00') AS "Total Salary",
+  COUNT(*) || ' People' AS "COUNT_EMPLOYEES",
+  TO_CHAR(MAX(SALARY), 'fm99,999,999.00') || '$' AS "Maximum Salary",
+  TO_CHAR(ROUND(MIN(SALARY) * AVG(NVL(COMMISSION_PCT, 0)) + SUM(SALARY)), 'fm$99,999,999.00') AS "Minimun Salary",
+  'KHR ' || TO_CHAR(AVG(SALARY) * 4100, 'fm99,999,999.00') AS "Average Salary"
+FROM EMPLOYEES;
+
+SELECT * FROM VIEW_GROUPFUNC;

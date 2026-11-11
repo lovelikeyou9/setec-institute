@@ -1,0 +1,10 @@
+Feb 03 15:34:57.460 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Feb 03 15:34:57.461 HYPERVISOR: Started on IP = localhost, TCP port = 53757.
+Feb 03 15:34:57.782 HYPERVISOR: exec_cmd: hypervisor version 
+Feb 03 15:34:57.783 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\Admin\OneDrive\Desktop\S\CND_I\M\test_1\test_1\test_1\project-files\dynamips 
+Feb 03 15:34:57.798 GENERAL: working_dir=C:\Users\Admin\OneDrive\Desktop\S\CND_I\M\test_1\test_1\test_1\project-files\dynamips
+Feb 03 15:34:57.798 HYPERVISOR: exec_cmd: nio_bridge create Hub1 
+Feb 03 15:35:11.744 HYPERVISOR: exec_cmd: nio_bridge delete Hub1 
+Feb 03 15:35:11.747 HYPERVISOR: exec_cmd: hypervisor stop 
+Feb 03 15:35:11.986 HYPERVISOR: Stopped.
+Feb 03 15:35:11.986 GENERAL: reset done.

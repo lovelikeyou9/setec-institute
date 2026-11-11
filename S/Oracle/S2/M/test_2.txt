@@ -1,0 +1,109 @@
+-- Continus from test_1
+
+-- 7. Create user sovann with password: 123
+CREATE USER SOVANN IDENTIFIED BY "123";
+
+-- 8. Find user sovann in oracle
+SELECT * FROM DBA_USERS
+WHERE USERNAME='SOVANN';
+-- or
+SELECT * FROM DBA_USERS
+WHERE UPPER(USERNAME)=UPPER('SOVANN');
+
+-- 9. DELETE USER IN ORACLE
+DROP USER SOVANN;
+DROP USER SOVANN CASCADE;
+
+-- 10. Provide permission on user Sovann can login
+GRANT CREATE SESSION TO SOVANN;
+
+-- 11. Check permission user SOVANN
+SELECT * FROM DBA_SYS_PRIVS;
+-- or
+SELECT * FROM DBA_SYS_PRIVS
+WHERE UPPER(GRANTEE)=UPPER('SOVANN');
+
+
+-- user sovann SQL
+-- create table tblusers
+CREATE TABLE tblusers(
+  userId NUMBER(10) PRIMARY KEY,
+  username VARCHAR(25) UNIQUE NOT NULL,
+  password VARCHAR2(30) NOT NULL
+);  -- not work
+
+
+-- 12. Provide permission on user sovann can create
+GRANT CREATE TABLE TO SOVANN;
+
+
+-- user sovann SQL
+-- create table tblusers
+CREATE TABLE tblusers(
+  userId NUMBER(10) PRIMARY KEY,
+  username VARCHAR(25) UNIQUE NOT NULL,
+  password VARCHAR2(30) NOT NULL
+);  -- work
+
+SELECT * FROM TBLUSERS;
+
+
+
+
+
+
+------
+
+
+
+
+
+-- Continus from test_1
+
+-- by using SQL in sys@localhost:orcl
+-- 7. Create user chouyamata with password: REMOVED
+CREATE USER CHOUYAMATA IDENTIFIED BY "REMOVED";
+
+-- 8. Find user chouyamata in oracle
+SELECT * FROM DBA_USERS;
+
+SELECT * FROM DBA_USERS
+WHERE USERNAME='CHOUYAMATA';
+-- or
+SELECT * FROM DBA_USERS
+WHERE UPPER(USERNAME)=UPPER('CHOUYAMATA');
+
+-- 9. DELETE USER IN ORACLE
+DROP USER CHOUYAMATA;
+DROP USER CHOUYAMATA CASCADE; -- if user is using or online
+
+-- 10. Provide permission on user Chou Yamata can login
+GRANT CREATE SESSION TO CHOUYAMATA;
+
+-- 11. Check permission user CHOUYAMATA
+SELECT * FROM DBA_SYS_PRIVS;
+-- or
+SELECT * FROM DBA_SYS_PRIVS
+WHERE UPPER(GRANTEE)=UPPER('CHOUYAMATA');
+
+
+-- user chouyamata SQL  ** by using SQL in chouyamata@localhost:orcl **
+-- create table tblusers
+CREATE TABLE tblusers(
+  userId NUMBER(10) PRIMARY KEY,
+  username VARCHAR(25) UNIQUE NOT NULL,
+  password VARCHAR2(30) NOT NULL
+);  -- not work
+
+-- 12. Provide permission on user chouyamata can create table. ** by using SQL in sys@localhost:orcl **
+GRANT CREATE TABLE TO CHOUYAMATA;
+
+-- user chouyamata SQL    ** by using SQL in chouyamata@localhost:orcl **
+-- create table tblusers
+CREATE TABLE tblusers(
+  userId NUMBER(10) PRIMARY KEY,
+  username VARCHAR(25) UNIQUE NOT NULL,
+  password VARCHAR2(30) NOT NULL
+);  -- work
+
+SELECT * FROM TBLUSERS;

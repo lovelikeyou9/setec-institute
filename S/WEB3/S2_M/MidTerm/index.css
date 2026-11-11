@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgb(2, 17, 30);
+}
+
+.form_container {
+  margin-top: 20px;
+  width: 60vw;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add_div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.add_div button {
+  padding: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.custom-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content input,
+.modal-content select {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.modal-content button {
+  margin-top: 10px;
+  padding: 10px;
+  cursor: pointer;
+}

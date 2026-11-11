@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hospital Appointments</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, sans-serif;
+            background: #f5f7fb;
+            color: #1b2230;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+        }
+
+        .lead {
+            margin: 0 0 18px 0;
+            color: #5b6878;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .control-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 160px;
+        }
+
+        .control-item input,
+        .control-item select {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        #search-btn,
+        .btn-add {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            background: #2563eb;
+            transition: .2s;
+        }
+
+        #search-btn:hover,
+        .btn-add:hover {
+            background: #1d4ed8;
+        }
+
+        .appointments {
+            display: grid;
+            gap: 14px;
+        }
+
+        .appt-card {
+            background: #fff;
+            border: 1px solid #e6eef6;
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+        }
+
+        .appt-main {
+            flex: 0 0 220px;
+            min-width: 160px;
+        }
+
+        .appt-id {
+            margin: 0 0 6px 0;
+            font-size: 1.05rem;
+        }
+
+        .meta {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 6px 8px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: #eef2ff;
+        }
+
+        .badge.status.completed {
+            background: #ecfdf5;
+            border: 1px solid rgba(8, 145, 105, 0.12);
+        }
+
+        .badge.status.scheduled {
+            background: #fff7ed;
+            border: 1px solid rgba(245, 158, 11, 0.12);
+        }
+
+        .badge.status.cancelled {
+            background: #fee2e2;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .appt-info {
+            flex: 1;
+            position: relative;
+        }
+
+        .row {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        dt {
+            font-size: 0.78rem;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+
+        dd {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .notes dt {
+            font-weight: 700;
+        }
+
+        .notes dd {
+            font-weight: 400;
+            color: #334155;
+            margin-top: 6px;
+        }
+
+        .card-footer {
+            margin-top: 12px;
+            color: #64748b;
+            font-size: 0.86rem;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            margin-right: 10px;
+            color: white;
+        }
+
+        .btn-edit {
+            background: #10b981;
+        }
+
+        .btn-edit:hover {
+            background: #059669;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+        }
+
+        .btn-delete:hover {
+            background: #b91c1c;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90%;
+            overflow: auto;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #e5e7eb;
+        }
+
+        /* Delete Modal specific */
+        #delete-modal .modal-content {
+            text-align: center;
+        }
+
+        #delete-modal h2 {
+            color: #ef4444;
+            margin-bottom: 12px;
+        }
+
+        #delete-modal p {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        #delete-modal .modal-buttons {
+            justify-content: center;
+        }
+
+        .btn-delete-confirm {
+            background: #ef4444;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-delete-confirm:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <header>
+            <h1>Appointments</h1>
+            <p class="lead">Manage appointments without page reload.</p>
+        </header>
+
+        <section class="controls">
+            <div class="control-item">
+                <label for="search-input">Search</label>
+                <input type="text" id="search-input" placeholder="Search appointments">
+            </div>
+            <div class="control-item">
+                <label for="filter-status">Status</label>
+                <select id="filter-status">
+                    <option value="">All</option>
+                    <option>Scheduled</option>
+                    <option>Completed</option>
+                    <option>Cancelled</option>
+                </select>
+            </div>
+            <div class="control-item">
+                <label for="filter-dept">Department</label>
+                <select id="filter-dept">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <a href="#" class="btn-add" id="btn-add" style="text-decoration: none;">Add Appointment</a>
+        </section>
+
+        <section class="appointments" aria-live="polite"></section>
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Add Appointment</h2>
+            <input type="hidden" id="appt-id-hidden">
+            <label>Appointment ID</label>
+            <input type="text" id="appointment_id">
+            <label>Patient ID</label>
+            <input type="text" id="patient_id">
+            <label>Doctor ID</label>
+            <input type="text" id="doctor_id">
+            <label>Department</label>
+            <input type="text" id="department">
+            <label>Appointment Date</label>
+            <input type="datetime-local" id="appointment_date">
+            <label>Duration (min)</label>
+            <input type="number" id="duration">
+            <label>Status</label>
+            <select id="status">
+                <option>Scheduled</option>
+                <option>Completed</option>
+                <option>Cancelled</option>
+            </select>
+            <label>Reason</label>
+            <textarea id="reason"></textarea>
+            <label>Notes</label>
+            <textarea id="notes"></textarea>
+
+            <div class="modal-buttons">
+                <button class="btn-cancel" id="btn-cancel">Cancel</button>
+                <button class="btn-save" id="btn-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <h2>Delete Appointment</h2>
+            <p>Are you sure you want to delete this appointment?</p>
+            <div class="modal-buttons">
+                <button class="btn-cancel" id="delete-cancel">Cancel</button>
+                <button class="btn-delete-confirm" id="delete-confirm">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const btnAdd = document.getElementById('btn-add');
+        const btnCancel = document.getElementById('btn-cancel');
+        const btnSave = document.getElementById('btn-save');
+        const modalTitle = document.getElementById('modal-title');
+
+        const deleteModal = document.getElementById('delete-modal');
+        const deleteCancel = document.getElementById('delete-cancel');
+        const deleteConfirm = document.getElementById('delete-confirm');
+        let deleteId = null;
+
+        let editingId = null;
+        let allAppointments = [];
+
+        btnAdd.addEventListener('click', e => {
+            e.preventDefault();
+            modalTitle.textContent = 'Add Appointment';
+            editingId = null;
+            modal.classList.add('active');
+            document.querySelectorAll('#modal input, #modal select, #modal textarea').forEach(i => i.value = '');
+        });
+
+        btnCancel.addEventListener('click', () => modal.classList.remove('active'));
+
+        deleteCancel.addEventListener('click', () => deleteModal.classList.remove('active'));
+
+        async function loadAppointments() {
+            const res = await fetch('/api/appointments');
+            allAppointments = await res.json();
+            populateFilters();
+            renderAppointments();
+        }
+
+        function populateFilters() {
+            const deptSelect = document.getElementById('filter-dept');
+            const depts = [...new Set(allAppointments.map(a => a.department))];
+            deptSelect.innerHTML = '<option value="">All</option>';
+            depts.forEach(d => { const opt = document.createElement('option'); opt.value = d; opt.textContent = d; deptSelect.appendChild(opt); });
+        }
+
+        function renderAppointments() {
+            const container = document.querySelector('.appointments');
+            container.innerHTML = '';
+            const searchText = document.getElementById('search-input').value.toLowerCase();
+            const statusFilter = document.getElementById('filter-status').value;
+            const deptFilter = document.getElementById('filter-dept').value;
+
+            const filtered = allAppointments.filter(a => {
+                return (!searchText || a.appointment_id.toLowerCase().includes(searchText) || (a.patient_id && a.patient_id.toLowerCase().includes(searchText))) &&
+                    (!statusFilter || a.status === statusFilter) &&
+                    (!deptFilter || a.department === deptFilter);
+            });
+
+            filtered.forEach(appt => {
+                const card = document.createElement('article');
+                card.className = 'appt-card';
+                card.innerHTML = `
+      <div class="appt-main">
+        <h2 class="appt-id">Appointment ID: ${appt.appointment_id}</h2>
+        <div class="meta">
+          <span class="badge dept">${appt.department}</span>
+          <span class="badge status ${appt.status.toLowerCase()}">${appt.status}</span>
+        </div>
+        <p class="reason">${appt.reason || ''}</p>
+      </div>
+      <div class="appt-info">
+        <div class="row">
+          <dl><dt>Patient</dt><dd>${appt.patient_id}</dd></dl>
+          <dl><dt>Doctor</dt><dd>${appt.doctor_id}</dd></dl>
+        </div>
+        <div class="row">
+          <dl><dt>Appointment Date</dt><dd>${new Date(appt.appointment_date).toLocaleString()}</dd></dl>
+          <dl><dt>Duration</dt><dd>${appt.duration} min</dd></dl>
+        </div>
+        <div class="row notes">
+          <dt>Notes</dt><dd>${appt.notes || ''}</dd>
+        </div>
+        <footer class="card-footer">
+          <small>Created at: ${new Date(appt.created_at).toLocaleString()}</small>
+        </footer>
+        <button class="btn-edit" onclick="openEdit('${appt._id}')">Edit</button>
+        <button class="btn-delete" onclick="openDelete('${appt._id}')">Delete</button>
+      </div>
+    `;
+                container.appendChild(card);
+            });
+        }
+
+        document.getElementById('search-input').addEventListener('input', renderAppointments);
+        document.getElementById('filter-status').addEventListener('change', renderAppointments);
+        document.getElementById('filter-dept').addEventListener('change', renderAppointments);
+
+        async function openEdit(id) {
+            const res = await fetch('/api/appointments/' + id);
+            const appt = await res.json();
+            editingId = id;
+            modalTitle.textContent = 'Edit Appointment';
+            document.getElementById('appointment_id').value = appt.appointment_id;
+            document.getElementById('patient_id').value = appt.patient_id;
+            document.getElementById('doctor_id').value = appt.doctor_id;
+            document.getElementById('department').value = appt.department;
+            document.getElementById('appointment_date').value = new Date(appt.appointment_date).toISOString().slice(0, 16);
+            document.getElementById('duration').value = appt.duration;
+            document.getElementById('status').value = appt.status;
+            document.getElementById('reason').value = appt.reason || '';
+            document.getElementById('notes').value = appt.notes || '';
+            modal.classList.add('active');
+        }
+
+        btnSave.addEventListener('click', async () => {
+            const data = {
+                appointment_id: document.getElementById('appointment_id').value,
+                patient_id: document.getElementById('patient_id').value,
+                doctor_id: document.getElementById('doctor_id').value,
+                department: document.getElementById('department').value,
+                appointment_date: document.getElementById('appointment_date').value,
+                duration: document.getElementById('duration').value,
+                status: document.getElementById('status').value,
+                reason: document.getElementById('reason').value,
+                notes: document.getElementById('notes').value
+            };
+            if (editingId) {
+                await fetch('/api/appointments/' + editingId, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+            } else {
+                await fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+            }
+            modal.classList.remove('active');
+            loadAppointments();
+        });
+
+        function openDelete(id) {
+            deleteId = id;
+            deleteModal.classList.add('active');
+        }
+
+        deleteConfirm.addEventListener('click', async () => {
+            if (deleteId) {
+                await fetch('/api/appointments/' + deleteId, { method: 'DELETE' });
+                deleteModal.classList.remove('active');
+                loadAppointments();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', loadAppointments);
+    </script>
+</body>
+
+</html>

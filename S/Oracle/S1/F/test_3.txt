@@ -1,0 +1,54 @@
+SELECT DEPARTMENT_NAME, INSTR(DEPARTMENT_NAME,'a') FROM DEPARTMENTS
+WHERE INSTR(DEPARTMENT_NAME,'a')<>0;
+
+SELECT LAST_NAME, INSTR(LAST_NAME,' ') FROM EMPLOYEES
+WHERE INSTR(LAST_NAME,' ')<>0;
+
+-- Using Function SUBSTR() => SUBSTRING=> cut string
+SELECT 'WelcometoSETECSV2.6', SUBSTR('WelcometoSETECSV2.6',1,7) FROM DUAL;
+
+SELECT 'WelcometoSETECSV2.6'
+       ,SUBSTR('WelcometoSETECSV2.6',1,7)
+       ,SUBSTR('WelcometoSETECSV2.6',-5)
+       ,SUBSTR('WelcometoSETECSV2.6',10,5)
+       ,SUBSTR('WelcometoSETECSV2.6',-10,5)
+FROM DUAL;
+
+-- Using Function SUBSTR() -> cut JOB_ID after undersorce(_)
+SELECT JOB_ID FROM EMPLOYEES;
+
+SELECT JOB_ID, INSTR(JOB_ID,'_'), SUBSTR(JOB_ID,INSTR(JOB_ID,'_')+1) FROM EMPLOYEES;
+
+SELECT JOB_ID, INSTR(JOB_ID,'_'), SUBSTR(JOB_ID,INSTR(JOB_ID,'_')+1,5) FROM EMPLOYEES;
+
+-- FIRST_NAME || ' ' || LAST_NAME
+SELECT FIRST_NAME, LAST_NAME, FIRST_NAME || ' ' || LAST_NAME AS "FullName"
+FROM EMPLOYEES;
+
+-- FIRST_NAME || ' ' || LAST_NAME => Clone table EMP_SV26 with data
+CREATE TABLE EMP_SV26 AS
+SELECT FIRST_NAME || ' ' || LAST_NAME AS "FullName" FROM EMPLOYEES;
+SELECT * FROM EMP_SV26;
+
+SELECT "FullName", "FirstName", "LastName" FROM EMP_SV26;
+
+SELECT 
+    FIRST_NAME AS FirstName,
+    LAST_NAME AS LastName,
+    FIRST_NAME || ' ' || LAST_NAME AS FullName
+FROM EMPLOYEES;
+
+-- Chou Yamata (SV2.6)
+SELECT
+    SUBSTR("FullName", 1, INSTR("FullName", ' ') - 1) AS FirstName,
+    SUBSTR("FullName", INSTR("FullName", ' ') + 1) AS LastName,
+    "FullName"
+FROM EMP_SV26;
+
+SELECT JOB_ID, INSTR(JOB_ID,'_'), SUBSTR(JOB_ID,INSTR(JOB_ID,'_')+1,5) FROM EMPLOYEES;
+
+SELECT
+    SUBSTR("FullName", 1, INSTR("FullName", ' ') - 1) AS FirstName,
+    SUBSTR("FullName", INSTR("FullName", ' ') + 1) AS LastName,
+    "FullName"
+FROM EMP_SV26;

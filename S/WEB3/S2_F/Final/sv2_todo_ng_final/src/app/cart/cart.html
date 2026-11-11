@@ -1,0 +1,98 @@
+<div class="container py-4 py-md-5">
+    <div class="row">
+        <!-- Cart items -->
+        <div class="col-lg-8 mb-4">
+            <div class="card cart-card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Your Cart <span class="badge badge-secondary"> {{ cartService.getItem().length }}   </span></h5>
+
+                    <!-- Item 1 -->
+                    @for (item of cartService.getItem(); track item.id){
+
+                    <div class="cart-item py-3">
+                        <div class="media align-items-center">
+                            <img class="mr-3 product-img" [src]="item.imageUrl" [alt]="item.imageUrl" onerror="this.src='/image/No-Image-Placeholder.png';">
+                            <div class="media-body">
+                                <div class="d-flex flex-wrap align-items-start justify-content-between">
+                                    <div class="product-meta">
+                                        <h6 class="mb-1"> {{ item.name }} </h6>
+                                        <div class="text-muted small">Size: 42 — Color: Black</div>
+                                        <div class="price mt-1"> {{ item.price | currency }} </div>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-end mt-3 mt-sm-0">
+                                        <div class="input-group qty-input mb-2">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-outline-secondary btn-sm btn-decrease"
+                                                    type="button" (click)="decreaseQty(item)">−</button>
+                                            </div>
+
+                                            <label class="form-control form-control-sm text-center qty">
+                                                {{ item.qty | number }} </label>
+
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary btn-sm btn-increase"
+                                                    type="button" (click)="increaseQty(item)">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="subtotal text-right">
+                                             {{ (item.price * item.qty) | currency }} </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+
+                                    <button (click)="removeItem(item)"
+                                        class="btn btn-link btn-sm p-0 text-danger btn-remove">Remove</button>
+
+                                    <span class="mx-2 text-muted">•</span>
+                                    <button class="btn btn-link btn-sm p-0">Save for later</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    }
+
+
+
+
+
+                    <!-- Footer actions -->
+                    <div class="pt-3 mt-3 line d-flex justify-content-between align-items-center">
+                        <a href="#" class="btn btn-outline-secondary btn-sm">Continue Shopping</a>
+                        <a href="#" class="btn btn-outline-danger btn-sm">Clear Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="col-lg-4">
+            <div class="card cart-card summary-sticky">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Order Summary</h5>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span> Item ({{ cartService.getItem().length }}) </span>
+                        <span id="itemsTotal"> {{ cartService.getTotal() | currency }} </span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping</span>
+                        <span class="text-success">Free</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Tax (10%)</span>
+                        <span id="taxAmount">$34.65</span>
+                    </div>
+                    <div class="line my-3"></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <strong>Total</strong>
+                        <strong id="grandTotal"> {{ cartService.getTotal() | currency }} </strong>
+                    </div>
+
+                    <button class="btn btn-primary btn-block mt-4" routerLink="/check-out">Checkout</button>
+                    <div class="text-muted small mt-2 text-center">Safe checkout • 30‑day returns</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

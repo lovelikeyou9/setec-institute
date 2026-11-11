@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Brands — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content">
+  <div class="container" style="padding-top:1.5rem">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <span>Brands</span>
+    </nav>
+    <div class="section-head">
+      <div>
+        <h1 class="section-title">Shop by Brand</h1>
+        <p class="section-sub">ASUS, MSI, Intel, AMD, and more trusted brands</p>
+      </div>
+    </div>
+    <div class="brand-shop-grid">
+      <a th:each="b : ${brands}" th:href="@{/products(brand=${b.id})}" class="brand-shop-card">
+        <img th:if="${b.logoUrl != null and !#strings.isEmpty(b.logoUrl)}"
+             th:src="${b.logoUrl}" th:alt="${b.name}"/>
+        <span th:unless="${b.logoUrl != null and !#strings.isEmpty(b.logoUrl)}" th:text="${b.name}">Brand</span>
+        <strong th:text="${b.name}">ASUS</strong>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

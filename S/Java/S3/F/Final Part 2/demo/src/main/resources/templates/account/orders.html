@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">My Orders — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/dash-sidebar :: sidebar}"></aside>
+    <div class="dash-main">
+      <h1 style="font-size:1.4rem;margin-bottom:1rem">My Orders</h1>
+
+      <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;align-items:center;justify-content:space-between">
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+          <a th:href="@{/account/orders(sort=${sort})}" class="btn btn-sm" th:classappend="${status == null} ? 'btn-primary' : 'btn-outline'">All</a>
+          <a th:href="@{/account/orders(status='PAYMENT_CONFIRMED',sort=${sort})}" class="btn btn-sm" th:classappend="${status == 'PAYMENT_CONFIRMED'} ? 'btn-primary' : 'btn-outline'">Paid</a>
+          <a th:href="@{/account/orders(status='OUT_FOR_DELIVERY',sort=${sort})}" class="btn btn-sm" th:classappend="${status == 'OUT_FOR_DELIVERY'} ? 'btn-primary' : 'btn-outline'">Out for delivery</a>
+          <a th:href="@{/account/orders(status='DELIVERED',sort=${sort})}" class="btn btn-sm" th:classappend="${status == 'DELIVERED'} ? 'btn-primary' : 'btn-outline'">Delivered</a>
+          <a th:href="@{/account/orders(status='COMPLETED',sort=${sort})}" class="btn btn-sm" th:classappend="${status == 'COMPLETED'} ? 'btn-primary' : 'btn-outline'">Completed</a>
+          <a th:href="@{/account/orders(status='CANCELLED',sort=${sort})}" class="btn btn-sm" th:classappend="${status == 'CANCELLED'} ? 'btn-primary' : 'btn-outline'">Cancelled</a>
+        </div>
+        <form class="dash-search" style="margin:0" th:action="@{/account/orders}" method="get">
+          <input type="hidden" name="status" th:value="${status}"/>
+          <label class="dash-sort">
+            <span>Sort</span>
+            <select name="sort" onchange="this.form.submit()">
+              <option value="newest" th:selected="${sort == null or sort == 'newest'}">Newest first</option>
+              <option value="oldest" th:selected="${sort == 'oldest'}">Oldest first</option>
+              <option value="total_desc" th:selected="${sort == 'total_desc'}">Total: High to Low</option>
+              <option value="total_asc" th:selected="${sort == 'total_asc'}">Total: Low to High</option>
+            </select>
+          </label>
+        </form>
+      </div>
+
+      <div th:if="${#lists.isEmpty(orders)}" class="empty-state">
+        <div class="icon">📦</div>
+        <h3>No orders found</h3>
+        <p>Orders matching this filter will appear here.</p>
+      </div>
+
+      <div class="data-table-wrap" th:if="${!#lists.isEmpty(orders)}">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Order #</th>
+              <th>Seller</th>
+              <th>Items</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="o : ${orders}">
+              <td th:text="${o.orderNumber}">CH-001</td>
+              <td th:text="${o.seller.storeName}">Store</td>
+              <td th:text="${#lists.size(o.items)}">1</td>
+              <td th:text="${o.placedAt != null ? #temporals.format(o.placedAt, 'dd MMM yyyy') : '—'}">01 Jan</td>
+              <td>
+                <span th:replace="~{fragments/status :: orderPill(${o.status})}"></span>
+              </td>
+              <td th:text="${'$' + #numbers.formatDecimal(o.total, 1, 2)}">$0</td>
+              <td><a th:href="@{/orders/{n}(n=${o.orderNumber})}" class="btn btn-outline btn-sm">Details</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

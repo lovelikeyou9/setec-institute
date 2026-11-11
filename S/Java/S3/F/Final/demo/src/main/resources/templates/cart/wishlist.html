@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Wishlist — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+
+<main class="main-content">
+  <div class="container" style="padding-top:1.5rem">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <span>Wishlist</span>
+    </nav>
+    <div class="section-head">
+      <div>
+        <h1 class="section-title">My Wishlist</h1>
+        <p class="section-sub" th:text="${(items != null ? #lists.size(items) : 0) + ' saved items'}">0 saved items</p>
+      </div>
+    </div>
+
+    <div th:if="${items == null or #lists.isEmpty(items)}" class="empty-state">
+      <div class="icon">♡</div>
+      <h3>Your wishlist is empty</h3>
+      <p>Save products you love and come back when you're ready to buy.</p>
+      <a th:href="@{/products}" class="btn btn-primary" style="margin-top:1rem">Browse Products</a>
+    </div>
+
+    <div class="product-grid" th:if="${items != null and !#lists.isEmpty(items)}">
+      <th:block th:each="item : ${items}" th:with="product=${item.product}">
+        <div th:replace="~{fragments/card :: card}"></div>
+      </th:block>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

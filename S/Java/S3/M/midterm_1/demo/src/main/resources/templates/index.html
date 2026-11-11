@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCommax | Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="topbar">
+    <div class="container inner">
+        <a href="#">Hot Deals</a>
+        <a href="#">Track Your Order</a>
+        <a href="#">Store Locator</a>
+    </div>
+</div>
+
+<header class="header">
+    <div class="container">
+        <div class="header-row">
+            <a class="logo" th:href="@{/}">
+                <span class="logo-icon">🛍</span> eCommax
+            </a>
+            <a class="shop-now-btn" th:href="@{/shop}">☰ SHOP NOW</a>
+            <div class="search-wrap">
+                <form class="search-box" th:action="@{/shop}" method="get">
+                    <input type="text" name="q" placeholder="ENTER YOUR KEYWORD">
+                    <button type="submit" aria-label="Search">🔍</button>
+                </form>
+                <div class="trending"><span>SEARCH TRENDING</span> iPhone, Huawei Mateview, GoPro, Headphone, Macbook Pro</div>
+            </div>
+            <div class="header-actions">
+                <div class="item">❤<br><strong>Wishlist</strong></div>
+                <div class="item">
+                    <a th:if="${staff != null and staff.role == 'User'}" th:href="@{/cart}">
+                        🛒<br>
+                        <strong th:text="'$' + ${#numbers.formatDecimal(cartTotal, 1, 2)} + ' (' + ${cartCount} + ')'">$0.00 (0)</strong>
+                    </a>
+                    <th:block th:unless="${staff != null and staff.role == 'User'}">
+                        🛒<br><strong>$0.00</strong>
+                    </th:block>
+                </div>
+                <div class="item" th:if="${staff == null}"><a th:href="@{/login}">👤<br><strong>Login</strong></a></div>
+                <div class="item" th:if="${staff != null and staff.role == 'User'}"><a th:href="@{/products}">⚙<br><strong th:text="${staff.userName}">Account</strong></a></div>
+                <div class="item" th:if="${staff != null and staff.role != 'User'}"><a th:href="@{/dashboard}">⚙<br><strong th:text="${staff.userName}">Account</strong></a></div>
+            </div>
+        </div>
+        <nav class="nav">
+            <a class="active" th:href="@{/}">HOME</a>
+            <a href="#collections">COLLECTIONS</a>
+            <a th:href="@{/shop}">PRODUCTS</a>
+            <a th:href="@{/shop}">SHOP</a>
+        </nav>
+    </div>
+</header>
+
+<section class="container hero">
+    <div class="hero-main">
+        <small>GAMING GEAR</small>
+        <h2>GAME<br>CONTROLLER</h2>
+        <p>Controller type: Wireless controller</p>
+        <a class="shop-now-btn" th:href="@{/shop}" style="width:fit-content">SHOP NOW</a>
+    </div>
+    <div class="hero-side">
+        <div class="promo-card promo-a">
+            <small>NEW ARRIVALS</small>
+            <h3>BAMBOOBUDS</h3>
+            <a th:href="@{/shop}">Shop Now →</a>
+        </div>
+        <div class="promo-card promo-b">
+            <small>NEW ARRIVALS</small>
+            <h3>HOMEPOD PRO</h3>
+            <a th:href="@{/shop}">Shop Now →</a>
+        </div>
+    </div>
+</section>
+
+<section class="container cat-strip" id="collections">
+    <div class="cat-item" th:each="c : ${categories}">
+        <div class="circle">📦</div>
+        <span th:text="${c.catName}">Category</span>
+    </div>
+</section>
+
+<section class="container features">
+    <div class="feature"><div class="ico">🚚</div><div><h4>FREE US DELIVERY</h4><p>Free shipping on all orders over $200</p></div></div>
+    <div class="feature"><div class="ico">🛡</div><div><h4>SECURE PAYMENT</h4><p>We accept Visa, Amex, PayPal & more</p></div></div>
+    <div class="feature"><div class="ico">☂</div><div><h4>1 YEAR WARRANTY</h4><p>Covered for manufacturing defects</p></div></div>
+    <div class="feature"><div class="ico">🎧</div><div><h4>SUPPORT 24/7</h4><p>Call us anytime: +123-456-789</p></div></div>
+</section>
+
+<section class="container banner-row">
+    <div class="mini-banner mb1"><h3>MACBOOK PRO 16</h3><p>2K Fullview Touch Display</p></div>
+    <div class="mini-banner mb2"><h3>SMART SPEAKER</h3><p>Dual-Speaker True sound</p></div>
+    <div class="mini-banner mb3"><h3>BAMBOO SPEAKER</h3><p>Sound that Speaks for itself</p></div>
+</section>
+
+<section class="container section" id="products">
+    <h2 class="section-title">TOP SMARTPHONE TRENDS</h2>    
+    <div class="product-grid">
+        <div class="product-card" th:each="p, stat : ${products}" th:if="${stat.index < 5}">
+            <div class="thumb">📱</div>
+<!--            <div class="cat" th:text="${p.catID}">CAT</div>-->
+            <h3 th:text="${p.PName}">Product</h3>
+            <div class="stars">★★★★★ <span>6 reviews</span></div>
+            <div class="price" th:text="'$' + ${#numbers.formatDecimal(p.price, 1, 2)}">$0.00</div>
+        </div>
+    </div>
+</section>
+
+<section class="container split-section">
+    <div class="split-banner">🎧<br><small style="font-size:16px">AUDIO & SOUND</small></div>
+    <div>
+        <div class="section-head"><h2>AUDIO & SOUND</h2></div>
+        <div class="product-grid cols-3">
+            <div class="product-card" th:each="p, stat : ${products}" th:if="${stat.index >= 4 and stat.index < 7}">
+                <div class="thumb">🔊</div>
+                <div class="cat">AUDIO</div>
+                <h3 th:text="${p.PName}">Product</h3>
+                <div class="stars">★★★★★ <span>6 reviews</span></div>
+                <div class="price" th:text="'$' + ${#numbers.formatDecimal(p.price, 1, 2)}">$0.00</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container testimonials">
+    <h2 class="section-title">WHAT OUR CUSTOMERS SAY</h2>
+    <p class="sub">Our references are very valuable the result of a great effort</p>
+    <div class="testi-grid">
+        <div class="testi-card" th:each="i : ${#numbers.sequence(1,4)}">
+            <div class="avatar" th:text="'U' + ${i}">U</div>
+            <div class="quote">“</div>
+            <div class="stars" style="text-align:center">★★★★★</div>
+            <h4>Great Price & Services</h4>
+            <p>Excellent quality products and fast delivery. Highly recommended store for gadgets.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container split-section reverse">
+    <div>
+        <div class="section-head"><h2>SMARTWATCH</h2></div>
+        <div class="product-grid cols-3">
+            <div class="product-card" th:each="p, stat : ${products}" th:if="${stat.index < 3}">
+                <div class="thumb">⌚</div>
+                <div class="cat">SMARTWATCH</div>
+                <h3 th:text="${p.PName}">Product</h3>
+                <div class="stars">★★★★★ <span>6 reviews</span></div>
+                <div class="price" th:text="'$' + ${#numbers.formatDecimal(p.price, 1, 2)}">$0.00</div>
+            </div>
+        </div>
+    </div>
+    <div class="split-banner watch">⌚<br><small style="font-size:16px">PREMIUM WATCH</small></div>
+</section>
+
+<section class="container section">
+    <h2 class="section-title">FROM LATEST NEWS</h2>
+    <div class="news-grid">
+        <article class="news-card">
+            <div class="news-img"><span class="tag">BASIC KNOWLEDGE</span></div>
+            <div class="news-body">
+                <h3>Revolutionary Tech: The Rise of Smart Speakers</h3>
+                <p>Discover how smart speakers are transforming modern homes with voice assistants and premium sound.</p>
+                <div class="news-meta"><span>BY ALEX NGUYEN · 28 JULY 2024</span><span>→</span></div>
+            </div>
+        </article>
+        <div class="news-side">
+            <article class="news-card">
+                <div class="news-img"><span class="tag">BASIC KNOWLEDGE</span></div>
+                <div class="news-body">
+                    <h3>Revolutionary Tech: The Rise of Smart Speakers</h3>
+                    <p>Tips and trends for choosing the right smart audio gear.</p>
+                    <div class="news-meta"><span>BY ALEX NGUYEN · 28 JULY 2024</span><span>→</span></div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="news-img"><span class="tag">BASIC KNOWLEDGE</span></div>
+                <div class="news-body">
+                    <h3>Revolutionary Tech: The Rise of Smart Speakers</h3>
+                    <p>Explore new wireless ecosystems for entertainment setups.</p>
+                    <div class="news-meta"><span>BY ALEX NGUYEN · 28 JULY 2024</span><span>→</span></div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="container about-block">
+    <h2>Explore Our E-Commerce Store</h2>
+    <p>Welcome to eCommax — your destination for electronics, gaming gear, audio devices, and smart accessories. Browse products by category and enjoy a smooth shopping experience.</p>
+    <p>Use Login to access Admin, Stock, or User dashboards for managing staff, inventory, and purchases.</p>
+    <a th:href="@{/shop}">View More ↓</a>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div>
+                <h4>Follow Us</h4>
+                <div class="socials"><span>f</span><span>t</span><span>p</span><span>in</span></div>
+            </div>
+            <div>
+                <h4>We Accept</h4>
+                <div class="pays"><span>V</span><span>M</span><span>P</span><span>$</span></div>
+            </div>
+            <div>
+                <h4>Subscribe</h4>
+                <div class="subscribe"><input placeholder="Your email"><button>Submit</button></div>
+            </div>
+        </div>
+        <div class="footer-cols">
+            <div><h4>Customer Care</h4><ul><li>FAQs</li><li>Terms of Service</li><li>Privacy Policy</li><li>Contact Us</li></ul></div>
+            <div><h4>Help & Support</h4><ul><li>Shipping Info</li><li>Returns</li><li>How To Order</li><li>How To Track</li></ul></div>
+            <div><h4>Company Info</h4><ul><li>About Us</li><li>Our Blog</li><li>Careers</li><li>Store Locations</li></ul></div>
+            <div>
+                <h4>Our Shop</h4>
+                <ul>
+                    <li th:each="c,stat : ${categories}" th:if="${stat.index < 5}" th:text="${c.catName}">Cat</li>
+                </ul>
+            </div>
+            <div><h4>My Account</h4><ul><li><a th:href="@{/login}">Login</a></li><li><a th:href="@{/dashboard}">Dashboard</a></li><li><a th:href="@{/shop}">Shop</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <div>Copyright © 2024 eCommax Midterm. All rights reserved.</div>
+            <div>15 West 27th Street, Miami FL, USA · +123-456-789</div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

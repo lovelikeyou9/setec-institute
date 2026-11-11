@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Countries — Admin</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: adminSidebar}"></aside>
+    <div class="dash-main">
+      <div class="section-head" style="margin-bottom:1rem">
+        <h1 style="font-size:1.4rem">Countries</h1>
+        <form method="get" th:action="@{/admin/countries}" class="dash-toolbar" style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+          <label class="dash-sort">
+            Sort
+            <select name="sort" onchange="this.form.submit()">
+              <option value="money_desc" th:selected="${sort == null or sort == 'money_desc'}">Money (high → low)</option>
+              <option value="name_asc" th:selected="${sort == 'name_asc'}">Country A–Z</option>
+              <option value="name_desc" th:selected="${sort == 'name_desc'}">Country Z–A</option>
+              <option value="sellers_desc" th:selected="${sort == 'sellers_desc'}">Most sellers</option>
+              <option value="sellers_asc" th:selected="${sort == 'sellers_asc'}">Fewest sellers</option>
+              <option value="buyers_desc" th:selected="${sort == 'buyers_desc'}">Most buyers</option>
+              <option value="buyers_asc" th:selected="${sort == 'buyers_asc'}">Fewest buyers</option>
+              <option value="buy_money_desc" th:selected="${sort == 'buy_money_desc'}">Money bought</option>
+              <option value="sell_money_desc" th:selected="${sort == 'sell_money_desc'}">Money sold</option>
+            </select>
+          </label>
+        </form>
+      </div>
+      <p style="color:var(--text-muted);margin:-.5rem 0 1rem;font-size:.9rem">
+        Click a country to see buyers, sellers, what they buy &amp; sell, wishlist activity, and money flow.
+      </p>
+
+      <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+      <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>
+                <a th:href="@{/admin/countries(sort=${sort == 'name_asc' ? 'name_desc' : 'name_asc'})}"
+                   style="color:inherit;text-decoration:none">Country
+                  <span th:if="${sort == 'name_asc'}">↑</span>
+                  <span th:if="${sort == 'name_desc'}">↓</span>
+                </a>
+              </th>
+              <th>
+                <a th:href="@{/admin/countries(sort=${sort == 'sellers_desc' ? 'sellers_asc' : 'sellers_desc'})}"
+                   style="color:inherit;text-decoration:none">Sellers
+                  <span th:if="${sort == 'sellers_asc'}">↑</span>
+                  <span th:if="${sort == 'sellers_desc'}">↓</span>
+                </a>
+              </th>
+              <th>
+                <a th:href="@{/admin/countries(sort=${sort == 'buyers_desc' ? 'buyers_asc' : 'buyers_desc'})}"
+                   style="color:inherit;text-decoration:none">Buyers
+                  <span th:if="${sort == 'buyers_asc'}">↑</span>
+                  <span th:if="${sort == 'buyers_desc'}">↓</span>
+                </a>
+              </th>
+              <th>Money Bought</th>
+              <th>Money Sold</th>
+              <th>Units Bought</th>
+              <th>Units Sold</th>
+              <th>Wishlist</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:if="${#lists.isEmpty(countries)}">
+              <td colspan="8" style="text-align:center;color:var(--text-muted)">No country data yet</td>
+            </tr>
+            <tr th:each="c : ${countries}" class="profile-row-click"
+                th:attr="data-href=@{/admin/countries/{name}(name=${c.name})}">
+              <td>
+                <a class="table-link-btn" th:href="@{/admin/countries/{name}(name=${c.name})}" th:text="${c.name}">Cambodia</a>
+              </td>
+              <td th:text="${c.sellerCount}">0</td>
+              <td th:text="${c.buyerCount}">0</td>
+              <td th:text="${'$' + #numbers.formatDecimal(c.buyMoney, 1, 'COMMA', 2, 'POINT')}">$0</td>
+              <td th:text="${'$' + #numbers.formatDecimal(c.sellMoney, 1, 'COMMA', 2, 'POINT')}">$0</td>
+              <td th:text="${c.buyUnits}">0</td>
+              <td th:text="${c.sellUnits}">0</td>
+              <td th:text="${c.wishlistViews}">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

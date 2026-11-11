@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Reviews — Seller</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+    <div class="dash-main">
+      <h1 style="font-size:1.4rem;margin-bottom:1rem">Product Reviews</h1>
+
+      <div th:if="${#lists.isEmpty(reviews)}" class="empty-state">
+        <div class="icon">⭐</div>
+        <h3>No reviews yet</h3>
+        <p>Customer reviews for your products will appear here.</p>
+      </div>
+
+      <div class="form-card" th:each="r : ${reviews}">
+        <div class="review-header">
+          <div class="review-avatar" th:text="${#strings.substring(r.user.fullName,0,1)}">U</div>
+          <div>
+            <strong th:text="${r.user.fullName}">Buyer</strong>
+            <span class="stars" th:text="${#strings.repeat('★', r.rating)}">★★★★★</span>
+            <div style="font-size:.8rem;color:var(--text-muted)">
+              <a th:href="@{/product/{slug}(slug=${r.product.slug})}"
+                 th:text="${r.product.name}"
+                 style="color:var(--brand);font-weight:600">Product</a> ·
+              <span th:text="${#temporals.format(r.createdAt, 'dd MMM yyyy')}">date</span>
+            </div>
+          </div>
+        </div>
+        <p th:text="${r.comment}" style="margin-top:.5rem">Review comment</p>
+        <div class="seller-reply" th:if="${r.sellerResponse != null}">
+          <strong>Your reply:</strong> <span th:text="${r.sellerResponse}">Thanks!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

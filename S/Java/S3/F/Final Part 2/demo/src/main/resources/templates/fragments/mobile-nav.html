@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<nav class="mobile-nav" th:fragment="mobileNav">
+  <a th:href="@{/}" th:classappend="${currentPath == '/' or currentPath == '/home'} ? 'active'">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Home
+  </a>
+  <a th:href="@{/categories}" th:classappend="${#strings.contains(currentPath,'categor')} ? 'active'">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Categories
+  </a>
+  <a th:href="@{/products}" th:classappend="${#strings.contains(currentPath,'product')} ? 'active'">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Search
+  </a>
+  <a th:href="@{/account/cart}" th:classappend="${currentPath == '/cart' or currentPath == '/account/cart'} ? 'active'">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Cart
+    <span class="badge-count" th:if="${cartCount > 0}" th:text="${cartCount}">0</span>
+  </a>
+  <!-- Role-aware dashboard entry -->
+  <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')"
+     th:classappend="${#strings.startsWith(currentPath,'/admin')} ? 'active'">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Admin
+  </a>
+  <a th:href="@{/seller-dashboard}" sec:authorize="hasRole('SELLER')"
+     th:classappend="${#strings.startsWith(currentPath,'/seller-dashboard')} ? 'active'">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Seller
+  </a>
+  <a th:href="@{/account}" sec:authorize="hasRole('CUSTOMER')"
+     th:classappend="${#strings.startsWith(currentPath,'/account')} ? 'active'">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Account
+  </a>
+  <a th:href="@{/login}" sec:authorize="!isAuthenticated()">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Account
+  </a>
+</nav>
+</body>
+</html>

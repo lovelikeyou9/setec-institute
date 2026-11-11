@@ -1,0 +1,22 @@
+https://www.youtube.com/watch?v=7edR32QVp_A
+
+https://www.youtube.com/watch?v=WDJhvIuzV8Q&t
+
+https://www.youtube.com/watch?v=x9cGa3oMJPc
+
+
+
+npm install -g @stripe/cli
+
+stripe -v
+
+stripe login        // then press [ Enter ]
+
+stripe listen --forward-to localhost:5000/checkout
+
+stripe trigger customer.created
+
+stripe trigger customer.deleted
+
+
+https://github.com/stripe/stripe-cli

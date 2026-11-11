@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% from "_macros.html" import product_card with context %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<section class="pd-page mt-3">
+  <nav class="pd-breadcrumb" aria-label="breadcrumb">
+    <a href="{{ url_for('main.index') }}">Home</a>
+    <span>/</span>
+    <a href="{{ url_for('product.product_list') }}">Products</a>
+    <span>/</span>
+    <a href="{{ url_for('product.product_list', category=product.category_id) }}">{{ product.category.name }}</a>
+    <span>/</span>
+    <span class="current">{{ product.name }}</span>
+  </nav>
+
+  <div class="pd-hero">
+    <div class="pd-gallery">
+      <div class="pd-media">
+        {% if product.has_discount %}
+        <span class="pd-badge sale">-{{ product.discount_percent }}% OFF</span>
+        {% endif %}
+        {% if not product.in_stock %}
+        <span class="pd-badge stock-out">Out of Stock</span>
+        {% endif %}
+        <img src="{{ product.image_url }}" alt="{{ product.name }}"
+             onerror="this.src='{{ url_for('static', filename='images/products/placeholder.jpg') }}'">
+      </div>
+    </div>
+
+    <div class="pd-info">
+      <p class="pd-eyebrow">{{ product.brand }} · {{ product.category.name }}</p>
+      <h1 class="pd-title">{{ product.name }}</h1>
+
+      <div class="pd-rating">
+        {% for i in range(5) %}
+          <i class="bi {{ 'bi-star-fill' if i < product.rating|int else 'bi-star' }}"></i>
+        {% endfor %}
+        <span>{{ '%.1f'|format(product.rating) }} rating</span>
+        {% if product.sales_count %}
+        <span class="dot">·</span>
+        <span>{{ product.sales_count }} sold</span>
+        {% endif %}
+      </div>
+
+      <div class="pd-price-box">
+        <div class="pd-price-now">${{ '%.2f'|format(product.effective_price) }}</div>
+        {% if product.has_discount %}
+        <div class="pd-price-old">${{ '%.2f'|format(product.price) }}</div>
+        <div class="pd-save">You save ${{ '%.2f'|format(product.price|float - product.effective_price) }}</div>
+        {% endif %}
+      </div>
+
+      <p class="pd-desc">{{ product.description }}</p>
+
+      <div class="pd-stock-row">
+        {% if product.in_stock %}
+        <span class="stock-pill in"><i class="bi bi-check-circle"></i> In stock — {{ product.stock_quantity }} available</span>
+        {% else %}
+        <span class="stock-pill out">Currently unavailable</span>
+        {% endif %}
+      </div>
+
+      {% if current_user.is_authenticated and product.in_stock %}
+      <form method="post" action="{{ url_for('cart.add_to_cart') }}" class="pd-buy">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <div class="pd-qty-row">
+          <label>Quantity</label>
+          <div class="qty-control">
+            <button type="button" data-qty-minus aria-label="Decrease">−</button>
+            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock_quantity }}">
+            <button type="button" data-qty-plus aria-label="Increase">+</button>
+          </div>
+        </div>
+        <div class="pd-actions">
+          <button class="btn btn-brand btn-lg" type="submit">
+            <i class="bi bi-cart-plus"></i> Add to Cart
+          </button>
+          <button class="btn btn-outline-brand btn-lg" type="submit" name="buy_now" value="1">
+            Buy Now
+          </button>
+        </div>
+      </form>
+      {% elif not current_user.is_authenticated %}
+      <div class="pd-actions mt-3">
+        <a class="btn btn-brand btn-lg" href="{{ url_for('auth.login', next=request.path) }}">
+          Login to purchase
+        </a>
+        <a class="btn btn-outline-brand btn-lg" href="{{ url_for('auth.register') }}">
+          Create account
+        </a>
+      </div>
+      {% else %}
+      <button class="btn btn-secondary btn-lg mt-3" disabled>Out of Stock</button>
+      {% endif %}
+
+      <ul class="pd-trust">
+        <li><i class="bi bi-shield-check"></i> Secure Stripe checkout</li>
+        <li><i class="bi bi-truck"></i> Fast shipping available</li>
+        <li><i class="bi bi-arrow-repeat"></i> Easy order tracking</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pd-specs">
+    <div class="pd-specs-head">
+      <h2>Specifications</h2>
+      <p>Technical details for this product</p>
+    </div>
+    {% if product.specifications %}
+    <div class="pd-spec-grid">
+      {% for line in product.specifications.splitlines() %}
+        {% if line.strip() %}
+          {% set parts = line.split(':', 1) %}
+          {% if parts|length == 2 %}
+          <div class="pd-spec-row">
+            <span class="key">{{ parts[0].strip() }}</span>
+            <span class="val">{{ parts[1].strip() }}</span>
+          </div>
+          {% else %}
+          <div class="pd-spec-row">
+            <span class="val full">{{ line.strip() }}</span>
+          </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-muted mb-0">No specifications listed.</p>
+    {% endif %}
+  </div>
+
+  {% if related %}
+  <section class="pd-related">
+    <div class="d-flex justify-content-between align-items-end mb-3 flex-wrap gap-2">
+      <div>
+        <h2 class="section-title mb-1">Related Products</h2>
+        <p class="section-sub mb-0">More from {{ product.category.name }}</p>
+      </div>
+      <a href="{{ url_for('product.product_list', category=product.category_id) }}" class="btn btn-outline-brand btn-sm">
+        View category
+      </a>
+    </div>
+    <div class="row g-3">
+      {% for p in related %}
+      <div class="col-6 col-lg-3">{{ product_card(p) }}</div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</section>
+{% endblock %}

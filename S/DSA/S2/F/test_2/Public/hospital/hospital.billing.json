@@ -1,0 +1,275 @@
+[{
+  "_id": {
+    "$oid": "68396062611906215cb5f957"
+  },
+  "billing_id": "B1001",
+  "patient_id": "P1001",
+  "date": "2024-01-15",
+  "amount": 500,
+  "payment_method": "Credit Card",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f958"
+  },
+  "billing_id": "B1002",
+  "patient_id": "P1002",
+  "date": "2024-01-16",
+  "amount": 250,
+  "payment_method": "Cash",
+  "status": "Unpaid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f959"
+  },
+  "billing_id": "B1003",
+  "patient_id": "P1003",
+  "date": "2024-01-17",
+  "amount": 320,
+  "payment_method": "Insurance",
+  "status": "Pending"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f95a"
+  },
+  "billing_id": "B1004",
+  "patient_id": "P1004",
+  "date": "2024-01-18",
+  "amount": 450,
+  "payment_method": "Credit Card",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f95b"
+  },
+  "billing_id": "B1005",
+  "patient_id": "P1005",
+  "date": "2024-01-19",
+  "amount": 700,
+  "payment_method": "Cash",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f95c"
+  },
+  "billing_id": "B1006",
+  "patient_id": "P1006",
+  "date": "2024-01-20",
+  "amount": 275,
+  "payment_method": "Insurance",
+  "status": "Pending"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f95d"
+  },
+  "billing_id": "B1007",
+  "patient_id": "P1007",
+  "date": "2024-01-21",
+  "amount": 600,
+  "payment_method": "Credit Card",
+  "status": "Unpaid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f95e"
+  },
+  "billing_id": "B1008",
+  "patient_id": "P1008",
+  "date": "2024-01-22",
+  "amount": 150,
+  "payment_method": "Cash",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f95f"
+  },
+  "billing_id": "B1009",
+  "patient_id": "P1009",
+  "date": "2024-01-23",
+  "amount": 520,
+  "payment_method": "Insurance",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f960"
+  },
+  "billing_id": "B1010",
+  "patient_id": "P1010",
+  "date": "2024-01-24",
+  "amount": 410,
+  "payment_method": "Credit Card",
+  "status": "Unpaid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f961"
+  },
+  "billing_id": "B1011",
+  "patient_id": "P1011",
+  "date": "2024-01-25",
+  "amount": 395,
+  "payment_method": "Cash",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f962"
+  },
+  "billing_id": "B1012",
+  "patient_id": "P1012",
+  "date": "2024-01-26",
+  "amount": 305,
+  "payment_method": "Insurance",
+  "status": "Pending"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f963"
+  },
+  "billing_id": "B1013",
+  "patient_id": "P1013",
+  "date": "2024-01-27",
+  "amount": 700,
+  "payment_method": "Credit Card",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f964"
+  },
+  "billing_id": "B1014",
+  "patient_id": "P1014",
+  "date": "2024-01-28",
+  "amount": 640,
+  "payment_method": "Cash",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f965"
+  },
+  "billing_id": "B1015",
+  "patient_id": "P1015",
+  "date": "2024-01-29",
+  "amount": 455,
+  "payment_method": "Insurance",
+  "status": "Unpaid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f966"
+  },
+  "billing_id": "B1016",
+  "patient_id": "P1016",
+  "date": "2024-01-30",
+  "amount": 390,
+  "payment_method": "Credit Card",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f967"
+  },
+  "billing_id": "B1017",
+  "patient_id": "P1017",
+  "date": "2024-01-31",
+  "amount": 285,
+  "payment_method": "Cash",
+  "status": "Unpaid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f968"
+  },
+  "billing_id": "B1018",
+  "patient_id": "P1018",
+  "date": "2024-02-01",
+  "amount": 510,
+  "payment_method": "Insurance",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f969"
+  },
+  "billing_id": "B1019",
+  "patient_id": "P1019",
+  "date": "2024-02-02",
+  "amount": 475,
+  "payment_method": "Credit Card",
+  "status": "Pending"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f96a"
+  },
+  "billing_id": "B1020",
+  "patient_id": "P1020",
+  "date": "2024-02-03",
+  "amount": 295,
+  "payment_method": "Cash",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f96b"
+  },
+  "billing_id": "B1021",
+  "patient_id": "P1021",
+  "date": "2024-02-04",
+  "amount": 355,
+  "payment_method": "Insurance",
+  "status": "Unpaid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f96c"
+  },
+  "billing_id": "B1022",
+  "patient_id": "P1022",
+  "date": "2024-02-05",
+  "amount": 510,
+  "payment_method": "Credit Card",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f96d"
+  },
+  "billing_id": "B1023",
+  "patient_id": "P1023",
+  "date": "2024-02-06",
+  "amount": 470,
+  "payment_method": "Cash",
+  "status": "Pending"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f96e"
+  },
+  "billing_id": "B1024",
+  "patient_id": "P1024",
+  "date": "2024-02-07",
+  "amount": 390,
+  "payment_method": "Insurance",
+  "status": "Paid"
+},
+{
+  "_id": {
+    "$oid": "68396062611906215cb5f96f"
+  },
+  "billing_id": "B1025",
+  "patient_id": "P1025",
+  "date": "2024-02-08",
+  "amount": 610,
+  "payment_method": "Credit Card",
+  "status": "Paid"
+}]

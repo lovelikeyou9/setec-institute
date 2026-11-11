@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Sellers — Admin</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: adminSidebar}"></aside>
+    <div class="dash-main">
+      <div class="section-head" style="margin-bottom:1rem">
+        <h1 style="font-size:1.4rem">Sellers Lists</h1>
+        <button type="button" class="btn btn-primary" data-modal-open="modalAddSeller">+ Add Seller</button>
+      </div>
+      <p style="color:var(--text-muted);margin:-.5rem 0 1rem;font-size:.9rem">Click a seller row to view sales &amp; wishlist analytics.</p>
+
+      <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+      <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+      <form class="dash-search" th:action="@{/admin/sellers}" method="get">
+        <input type="search" name="q" th:value="${q}" placeholder="Search store, owner, email, location..."/>
+        <label class="dash-sort">
+          <span>Sort</span>
+          <select name="sort" onchange="this.form.submit()">
+            <option value="newest" th:selected="${sort == null or sort == 'newest'}">Newest</option>
+            <option value="oldest" th:selected="${sort == 'oldest'}">Oldest</option>
+            <option value="name_asc" th:selected="${sort == 'name_asc'}">Store A–Z</option>
+            <option value="name_desc" th:selected="${sort == 'name_desc'}">Store Z–A</option>
+            <option value="owner_asc" th:selected="${sort == 'owner_asc'}">Owner A–Z</option>
+            <option value="rating_desc" th:selected="${sort == 'rating_desc'}">Highest rating</option>
+            <option value="products_desc" th:selected="${sort == 'products_desc'}">Most products</option>
+            <option value="status" th:selected="${sort == 'status'}">Status</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        <a th:if="${(q != null and !#strings.isEmpty(q)) or (sort != null and sort != 'newest')}"
+           th:href="@{/admin/sellers}" class="btn btn-outline btn-sm">Clear</a>
+      </form>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Store</th><th>Owner</th><th>Email</th><th>Location</th><th>Status</th><th>Level</th><th>Products</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr th:each="s : ${sellers}" class="profile-row-click" th:attr="data-href=@{/admin/sellers/{id}(id=${s.id})}">
+              <td><a class="table-link-btn" th:href="@{/admin/sellers/{id}(id=${s.id})}" th:text="${s.storeName}">Store</a></td>
+              <td th:text="${s.ownerName}">Owner</td>
+              <td th:text="${s.user.email}">email</td>
+              <td th:text="${s.location}">PP</td>
+              <td>
+                <span class="status-pill"
+                      th:classappend="${s.status.name() == 'APPROVED'} ? 'green' : (${s.status.name() == 'SUSPENDED'} ? 'red' : (${s.status.name() == 'PENDING'} ? 'yellow' : 'gray'))"
+                      th:text="${s.status.name()}">APPROVED</span>
+              </td>
+              <td th:text="${s.level.name()}">NEW</td>
+              <td th:text="${s.totalProducts}">0</td>
+              <td class="table-actions" onclick="event.stopPropagation()">
+                <a th:href="@{/profile/seller/{id}(id=${s.id})}"
+                   class="btn btn-outline btn-sm" target="_blank" rel="noopener">Profile</a>
+                <button type="button" class="btn btn-outline btn-sm"
+                        data-edit="editSellerForm"
+                        data-modal-open="modalEditSeller"
+                        th:attr="data-action=@{/admin/sellers/{id}/edit(id=${s.id})},
+                                 data-field-storeName=${s.storeName},
+                                 data-field-ownerName=${s.ownerName},
+                                 data-field-phone=${s.phone},
+                                 data-field-country=${s.country},
+                                 data-field-location=${s.location},
+                                 data-field-address=${s.address},
+                                 data-field-status=${s.status.name()},
+                                 data-field-level=${s.level.name()}">Edit</button>
+                <form th:if="${s.status.name() != 'SUSPENDED' and s.status.name() != 'REJECTED'}"
+                      th:action="@{/admin/sellers/{id}/ban(id=${s.id})}" method="post" style="display:inline">
+                  <button type="submit" class="btn btn-sm btn-danger">Ban</button>
+                </form>
+                <form th:if="${s.status.name() == 'SUSPENDED'}"
+                      th:action="@{/admin/sellers/{id}/unban(id=${s.id})}" method="post" style="display:inline">
+                  <button type="submit" class="btn btn-sm btn-primary">Unban</button>
+                </form>
+                <button type="button" class="btn btn-danger btn-sm"
+                        th:attr="data-delete=@{/admin/sellers/{id}/delete(id=${s.id})}, data-label=${'seller ' + s.storeName}">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="modalAddSeller">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Add Seller</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form th:action="@{/admin/sellers}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group"><label>Store Name *</label><input type="text" name="storeName" required/></div>
+          <div class="form-group"><label>Owner Name *</label><input type="text" name="ownerName" required/></div>
+          <div class="form-group"><label>Login Email *</label><input type="email" name="email" required/></div>
+          <div class="form-group"><label>Password *</label><input type="password" name="password" required minlength="6"/></div>
+          <div class="form-group"><label>Phone</label><input type="text" name="phone"/></div>
+          <div class="form-group">
+            <label>Country</label>
+            <select name="country">
+              <option value="">Select country</option>
+              <option th:each="c : ${countryOptions}" th:value="${c}" th:text="${c}"></option>
+            </select>
+          </div>
+          <div class="form-group"><label>Location</label><input type="text" name="location"/></div>
+          <div class="form-group"><label>Address</label><input type="text" name="address"/></div>
+          <div class="form-group">
+            <label>Level</label>
+            <select name="level">
+              <option value="VERIFIED">VERIFIED</option>
+              <option value="NEW">NEW</option>
+              <option value="TRUSTED">TRUSTED</option>
+              <option value="TOP">TOP</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Add Seller</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalEditSeller">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Edit Seller</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form id="editSellerForm" method="post" action="#">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group"><label>Store Name *</label><input type="text" name="storeName" required/></div>
+          <div class="form-group"><label>Owner Name *</label><input type="text" name="ownerName" required/></div>
+          <div class="form-group"><label>Phone</label><input type="text" name="phone"/></div>
+          <div class="form-group">
+            <label>Country</label>
+            <select name="country">
+              <option value="">Select country</option>
+              <option th:each="c : ${countryOptions}" th:value="${c}" th:text="${c}"></option>
+            </select>
+          </div>
+          <div class="form-group"><label>Location</label><input type="text" name="location"/></div>
+          <div class="form-group"><label>Address</label><input type="text" name="address"/></div>
+          <div class="form-group">
+            <label>Status</label>
+            <select name="status">
+              <option value="PENDING">PENDING</option>
+              <option value="APPROVED">APPROVED</option>
+              <option value="REJECTED">REJECTED</option>
+              <option value="SUSPENDED">SUSPENDED</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Level</label>
+            <select name="level">
+              <option value="NEW">NEW</option>
+              <option value="VERIFIED">VERIFIED</option>
+              <option value="TRUSTED">TRUSTED</option>
+              <option value="TOP">TOP</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalDelete">
+  <div class="modal">
+    <div class="modal-header"><h3>Confirm Delete</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form id="deleteForm" method="post" action="#">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <div class="modal-body"><p>Are you sure you want to delete <strong id="deleteLabel">this item</strong>?</p></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

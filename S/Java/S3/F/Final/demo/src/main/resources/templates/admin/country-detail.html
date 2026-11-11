@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Country — Admin</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: adminSidebar}"></aside>
+    <div class="dash-main">
+      <div class="section-head" style="margin-bottom:1rem">
+        <div>
+          <a th:href="@{/admin/countries}" class="btn btn-outline btn-sm" style="margin-bottom:.5rem">← Countries</a>
+          <h1 style="font-size:1.4rem" th:text="${countryName}">Cambodia</h1>
+          <p style="color:var(--text-muted);margin:.25rem 0 0">
+            Buyers, sellers, money &amp; MME fees (<span th:text="${commissionRate != null ? commissionRate : '3%'}">3%</span>) in this country
+            <span th:if="${usingEstimate}" style="color:var(--accent)"> · estimated from catalog sales</span>
+          </p>
+        </div>
+        <div class="exec-head-actions">
+          <a th:href="@{/admin/commissions}" class="btn btn-outline btn-sm">All commissions</a>
+        </div>
+      </div>
+
+      <div class="exec-kpi-grid">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Money Bought</span><span class="exec-ico teal">$</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(buyMoney, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up" th:text="${buyOrders + ' orders · ' + buyUnits + ' units'}">0 orders</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Money Sold</span><span class="exec-ico gold">$</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(sellMoney, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="warn" th:text="${sellOrders + ' orders · ' + sellUnits + ' units'}">0 orders</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span th:text="${'Fees earned (' + (commissionRate != null ? commissionRate : '3%') + ')'}">Fees earned (3%)</span><span class="exec-ico green">%</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(feesEarned != null ? feesEarned : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up">Released after seller payout</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Fees in escrow</span><span class="exec-ico purple">◷</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(feesInEscrow != null ? feesInEscrow : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="warn" th:text="${(feeOrders != null ? feeOrders : 0) + ' escrow rows'}">0 rows</em>
+        </article>
+      </div>
+
+      <div class="exec-kpi-grid" style="margin-top:1rem">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>People</span><span class="exec-ico purple">◎</span></div>
+          <strong th:text="${buyerCount + sellerCount}">0</strong>
+          <em class="purple" th:text="${buyerCount + ' buyers · ' + sellerCount + ' sellers'}">0 buyers</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Wishlist Views</span><span class="exec-ico green">▣</span></div>
+          <strong th:text="${wishlistViews}">0</strong>
+          <em class="purple" th:text="${wishlistOnSellers + ' on local sellers'}">0</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Total fee pipeline</span><span class="exec-ico gold">%</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(feesTotal != null ? feesTotal : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up">Earned + still in escrow</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Fee rate</span><span class="exec-ico teal">%</span></div>
+          <strong th:text="${commissionRate != null ? commissionRate : '3%'}">3%</strong>
+          <em class="warn">Deducted when admin pays sellers</em>
+        </article>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Country Snapshot</h3><p>Period money flow</p></div>
+          </div>
+          <dl class="profile-dl">
+            <div><dt>Country</dt><dd th:text="${countryName}">Cambodia</dd></div>
+            <div><dt>Buyers</dt><dd th:text="${buyerCount}">0</dd></div>
+            <div><dt>Sellers</dt><dd th:text="${sellerCount}">0</dd></div>
+            <div><dt>Bought this month</dt><dd th:text="${'$' + #numbers.formatDecimal(buyMonth, 1, 'COMMA', 2, 'POINT')}">$0</dd></div>
+            <div><dt>Sold this month</dt><dd th:text="${'$' + #numbers.formatDecimal(sellMonth, 1, 'COMMA', 2, 'POINT')}">$0</dd></div>
+            <div><dt>Bought this year</dt><dd th:text="${'$' + #numbers.formatDecimal(buyYear, 1, 'COMMA', 2, 'POINT')}">$0</dd></div>
+            <div><dt>Sold this year</dt><dd th:text="${'$' + #numbers.formatDecimal(sellYear, 1, 'COMMA', 2, 'POINT')}">$0</dd></div>
+            <div><dt>Orders (month / year)</dt><dd th:text="${ordersMonth + ' / ' + ordersYear}">0 / 0</dd></div>
+            <div><dt>MME fees earned</dt><dd th:text="${'$' + #numbers.formatDecimal(feesEarned != null ? feesEarned : 0, 1, 'COMMA', 2, 'POINT')}">$0</dd></div>
+            <div><dt>MME fees in escrow</dt><dd th:text="${'$' + #numbers.formatDecimal(feesInEscrow != null ? feesInEscrow : 0, 1, 'COMMA', 2, 'POINT')}">$0</dd></div>
+            <div><dt>Fee rate</dt><dd th:text="${commissionRate != null ? commissionRate : '3%'}">3%</dd></div>
+          </dl>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Money Trend</h3><p>Buy vs sell · FY<span th:text="${year}">2026</span></p></div>
+          </div>
+          <div class="exec-chart-lg"><canvas id="countryTrendChart"></canvas></div>
+        </section>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Usually Buy</h3><p>Top categories shipped here</p></div>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Category</th><th>Units</th><th>Spent</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(topBuyCategories)}"><td colspan="3" style="text-align:center;color:var(--text-muted)">No purchases yet</td></tr>
+                <tr th:each="row : ${topBuyCategories}">
+                  <td th:text="${row.label}">CPU</td>
+                  <td th:text="${row.qty}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.amount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Usually Sell</h3><p>Top categories from local sellers</p></div>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Category</th><th>Units</th><th>Revenue</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(topSellCategories)}"><td colspan="3" style="text-align:center;color:var(--text-muted)">No sales yet</td></tr>
+                <tr th:each="row : ${topSellCategories}">
+                  <td th:text="${row.label}">GPU</td>
+                  <td th:text="${row.qty}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.amount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Top Products Bought</h3><p>Most purchased into this country</p></div>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Product</th><th>Units</th><th>Spent</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(topBuyProducts)}"><td colspan="3" style="text-align:center;color:var(--text-muted)">No purchases yet</td></tr>
+                <tr th:each="row : ${topBuyProducts}">
+                  <td th:text="${row.label}">Product</td>
+                  <td th:text="${row.qty}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.amount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Top Products Sold</h3><p>Best sellers from this country</p></div>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Product</th><th>Units</th><th>Revenue</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(topSellProducts)}"><td colspan="3" style="text-align:center;color:var(--text-muted)">No sales yet</td></tr>
+                <tr th:each="row : ${topSellProducts}">
+                  <td th:text="${row.label}">Product</td>
+                  <td th:text="${row.qty}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.amount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Sellers in <span th:text="${countryName}">Country</span></h3><p>Stores &amp; revenue</p></div>
+            <form method="get" th:action="@{/admin/countries/{name}(name=${countryName})}" style="display:flex;gap:.5rem;align-items:center">
+              <input type="hidden" name="buyerSort" th:value="${buyerSort}"/>
+              <label class="dash-sort" style="font-size:.8rem">
+                Sort
+                <select name="sellerSort" onchange="this.form.submit()">
+                  <option value="revenue_desc" th:selected="${sellerSort == null or sellerSort == 'revenue_desc'}">Revenue ↓</option>
+                  <option value="revenue_asc" th:selected="${sellerSort == 'revenue_asc'}">Revenue ↑</option>
+                  <option value="name_asc" th:selected="${sellerSort == 'name_asc'}">Store A–Z</option>
+                  <option value="name_desc" th:selected="${sellerSort == 'name_desc'}">Store Z–A</option>
+                  <option value="units_desc" th:selected="${sellerSort == 'units_desc'}">Units ↓</option>
+                  <option value="units_asc" th:selected="${sellerSort == 'units_asc'}">Units ↑</option>
+                </select>
+              </label>
+            </form>
+          </div>
+          <div class="data-table-wrap" style="border:none;box-shadow:none">
+            <table class="data-table">
+              <thead><tr><th>Store</th><th>Location</th><th>Units</th><th>Revenue</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(sellers)}"><td colspan="4" style="text-align:center;color:var(--text-muted)">No sellers</td></tr>
+                <tr th:each="s : ${sellers}" class="profile-row-click"
+                    th:attr="data-href=@{/admin/sellers/{id}(id=${s.id})}">
+                  <td><a class="table-link-btn" th:href="@{/admin/sellers/{id}(id=${s.id})}" th:text="${s.storeName}">Store</a></td>
+                  <td th:text="${s.location}">—</td>
+                  <td th:text="${s.units}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(s.revenue, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Buyers in <span th:text="${countryName}">Country</span></h3><p>Spend &amp; wishlist</p></div>
+            <form method="get" th:action="@{/admin/countries/{name}(name=${countryName})}" style="display:flex;gap:.5rem;align-items:center">
+              <input type="hidden" name="sellerSort" th:value="${sellerSort}"/>
+              <label class="dash-sort" style="font-size:.8rem">
+                Sort
+                <select name="buyerSort" onchange="this.form.submit()">
+                  <option value="spent_desc" th:selected="${buyerSort == null or buyerSort == 'spent_desc'}">Spent ↓</option>
+                  <option value="spent_asc" th:selected="${buyerSort == 'spent_asc'}">Spent ↑</option>
+                  <option value="name_asc" th:selected="${buyerSort == 'name_asc'}">Name A–Z</option>
+                  <option value="name_desc" th:selected="${buyerSort == 'name_desc'}">Name Z–A</option>
+                  <option value="orders_desc" th:selected="${buyerSort == 'orders_desc'}">Orders ↓</option>
+                  <option value="orders_asc" th:selected="${buyerSort == 'orders_asc'}">Orders ↑</option>
+                </select>
+              </label>
+            </form>
+          </div>
+          <div class="data-table-wrap" style="border:none;box-shadow:none">
+            <table class="data-table">
+              <thead><tr><th>Buyer</th><th>Orders</th><th>Spent</th><th>Wishlist</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(buyers)}"><td colspan="4" style="text-align:center;color:var(--text-muted)">No buyers</td></tr>
+                <tr th:each="b : ${buyers}" class="profile-row-click"
+                    th:attr="data-href=@{/admin/users/{id}(id=${b.id})}">
+                  <td>
+                    <a class="table-link-btn" th:href="@{/admin/users/{id}(id=${b.id})}" th:text="${b.fullName}">Name</a>
+                    <div style="font-size:.75rem;color:var(--text-muted)" th:text="${b.email}">email</div>
+                  </td>
+                  <td th:text="${b.orders}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(b.spent, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                  <td th:text="${b.wishlist}">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <section class="exec-card" style="margin-top:1rem">
+        <div class="exec-card-head">
+          <div><h3>Recent Orders</h3><p>Shipments into this country</p></div>
+        </div>
+        <div class="data-table-wrap" style="border:none;box-shadow:none">
+          <table class="data-table">
+            <thead><tr><th>Order</th><th>Buyer</th><th>Seller</th><th>Status</th><th>Total</th><th>Date</th></tr></thead>
+            <tbody>
+              <tr th:if="${#lists.isEmpty(recentOrders)}"><td colspan="6" style="text-align:center;color:var(--text-muted)">No orders yet</td></tr>
+              <tr th:each="o : ${recentOrders}">
+                <td th:text="${o.orderNumber}">ORD-001</td>
+                <td th:text="${o.recipientName}">Buyer</td>
+                <td th:text="${o.seller != null ? o.seller.storeName : '—'}">Seller</td>
+                <td><span class="status-pill yellow" th:text="${o.status.name()}">STATUS</span></td>
+                <td th:text="${'$' + #numbers.formatDecimal(o.total, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                <td th:text="${o.placedAt != null ? #temporals.format(o.placedAt, 'dd MMM yyyy') : '—'}">01 Jan</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+<script th:inline="javascript">
+  const months = /*[[${months}]]*/ [];
+  const buyTrend = /*[[${buyTrend}]]*/ [];
+  const sellTrend = /*[[${sellTrend}]]*/ [];
+  const ordersTrend = /*[[${ordersTrend}]]*/ [];
+  Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+  Chart.defaults.color = '#5a6570';
+  new Chart(document.getElementById('countryTrendChart'), {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [
+        { label: 'Bought ($)', data: buyTrend, borderColor: '#2f6bff', backgroundColor: 'rgba(47,107,255,.12)', fill: true, tension: .35, pointRadius: 0 },
+        { label: 'Sold ($)', data: sellTrend, borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,.1)', fill: true, tension: .35, pointRadius: 0 },
+        { label: 'Orders', data: ordersTrend, borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,.08)', fill: false, tension: .35, pointRadius: 0 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#eef2f6' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+</script>
+</body>
+</html>

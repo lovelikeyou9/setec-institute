@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Store Settings — Seller</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+    <div class="dash-main">
+      <div class="section-head" style="margin-bottom:1rem">
+        <h1 style="font-size:1.4rem">Store Settings</h1>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button type="button" class="btn btn-outline" data-modal-open="modalEditPersonal">Edit Personal</button>
+          <button type="button" class="btn btn-primary" data-modal-open="modalEditStore">Edit Store</button>
+        </div>
+      </div>
+
+      <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+      <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+      <div class="form-card">
+        <h3>Personal profile</h3>
+        <div class="settings-cover-preview store-banner profile-cover"
+             th:style="|margin-bottom:1rem;background-image:url('${currentUser.coverUrl != null and !#strings.isEmpty(currentUser.coverUrl) ? #strings.replace(currentUser.coverUrl,' ','%20') : '/uploads/avatars/cover%20photos/photo_2026-10-09_09-47-07.jpg'}');|">
+        </div>
+        <div class="settings-profile-head">
+          <div class="settings-avatar" th:if="${currentUser.avatarUrl == null or #strings.isEmpty(currentUser.avatarUrl)}"
+               th:text="${#strings.substring(currentUser.fullName,0,1)}">U</div>
+          <img class="settings-avatar-img" th:if="${currentUser.avatarUrl != null and !#strings.isEmpty(currentUser.avatarUrl)}"
+               th:src="${currentUser.avatarUrl}" th:alt="${currentUser.fullName}"/>
+          <div>
+            <strong th:text="${currentUser.fullName}">Owner</strong>
+            <div style="font-size:.85rem;color:var(--text-muted);margin-top:.25rem" th:text="${currentUser.email}">email</div>
+            <a th:href="@{/profile/{id}(id=${currentUser.id})}" class="btn btn-ghost btn-sm" style="margin-top:.5rem">View owner profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3>Store profile</h3>
+        <div class="settings-profile-head">
+          <img class="settings-store-logo" th:src="${seller.logoUrl}" th:alt="${seller.storeName}"/>
+          <div>
+            <strong th:text="${seller.storeName}">Store</strong>
+            <span class="badge badge-verified" th:if="${seller.verified}" style="margin-left:.4rem">✓ Verified</span>
+            <div style="font-size:.85rem;color:var(--text-muted);margin-top:.25rem"
+                 th:text="${seller.level.name() + ' · ' + seller.status.name()}">LEVEL</div>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label>Store Name</label><input type="text" th:value="${seller.storeName}" readonly/></div>
+          <div class="form-group"><label>Owner</label><input type="text" th:value="${seller.ownerName}" readonly/></div>
+          <div class="form-group"><label>Phone</label><input type="text" th:value="${seller.phone}" readonly/></div>
+          <div class="form-group"><label>Country</label><input type="text" th:value="${seller.country != null ? seller.country : '—'}" readonly/></div>
+          <div class="form-group"><label>Location</label><input type="text" th:value="${seller.location}" readonly/></div>
+          <div class="form-group full"><label>Address</label><input type="text" th:value="${seller.address}" readonly/></div>
+          <div class="form-group full"><label>Description</label><textarea rows="3" readonly th:text="${seller.description}"></textarea></div>
+        </div>
+        <a th:href="@{/seller/{id}(id=${seller.id})}" class="btn btn-outline btn-sm" style="margin-top:.75rem">View public store profile</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="modalEditPersonal">
+  <div class="modal">
+    <div class="modal-header"><h3>Edit Personal Profile</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form th:action="@{/seller-dashboard/settings/personal}" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Cover photo (owner profile)</label>
+            <div class="logo-field logo-field-banner" data-logo-field>
+              <div class="logo-preview-box logo-preview-banner">
+                <img class="logo-preview-img" th:src="${currentUser.coverUrl}" alt="Cover"
+                     th:hidden="${currentUser.coverUrl == null or #strings.isEmpty(currentUser.coverUrl)}"/>
+                <span class="logo-preview-empty"
+                      th:hidden="${currentUser.coverUrl != null and !#strings.isEmpty(currentUser.coverUrl)}">No cover</span>
+              </div>
+              <div class="logo-field-controls">
+                <input type="file" name="coverFile" accept="image/*" class="logo-file-input"/>
+                <input type="hidden" name="coverUrl" class="logo-url-input" th:value="${currentUser.coverUrl}"/>
+                <p class="logo-field-hint">Wide banner on your public owner profile (/profile/…).</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Profile image</label>
+            <div class="logo-field" data-logo-field>
+              <div class="logo-preview-box logo-preview-round">
+                <img class="logo-preview-img" th:src="${currentUser.avatarUrl}" th:alt="${currentUser.fullName}"
+                     th:hidden="${currentUser.avatarUrl == null or #strings.isEmpty(currentUser.avatarUrl)}"/>
+                <span class="logo-preview-empty"
+                      th:hidden="${currentUser.avatarUrl != null and !#strings.isEmpty(currentUser.avatarUrl)}">No image</span>
+              </div>
+              <div class="logo-field-controls">
+                <input type="file" name="avatarFile" accept="image/*" class="logo-file-input"/>
+                <input type="hidden" name="avatarUrl" class="logo-url-input" th:value="${currentUser.avatarUrl}"/>
+                <p class="logo-field-hint">Shown on your public owner profile and reviews.</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group"><label>Full Name *</label><input type="text" name="fullName" required th:value="${currentUser.fullName}"/></div>
+          <div class="form-group"><label>Phone</label><input type="tel" name="phone" th:value="${currentUser.phone}"/></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Personal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalEditStore">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Edit Store</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form th:action="@{/seller-dashboard/settings}" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Store logo</label>
+            <div class="logo-field" data-logo-field>
+              <div class="logo-preview-box">
+                <img class="logo-preview-img" th:src="${seller.logoUrl}" th:alt="${seller.storeName}"
+                     th:hidden="${seller.logoUrl == null or #strings.isEmpty(seller.logoUrl)}"/>
+                <span class="logo-preview-empty"
+                      th:hidden="${seller.logoUrl != null and !#strings.isEmpty(seller.logoUrl)}">No logo</span>
+              </div>
+              <div class="logo-field-controls">
+                <input type="file" name="logoFile" accept="image/*" class="logo-file-input"/>
+                <input type="hidden" name="logoUrl" class="logo-url-input" th:value="${seller.logoUrl}"/>
+                <p class="logo-field-hint">Square logo works best for your storefront.</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Cover photo (store profile)</label>
+            <div class="logo-field logo-field-banner" data-logo-field>
+              <div class="logo-preview-box logo-preview-banner">
+                <img class="logo-preview-img" th:src="${seller.bannerUrl}" th:alt="Banner"
+                     th:hidden="${seller.bannerUrl == null or #strings.isEmpty(seller.bannerUrl)}"/>
+                <span class="logo-preview-empty"
+                      th:hidden="${seller.bannerUrl != null and !#strings.isEmpty(seller.bannerUrl)}">No banner</span>
+              </div>
+              <div class="logo-field-controls">
+                <input type="file" name="bannerFile" accept="image/*" class="logo-file-input"/>
+                <input type="hidden" name="bannerUrl" class="logo-url-input" th:value="${seller.bannerUrl}"/>
+                <p class="logo-field-hint">Wide cover at the top of your seller store page.</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group"><label>Store Name *</label><input type="text" name="storeName" required th:value="${seller.storeName}"/></div>
+          <div class="form-group"><label>Owner *</label><input type="text" name="ownerName" required th:value="${seller.ownerName}"/></div>
+          <div class="form-group"><label>Phone</label><input type="text" name="phone" th:value="${seller.phone}"/></div>
+          <div class="form-group">
+            <label>Country *</label>
+            <select name="country" required>
+              <option value="">Select country</option>
+              <option th:each="c : ${countryOptions}" th:value="${c}" th:text="${c}"
+                      th:selected="${seller.country == c}"></option>
+            </select>
+          </div>
+          <div class="form-group"><label>Location</label><input type="text" name="location" th:value="${seller.location}"/></div>
+          <div class="form-group full"><label>Address</label><input type="text" name="address" th:value="${seller.address}"/></div>
+          <div class="form-group full"><label>Description</label><textarea name="description" rows="3" th:text="${seller.description}"></textarea></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Store</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

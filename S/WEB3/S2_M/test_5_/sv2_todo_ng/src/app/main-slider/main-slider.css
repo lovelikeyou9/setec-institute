@@ -1,0 +1,5 @@
+.main-slide-image{
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Orders — Seller</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+    <div class="dash-main">
+      <div class="exec-head" style="margin-bottom:1rem">
+        <div>
+          <h1 style="font-size:1.4rem;margin:0">Orders</h1>
+          <p style="margin:.35rem 0 0;color:var(--text-muted);font-size:.9rem">
+            Confirm stock → <strong>Shipped</strong> → <strong>Out for delivery</strong>.
+            Admin confirms delivered and pays you (minus 3%).
+          </p>
+        </div>
+        <div class="exec-head-actions">
+          <a th:href="@{/seller-dashboard/earnings}" class="btn btn-outline btn-sm">Earnings</a>
+        </div>
+      </div>
+
+      <div th:if="${message}" class="alert alert-success" data-keep-alert th:text="${message}"></div>
+      <div th:if="${error}" class="alert alert-error" data-keep-alert th:text="${error}"></div>
+
+      <form class="dash-search" th:action="@{/seller-dashboard/orders}" method="get">
+        <label class="dash-sort">
+          <span>Sort</span>
+          <select name="sort" onchange="this.form.submit()">
+            <option value="newest" th:selected="${sort == null or sort == 'newest'}">Newest first</option>
+            <option value="oldest" th:selected="${sort == 'oldest'}">Oldest first</option>
+            <option value="total_desc" th:selected="${sort == 'total_desc'}">Total: High to Low</option>
+            <option value="total_asc" th:selected="${sort == 'total_asc'}">Total: Low to High</option>
+          </select>
+        </label>
+      </form>
+
+      <div th:if="${#lists.isEmpty(orders)}" class="empty-state">
+        <div class="icon">📦</div>
+        <h3>No orders yet</h3>
+        <p>When customers buy your products, orders show up here.</p>
+      </div>
+
+      <div class="data-table-wrap" th:if="${!#lists.isEmpty(orders)}">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Order #</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="o : ${orders}" th:with="s=${o.status.name()}">
+              <td th:text="${o.orderNumber}">CH-001</td>
+              <td>
+                <div th:text="${o.recipientName}">Name</div>
+                <div style="font-size:.8rem;color:var(--text-muted)" th:text="${o.recipientPhone}">Phone</div>
+              </td>
+              <td th:text="${#lists.size(o.items)}">1</td>
+              <td th:text="${'$' + #numbers.formatDecimal(o.total, 1, 2)}">$0</td>
+              <td>
+                <span th:replace="~{fragments/status :: orderPill(${o.status})}"></span>
+              </td>
+              <td th:text="${o.placedAt != null ? #temporals.format(o.placedAt, 'dd MMM yyyy') : '—'}">01 Jan</td>
+              <td class="table-actions">
+                <span th:if="${s == 'PAYMENT_CONFIRMED' or s == 'PENDING_PAYMENT'}"
+                      class="hint-muted">Waiting for admin hold</span>
+
+                <th:block th:if="${s == 'FUNDS_HELD'}">
+                  <form th:action="@{/seller-dashboard/orders/{id}/accept(id=${o.id})}" method="post" style="display:inline">
+                    <button type="submit" class="btn btn-primary btn-sm">Confirm stock</button>
+                  </form>
+                  <form th:action="@{/seller-dashboard/orders/{id}/decline-stock(id=${o.id})}" method="post" style="display:inline"
+                        onsubmit="return confirm('Decline because out of stock? Customer will be refunded.');">
+                    <button type="submit" class="btn btn-danger btn-sm">Out of stock</button>
+                  </form>
+                </th:block>
+
+                <form th:if="${s == 'SELLER_PROCESSING'}"
+                      th:action="@{/seller-dashboard/orders/{id}/status(id=${o.id})}" method="post" style="display:inline">
+                  <input type="hidden" name="status" value="SHIPPED"/>
+                  <button type="submit" class="btn btn-primary btn-sm">Mark shipped</button>
+                </form>
+
+                <form th:if="${s == 'SHIPPED'}"
+                      th:action="@{/seller-dashboard/orders/{id}/status(id=${o.id})}" method="post" style="display:inline">
+                  <input type="hidden" name="status" value="OUT_FOR_DELIVERY"/>
+                  <button type="submit" class="btn btn-primary btn-sm">Out for delivery</button>
+                </form>
+
+                <span th:if="${s == 'OUT_FOR_DELIVERY'}" class="hint-muted">Waiting for admin: delivered → pay</span>
+                <span th:if="${s == 'DELIVERED'}" class="hint-muted">Buyer protection — await payout</span>
+                <span th:if="${s == 'COMPLETED'}" class="hint-ok">Paid (minus 3%)</span>
+
+                <a th:href="@{/orders/{n}(n=${o.orderNumber})}" class="btn btn-outline btn-sm">View</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+
+flask run --debug --port 5000
+
+stripe listen --forward-to localhost:5000/webhook/stripe
+
+ngrok http 5000 --url https://neurosis-skyrocket-kindness.ngrok-free.dev

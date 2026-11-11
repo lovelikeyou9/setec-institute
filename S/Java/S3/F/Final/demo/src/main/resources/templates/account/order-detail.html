@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Order Detail — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" data-keep-alert th:text="${message}"></div></div>
+<div th:if="${error}" class="container" style="padding-top:1rem"><div class="alert alert-error" data-keep-alert th:text="${error}"></div></div>
+
+<main class="main-content">
+  <div class="container" style="padding-top:1.5rem;max-width:900px">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <a th:href="@{/account/orders}">Orders</a>
+      <span class="sep">/</span>
+      <span th:text="${order.orderNumber}">CH-001</span>
+    </nav>
+
+    <div class="section-head">
+      <div>
+        <h1 class="section-title" th:text="${'Order ' + order.orderNumber}">Order</h1>
+        <p class="section-sub">
+          Placed <span th:text="${order.placedAt != null ? #temporals.format(order.placedAt, 'dd MMM yyyy HH:mm') : '—'}">date</span>
+          · Seller: <a th:href="@{/seller/{id}(id=${order.seller.id})}" th:text="${order.seller.storeName}">Store</a>
+        </p>
+      </div>
+      <span th:replace="~{fragments/status :: orderPill(${order.status})}"></span>
+    </div>
+
+    <div class="form-card" th:if="${commission != null}">
+      <h3>Payment escrow</h3>
+      <p style="font-size:.92rem;color:var(--text-secondary);margin-bottom:.75rem">
+        After you pay, MME holds your money. Seller confirms stock and ships.
+        Admin confirms delivery, then deducts
+        <strong th:text="${commission.commissionPercent + '%'}">3%</strong> and pays the seller.
+      </p>
+      <div class="summary-row">
+        <span>Escrow status</span>
+        <strong th:text="${T(com.example.demo.util.StatusLabels).payout(commission.payoutStatus)}">Held</strong>
+      </div>
+      <div class="summary-row">
+        <span>MME fee</span>
+        <span th:text="${'$' + #numbers.formatDecimal(commission.commissionAmount, 1, 2) + ' (' + commission.commissionPercent + '%)'}">$0</span>
+      </div>
+      <div class="summary-row">
+        <span>Seller receives</span>
+        <span th:text="${'$' + #numbers.formatDecimal(commission.sellerEarnings, 1, 2)}">$0</span>
+      </div>
+      <div class="summary-row" th:if="${order.adminHeldAt != null}">
+        <span>Admin held at</span>
+        <span th:text="${#temporals.format(order.adminHeldAt, 'dd MMM yyyy HH:mm')}">date</span>
+      </div>
+      <div class="summary-row" th:if="${order.sellerConfirmedAt != null}">
+        <span>Seller confirmed stock</span>
+        <span th:text="${#temporals.format(order.sellerConfirmedAt, 'dd MMM yyyy HH:mm')}">date</span>
+      </div>
+      <div class="summary-row" th:if="${order.protectionEndsAt != null}">
+        <span>Buyer protection ends</span>
+        <span th:text="${#temporals.format(order.protectionEndsAt, 'dd MMM yyyy HH:mm')}">date</span>
+      </div>
+      <div class="summary-row" th:if="${order.payoutReleasedAt != null}">
+        <span>Seller paid at</span>
+        <span th:text="${#temporals.format(order.payoutReleasedAt, 'dd MMM yyyy HH:mm')}">date</span>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>Order Progress</h3>
+      <div class="timeline"
+           th:with="s=${order.status.name()},
+                    cancelled=${s == 'CANCELLED' or s == 'REFUNDED'},
+                    disputed=${s == 'DISPUTED'},
+                    idx=${s == 'PENDING_PAYMENT' ? 0 : (s == 'PAYMENT_CONFIRMED' ? 1 : (s == 'FUNDS_HELD' ? 2 : (s == 'SELLER_PROCESSING' ? 3 : (s == 'SHIPPED' ? 4 : (s == 'OUT_FOR_DELIVERY' ? 5 : (s == 'DELIVERED' or s == 'DISPUTED' ? 6 : (s == 'COMPLETED' ? 7 : -1)))))))}">
+
+        <div th:if="${cancelled}" class="timeline-item active">
+          <h4 th:text="${s}">CANCELLED</h4>
+          <p th:if="${order.cancelReason == 'OUT_OF_STOCK'}">Seller declined — product out of stock. Payment refunded.</p>
+          <p th:if="${s == 'CANCELLED' and order.cancelReason != 'OUT_OF_STOCK'}">This order was cancelled.</p>
+          <p th:if="${s == 'REFUNDED'}">Held funds were returned to you.</p>
+        </div>
+
+        <th:block th:unless="${cancelled}">
+          <div class="timeline-item" th:classappend="${idx > 0} ? 'done' : (${idx == 0} ? 'active' : '')">
+            <h4>1. Customer pays</h4>
+            <p th:text="${order.paidAt != null ? #temporals.format(order.paidAt, 'dd MMM yyyy HH:mm') : 'Waiting for payment'}">Pay</p>
+          </div>
+          <div class="timeline-item" th:classappend="${idx > 1} ? 'done' : (${idx == 1} ? 'active' : '')">
+            <h4>2. Admin confirms &amp; holds money</h4>
+            <p th:text="${order.adminHeldAt != null ? #temporals.format(order.adminHeldAt, 'dd MMM yyyy HH:mm') + ' — funds held by MME' : 'Waiting for admin confirmation'}">Hold</p>
+          </div>
+          <div class="timeline-item" th:classappend="${idx > 2} ? 'done' : (${idx == 2} ? 'active' : '')">
+            <h4>3. Seller confirms stock</h4>
+            <p th:text="${order.sellerConfirmedAt != null ? #temporals.format(order.sellerConfirmedAt, 'dd MMM yyyy HH:mm') + ' — seller accepted' : 'Seller checks stock (can decline if out of stock)'}">Stock</p>
+          </div>
+          <div class="timeline-item" th:classappend="${idx > 3} ? 'done' : (${idx == 3} ? 'active' : '')">
+            <h4>4. Seller processing</h4>
+            <p>Seller is preparing your package</p>
+          </div>
+          <div class="timeline-item" th:classappend="${idx > 4} ? 'done' : (${idx == 4} ? 'active' : '')">
+            <h4>5. Seller shipped</h4>
+            <p th:text="${order.shippedAt != null ? #temporals.format(order.shippedAt, 'dd MMM yyyy HH:mm') : 'Awaiting shipment'}">Shipped</p>
+          </div>
+          <div class="timeline-item" th:classappend="${idx > 5} ? 'done' : (${idx == 5} ? 'active' : '')">
+            <h4>6. Out for delivery</h4>
+            <p th:text="${order.outForDeliveryAt != null ? #temporals.format(order.outForDeliveryAt, 'dd MMM yyyy HH:mm') + ' — courier delivering' : 'Courier delivering to your address'}">Out for delivery</p>
+          </div>
+          <div class="timeline-item" th:classappend="${idx > 6} ? 'done' : (${idx == 6} ? 'active' : '')">
+            <h4>7. Admin confirms delivered</h4>
+            <p th:if="${order.deliveredAt != null}"
+               th:text="${#temporals.format(order.deliveredAt, 'dd MMM yyyy HH:mm') + ' · buyer protection: report missing / damaged / incorrect within ' + protectionDays + ' day(s)'}">Delivered</p>
+            <p th:unless="${order.deliveredAt != null}">Admin confirms you received the product</p>
+            <p th:if="${disputed}" style="color:#c62828;margin-top:.35rem">
+              Dispute open:
+              <strong th:text="${order.disputeReason != null ? order.disputeReason.name() : 'ISSUE'}">MISSING</strong>
+              <span th:if="${order.disputeNote != null}" th:text="${' — ' + order.disputeNote}"></span>
+            </p>
+          </div>
+          <div class="timeline-item" th:classappend="${idx >= 7} ? 'done' : ''">
+            <h4>8. Admin pays seller</h4>
+            <p th:if="${order.payoutReleasedAt != null}"
+               th:text="${#temporals.format(order.payoutReleasedAt, 'dd MMM yyyy HH:mm') + ' — 3% commission deducted, seller paid'}">Released</p>
+            <p th:unless="${order.payoutReleasedAt != null}">Admin deducts commission and pays the seller</p>
+          </div>
+        </th:block>
+      </div>
+
+      <p th:if="${order.trackingNumber != null}" style="margin-top:.5rem">
+        Tracking number: <strong th:text="${order.trackingNumber}">TRK</strong>
+      </p>
+      <p th:if="${order.estimatedDelivery != null}" style="font-size:.9rem;color:var(--text-muted)">
+        Estimated delivery: <span th:text="${#temporals.format(order.estimatedDelivery, 'dd MMM yyyy')}">date</span>
+      </p>
+    </div>
+
+    <div class="form-card" th:if="${canOpenDispute}">
+      <h3>Buyer protection</h3>
+      <div>
+        <p style="font-size:.9rem;color:var(--text-secondary);margin-bottom:.5rem">
+          Admin confirmed delivery. Report missing, damaged, or incorrect items during buyer protection.
+          Payment stays held until this is resolved.
+        </p>
+        <form th:action="@{/orders/{n}/dispute(n=${order.orderNumber})}" method="post" class="form-grid">
+          <div class="form-group">
+            <label>Issue type *</label>
+            <select name="reason" required>
+              <option th:each="r : ${disputeReasons}" th:value="${r.name()}"
+                      th:text="${r.name() == 'MISSING' ? 'Missing item' : (r.name() == 'DAMAGED' ? 'Damaged item' : (r.name() == 'INCORRECT' ? 'Incorrect item' : 'Other'))}">Missing</option>
+            </select>
+          </div>
+          <div class="form-group" style="grid-column:1/-1">
+            <label>Details</label>
+            <textarea name="note" rows="3" placeholder="Describe what went wrong..."></textarea>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-danger">Report issue</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>Order Items</h3>
+      <div class="cart-item" th:each="item : ${order.items}" style="grid-template-columns:80px 1fr auto">
+        <img th:src="${item.productImage}" th:alt="${item.productName}"/>
+        <div>
+          <strong th:text="${item.productName}">Product</strong>
+          <div style="font-size:.85rem;color:var(--text-secondary);margin-top:.25rem"
+               th:text="${'Qty: ' + item.quantity + ' × $' + #numbers.formatDecimal(item.unitPrice, 1, 2)}">Qty</div>
+        </div>
+        <div style="font-weight:700" th:text="${'$' + #numbers.formatDecimal(item.lineTotal, 1, 2)}">$0</div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>Payment &amp; Shipping</h3>
+      <div class="summary-row"><span>Subtotal</span><span th:text="${'$' + #numbers.formatDecimal(order.subtotal, 1, 2)}">$0</span></div>
+      <div class="summary-row"><span>Shipping</span><span th:text="${'$' + #numbers.formatDecimal(order.shippingFee, 1, 2)}">$0</span></div>
+      <div class="summary-row" th:if="${order.discount != null and order.discount > 0}">
+        <span>Discount</span><span th:text="${'-$' + #numbers.formatDecimal(order.discount, 1, 2)}">$0</span>
+      </div>
+      <div class="summary-row total"><span>Total paid</span><span th:text="${'$' + #numbers.formatDecimal(order.total, 1, 2)}">$0</span></div>
+      <p style="margin-top:1rem;font-size:.9rem;color:var(--text-secondary)">
+        Payment: <strong th:text="${order.paymentMethod != null ? order.paymentMethod.name() : '—'}">COD</strong> ·
+        Delivery: <strong th:text="${order.deliveryType != null ? order.deliveryType.name() : 'STANDARD'}">STANDARD</strong>
+      </p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--text-secondary)">
+        Ship to: <strong th:text="${order.recipientName}">Name</strong>,
+        <span th:text="${order.recipientPhone}">Phone</span><br/>
+        <span th:text="${order.shippingAddress}">Address</span>
+      </p>
+    </div>
+
+    <a th:href="@{/account/orders}" class="btn btn-outline">← Back to Orders</a>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

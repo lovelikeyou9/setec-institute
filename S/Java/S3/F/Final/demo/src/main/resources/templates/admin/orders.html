@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Orders — Admin</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: adminSidebar}"></aside>
+    <div class="dash-main">
+      <div class="exec-head" style="margin-bottom:1rem">
+        <div>
+          <h1 style="font-size:1.4rem;margin:0">Orders &amp; Escrow</h1>
+          <p style="margin:.35rem 0 0;color:var(--text-muted);font-size:.9rem">
+            Confirm &amp; hold → seller ships → <strong>Confirm delivered</strong> → <strong>Deduct 3% &amp; pay seller</strong>
+          </p>
+        </div>
+        <div class="exec-head-actions">
+          <a th:href="@{/admin/commissions}" class="btn btn-outline btn-sm">Commissions</a>
+        </div>
+      </div>
+
+      <div th:if="${message}" class="alert alert-success" data-keep-alert th:text="${message}"></div>
+      <div th:if="${error}" class="alert alert-error" data-keep-alert th:text="${error}"></div>
+
+      <div th:if="${#lists.isEmpty(orders)}" class="empty-state">
+        <h3>No orders yet</h3>
+        <p>Orders appear here when customers check out.</p>
+      </div>
+
+      <div class="data-table-wrap" th:if="${!#lists.isEmpty(orders)}">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Order #</th>
+              <th>Seller</th>
+              <th>Customer</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>Total</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="o : ${orders}" th:with="s=${o.status.name()}">
+              <td th:text="${o.orderNumber}">CH-001</td>
+              <td th:text="${o.seller.storeName}">Store</td>
+              <td th:text="${o.recipientName}">Buyer</td>
+              <td th:text="${o.paymentMethod != null ? #strings.replace(o.paymentMethod.name(),'_',' ') : '—'}">CARD</td>
+              <td>
+                <span th:replace="~{fragments/status :: orderPill(${o.status})}"></span>
+              </td>
+              <td th:text="${'$' + #numbers.formatDecimal(o.total, 1, 2)}">$0</td>
+              <td th:text="${o.placedAt != null ? #temporals.format(o.placedAt, 'dd MMM yyyy') : '—'}">01 Jan</td>
+              <td class="table-actions">
+                <a th:href="@{/orders/{n}(n=${o.orderNumber})}" class="btn btn-outline btn-sm">View</a>
+
+                <form th:if="${s == 'PAYMENT_CONFIRMED' or s == 'PENDING_PAYMENT'}"
+                      th:action="@{/admin/orders/{id}/confirm-hold(id=${o.id})}" method="post" style="display:inline">
+                  <button type="submit" class="btn btn-primary btn-sm">Confirm &amp; hold</button>
+                </form>
+
+                <form th:if="${s == 'OUT_FOR_DELIVERY' or s == 'SHIPPED'}"
+                      th:action="@{/admin/orders/{id}/confirm-delivered(id=${o.id})}" method="post" style="display:inline">
+                  <button type="submit" class="btn btn-primary btn-sm">Confirm delivered</button>
+                </form>
+
+                <form th:if="${s == 'DELIVERED' or s == 'DISPUTED'}"
+                      th:action="@{/admin/orders/{id}/release-payout(id=${o.id})}" method="post" style="display:inline">
+                  <button type="submit" class="btn btn-primary btn-sm">Deduct 3% &amp; pay</button>
+                </form>
+
+                <form th:if="${s != 'REFUNDED' and s != 'COMPLETED' and s != 'CANCELLED'}"
+                      th:action="@{/admin/orders/{id}/refund(id=${o.id})}" method="post" style="display:inline"
+                      onsubmit="return confirm('Refund held funds to customer?');">
+                  <button type="submit" class="btn btn-danger btn-sm">Refund</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

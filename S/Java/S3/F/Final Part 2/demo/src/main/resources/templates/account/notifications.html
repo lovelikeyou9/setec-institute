@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Notifications — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell" th:with="activeNav='notifications'">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/dash-sidebar :: sidebar}"></aside>
+    <div class="dash-main">
+      <div class="section-head" style="margin-bottom:1.25rem">
+        <div>
+          <h1 style="font-size:1.4rem">Notifications</h1>
+          <p class="section-sub">Order updates, deals, and store messages</p>
+        </div>
+        <form th:action="@{/notifications/read-all}" method="post">
+          <button type="submit" class="btn btn-outline btn-sm">Mark all as read</button>
+        </form>
+      </div>
+
+      <div th:if="${#lists.isEmpty(notifications)}" class="empty-state">
+        <div class="icon">🔔</div>
+        <h3>You're all caught up</h3>
+        <p>New notifications about orders and deals will appear here.</p>
+      </div>
+
+      <div class="form-card" th:each="n : ${notifications}"
+           th:style="${!n.readFlag ? 'border-left:3px solid var(--brand)' : ''}">
+        <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+          <div>
+            <strong th:text="${n.title}">Title</strong>
+            <span class="status-pill blue" th:if="${!n.readFlag}" style="margin-left:.4rem">New</span>
+            <p style="margin-top:.35rem;color:var(--text-secondary)" th:text="${n.message}">Message</p>
+            <a th:if="${n.link != null and !n.link.isEmpty()}" th:href="${n.link}"
+               style="font-size:.85rem;color:var(--brand)">View details →</a>
+          </div>
+          <span style="font-size:.8rem;color:var(--text-muted);white-space:nowrap"
+                th:text="${n.createdAt != null ? #temporals.format(n.createdAt, 'dd MMM HH:mm') : ''}">date</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

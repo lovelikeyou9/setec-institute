@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Category | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="dash-body">
+<div class="dash-shell">
+    <div th:replace="~{fragments/dash :: sidebar('stock-categories', ${staff})}"></div>
+    <div class="dash-main">
+        <div th:replace="~{fragments/dash :: top(${staff}, 'CRUD Category')}"></div>
+        <div class="dash-content">
+            <div class="dash-grid-2">
+                <div class="dash-panel">
+                    <div class="dash-panel-pad">
+                        <h3 th:text="${formCategory.catID != null} ? 'Edit Category' : 'Add Category'">Add Category</h3>
+                        <form th:action="@{/stock/categories/save}" method="post">
+                            <input type="hidden" name="CatID" th:value="${formCategory.catID}">
+                            <div class="form-group">
+                                <label>Category Name</label>
+                                <input type="text" name="CatName" th:value="${formCategory.catName}" required>
+                            </div>
+                            <button class="btn-primary" type="submit">Save Category</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="dash-panel">
+                    <div class="dash-panel-pad">
+                        <h3>Category list</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                <tr><th>CatID</th><th>Name</th><th>Actions</th></tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="c : ${categories}">
+                                    <td th:text="${c.catID}"></td>
+                                    <td th:text="${c.catName}"></td>
+                                    <td class="actions">
+                                        <a class="btn-edit" th:href="@{/stock/categories/edit/{id}(id=${c.catID})}">Edit</a>
+                                        <a class="btn-del" th:href="@{/stock/categories/delete/{id}(id=${c.catID})}"
+                                           onclick="return confirm('Delete this category?')">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

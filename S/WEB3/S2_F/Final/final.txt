@@ -1,0 +1,84 @@
+Create new project Angular:
+cd C:\Users\Admin\OneDrive\Desktop\S\WEB3\S2_F\Final
+
+ng new sv2_todo_ng_final
+
+cd C:\Users\Admin\OneDrive\Desktop\S\WEB3\S2_F\Final\sv2_todo_ng_final
+
+ng serve
+
+ng g c Cart
+
+ng g c CheckOut
+
+ng g c Home
+
+ng g c Product
+
+ng g c ProductDetail
+
+ng g c ProductCard
+
+ng g c Cart
+
+ng g c MainSlider
+
+ng g c error404
+
+right click on "app" folder > name: service
+
+ng g s service/CartService
+
+ng g s service/ProductService
+
+https://fakestoreapi.com/products
+
+
+
+chatgpt
+
+i already created (
+ng new sv2_todo_ng_final
+
+cd C:\Users\Admin\OneDrive\Desktop\S\WEB3\S2_F\Final\sv2_todo_ng_final
+
+ng serve
+
+ng g c Cart
+
+ng g c Home
+
+ng g c Product
+
+ng g c ProductDetail
+
+ng g c ProductCard
+
+ng g c Cart
+
+ng g c MainSlider
+
+ng g c error404
+
+right click on "app" folder > name: service
+
+ng g s service/CartService
+
+ng g s service/ProductService) 
+
+
+is not just have 1 id. is have alots. i want you get all data from ( https://sv-gen-api.bczin2zin2takeo.us/api/product_detail?id=1 )
+
+i got exam from my teacher. i don't like web but i like c++.
+
+here is from my teacher:
+1. Home page
+2. Product page
+3. Product detail page
+4. Add to cart(Home, Product, detail)
+ - add qty, remove qty, delete item
+5. Checkout page
+
+
+
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Settings — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/dash-sidebar :: sidebar}"></aside>
+    <div class="dash-main">
+      <div class="section-head" style="margin-bottom:1rem">
+        <h1 style="font-size:1.4rem">Account Settings</h1>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <a class="btn btn-outline btn-sm" th:href="@{/profile/{id}(id=${currentUser.id})}">View public profile</a>
+          <button type="button" class="btn btn-primary" data-modal-open="modalEditProfile">Edit Profile</button>
+        </div>
+      </div>
+
+      <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+      <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+      <div class="form-card">
+        <h3>Profile</h3>
+        <div class="settings-cover-preview store-banner profile-cover"
+             th:style="|margin-bottom:1rem;background-image:url('${currentUser.coverUrl != null and !#strings.isEmpty(currentUser.coverUrl) ? #strings.replace(currentUser.coverUrl,' ','%20') : '/uploads/avatars/cover%20photos/photo_2026-10-09_09-47-07.jpg'}');|">
+        </div>
+        <div class="settings-profile-head">
+          <div class="settings-avatar" th:if="${currentUser.avatarUrl == null or #strings.isEmpty(currentUser.avatarUrl)}"
+               th:text="${#strings.substring(currentUser.fullName,0,1)}">U</div>
+          <img class="settings-avatar-img" th:if="${currentUser.avatarUrl != null and !#strings.isEmpty(currentUser.avatarUrl)}"
+               th:src="${currentUser.avatarUrl}" th:alt="${currentUser.fullName}"/>
+          <div>
+            <strong th:text="${currentUser.fullName}">Name</strong>
+            <div style="font-size:.85rem;color:var(--text-muted);margin-top:.25rem" th:text="${currentUser.email}">email</div>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label>Full Name</label><input type="text" th:value="${currentUser.fullName}" readonly/></div>
+          <div class="form-group"><label>Email</label><input type="email" th:value="${currentUser.email}" readonly/></div>
+          <div class="form-group"><label>Phone</label><input type="tel" th:value="${currentUser.phone}" readonly/></div>
+          <div class="form-group"><label>Role</label><input type="text" th:value="${currentUser.role.name()}" readonly/></div>
+          <div class="form-group">
+            <label>Member Since</label>
+            <input type="text" th:value="${currentUser.createdAt != null ? #temporals.format(currentUser.createdAt, 'dd MMM yyyy') : '—'}" readonly/>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3>Quick Links</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <a th:href="@{/account/addresses}" class="btn btn-outline btn-sm">Manage Addresses</a>
+          <a th:href="@{/account/orders}" class="btn btn-outline btn-sm">View Orders</a>
+          <a th:href="@{/become-seller}" class="btn btn-outline btn-sm" sec:authorize="hasRole('CUSTOMER')">Become a Seller</a>
+          <a th:href="@{/seller-dashboard}" class="btn btn-outline btn-sm" sec:authorize="hasAnyRole('SELLER','ADMIN')">Seller Center</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="modalEditProfile">
+  <div class="modal">
+    <div class="modal-header"><h3>Edit Profile</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form th:action="@{/account/settings}" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Cover photo</label>
+            <div class="logo-field logo-field-banner" data-logo-field>
+              <div class="logo-preview-box logo-preview-banner">
+                <img class="logo-preview-img" th:src="${currentUser.coverUrl}" alt="Cover"
+                     th:hidden="${currentUser.coverUrl == null or #strings.isEmpty(currentUser.coverUrl)}"/>
+                <span class="logo-preview-empty"
+                      th:hidden="${currentUser.coverUrl != null and !#strings.isEmpty(currentUser.coverUrl)}">No cover</span>
+              </div>
+              <div class="logo-field-controls">
+                <input type="file" name="coverFile" accept="image/*" class="logo-file-input"/>
+                <input type="hidden" name="coverUrl" class="logo-url-input" th:value="${currentUser.coverUrl}"/>
+                <p class="logo-field-hint">Wide banner for your public profile. Saved under uploads/avatars/cover photos.</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Profile image</label>
+            <div class="logo-field" data-logo-field>
+              <div class="logo-preview-box logo-preview-round">
+                <img class="logo-preview-img" th:src="${currentUser.avatarUrl}" th:alt="${currentUser.fullName}"
+                     th:hidden="${currentUser.avatarUrl == null or #strings.isEmpty(currentUser.avatarUrl)}"/>
+                <span class="logo-preview-empty"
+                      th:hidden="${currentUser.avatarUrl != null and !#strings.isEmpty(currentUser.avatarUrl)}">No image</span>
+              </div>
+              <div class="logo-field-controls">
+                <input type="file" name="avatarFile" accept="image/*" class="logo-file-input"/>
+                <input type="hidden" name="avatarUrl" class="logo-url-input" th:value="${currentUser.avatarUrl}"/>
+                <p class="logo-field-hint">Upload a square photo (PNG/JPG). Preview updates instantly.</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group"><label>Full Name *</label><input type="text" name="fullName" required th:value="${currentUser.fullName}"/></div>
+          <div class="form-group"><label>Phone</label><input type="tel" name="phone" th:value="${currentUser.phone}"/></div>
+          <div class="form-group full">
+            <label>Email</label>
+            <input type="email" th:value="${currentUser.email}" readonly/>
+            <small style="color:var(--text-muted);font-size:.75rem">Email cannot be changed here</small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

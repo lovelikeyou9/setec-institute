@@ -1,0 +1,46 @@
+
+
+
+  <footer class="site-footer border-top bg-white">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <a class="footer-brand" href="{{ url_for('home') }}">SV2.6 Shop</a>
+          <p class="text-muted mt-3 mb-4">Electronics ecommerce template for laptops, phones, audio, gaming gear, and accessories.</p>
+          <div class="payment-pills">
+            <span>QR Pay</span>
+            <span>Cash</span>
+            <span>Cash on Delivery</span>
+<!--            <span>Visa</span>-->
+<!--            <span>Mastercard</span>-->
+          </div>  
+        </div>
+        <div class="col-6 col-lg-2">
+          <h2>Shop</h2>
+          <a href="{{ url_for('products') }}">Products</a>
+          <a href="{{ url_for('cart') }}">Cart</a>
+          <a href="{{ url_for('checkout') }}">Checkout</a>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h2>Account</h2>
+          <a href="{{ url_for('account') }}">My account</a>
+          <a href="{{ url_for('login') }}">Login</a>
+          <a href="{{ url_for('create_user') }}">Create user</a>
+          <a href="{{ url_for('forgot_password') }}">Forgot password</a>
+        </div>
+        <div class="col-lg-4">
+          <h2>Support</h2>
+          <p class="text-muted mb-2">Email: support@sv2.6.com</p>
+          <p class="text-muted mb-2">Phone: +855 99 555 012</p>
+          <p class="text-muted mb-0">24/7/365</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container d-flex flex-wrap justify-content-between gap-2">
+        <span>&copy;&copy; 2026 SV2.6 Shop</span>
+        <span>Happy168</span>
+      </div>
+    </div>
+  </footer>
+

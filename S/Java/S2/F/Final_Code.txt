@@ -1,0 +1,1565 @@
+JFrame_Main.java
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import javax.swing.Timer;
+import java.awt.CardLayout;
+import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
+
+/**
+ *
+ * @author Admin
+ */
+public class JPanel_Admin extends javax.swing.JPanel {
+    /**
+     * Creates new form JPanel_Admin
+     */
+
+    public JPanel_Admin() {
+        initComponents();
+        refreshSpinnerToday();
+//        refreshSpinnerBooking();
+//        refreshSpinnerToday();
+        
+//        jpnScrollPane.setLayout(new BorderLayout());
+//        jpnScrollPane.add(scrollPane2, BorderLayout.CENTER);
+        
+                
+        LocalDate currentDate = LocalDate.now();
+        // EEE = Mon/Tue/Wed/...
+        DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("EEE, dd-MMM-yyyy");
+        jlbDate.setText("Date : " + currentDate.format(dataFormatter));
+        
+        ActionListener actionListenerTime = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                LocalTime currentTime = LocalTime.now();
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+                jlbTime.setText("Time : " + currentTime.format(timeFormatter));
+                
+                // auto refresh parking
+                // refreshAll(); // refreshParkingState();
+                
+            }
+        };
+        
+        Timer timer = new Timer( 1000, actionListenerTime);
+        
+        timer.start();
+        
+
+        
+    }
+
+//    void refreshSpinnerToday(){
+//        jsnTodayOrCheckInOrCheckout.setModel(new SpinnerDateModel());
+//        JSpinner.DateEditor editor = new JSpinner.DateEditor(jsnTodayOrCheckInOrCheckout, "dd-MM-yyyy   hh:mm:ss a");
+//        
+//        jsnTodayOrCheckInOrCheckout.setEditor(editor);
+//    }
+    
+//    void refreshSpinnerBooking (){
+//        // SpinnerDateModel() = 5/16/26, 10:06 PM
+//        jsDateAndTimeBook.setModel(new SpinnerDateModel());
+//        
+//        // ( JSpinner ) A Swing input component with a textbox and 🔼🔽 buttons used to increase/decrease 
+//        //   values like numbers, dates, times, or lists.
+//        // ( JSpinner.DateEditor ) A formatter/editor for JSpinner that controls how date/time 
+//        //   is displayed and edited inside the spinner.
+//        JSpinner.DateEditor editor = new JSpinner.DateEditor(jsDateAndTimeBook, "dd-MM-yyyy   hh:mm:ss a");
+//        
+//        jsDateAndTimeBook.setEditor(editor);
+//        
+//    }
+    
+    void refreshSpinnerToday (){
+        jsnTodayOrCheckInOrCheckout.setModel(new SpinnerDateModel());
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(jsnTodayOrCheckInOrCheckout, "dd-MM-yyyy   hh:mm:ss a");
+        
+        jsnTodayOrCheckInOrCheckout.setEditor(editor);
+        
+    }
+    
+
+    
+    private void jbtRefreshTodayOrCheckInOrCheckoutActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
+        // TODO add your handling code here:
+        refreshSpinnerToday();
+    }                                                                  
+
+    private void jbtCheckoutActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void jbtViewOrManageActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+        
+        JFrame frame = new JFrame("View & Manage");
+        
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setContentPane(new JPanel_ViewOrManage());
+        
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
+        
+        // JFrame_Main mainFrame = (JFrame_Main) SwingUtilities.getWindowAncestor(this);
+        // mainFrame.switchPanel(new JPanel_ViewOrManage());
+        
+//        JFrame_Main.cardLayout.show(JFrame_Main.mainPanel, "JPANEL_VIEWORMANAGE");
+        
+//        CardLayout c1 = (CardLayout) JPanel_ViewOrManage.getLayout();        
+        
+//        JPanel_ViewOrManage formTest2Calculate = new JPanel_ViewOrManage();
+//        formTest2Calculate.setVisible(true);
+    }                                               
+
+    private void jbtCheckInActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jtxtCustomerPhoneActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+    }                                                 
+
+    private void jtxtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
+    private void jtxtCustomerIdentityCardActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+
+    private void jbtAdminLogoutActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
+
+    private void jtxtCustomerRoomActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
+    private void jtxtCustomerBuildingActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+        // TODO add your handling code here:
+    }                                                    
+
+    private void jbtBookingManageActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+        
+        JFrame frame = new JFrame("Booking Manage");
+        
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setContentPane(new JPanel_BookingManage());
+        
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
+    }                                                
+
+    private void jtbBuildAndRoomMouseClicked(java.awt.event.MouseEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtAdminLogout;
+    private javax.swing.JButton jbtBookingManage;
+    private javax.swing.JButton jbtCheckIn;
+    private javax.swing.JButton jbtCheckout;
+    private javax.swing.JButton jbtRefreshTodayOrCheckInOrCheckout;
+    private javax.swing.JButton jbtViewOrManage;
+    private javax.swing.JLabel jlbDate;
+    private javax.swing.JLabel jlbTime;
+    private javax.swing.JSpinner jsnTodayOrCheckInOrCheckout;
+    private javax.swing.JTable jtbBuildAndRoom;
+    private javax.swing.JTextField jtxtCustomerBuilding;
+    private javax.swing.JTextField jtxtCustomerIdentityCard;
+    private javax.swing.JTextField jtxtCustomerName;
+    private javax.swing.JTextField jtxtCustomerPhone;
+    private javax.swing.JTextField jtxtCustomerRoom;
+    // End of variables declaration                   
+}
+
+
+
+
+
+
+JPanel_AdminLogin.java
+
+
+
+/**
+
+ *
+
+ * @author Admin
+
+ */
+
+public class JPanel_AdminLogin extends javax.swing.JPanel {
+
+
+
+    private JFrame_Main mainFrame;
+
+    
+
+    /**
+
+     * Creates new form JPanel_AdminLogin
+
+     */
+
+    public JPanel_AdminLogin(JFrame_Main mainFrame) {
+
+        this.mainFrame = mainFrame;
+
+        initComponents();
+
+    }
+
+
+
+    /**
+
+     * This method is called from within the constructor to initialize the form.
+
+     * WARNING: Do NOT modify this code. The content of this method is always
+
+     * regenerated by the Form Editor.
+
+     */
+
+
+
+    private void jtxtAdminUserNameActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+    private void jtxtAdminPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+    private void jbtAdminShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+
+        // TODO add your handling code here:
+
+    }                                                    
+
+
+
+    private void jbtAdminLoginActionPerformed(java.awt.event.ActionEvent evt) {                                              
+
+        // TODO add your handling code here:
+
+        mainFrame.switchPanel(new JPanel_Admin());
+
+    }                                             
+
+
+
+
+
+    // Variables declaration - do not modify                     
+
+    private javax.swing.JLabel jLabel1;
+
+    private javax.swing.JLabel jLabel2;
+
+    private javax.swing.JLabel jLabel3;
+
+    private javax.swing.JPanel jPanel1;
+
+    private javax.swing.JButton jbtAdminLogin;
+
+    private javax.swing.JButton jbtAdminShowPassword;
+
+    private javax.swing.JTextField jtxtAdminPassword;
+
+    private javax.swing.JTextField jtxtAdminUserName;
+
+    // End of variables declaration                   
+
+}
+
+
+
+JPanel_BookingManage.java
+
+
+
+/**
+
+ *
+
+ * @author Admin
+
+ */
+
+public class JPanel_BookingManage extends javax.swing.JPanel {
+
+
+
+    /**
+
+     * Creates new form JPanel_BookingManage
+
+     */
+
+    public JPanel_BookingManage() {
+
+        initComponents();
+
+    }
+
+
+
+    private void jtbBookingManageMouseClicked(java.awt.event.MouseEvent evt) {                                              
+
+        // TODO add your handling code here:
+
+    }                                             
+
+
+
+    private void jtxtCustomerPhoneActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+    private void jcbbCustomerRoomActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+
+        // TODO add your handling code here:
+
+    }                                                
+
+
+
+    private void jtxtCustomerCheckInActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+
+        // TODO add your handling code here:
+
+    }                                                   
+
+
+
+    private void jtxtCustomerCheckoutActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+
+        // TODO add your handling code here:
+
+    }                                                    
+
+
+
+    private void jtxtCustomerDepositActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+
+        // TODO add your handling code here:
+
+    }                                                   
+
+
+
+    private void jbtBookActionPerformed(java.awt.event.ActionEvent evt) {                                        
+
+        // TODO add your handling code here:
+
+    }                                       
+
+
+
+    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        // TODO add your handling code here:
+
+    }                                         
+
+
+
+    private void jbtCancelActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        // TODO add your handling code here:
+
+    }                                         
+
+
+
+    private void jbtClearActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+        // TODO add your handling code here:
+
+    }                                        
+
+
+
+    private void jtxtSearchBookingActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+    private void jbtSearchBookingActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+
+        // TODO add your handling code here:
+
+    }                                                
+
+
+
+    private void jtxtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+
+        // TODO add your handling code here:
+
+    }                                                
+
+
+
+
+
+    // Variables declaration - do not modify                     
+
+    private javax.swing.JLabel jLabel1;
+
+    private javax.swing.JLabel jLabel2;
+
+    private javax.swing.JLabel jLabel3;
+
+    private javax.swing.JLabel jLabel4;
+
+    private javax.swing.JLabel jLabel5;
+
+    private javax.swing.JLabel jLabel6;
+
+    private javax.swing.JLabel jLabel7;
+
+    private javax.swing.JLabel jLabel8;
+
+    private javax.swing.JScrollPane jScrollPane1;
+
+    private javax.swing.JButton jbtBook;
+
+    private javax.swing.JButton jbtCancel;
+
+    private javax.swing.JButton jbtClear;
+
+    private javax.swing.JButton jbtSearchBooking;
+
+    private javax.swing.JButton jbtUpdate;
+
+    private javax.swing.JComboBox<String> jcbbCustomerRoom;
+
+    private javax.swing.JTable jtbBookingManage;
+
+    private javax.swing.JTextField jtxtCustomerCheckIn;
+
+    private javax.swing.JTextField jtxtCustomerCheckout;
+
+    private javax.swing.JTextField jtxtCustomerDeposit;
+
+    private javax.swing.JTextField jtxtCustomerName;
+
+    private javax.swing.JTextField jtxtCustomerPhone;
+
+    private javax.swing.JTextField jtxtSearchBooking;
+
+    // End of variables declaration                   
+
+}
+
+
+
+JPanel_ManageBuildingOrRoom.java
+
+
+
+/**
+
+ *
+
+ * @author Admin
+
+ */
+
+public class JPanel_ManageBuildingOrRoom extends javax.swing.JPanel {
+
+
+
+    /**
+
+     * Creates new form JPanel_ManageBuildingOrRoom
+
+     */
+
+    public JPanel_ManageBuildingOrRoom() {
+
+        initComponents();
+
+    }
+
+
+
+    private void jtbManageBuildingOrRoomMouseClicked(java.awt.event.MouseEvent evt) {                                                     
+
+        // TODO add your handling code here:
+
+    }                                                    
+
+
+
+    private void jtxtRoomNumberActionPerformed(java.awt.event.ActionEvent evt) {                                               
+
+        // TODO add your handling code here:
+
+    }                                              
+
+
+
+    private void jtxtBuildingOrRoomPriceActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+
+        // TODO add your handling code here:
+
+    }                                                       
+
+
+
+    private void jtxtSearchActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+        // TODO add your handling code here:
+
+    }                                          
+
+
+
+    private void jtxtBuildingNameActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+
+        // TODO add your handling code here:
+
+    }                                                
+
+
+
+    private void jcbbRoomTypeActionPerformed(java.awt.event.ActionEvent evt) {                                             
+
+        // TODO add your handling code here:
+
+    }                                            
+
+
+
+    private void jcbbStatusActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+        // TODO add your handling code here:
+
+    }                                          
+
+
+
+    private void jbtAddActionPerformed(java.awt.event.ActionEvent evt) {                                       
+
+        // TODO add your handling code here:
+
+    }                                      
+
+
+
+    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        // TODO add your handling code here:
+
+    }                                         
+
+
+
+    private void jbtDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        // TODO add your handling code here:
+
+    }                                         
+
+
+
+    private void jbtClearActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+        // TODO add your handling code here:
+
+    }                                        
+
+
+
+    private void jbtSearchActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        // TODO add your handling code here:
+
+    }                                         
+
+
+
+
+
+    // Variables declaration - do not modify                     
+
+    private javax.swing.JLabel jLabel1;
+
+    private javax.swing.JLabel jLabel2;
+
+    private javax.swing.JLabel jLabel3;
+
+    private javax.swing.JLabel jLabel4;
+
+    private javax.swing.JLabel jLabel5;
+
+    private javax.swing.JLabel jLabel6;
+
+    private javax.swing.JLabel jLabel8;
+
+    private javax.swing.JScrollPane jScrollPane1;
+
+    private javax.swing.JButton jbtAdd;
+
+    private javax.swing.JButton jbtClear;
+
+    private javax.swing.JButton jbtDelete;
+
+    private javax.swing.JButton jbtSearch;
+
+    private javax.swing.JButton jbtUpdate;
+
+    private javax.swing.JComboBox<String> jcbbRoomType;
+
+    private javax.swing.JComboBox<String> jcbbStatus;
+
+    private javax.swing.JTable jtbManageBuildingOrRoom;
+
+    private javax.swing.JTextField jtxtBuildingName;
+
+    private javax.swing.JTextField jtxtBuildingOrRoomPrice;
+
+    private javax.swing.JTextField jtxtRoomNumber;
+
+    private javax.swing.JTextField jtxtSearch;
+
+    // End of variables declaration                   
+
+}
+
+
+
+JPanel_ManageStaff.java
+
+
+
+/**
+
+ *
+
+ * @author Admin
+
+ */
+
+public class JPanel_ManageStaff extends javax.swing.JPanel {
+
+
+
+    /**
+
+     * Creates new form JPanel_ManageStaff
+
+     */
+
+    public JPanel_ManageStaff() {
+
+        initComponents();
+
+        
+
+    }
+
+
+
+    private void jtbManageStaffMouseClicked(java.awt.event.MouseEvent evt) {                                            
+
+        // TODO add your handling code here:
+
+    }                                           
+
+
+
+    private void jbtStaffSearchActionPerformed(java.awt.event.ActionEvent evt) {                                               
+
+        // TODO add your handling code here:
+
+    }                                              
+
+
+
+    private void jtxtStaffNameActionPerformed(java.awt.event.ActionEvent evt) {                                              
+
+        // TODO add your handling code here:
+
+    }                                             
+
+
+
+    private void jtxtStaffPhoneActionPerformed(java.awt.event.ActionEvent evt) {                                               
+
+        // TODO add your handling code here:
+
+    }                                              
+
+
+
+    private void jtxtStaffUsernameActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+    private void jtxtStaffPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+    private void jcbbStaffRoleActionPerformed(java.awt.event.ActionEvent evt) {                                              
+
+        // TODO add your handling code here:
+
+    }                                             
+
+
+
+    private void jbtStaffAddActionPerformed(java.awt.event.ActionEvent evt) {                                            
+
+        // TODO add your handling code here:
+
+    }                                           
+
+
+
+    private void jbtStaffUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                               
+
+        // TODO add your handling code here:
+
+    }                                              
+
+
+
+    private void jbtStaffDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                               
+
+        // TODO add your handling code here:
+
+    }                                              
+
+
+
+    private void jbtStaffClearActionPerformed(java.awt.event.ActionEvent evt) {                                              
+
+        // TODO add your handling code here:
+
+    }                                             
+
+
+
+    private void jtxtStaffSearchActionPerformed(java.awt.event.ActionEvent evt) {                                                
+
+        // TODO add your handling code here:
+
+    }                                               
+
+
+
+
+
+    // Variables declaration - do not modify                     
+
+    private javax.swing.JLabel jLabel1;
+
+    private javax.swing.JLabel jLabel2;
+
+    private javax.swing.JLabel jLabel3;
+
+    private javax.swing.JLabel jLabel4;
+
+    private javax.swing.JLabel jLabel5;
+
+    private javax.swing.JLabel jLabel6;
+
+    private javax.swing.JLabel jLabel8;
+
+    private javax.swing.JScrollPane jScrollPane1;
+
+    private javax.swing.JButton jbtStaffAdd;
+
+    private javax.swing.JButton jbtStaffClear;
+
+    private javax.swing.JButton jbtStaffDelete;
+
+    private javax.swing.JButton jbtStaffSearch;
+
+    private javax.swing.JButton jbtStaffUpdate;
+
+    private javax.swing.JComboBox<String> jcbbStaffRole;
+
+    private javax.swing.JTable jtbManageStaff;
+
+    private javax.swing.JTextField jtxtStaffName;
+
+    private javax.swing.JTextField jtxtStaffPassword;
+
+    private javax.swing.JTextField jtxtStaffPhone;
+
+    private javax.swing.JTextField jtxtStaffSearch;
+
+    private javax.swing.JTextField jtxtStaffUsername;
+
+    // End of variables declaration                   
+
+}
+
+
+
+JPanel_Staff.java
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JFrame;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import javax.swing.Timer;
+
+/**
+ *
+ * @author Admin
+ */
+public class JPanel_Staff extends javax.swing.JPanel {
+
+    /**
+     * Creates new form JPanel_Staff
+     */
+    public JPanel_Staff() {
+        initComponents();
+        
+        refreshSpinnerToday();
+                
+        LocalDate currentDate = LocalDate.now();
+        // EEE = Mon/Tue/Wed/...
+        DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("EEE, dd-MMM-yyyy");
+        jlbDate.setText("Date : " + currentDate.format(dataFormatter));
+        
+        ActionListener actionListenerTime = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                LocalTime currentTime = LocalTime.now();
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+                jlbTime.setText("Time : " + currentTime.format(timeFormatter));
+                
+                // auto refresh parking
+                // refreshAll(); // refreshParkingState();
+                
+            }
+        };
+        
+        Timer timer = new Timer( 1000, actionListenerTime);
+        
+        timer.start();
+        
+        
+    }
+
+//    void refreshSpinnerBooking (){
+//        // SpinnerDateModel() = 5/16/26, 10:06 PM
+//        jsDateAndTimeBook.setModel(new SpinnerDateModel());
+//        
+//        // ( JSpinner ) A Swing input component with a textbox and 🔼🔽 buttons used to increase/decrease 
+//        //   values like numbers, dates, times, or lists.
+//        // ( JSpinner.DateEditor ) A formatter/editor for JSpinner that controls how date/time 
+//        //   is displayed and edited inside the spinner.
+//        JSpinner.DateEditor editor = new JSpinner.DateEditor(jsDateAndTimeBook, "dd-MM-yyyy   hh:mm:ss a");
+//        
+//        jsDateAndTimeBook.setEditor(editor);
+//        
+//    }
+    
+    void refreshSpinnerToday (){
+        jsnTodayOrCheckInOrCheckout.setModel(new SpinnerDateModel());
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(jsnTodayOrCheckInOrCheckout, "dd-MM-yyyy   hh:mm:ss a");
+        
+        jsnTodayOrCheckInOrCheckout.setEditor(editor);
+        
+    }   
+    
+
+    private void jtxtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
+    private void jtxtCustomerPhoneActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+    }                                                 
+
+    private void jbtCheckInActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jtxtCustomerIdentityCardActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+
+    private void jbtStaffLogoutActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
+
+    private void jtxtCustomerBuildingActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+        // TODO add your handling code here:
+    }                                                    
+
+    private void jbtCheckoutActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void jtxtCustomerRoomActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
+    private void jbtRefreshTodayOrCheckInOrCheckoutActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
+        // TODO add your handling code here:
+        refreshSpinnerToday();
+    }                                                                  
+
+    private void jbtBookingManageActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+        JFrame frame = new JFrame("Booking Manage");
+        
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setContentPane(new JPanel_BookingManage());
+        
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
+    }                                                
+
+    private void jtbBuildAndRoomMouseClicked(java.awt.event.MouseEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtBookingManage;
+    private javax.swing.JButton jbtCheckIn;
+    private javax.swing.JButton jbtCheckout;
+    private javax.swing.JButton jbtRefreshTodayOrCheckInOrCheckout;
+    private javax.swing.JButton jbtStaffLogout;
+    private javax.swing.JLabel jlbDate;
+    private javax.swing.JLabel jlbTime;
+    private javax.swing.JSpinner jsnTodayOrCheckInOrCheckout;
+    private javax.swing.JTable jtbBuildAndRoom;
+    private javax.swing.JTextField jtxtCustomerBuilding;
+    private javax.swing.JTextField jtxtCustomerIdentityCard;
+    private javax.swing.JTextField jtxtCustomerName;
+    private javax.swing.JTextField jtxtCustomerPhone;
+    private javax.swing.JTextField jtxtCustomerRoom;
+    // End of variables declaration                   
+}
+
+
+
+JPanel_StaffLogin.java
+
+ 
+
+/**
+
+ *
+
+ * @author Admin
+
+ */
+
+public class JPanel_StaffLogin extends javax.swing.JPanel {
+
+
+
+    private JFrame_Main mainFrame;
+
+    
+
+    /**
+
+     * Creates new form JPanel_StaffLogin
+
+     */
+
+    public JPanel_StaffLogin(JFrame_Main mainFrame) {
+
+        this.mainFrame = mainFrame;
+
+        initComponents();
+
+        
+
+    }
+
+
+
+    private void jbtStaffShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+
+        // TODO add your handling code here:
+
+    }                                                    
+
+
+
+    private void jbtStaffLoginActionPerformed(java.awt.event.ActionEvent evt) {                                              
+
+        // TODO add your handling code here:
+
+        mainFrame.switchPanel(new JPanel_Staff());
+
+    }                                             
+
+
+
+    private void jtxtStaffUserNameActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+    private void jtxtStaffPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+
+
+    // Variables declaration - do not modify                     
+
+    private javax.swing.JLabel jLabel1;
+
+    private javax.swing.JLabel jLabel2;
+
+    private javax.swing.JLabel jLabel3;
+
+    private javax.swing.JPanel jPanel1;
+
+    private javax.swing.JButton jbtStaffLogin;
+
+    private javax.swing.JButton jbtStaffShowPassword;
+
+    private javax.swing.JTextField jtxtStaffPassword;
+
+    private javax.swing.JTextField jtxtStaffUserName;
+
+    // End of variables declaration                   
+
+}
+
+
+
+
+
+JPanel_ViewOrManage.java
+
+
+
+import javax.swing.JFrame;
+
+
+
+/**
+
+ *
+
+ * @author Admin
+
+ */
+
+public class JPanel_ViewOrManage extends javax.swing.JPanel {
+
+
+
+    /**
+
+     * Creates new form JPanel_ViewOrManage
+
+     */
+
+    public JPanel_ViewOrManage() {
+
+        initComponents();
+
+    }
+
+
+
+
+
+    private void jbtManageBuildingOrRoomActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+
+        // TODO add your handling code here:
+
+        JFrame frame = new JFrame("Manage Building or Room");
+
+        
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        frame.setContentPane(new JPanel_ManageBuildingOrRoom());
+
+        
+
+        frame.pack();
+
+        frame.setLocationRelativeTo(null);
+
+        frame.setVisible(true);
+
+        
+
+    }                                                       
+
+
+
+    private void jbtManageStaffActionPerformed(java.awt.event.ActionEvent evt) {                                               
+
+        // TODO add your handling code here:
+
+        JFrame frame = new JFrame("Manage Staff");
+
+        
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        frame.setContentPane(new JPanel_ManageStaff());
+
+        
+
+        frame.pack();
+
+        frame.setLocationRelativeTo(null);
+
+        frame.setVisible(true);
+
+        
+
+    }                                              
+
+
+
+    private void jbtIncomeActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        // TODO add your handling code here:
+
+        JFrame frame = new JFrame("Admin Income");
+
+        
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        frame.setContentPane(new JPanel_AdminIncome());
+
+        
+
+        frame.pack();
+
+        frame.setLocationRelativeTo(null);
+
+        frame.setVisible(true);
+
+    }                                         
+
+
+
+    private void jbtViewHistoryOrReportActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+
+        // TODO add your handling code here:
+
+        JFrame frame = new JFrame("Admin History/Report");
+
+        
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        frame.setContentPane(new JPanel_AdminHistoryOrReport());
+
+        
+
+        frame.pack();
+
+        frame.setLocationRelativeTo(null);
+
+        frame.setVisible(true);
+
+    }                                                  
+
+
+
+    private void jtbViewReportMouseClicked(java.awt.event.MouseEvent evt) {                                                        
+
+        // TODO add your handling code here:
+
+    }                                                      
+
+
+
+
+
+    // Variables declaration - do not modify                     
+
+    private javax.swing.JMenu jMenu1;
+
+    private javax.swing.JMenu jMenu2;
+
+    private javax.swing.JMenuBar jMenuBar1;
+
+    private javax.swing.JPanel jPanel1;
+
+    private javax.swing.JScrollPane jScrollPane1;
+
+    private javax.swing.JButton jbtIncome;
+
+    private javax.swing.JButton jbtManageBuildingOrRoom;
+
+    private javax.swing.JButton jbtManageStaff;
+
+    private javax.swing.JButton jbtViewHistoryOrReport;
+
+    private javax.swing.JTable jtbViewReport; 
+
+    // End of variables declaration                   
+
+}
+
+
+
+JPanel_AdminIncome.java
+
+public class JPanel_AdminIncome extends javax.swing.JPanel {
+
+
+
+    /**
+
+     * Creates new form JPanel_AdminIncome
+
+     */
+
+    public JPanel_AdminIncome() {
+
+        initComponents();
+
+    }
+
+
+
+
+
+    private void jtxtFromDateActionPerformed(java.awt.event.ActionEvent evt) {                                             
+
+        // TODO add your handling code here:
+
+    }                                            
+
+
+
+    private void jtbAdminIncomeMouseClicked(java.awt.event.MouseEvent evt) {                                            
+
+        // TODO add your handling code here:
+
+    }                                           
+
+
+
+    private void jtxtToDateActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+        // TODO add your handling code here:
+
+    }                                          
+
+
+
+    private void jtxtBookingIncomeActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+
+        // TODO add your handling code here:
+
+    }                                                 
+
+
+
+    private void jtxtRoomIncomeActionPerformed(java.awt.event.ActionEvent evt) {                                               
+
+        // TODO add your handling code here:
+
+    }                                              
+
+
+
+    private void jtxtIncomeTotalActionPerformed(java.awt.event.ActionEvent evt) {                                                
+
+        // TODO add your handling code here:
+
+    }                                               
+
+
+
+
+
+    // Variables declaration - do not modify                     
+
+    private javax.swing.JLabel jLabel1;
+
+    private javax.swing.JLabel jLabel2;
+
+    private javax.swing.JLabel jLabel3;
+
+    private javax.swing.JLabel jLabel4;
+
+    private javax.swing.JLabel jLabel5;
+
+    private javax.swing.JLabel jLabel6;
+
+    private javax.swing.JScrollPane jScrollPane1;
+
+    private javax.swing.JTable jtbAdminIncome;
+
+    private javax.swing.JTextField jtxtBookingIncome;
+
+    private javax.swing.JTextField jtxtFromDate;
+
+    private javax.swing.JTextField jtxtIncomeTotal;
+
+    private javax.swing.JTextField jtxtRoomIncome;
+
+    private javax.swing.JTextField jtxtToDate;
+
+    // End of variables declaration                   
+
+}
+
+
+
+JPanel_AdminHistoryOrReport.java
+
+public class JPanel_AdminHistoryOrReport extends javax.swing.JPanel {
+
+
+
+    /**
+
+     * Creates new form JPanel_AdminHistoryOrReport
+
+     */
+
+    public JPanel_AdminHistoryOrReport() {
+
+        initComponents();
+
+    }
+
+
+
+    private void jtbAdminHistoryOrReportMouseClicked(java.awt.event.MouseEvent evt) {                                                     
+
+        // TODO add your handling code here:
+
+    }                                                    
+
+
+
+    private void jtxtGuestNameActionPerformed(java.awt.event.ActionEvent evt) {                                              
+
+        // TODO add your handling code here:
+
+    }                                             
+
+
+
+    private void jtxtRoomActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+        // TODO add your handling code here:
+
+    }                                        
+
+
+
+    private void jtxtTotalRecordActionPerformed(java.awt.event.ActionEvent evt) {                                                
+
+        // TODO add your handling code here:
+
+    }                                               
+
+
+
+
+
+    // Variables declaration - do not modify                     
+
+    private javax.swing.JLabel jLabel1;
+
+    private javax.swing.JLabel jLabel2;
+
+    private javax.swing.JLabel jLabel3;
+
+    private javax.swing.JLabel jLabel4;
+
+    private javax.swing.JScrollPane jScrollPane1;
+
+    private javax.swing.JTable jtbAdminHistoryOrReport;
+
+    private javax.swing.JTextField jtxtGuestName;
+
+    private javax.swing.JTextField jtxtRoom;
+
+    private javax.swing.JTextField jtxtTotalRecord;
+
+    // End of variables declaration                   
+
+}
+
+
+JPanel_ViewHistoryOrReport.java
+package pkg3rd_year_s2_f;
+
+/**
+ *
+ * @author Admin
+ */
+public class JPanel_ViewHistoryOrReport extends javax.swing.JPanel {
+
+    /**
+     * Creates new form JPanel_ViewHistoryOrReport
+     */
+    public JPanel_ViewHistoryOrReport() {
+        initComponents();
+    }
+
+
+
+    private void jtbViewHistoryOrReportMouseClicked(java.awt.event.MouseEvent evt) {                                                    
+        // TODO add your handling code here:
+    }                                                   
+
+    private void jbtRefreshActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jtxtFromDateActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void jtxtToDateActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jtxtSearchActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jbtSearchActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jcbbBuildingActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void jcbbRoomActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jtxtTotalRecordActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jtxtIncomeActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jtxtExpenseActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void jtxtNetActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
+
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtRefresh;
+    private javax.swing.JButton jbtSearch;
+    private javax.swing.JComboBox<String> jcbbBuilding;
+    private javax.swing.JComboBox<String> jcbbRoom;
+    private javax.swing.JTable jtbViewHistoryOrReport;
+    private javax.swing.JTextField jtxtExpense;
+    private javax.swing.JTextField jtxtFromDate;
+    private javax.swing.JTextField jtxtIncome;
+    private javax.swing.JTextField jtxtNet;
+    private javax.swing.JTextField jtxtSearch;
+    private javax.swing.JTextField jtxtToDate;
+    private javax.swing.JTextField jtxtTotalRecord;
+    // End of variables declaration                   
+}
+
+

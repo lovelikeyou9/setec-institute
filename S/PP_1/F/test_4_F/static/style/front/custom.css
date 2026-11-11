@@ -1,0 +1,19 @@
+.product-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show 2 Lines*/
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pro-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Show 3 Lines*/
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-image {
+    object-fit: contain !important;
+}

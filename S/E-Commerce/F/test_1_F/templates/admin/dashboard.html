@@ -1,0 +1,35 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block admin_content %}
+<h1 class="section-title">Dashboard</h1>
+<div class="row g-3">
+  <div class="col-md-4"><div class="stat-card"><div class="label">Total Products</div><div class="value">{{ total_products }}</div></div></div>
+  <div class="col-md-4"><div class="stat-card"><div class="label">Total Customers</div><div class="value">{{ total_customers }}</div></div></div>
+  <div class="col-md-4"><div class="stat-card"><div class="label">Total Orders</div><div class="value">{{ total_orders }}</div></div></div>
+  <div class="col-md-4"><div class="stat-card"><div class="label">Total Sales</div><div class="value">${{ '%.2f'|format(total_sales) }}</div></div></div>
+  <div class="col-md-4"><div class="stat-card"><div class="label">Pending Orders</div><div class="value">{{ pending_orders }}</div></div></div>
+  <div class="col-md-4"><div class="stat-card"><div class="label">Paid Orders</div><div class="value">{{ paid_orders }}</div></div></div>
+</div>
+
+<div class="summary-card mt-4">
+  <h2 class="h5 fw-bold">Recent Orders</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead><tr><th>ID</th><th>Customer</th><th>Total</th><th>Status</th><th>Payment</th></tr></thead>
+      <tbody>
+        {% for o in recent_orders %}
+        <tr>
+          <td><a href="{{ url_for('admin.order_detail', order_id=o.id) }}">#{{ o.id }}</a></td>
+          <td>{{ o.customer_name }}</td>
+          <td>${{ '%.2f'|format(o.total_amount) }}</td>
+          <td>{{ o.status }}</td>
+          <td>{{ o.payment_status }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="text-muted">No orders yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

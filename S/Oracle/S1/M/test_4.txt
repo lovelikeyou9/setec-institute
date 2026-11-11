@@ -1,0 +1,35 @@
+SELECT DEPARTMENT_NAME, MANAGER_ID,
+       DEPARTMENT_NAME || q'[ Department's Manager ID: ]'
+       || MANAGER_ID
+       AS "Name and Manager"
+FROM DEPARTMENTS;
+
+SELECT LAST_NAME, SALARY, LAST_NAME || ' has total salary: ' || SALARY
+       AS "Name and Salary",
+       LAST_NAME || q'{'s has total salary's: }' || SALARY AS "Total Salary"
+FROM EMPLOYEES;
+
+SELECT LAST_NAME, SALARY, LAST_NAME || ' has total salary: ' || SALARY
+       AS "Name and Salary",
+       LAST_NAME || Q'{'s has total salary's: }' || SALARY AS "Total Salary"
+FROM EMPLOYEES;
+
+-- Remove Duplicate records or rows
+SELECT DEPARTMENT_ID FROM EMPLOYEES;
+
+SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEES;
+
+SELECT UNIQUE DEPARTMENT_ID FROM EMPLOYEES;
+
+SELECT DISTINCT JOB_ID FROM EMPLOYEES;
+
+--  Display of all data or all columns from departments.
+--  Display structure of table departments.
+--  Structure is meant Data Type
+--  Data Type is Data or Information of something from Data
+SELECT * FROM DEPARTMENTS;
+
+-- Display structure(DataType) of table departments.
+DESCRIBE DEPARTMENTS;
+
+DESC DEPARTMENTS;

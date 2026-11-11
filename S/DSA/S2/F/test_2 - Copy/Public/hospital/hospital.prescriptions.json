@@ -1,0 +1,510 @@
+[{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f925"
+  },
+  "prescription_id": "RX1001",
+  "patient_id": "P1001",
+  "doctor_id": "DOC101",
+  "medication": "Lisinopril",
+  "dosage": "10mg",
+  "frequency": "once daily",
+  "start_date": {
+    "$date": "2023-01-05T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-02-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f926"
+  },
+  "prescription_id": "RX1002",
+  "patient_id": "P1002",
+  "doctor_id": "DOC102",
+  "medication": "Sumatriptan",
+  "dosage": "50mg",
+  "frequency": "as needed",
+  "start_date": {
+    "$date": "2023-01-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-03-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f927"
+  },
+  "prescription_id": "RX1003",
+  "patient_id": "P1003",
+  "doctor_id": "DOC103",
+  "medication": "Acetaminophen",
+  "dosage": "500mg",
+  "frequency": "every 6 hours",
+  "start_date": {
+    "$date": "2023-01-20T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-02-03T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f928"
+  },
+  "prescription_id": "RX1004",
+  "patient_id": "P1004",
+  "doctor_id": "DOC104",
+  "medication": "Amoxicillin",
+  "dosage": "250mg",
+  "frequency": "3x daily",
+  "start_date": {
+    "$date": "2023-01-25T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-02-04T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f929"
+  },
+  "prescription_id": "RX1005",
+  "patient_id": "P1005",
+  "doctor_id": "DOC105",
+  "medication": "Paclitaxel",
+  "dosage": "175mg/m2",
+  "frequency": "every 3 weeks",
+  "start_date": {
+    "$date": "2023-02-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-02-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f92a"
+  },
+  "prescription_id": "RX1006",
+  "patient_id": "P1006",
+  "doctor_id": "DOC106",
+  "medication": "Ibuprofen",
+  "dosage": "400mg",
+  "frequency": "every 8 hours",
+  "start_date": {
+    "$date": "2023-02-05T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-02-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f92b"
+  },
+  "prescription_id": "RX1007",
+  "patient_id": "P1007",
+  "doctor_id": "DOC107",
+  "medication": "Epinephrine",
+  "dosage": "0.3mg",
+  "frequency": "once",
+  "start_date": {
+    "$date": "2023-02-10T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-02-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f92c"
+  },
+  "prescription_id": "RX1008",
+  "patient_id": "P1008",
+  "doctor_id": "DOC108",
+  "medication": "Oxycodone",
+  "dosage": "5mg",
+  "frequency": "every 4 hours",
+  "start_date": {
+    "$date": "2023-02-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-02-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f92d"
+  },
+  "prescription_id": "RX1009",
+  "patient_id": "P1009",
+  "doctor_id": "DOC109",
+  "medication": "Sertraline",
+  "dosage": "50mg",
+  "frequency": "once daily",
+  "start_date": {
+    "$date": "2023-02-20T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-03-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f92e"
+  },
+  "prescription_id": "RX1010",
+  "patient_id": "P1010",
+  "doctor_id": "DOC110",
+  "medication": "-",
+  "dosage": "-",
+  "frequency": "-",
+  "start_date": {
+    "$date": "2023-02-25T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-03-11T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f92f"
+  },
+  "prescription_id": "RX1011",
+  "patient_id": "P1011",
+  "doctor_id": "DOC101",
+  "medication": "Metoprolol",
+  "dosage": "25mg",
+  "frequency": "twice daily",
+  "start_date": {
+    "$date": "2023-03-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-04-01T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f930"
+  },
+  "prescription_id": "RX1012",
+  "patient_id": "P1012",
+  "doctor_id": "DOC102",
+  "medication": "Naproxen",
+  "dosage": "250mg",
+  "frequency": "twice daily",
+  "start_date": {
+    "$date": "2023-03-05T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-04-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f931"
+  },
+  "prescription_id": "RX1013",
+  "patient_id": "P1013",
+  "doctor_id": "DOC103",
+  "medication": "Ibuprofen",
+  "dosage": "400mg",
+  "frequency": "every 8 hours",
+  "start_date": {
+    "$date": "2023-03-10T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-04-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f932"
+  },
+  "prescription_id": "RX1014",
+  "patient_id": "P1014",
+  "doctor_id": "DOC104",
+  "medication": "Albuterol",
+  "dosage": "2 puffs",
+  "frequency": "as needed",
+  "start_date": {
+    "$date": "2023-03-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-03-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f933"
+  },
+  "prescription_id": "RX1015",
+  "patient_id": "P1014",
+  "doctor_id": "DOC104",
+  "medication": "Prednisone",
+  "dosage": "20mg",
+  "frequency": "once daily",
+  "start_date": {
+    "$date": "2023-03-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-03-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f934"
+  },
+  "prescription_id": "RX1016",
+  "patient_id": "P1015",
+  "doctor_id": "DOC105",
+  "medication": "-",
+  "dosage": "-",
+  "frequency": "-",
+  "start_date": {
+    "$date": "2023-03-20T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-06-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f935"
+  },
+  "prescription_id": "RX1017",
+  "patient_id": "P1016",
+  "doctor_id": "DOC106",
+  "medication": "-",
+  "dosage": "-",
+  "frequency": "-",
+  "start_date": {
+    "$date": "2023-03-25T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-04-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f936"
+  },
+  "prescription_id": "RX1018",
+  "patient_id": "P1017",
+  "doctor_id": "DOC107",
+  "medication": "Ibuprofen",
+  "dosage": "400mg",
+  "frequency": "every 8 hours",
+  "start_date": {
+    "$date": "2023-04-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-04-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f937"
+  },
+  "prescription_id": "RX1019",
+  "patient_id": "P1018",
+  "doctor_id": "DOC108",
+  "medication": "-",
+  "dosage": "-",
+  "frequency": "-",
+  "start_date": {
+    "$date": "2023-04-05T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-04-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f938"
+  },
+  "prescription_id": "RX1020",
+  "patient_id": "P1019",
+  "doctor_id": "DOC109",
+  "medication": "Fluoxetine",
+  "dosage": "40mg",
+  "frequency": "once daily",
+  "start_date": {
+    "$date": "2023-04-10T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-05-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f939"
+  },
+  "prescription_id": "RX1021",
+  "patient_id": "P1020",
+  "doctor_id": "DOC110",
+  "medication": "-",
+  "dosage": "-",
+  "frequency": "-",
+  "start_date": {
+    "$date": "2023-04-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-04-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f93a"
+  },
+  "prescription_id": "RX1022",
+  "patient_id": "P1021",
+  "doctor_id": "DOC101",
+  "medication": "Atorvastatin",
+  "dosage": "20mg",
+  "frequency": "once nightly",
+  "start_date": {
+    "$date": "2023-04-20T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-07-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f93b"
+  },
+  "prescription_id": "RX1023",
+  "patient_id": "P1022",
+  "doctor_id": "DOC102",
+  "medication": "Lamotrigine",
+  "dosage": "100mg",
+  "frequency": "twice daily",
+  "start_date": {
+    "$date": "2023-04-25T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-07-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f93c"
+  },
+  "prescription_id": "RX1024",
+  "patient_id": "P1023",
+  "doctor_id": "DOC103",
+  "medication": "-",
+  "dosage": "-",
+  "frequency": "-",
+  "start_date": {
+    "$date": "2023-05-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-08-01T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f93d"
+  },
+  "prescription_id": "RX1025",
+  "patient_id": "P1024",
+  "doctor_id": "DOC104",
+  "medication": "Methylphenidate",
+  "dosage": "10mg",
+  "frequency": "once daily",
+  "start_date": {
+    "$date": "2023-05-05T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-06-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f93e"
+  },
+  "prescription_id": "RX1026",
+  "patient_id": "P1025",
+  "doctor_id": "DOC105",
+  "medication": "-",
+  "dosage": "-",
+  "frequency": "-",
+  "start_date": {
+    "$date": "2023-05-10T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2024-05-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f93f"
+  },
+  "prescription_id": "RX1027",
+  "patient_id": "P1026",
+  "doctor_id": "DOC106",
+  "medication": "Azithromycin",
+  "dosage": "500mg",
+  "frequency": "once daily",
+  "start_date": {
+    "$date": "2023-05-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-05-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f940"
+  },
+  "prescription_id": "RX1028",
+  "patient_id": "P1027",
+  "doctor_id": "DOC107",
+  "medication": "Ondansetron",
+  "dosage": "4mg",
+  "frequency": "every 6 hours",
+  "start_date": {
+    "$date": "2023-05-20T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-05-23T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f941"
+  },
+  "prescription_id": "RX1029",
+  "patient_id": "P1028",
+  "doctor_id": "DOC108",
+  "medication": "-",
+  "dosage": "-",
+  "frequency": "-",
+  "start_date": {
+    "$date": "2023-05-25T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-06-01T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395fa6611906215cb5f942"
+  },
+  "prescription_id": "RX1030",
+  "patient_id": "P1029",
+  "doctor_id": "DOC109",
+  "medication": "Lithium",
+  "dosage": "300mg",
+  "frequency": "twice daily",
+  "start_date": {
+    "$date": "2023-06-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2023-06-15T00:00:00.000Z"
+  }
+}]

@@ -1,0 +1,34 @@
+-- 1
+INSERT INTO Products (ProductID, ProductName, Price, Qty, CreateDate)
+VALUES (1, 'Coca', 1.25, 100, TO_DATE('25-03-2026','DD-MM-YYYY'));
+
+INSERT INTO Products (ProductID, ProductName, Price, CreateDate)
+VALUES (2, 'Fanta', 1.75, SYSDATE + 14);
+
+INSERT INTO Products (ProductID, ProductName, Price, Qty, CreateDate)
+VALUES (3, 'Sting', 1.50, 80, ADD_MONTHS(SYSDATE, -2));
+
+INSERT INTO Products (ProductID, ProductName, Price, CreateDate)
+VALUES (4, 'ABC', 2.30, ADD_MONTHS(SYSDATE, 24));
+
+SELECT * FROM Products;
+
+
+-- 2
+CREATE TABLE STAFFS(
+  StaffID NUMBER(10) PRIMARY KEY,
+  StaffName VARCHAR2(30) UNIQUE NOT NULL,
+  Salary NUMBER(10,2) DEFAULT 250 CHECK(Salary BETWEEN 0 AND 1000),
+  HireDate DATE DEFAULT TO_DATE('12-04-2026','DD-MM-YYYY') -- DD-MM-YYYY
+);
+
+INSERT INTO STAFFS (StaffID, StaffName, Salary, HireDate)
+VALUES (1, 'Leng Dara', 250, SYSDATE + 21);
+
+INSERT INTO STAFFS (StaffID, StaffName, Salary, HireDate)
+VALUES (2, 'Rorn Bopha', 340, ADD_MONTHS(SYSDATE, -2));
+
+INSERT INTO STAFFS (StaffID, StaffName, HireDate)
+VALUES (3, 'Pov Veasna', SYSDATE - 3 + 730);
+
+SELECT * FROM STAFFS;

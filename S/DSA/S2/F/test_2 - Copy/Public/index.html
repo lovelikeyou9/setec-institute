@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hospital Master Control Panel</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+  <!-- Top Navigation Bar -->
+  <div class="menu_bar">
+    <h1 class="logo">
+      <img src="image/14.jpg" alt="Logo" style="height: 70px;">
+      Hospital <span>Care</span>
+    </h1>
+
+    <ul>
+      <li><a href="#">Home</a></li>
+
+      <li class="hover-menu">
+        <a href="#">Doctors</a>
+        <div class="dropdown">
+          <a href="#">test_1</a>
+          <a href="#">test_2</a>
+          <a href="#">test_3</a>
+          <a href="#">test_4</a>
+        </div>
+      </li>
+
+      <li class="hover-menu">
+        <a href="#">Patients</a>
+        <div class="dropdown">
+          <a href="#">test_1</a>
+          <a href="#">test_2</a>
+          <a href="#">test_3</a>
+          <a href="#">test_4</a>
+        </div>
+      </li>
+
+      <li><a href="#">Blog</a></li>
+
+      <li class="hover-menu">
+        <a href="#">Other</a>
+        <div class="dropdown">
+          <a href="#">test_1</a>
+          <a href="#">test_2</a>
+          <a href="#">test_3</a>
+          <a href="#">test_4</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Dashboard Panel -->
+  <div class="main-container">
+    <header class="header">
+      <img src="image/a4fb11aa-af91-4f70-824f-96f8d17aa4b7.png" alt="SETEC Logo" class="logo">
+    </header>
+
+    <section class="panel">
+      <h2>Hospital Master Control Panel</h2>
+      <div class="datetime-box">
+        <p>Current Date & Time</p>
+        <p id="datetime"></p>
+      </div>
+
+      <div class="button-container">
+
+        <a href="appointments.html" style="text-decoration: none;">
+          <button type="button">Appointments</button>
+        </a>
+
+        <a href="billings.html" style="text-decoration: none;">
+        <button>Billing</button>
+        </a>
+
+        <a href="departments.html" style="text-decoration: none;">
+        <button>Departments</button>
+        </a>
+
+        <a href="doctors.html" style="text-decoration: none;">
+        <button>Doctors</button>
+        </a>
+
+        <a href="medicalRecords.html" style="text-decoration: none;">
+        <button>Medical Records</button>
+        </a>
+
+        <a href="patients.html" style="text-decoration: none;">
+        <button>Patients</button>
+        </a>
+
+        <a href="prescriptions.html" style="text-decoration: none;">
+        <button>Prescriptions</button>
+        </a>
+
+        <a href="staffs.html" style="text-decoration: none;">
+        <button>Staff</button>
+        </a>
+
+
+      </div>
+
+      <div id="output" class="output-box"></div>
+    </section>
+
+    <footer>
+      © 2025 | All Final Project Made By Chou Yamata | Hospital Management System
+    </footer>
+  </div>
+
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+      document.getElementById("datetime").textContent = 
+        now.toLocaleString("en-GB", { dateStyle: "full", timeStyle: "medium" });
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+  </script>
+</body>
+
+</html>

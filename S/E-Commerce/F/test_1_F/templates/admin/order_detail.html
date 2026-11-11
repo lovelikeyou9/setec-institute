@@ -1,0 +1,47 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Order #{{ order.id }}{% endblock %}
+{% block admin_content %}
+<h1 class="section-title">Order #{{ order.id }}</h1>
+<div class="row g-4">
+  <div class="col-md-7">
+    <div class="summary-card">
+      <h2 class="h6 fw-bold">Items</h2>
+      <table class="table">
+        <thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead>
+        <tbody>
+          {% for item in order.items %}
+          <tr>
+            <td>{{ item.product_name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ '%.2f'|format(item.price) }}</td>
+            <td>${{ '%.2f'|format(item.line_total) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="mb-0"><strong>Grand total:</strong> ${{ '%.2f'|format(order.total_amount) }}</p>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="summary-card mb-3">
+      <p><strong>Customer:</strong> {{ order.customer_name }}</p>
+      <p><strong>Email:</strong> {{ order.customer_email }}</p>
+      <p><strong>Phone:</strong> {{ order.customer_phone }}</p>
+      <p><strong>Address:</strong> {{ order.shipping_address }}</p>
+      <p><strong>Payment:</strong> {{ order.payment_status }}</p>
+      <p><strong>Method:</strong> {{ order.payment_method or 'stripe' }}</p>
+      <p><strong>Stripe Session:</strong> <span class="small">{{ order.stripe_session_id or '-' }}</span></p>
+      <p><strong>Payment Intent:</strong> <span class="small">{{ order.stripe_payment_intent_id or '-' }}</span></p>
+      <p class="mb-0"><strong>Visa TX:</strong> <span class="small">{{ order.visa_transaction_id or '-' }}</span></p>
+    </div>
+    <div class="summary-card">
+      <h2 class="h6 fw-bold">Update Order Status</h2>
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">{{ form.status(class="form-select") }}</div>
+        {{ form.submit(class="btn btn-brand") }}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

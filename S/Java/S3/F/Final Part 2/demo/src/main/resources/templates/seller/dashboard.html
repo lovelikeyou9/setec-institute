@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">My Store Dashboard — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+    <div class="dash-main">
+      <div class="exec-head">
+        <div>
+          <h1 th:text="${'My Store · ' + seller.storeName}">My Store</h1>
+          <p th:text="${'Income after MME ' + (commissionRate != null ? commissionRate : '3%') + ' fee · escrow until admin pays you · FY ' + year}">Income after fees</p>
+        </div>
+        <div class="exec-head-actions">
+          <span class="exec-range">Private seller view</span>
+          <a th:href="@{/seller-dashboard/orders}" class="btn btn-outline btn-sm">Orders</a>
+          <a th:href="@{/seller-dashboard/earnings}" class="btn btn-primary btn-sm">Earnings</a>
+        </div>
+      </div>
+
+      <div class="exec-kpi-grid">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Paid to me (net)</span><span class="exec-ico gold">$</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(earnings, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up">Released after admin payout</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Still in escrow</span><span class="exec-ico teal">◷</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(heldEarnings != null ? heldEarnings : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="warn">Held until delivered + admin pays</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span th:text="${'MME fees paid (' + (commissionRate != null ? commissionRate : '3%') + ')'}">MME fees paid (3%)</span><span class="exec-ico green">%</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(feesPaid != null ? feesPaid : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="purple" th:text="${'$' + #numbers.formatDecimal(feesPending != null ? feesPending : 0, 1, 'COMMA', 2, 'POINT') + ' fee pending in escrow'}">$0 pending</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Awaiting admin</span><span class="exec-ico purple">◎</span></div>
+          <strong th:text="${awaitAdminPayout != null ? awaitAdminPayout : 0}">0</strong>
+          <em class="warn">Delivered / out for delivery → payout</em>
+        </article>
+      </div>
+
+      <div class="exec-kpi-grid" style="margin-top:1rem">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Store revenue (sales)</span><span class="exec-ico teal">$</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(revenue, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up" th:text="${soldUnits + ' units · ' + uniqueBuyers + ' buyers'}">0 units</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Orders needing me</span><span class="exec-ico green">◷</span></div>
+          <strong th:text="${pendingOrders}">0</strong>
+          <em class="up" th:text="${ordersDelta + ' stock / ship / OFD'}">+0</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Wishlist / Favorites</span><span class="exec-ico purple">♡</span></div>
+          <strong th:text="${wishlistAdds}">0</strong>
+          <em class="purple" th:text="${productCount + ' products · ★ ' + rating}">catalog</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Fee model</span><span class="exec-ico gold">%</span></div>
+          <strong th:text="${commissionRate}">3%</strong>
+          <em class="warn">Deducted when admin pays you</em>
+        </article>
+      </div>
+
+      <div class="exec-kpi-grid" style="margin-top:1rem">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Sold Today</span><span class="exec-ico teal">D</span></div>
+          <strong th:text="${soldToday}">0</strong>
+          <em class="up" th:text="${'$' + #numbers.formatDecimal(revenueToday, 1, 'COMMA', 2, 'POINT') + ' income'}">$0</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Sold This Month</span><span class="exec-ico green">M</span></div>
+          <strong th:text="${soldMonth}">0</strong>
+          <em class="up" th:text="${'$' + #numbers.formatDecimal(revenueMonth, 1, 'COMMA', 2, 'POINT') + ' income'}">$0</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Sold This Year</span><span class="exec-ico gold">Y</span></div>
+          <strong th:text="${soldYear}">0</strong>
+          <em class="warn" th:text="${'$' + #numbers.formatDecimal(revenueYear, 1, 'COMMA', 2, 'POINT') + ' income'}">$0</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Catalog Health</span><span class="exec-ico purple">◎</span></div>
+          <strong th:text="${activeProducts + ' / ' + productCount}">0 / 0</strong>
+          <em class="purple" th:text="${stockDelta + ' stock'}">Healthy</em>
+        </article>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>My Store Information</h3><p>Only your seller profile</p></div>
+            <a th:href="@{/seller-dashboard/settings}" class="btn btn-outline btn-sm">Edit</a>
+          </div>
+          <dl class="profile-dl">
+            <div><dt>Store name</dt><dd th:text="${seller.storeName}">Store</dd></div>
+            <div><dt>Owner</dt><dd th:text="${seller.ownerName}">Owner</dd></div>
+            <div><dt>Email</dt><dd th:text="${seller.user != null ? seller.user.email : '—'}">email</dd></div>
+            <div><dt>Phone</dt><dd th:text="${seller.phone != null ? seller.phone : '—'}">—</dd></div>
+            <div><dt>Location</dt><dd th:text="${seller.location != null ? seller.location : '—'}">—</dd></div>
+            <div><dt>Level</dt><dd th:text="${seller.level.name()}">VERIFIED</dd></div>
+            <div><dt>Rating</dt><dd th:text="${rating + ' ★'}">4.9</dd></div>
+            <div><dt>Followers</dt><dd th:text="${followers != null ? followers : 0}">0</dd></div>
+          </dl>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>My Sales &amp; Income Trend</h3><p>Your store only · FY<span th:text="${year}">2026</span></p></div>
+          </div>
+          <div class="exec-chart-lg"><canvas id="sellerTrendChart"></canvas></div>
+        </section>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>What I Usually Sell</h3><p>Your top categories</p></div>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Category</th><th>Units</th><th>Revenue</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(usuallyCategories)}"><td colspan="3" style="text-align:center;color:var(--text-muted)">No sales yet</td></tr>
+                <tr th:each="row : ${usuallyCategories}">
+                  <td th:text="${row.label}">CPU</td>
+                  <td th:text="${row.qty}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.amount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>My Best Products</h3><p>Top sellers in your catalog</p></div>
+            <a th:href="@{/seller-dashboard/products}" class="btn btn-outline btn-sm">Manage</a>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Product</th><th>Units</th><th>Revenue</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(usuallyProducts)}"><td colspan="3" style="text-align:center;color:var(--text-muted)">No products yet</td></tr>
+                <tr th:each="row : ${usuallyProducts}">
+                  <td th:text="${row.label}">Product</td>
+                  <td th:text="${row.qty}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.amount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>My Revenue by Category</h3><p th:text="${usingEstimate} ? 'From your sold volume' : 'From your orders'">Breakdown</p></div>
+            <strong class="exec-donut-total" th:text="${'$' + #numbers.formatDecimal(revenue, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          </div>
+          <div class="exec-donut-wrap">
+            <div class="exec-chart-donut"><canvas id="sellerCategoryChart"></canvas></div>
+            <ul class="exec-legend">
+              <li th:each="row, st : ${categoryRows}">
+                <span class="dot" th:classappend="'c' + st.index"></span>
+                <div>
+                  <strong th:text="${row.label}">CPU</strong>
+                  <small th:text="${'$' + #numbers.formatDecimal(row.value, 1, 'COMMA', 2, 'POINT') + ' / ' + row.percent + '%'}">$0</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>My Recent Orders</h3><p>Buyers of your products</p></div>
+            <a th:href="@{/seller-dashboard/orders}" class="btn btn-outline btn-sm">View all</a>
+          </div>
+          <div th:if="${#lists.isEmpty(orders)}" class="empty-state" style="padding:1.5rem">
+            <h3>No orders yet</h3>
+            <p>Orders for your store will appear here.</p>
+          </div>
+          <div class="data-table-wrap" style="border:none;box-shadow:none" th:if="${!#lists.isEmpty(orders)}">
+            <table class="data-table">
+              <thead>
+                <tr><th>Order</th><th>Customer</th><th>Status</th><th>Total</th><th>Date</th></tr>
+              </thead>
+              <tbody>
+                <tr th:each="o, iter : ${orders}" th:if="${iter.index < 8}">
+                  <td th:text="${o.orderNumber}">CH-001</td>
+                  <td th:text="${o.recipientName}">Buyer</td>
+                  <td><span th:replace="~{fragments/status :: orderPill(${o.status})}"></span></td>
+                  <td th:text="${'$' + #numbers.formatDecimal(o.total, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                  <td th:text="${o.placedAt != null ? #temporals.format(o.placedAt, 'dd MMM') : '—'}">01 Jan</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <p class="exec-footnote">Your private seller analytics · FY<span th:text="${year}">2026</span> · Other sellers’ data is not shown</p>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+<script th:inline="javascript">
+  const months = /*[[${months}]]*/ [];
+  const ordersTrend = /*[[${ordersTrend}]]*/ [];
+  const revenueTrend = /*[[${revenueTrend}]]*/ [];
+  const categoryLabels = /*[[${categoryLabels}]]*/ [];
+  const categoryValues = /*[[${categoryValues}]]*/ [];
+  const palette = ['#2563eb', '#f59e0b', '#10b981', '#8b5cf6', '#0d7377'];
+
+  Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+  Chart.defaults.color = '#5a6570';
+
+  new Chart(document.getElementById('sellerTrendChart'), {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [
+        { label: 'My Orders', data: ordersTrend, borderColor: '#1d4ed8', backgroundColor: 'rgba(37,99,235,.18)', fill: true, tension: .35, pointRadius: 0 },
+        { label: 'My Revenue', data: revenueTrend, borderColor: '#38bdf8', backgroundColor: 'rgba(56,189,248,.12)', fill: true, tension: .35, pointRadius: 0 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, grid: { color: '#eef2f6' } }, x: { grid: { display: false } } } }
+  });
+
+  new Chart(document.getElementById('sellerCategoryChart'), {
+    type: 'doughnut',
+    data: { labels: categoryLabels, datasets: [{ data: categoryValues, backgroundColor: palette, borderWidth: 0 }] },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false } } }
+  });
+</script>
+</body>
+</html>

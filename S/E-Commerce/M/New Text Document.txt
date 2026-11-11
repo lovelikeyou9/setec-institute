@@ -1,0 +1,27 @@
+1. What is SEO?
+
+SEO (Search Engine Optimization) គឺជាការអនុវត្តក្នុងការកែលម្អ website  ដើម្បីឱ្យវាបង្ហាញនៅលំដាប់ខ្ពស់ក្នុងលទ្ធផលស្វែងរក នៅពេលដែលមានមនុស្សស្វែងរកប្រធានបទពាក់ព័ន្ធ។
+
+ឧទាហរណ៍
+ប្រសិនបើអ្នកជាម្ចាស់ website អំពី programming tutorials ហើយមាននរណាម្នាក់ស្វែងរកពាក្យថា "learn Python for beginners" (learn Python for beginners) SEO នឹងជួយឱ្យគេហ website  លេចឡើងនៅជិត កំពូលនៃលទ្ធផលនៅលើ Google និង other search engines។
+
+
+
+2. Why SEO Matters?
+
+SEO helps you:
+. បង្កើនចរាចរណ៍ចូលមើលដោយធម្មជាតិ/មិនបាច់បង់ប្រាក់ (Organic traffic)
+. ទៅដល់ Customer ឬ Reader ដែលមានសក្ដានុពលកាន់តែច្រើន
+. កែលម្អភាពមើលឃើញ និងភាពលេចធ្លោនៃគេហទំព័រ
+. បង្កើតទំនុកចិត្ត និងភាពគួរឱ្យជឿជាក់
+. កាត់បន្ថយការពឹងផ្អែកលើការផ្សាយពាណិជ្ជកម្មដែលត្រូវបង់ប្រាក់
+
+
+How SEO Works
+Search engines ជាទូទៅដំណើរការតាម ៣ ជំហានសំខាន់ៗ៖
+
+Crawling - ប្រព័ន្ធស្វ័យប្រវត្តិ (Bots / Web Crawlers) ស្វែងរកទំព័រគេហទំព័រនានាដោយដើរតាមតំណភ្ជាប់ (Links) ពីគេហទំព័រមួយទៅកាន់គេហទំព័រមួយទៀត
+
+Indexing - ទំព័រទាំងនោះត្រូវបានប្រមូល រក្សាទុក stored និងរៀបចំទុកដាក់យ៉ាងមានរបៀបនៅក្នុង Database of search engine's database
+
+Ranking  - search engine decides តើ pages ណាដែលត្រឹមត្រូវ search query រួចបង្ហាញទាំងនោះតាមលំដាប់លំដោយ តាម order 

@@ -1,0 +1,48 @@
+-- test_5_F_classwork
+-- on ora1@localhost:orcl
+-- 1. VIEW_AGGREGATE_FUNC1
+CREATE OR REPLACE VIEW VIEW_AGGREGATE_FUNC1 AS
+SELECT 
+    department_id,
+    TO_CHAR(SUM(salary), 'fm$99,999,999.00') AS total_salary,
+    TO_CHAR(MIN(salary), 'fm$99,999,999.00') AS minimum_salary,
+    TO_CHAR(MAX(salary), 'fm$99,999,999.00') AS maximum_salary
+FROM employees
+WHERE department_id IS NOT NULL
+GROUP BY department_id
+HAVING SUM(salary) >= 10000
+ORDER BY SUM(salary) DESC;
+
+-- Show result
+SELECT * FROM VIEW_AGGREGATE_FUNC1;
+
+
+-- 2. VIEW_AGGREGATE_FUNC2
+CREATE OR REPLACE VIEW VIEW_AGGREGATE_FUNC2 AS
+SELECT 
+    department_id,
+    TO_CHAR(SUM(salary), 'fm99,999,999.00') || '€' AS total_salary,
+    TO_CHAR(MIN(salary), 'fm99,999,999.00') || '€' AS minimum_salary,
+    TO_CHAR(MAX(salary), 'fm99,999,999.00') || '€' AS maximum_salary
+FROM employees
+WHERE department_id IS NOT NULL
+GROUP BY department_id
+ORDER BY SUM(salary) DESC;
+
+-- Show result
+SELECT * FROM VIEW_AGGREGATE_FUNC2;
+
+
+-- 3. VIEW_AGGREGATE_FUNC3
+CREATE OR REPLACE VIEW VIEW_AGGREGATE_FUNC3 AS
+SELECT
+    COUNT(last_name) AS total_last_name,
+    job_id,
+    department_id
+FROM employees
+GROUP BY job_id, department_id
+HAVING COUNT(last_name) > 1
+ORDER BY department_id DESC;
+
+-- Show result
+SELECT * FROM VIEW_AGGREGATE_FUNC3;

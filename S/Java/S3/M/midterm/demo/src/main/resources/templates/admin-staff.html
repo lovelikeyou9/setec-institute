@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff CRUD | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="dash-body">
+<div class="dash-shell">
+    <div th:replace="~{fragments/dash :: sidebar('staff', ${staff})}"></div>
+    <div class="dash-main">
+        <div th:replace="~{fragments/dash :: top(${staff}, 'CRUD Staff')}"></div>
+        <div class="dash-content">
+            <div class="dash-grid-2">
+                <div class="dash-panel">
+                    <div class="dash-panel-pad">
+                        <h3 th:text="${formStaff.SId != null} ? 'Edit Staff' : 'Add Staff'">Add Staff</h3>
+                        <form th:action="@{/admin/staff/save}" method="post" th:object="${formStaff}">
+                            <input type="hidden" th:field="*{SId}">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" th:field="*{userName}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="text" th:field="*{password}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select th:field="*{role}" required>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Stock">Stock</option>
+                                    <option value="User">User</option>
+                                </select>
+                            </div>
+                            <button class="btn-primary" type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="dash-panel">
+                    <div class="dash-panel-pad">
+                        <h3>Staff list</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                <tr><th>SID</th><th>Username</th><th>Password</th><th>Role</th><th>Actions</th></tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="s : ${staffList}">
+                                    <td th:text="${s.SId}"></td>
+                                    <td th:text="${s.userName}"></td>
+                                    <td th:text="${s.password}"></td>
+                                    <td th:text="${s.role}"></td>
+                                    <td class="actions">
+                                        <a class="btn-edit" th:href="@{/admin/staff/edit/{id}(id=${s.SId})}">Edit</a>
+                                        <a class="btn-del" th:href="@{/admin/staff/delete/{id}(id=${s.SId})}"
+                                           onclick="return confirm('Delete this staff?')">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

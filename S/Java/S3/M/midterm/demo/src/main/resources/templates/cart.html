@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="dash-body">
+<div class="dash-shell">
+    <div th:replace="~{fragments/dash :: sidebar('cart', ${staff})}"></div>
+    <div class="dash-main">
+        <div th:replace="~{fragments/dash :: top(${staff}, 'My Cart')}"></div>
+        <div class="dash-content">
+            <div class="alert alert-error" th:if="${error}" th:text="${error}"></div>
+            <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+
+            <div class="dash-panel">
+                <div class="dash-panel-pad">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                            <tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item : ${cart}">
+                                <td th:text="${item.productName}"></td>
+                                <td th:text="'$' + ${#numbers.formatDecimal(item.price, 1, 2)}"></td>
+                                <td>
+                                    <form th:action="@{/cart/update/{id}(id=${item.productId})}" method="post" style="display:flex;gap:8px">
+                                        <input class="qty-input" type="number" name="qty" th:value="${item.qty}" min="0">
+                                        <button class="btn-edit" type="submit">Update</button>
+                                    </form>
+                                </td>
+                                <td th:text="'$' + ${#numbers.formatDecimal(item.lineTotal, 1, 2)}"></td>
+                                <td class="actions">
+                                    <a class="btn-del" th:href="@{/cart/remove/{id}(id=${item.productId})}">Remove</a>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(cart)}">
+                                <td colspan="5">Cart is empty. <a th:href="@{/shop}">Browse products</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="dash-cart-footer" th:if="${!#lists.isEmpty(cart)}">
+                        <h2 th:text="'Total: $' + ${#numbers.formatDecimal(cartTotal, 1, 2)}">Total</h2>
+                        <a class="btn-buy" th:href="@{/checkout}">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+
+-- Oracle_II_Final
+-- 1. Create table product
+CREATE TABLE product (
+    product_id NUMBER(10),
+    product_name VARCHAR2(30),
+    qty NUMBER(80),
+    price NUMBER(10,2)
+);
+
+-- 2. Create sequence prod_seq
+CREATE SEQUENCE prod_seq
+START WITH 1
+INCREMENT BY 1;
+
+-- 3. Create index idx_prod_name
+CREATE INDEX idx_prod_name
+ON product(product_name);
+
+-- 4. Create synonyms
+CREATE SYNONYM prod FOR product;
+
+CREATE SYNONYM prod_id_seq FOR prod_seq;
+
+-- 5. Insert records using synonyms
+INSERT INTO prod ( product_id, product_name, qty, price )
+VALUES ( prod_id_seq.NEXTVAL, 'Laptop', 200, 2000 );
+
+INSERT INTO prod ( product_id, product_name, qty, price )
+VALUES ( prod_id_seq.NEXTVAL, 'Desktop', 500, 3000 );
+
+COMMIT;
+
+-- 6. Modify product_name with NOT NULL and UNIQUE constraints
+ALTER TABLE product
+MODIFY product_name VARCHAR2(30) NOT NULL;
+
+ALTER TABLE product
+ADD CONSTRAINT uq_product_name UNIQUE(product_name);
+
+-- 7. Create VIEW_GFUNC_EMP
+CREATE OR REPLACE VIEW VIEW_GFUNC_EMP AS
+SELECT
+    department_id,
+    TO_CHAR(SUM(salary), 'fm€99,999,999.00') AS total_salary,
+    TO_CHAR(MIN(salary), 'fm€99,999,999.00') AS minimum_salary,
+    TO_CHAR(MAX(salary), 'fm€99,999,999.00') AS maximum_salary
+FROM employees
+WHERE department_id IS NOT NULL
+GROUP BY department_id
+ORDER BY SUM(salary) DESC;
+
+-- 8. Create VIEW_EMP
+CREATE OR REPLACE VIEW VIEW_EMP AS
+SELECT *
+FROM (
+    SELECT
+        employee_id AS emp_id,
+        first_name || ' ' || last_name AS emp_name,
+        salary
+    FROM employees
+    WHERE MOD(employee_id, 2) = 1
+    ORDER BY salary DESC
+)
+WHERE ROWNUM <= 5;
+
+CREATE OR REPLACE VIEW VIEW_EMP AS
+SELECT
+    employee_id AS emp_id,
+    first_name || ' ' || last_name AS emp_name,
+    salary
+FROM employees
+WHERE MOD(employee_id, 2) = 1
+ORDER BY salary DESC
+FETCH FIRST 5 ROWS ONLY;
+-- ⚠ But best practice: avoid ORDER BY + FETCH inside VIEW
+
+-- 9. Create VIEW_EMP_DEPT
+CREATE OR REPLACE VIEW VIEW_EMP_DEPT AS
+SELECT e.employee_id, e.last_name, e.salary, d.department_name, l.city
+FROM employees e 
+JOIN departments d
+  ON e.department_id = d.department_id
+JOIN locations l
+  ON d.location_id = l.location_id
+WHERE d.department_name NOT LIKE 'S%'
+AND l.city NOT LIKE 'S%';
+
+-- 10. Create VIEW_SUB_EMP
+CREATE OR REPLACE VIEW VIEW_SUB_EMP AS
+SELECT employee_id, last_name, salary, job_id, hire_date
+FROM employees
+WHERE hire_date = ( SELECT MIN(hire_date) FROM employees )
+   OR hire_date = ( SELECT MIN(hire_date) FROM employees
+        WHERE hire_date > ( SELECT MIN(hire_date)
+            FROM employees )
+);
+

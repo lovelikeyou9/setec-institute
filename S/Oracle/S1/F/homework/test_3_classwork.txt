@@ -1,0 +1,5 @@
+SELECT
+    SUBSTR("FullName", 1, INSTR("FullName", ' ') - 1) AS FirstName,
+    SUBSTR("FullName", INSTR("FullName", ' ') + 1) AS LastName,
+    "FullName"
+FROM EMP_SV26;

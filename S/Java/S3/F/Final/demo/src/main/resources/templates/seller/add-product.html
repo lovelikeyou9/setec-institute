@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Add Product — Seller</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+    <div class="dash-main">
+      <h1 style="font-size:1.4rem;margin-bottom:1rem">Add Product</h1>
+
+      <div class="form-card">
+        <form th:action="@{/seller-dashboard/products/add}" method="post" enctype="multipart/form-data">
+          <div class="form-grid">
+            <div class="form-group full">
+              <label for="name">Product Name *</label>
+              <input type="text" id="name" name="name" required placeholder="e.g. ASUS ROG Strix RTX 5070 12GB"/>
+            </div>
+            <div class="form-group">
+              <label for="categoryId">Category *</label>
+              <select id="categoryId" name="categoryId" required>
+                <option value="">Select category</option>
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}">CPU</option>
+              </select>
+              <small style="color:var(--text-muted);font-size:.75rem">Categories are managed by admin</small>
+            </div>
+            <div class="form-group">
+              <label for="brandId">Brand *</label>
+              <select id="brandId" name="brandId" required>
+                <option value="">Select brand</option>
+                <option th:each="b : ${brands}" th:value="${b.id}" th:text="${b.name}">ASUS</option>
+              </select>
+              <small style="color:var(--text-muted);font-size:.75rem">Brands are managed by admin</small>
+            </div>
+            <div class="form-group">
+              <label for="price">Price (USD) *</label>
+              <input type="number" id="price" name="price" required min="0" step="0.01" placeholder="299.00"/>
+            </div>
+            <div class="form-group">
+              <label for="originalPrice">Original Price</label>
+              <input type="number" id="originalPrice" name="originalPrice" min="0" step="0.01" placeholder="349.00"/>
+            </div>
+            <div class="form-group">
+              <label for="stock">Stock *</label>
+              <input type="number" id="stock" name="stock" required min="0" value="10"/>
+            </div>
+            <div class="form-group">
+              <label for="sku">SKU</label>
+              <input type="text" id="sku" name="sku" placeholder="ASUS-RTX5070-12G"/>
+            </div>
+            <div class="form-group">
+              <label for="warranty">Warranty</label>
+              <input type="text" id="warranty" name="warranty" placeholder="24 months"/>
+            </div>
+            <div class="form-group full">
+              <label for="imageFile">Product Image *</label>
+              <input type="file" id="imageFile" name="imageFile" accept="image/*" required/>
+              <small style="color:var(--text-muted);font-size:.75rem">Choose an image file (PNG, JPG, WEBP…)</small>
+            </div>
+            <div class="form-group full">
+              <label for="description">Description *</label>
+              <textarea id="description" name="description" rows="4" required
+                        placeholder="Describe the product for PC builders — specs highlights, use cases, compatibility..."></textarea>
+            </div>
+            <div class="form-group full">
+              <label for="specifications">Specifications</label>
+              <textarea id="specifications" name="specifications" rows="5"
+                        placeholder="Chipset: NVIDIA Ada Lovelace&#10;Memory: 12GB GDDR7&#10;Boost Clock: 2512 MHz&#10;Interface: PCIe 5.0"></textarea>
+              <small style="color:var(--text-muted);font-size:.75rem">One spec per line as Key: Value</small>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-accent btn-lg" style="margin-top:.5rem">Publish Product</button>
+          <a th:href="@{/seller-dashboard/products}" class="btn btn-outline" style="margin-left:.5rem">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

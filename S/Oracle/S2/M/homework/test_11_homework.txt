@@ -1,0 +1,53 @@
+
+-- test_11_homework
+-- Table: DEPARTMENT
+CREATE TABLE DEPARTMENT (
+    dept_id NUMBER PRIMARY KEY,
+    dept_name VARCHAR2(100) NOT NULL UNIQUE,
+    mgrID NUMBER NOT NULL,
+    LocatID NUMBER
+);
+
+SELECT * FROM DEPARTMENT;
+
+-- Table: EMPLOYEE
+CREATE TABLE EMPLOYEE (
+    emp_id NUMBER PRIMARY KEY,
+    emp_name VARCHAR2(100) NOT NULL,
+    Salary NUMBER CHECK (Salary > 0),
+    DateOfBrith DATE NOT NULL,
+    PhoneNumber VARCHAR2(20) NOT NULL,
+    Email VARCHAR2(100),
+    dept_id NUMBER,
+    CONSTRAINT fk_emp_dept FOREIGN KEY (dept_id)
+        REFERENCES DEPARTMENT(dept_id)
+);
+
+SELECT * FROM USER_CONS_COLUMNS WHERE TABLE_NAME='EMPLOYEE';
+
+CREATE TABLE EMPLOYEE(
+
+);
+
+-- Table: CUSTOMER
+CREATE TABLE CUSTOMER (
+    customer_id NUMBER PRIMARY KEY,
+    customer_name VARCHAR2(100) NOT NULL,
+    gender VARCHAR2(6) CHECK (gender IN ('Male', 'Female')),
+    phone VARCHAR2(20) NOT NULL,
+    address VARCHAR2(200)
+);
+
+SELECT * FROM DEPARTMENT;
+
+-- Table: ORDERS
+CREATE TABLE ORDERS (
+    order_id NUMBER PRIMARY KEY,
+    order_date DATE DEFAULT SYSDATE,
+    customer_id NUMBER,
+    CONSTRAINT fk_order_customer FOREIGN KEY (customer_id)
+        REFERENCES CUSTOMER(customer_id)
+);
+
+SELECT * FROM USER_CONS_COLUMNS WHERE TABLE_NAME='ORDERS';
+

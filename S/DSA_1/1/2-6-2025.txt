@@ -1,0 +1,26 @@
+select lastName from employees where lastName like "%r%r%";
+
+select lastname from employees where locate("r",lastName)>0;
+
+select lastname,locate("r",lastname),
+locate("r",lastname,locate("r",lastname)+1)
+from employees
+where locate("r",lastname+1)>0;
+
+select mid("Hello SV2!",1,5); -- "Hello"
+select mid("Hello SV2!",6); -- " SV2!"
+
+select productcode from products;
+
+select productcode,mid(productcode,1,locate("_",productcode)-1),
+mid(productcode,locate("_",productcode)+1)
+from products;
+
+select substring_index(productcode,"_",1),
+substring_index(productcode,"_",-1) from products;
+
+select substring_index("Hello","l",1); -- He
+select substring_index("Hello","l",2); -- Hel
+select substring_index("Hello","l",-1); -- o
+select substring_index("Hello","l",-2); -- lo
+select substring_index("Hello","l",-3); -- Hello

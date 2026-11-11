@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">MME — Modern Multiple Technology</title>
+  <link rel="stylesheet" th:href="@{/css/main.css(v=dropdown2)}"/>
+  <link rel="icon" type="image/png" th:href="@{/images/mme-icon.png}" href="/images/mme-icon.png"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+
+<main class="main-content">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-brand">
+        <img class="hero-logo-icon" th:src="@{/images/mme-icon.png}" src="/images/mme-icon.png" alt="" width="56" height="56"/>
+        <span class="hero-brand-text">MME</span>
+      </div>
+      <p class="hero-tagline">Modern Multiple Technology</p>
+      <h1>One marketplace. Every kind of tech.</h1>
+      <p>Computers, networking, gaming, cameras, drones, power, DIY electronics, and pro IT — from verified sellers.</p>
+      <div class="hero-ctas">
+        <a th:href="@{/products}" class="btn btn-accent btn-lg">Shop Technology</a>
+        <a th:href="@{/categories}" class="btn btn-outline btn-lg">Browse Categories</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology pillars -->
+  <section class="tech-pillars" th:if="${navMenuGroups != null and !navMenuGroups.isEmpty()}" aria-label="Technology categories">
+    <div class="container tech-pillars-track">
+      <a th:each="g : ${navMenuGroups}"
+         th:href="@{/products(category=${g.items[0].id})}"
+         class="tech-pillar">
+        <span class="tech-pillar-icon" th:text="${g.icon}">💻</span>
+        <span class="tech-pillar-copy">
+          <strong th:text="${g.title}">Computers</strong>
+          <small th:text="${#lists.size(g.items) + ' categories'}">0 categories</small>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Promo peek carousel -->
+  <section class="promo-carousel section" th:if="${promoSlides != null and !promoSlides.isEmpty()}" aria-label="Featured categories">
+    <div class="promo-viewport" id="promoCarousel">
+      <div class="promo-track" id="promoTrack">
+        <article class="promo-slide" th:each="slide, st : ${promoSlides}"
+                 th:classappend="${st.index == 0} ? 'active'"
+                 th:style="|background-image:linear-gradient(105deg,rgba(10,12,16,.72) 0%,rgba(10,12,16,.28) 55%,rgba(10,12,16,.15) 100%),url('${slide.imageUrl}')|">
+          <div class="promo-slide-copy">
+            <h2 th:text="${slide.title}">Category</h2>
+            <p th:text="${slide.subtitle}">Subtitle</p>
+            <a class="promo-cta" th:href="${slide.href}" th:text="${slide.cta}">Explore Now</a>
+          </div>
+        </article>
+      </div>
+      <button type="button" class="promo-nav prev" id="promoPrev" aria-label="Previous slide">‹</button>
+      <button type="button" class="promo-nav next" id="promoNext" aria-label="Next slide">›</button>
+    </div>
+  </section>
+
+  <!-- Brands marquee -->
+  <section class="brand-marquee" th:if="${brands != null and !brands.isEmpty()}" aria-label="Shop by brand">
+    <div class="brand-track">
+      <!-- duplicated once for seamless infinite scroll -->
+      <th:block th:each="pass : ${#numbers.sequence(1,2)}">
+        <a th:each="b : ${brands}"
+           th:href="@{/products(brand=${b.id})}"
+           class="brand-logo"
+           th:attr="data-brand=${b.slug}"
+           th:title="${b.name}">
+          <img th:if="${b.logoUrl != null and !#strings.isEmpty(b.logoUrl)}"
+               th:src="${b.logoUrl}" th:alt="${b.name}"/>
+          <span th:unless="${b.logoUrl != null and !#strings.isEmpty(b.logoUrl)}"
+                th:text="${b.name}">Brand</span>
+        </a>
+      </th:block>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Shop by Category</h2>
+          <p class="section-sub">Modern Multiple Technology — explore every product line</p>
+        </div>
+        <a th:href="@{/categories}">View all →</a>
+      </div>
+      <div class="cat-grid cat-grid-media">
+        <a th:each="c, stat : ${categories}" th:if="${stat.index < 12}"
+           th:href="@{/products(category=${c.id})}" class="cat-card cat-card-media">
+          <div class="cat-thumb" th:if="${c.imageUrl != null and !#strings.isEmpty(c.imageUrl)}">
+            <img th:src="${c.imageUrl}" th:alt="${c.name}" loading="lazy"/>
+          </div>
+          <div class="cat-icon" th:unless="${c.imageUrl != null and !#strings.isEmpty(c.imageUrl)}"
+               th:text="${c.icon}">💻</div>
+          <span th:text="${c.name}">CPU</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category showcases (banner + product row) -->
+  <section class="section" style="padding-top:0" th:if="${showcases != null and !showcases.isEmpty()}">
+    <div class="container">
+      <div class="showcase-grid">
+        <div class="showcase-panel" th:each="sc : ${showcases}">
+          <a class="showcase-banner" th:classappend="${'theme-' + sc.theme}"
+             th:href="@{/products(category=${sc.category.id})}">
+            <div class="showcase-banner-copy">
+              <h3 th:text="${sc.bannerTitle}">Product</h3>
+              <p>PRICE FROM: $<th:block th:text="${#numbers.formatDecimal(sc.priceFrom, 1, 0)}">100</th:block></p>
+              <span class="showcase-shop">Shop Now</span>
+            </div>
+            <img class="showcase-banner-img" th:src="${sc.bannerImage}" th:alt="${sc.bannerTitle}" loading="lazy"/>
+          </a>
+          <div class="showcase-products">
+            <a class="showcase-item" th:each="product : ${sc.products}"
+               th:href="@{/product/{slug}(slug=${product.slug})}">
+              <span class="showcase-sale" th:if="${product.discountPercent != null and product.discountPercent > 0}"
+                    th:text="|-${product.discountPercent}%|">-8%</span>
+              <div class="showcase-item-img">
+                <img th:src="${product.imageUrl}" th:alt="${product.name}" loading="lazy"/>
+              </div>
+              <h4 th:text="${product.name}">Product</h4>
+              <div class="showcase-stars" th:attr="aria-label=${'Rating ' + product.rating}"
+                   th:with="full=${product.rating != null ? T(java.lang.Math).round(product.rating) : 0}">
+                <span th:each="i : ${#numbers.sequence(1,5)}"
+                      th:classappend="${i <= full} ? 'on'"
+                      th:text="${i <= full} ? '★' : '☆'">☆</span>
+              </div>
+              <div class="showcase-price">
+                <span class="now" th:classappend="${product.discountPercent != null and product.discountPercent > 0} ? 'sale'"
+                      th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$0.00</span>
+                <span class="was" th:if="${product.discountPercent != null and product.discountPercent > 0 and product.originalPrice != null}"
+                      th:text="${'$' + #numbers.formatDecimal(product.originalPrice, 1, 2)}">$0.00</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sale Off featured deal -->
+  <section class="section" style="padding-top:0" th:if="${!flashDeals.isEmpty()}"
+           th:with="saleItems=${#lists.size(flashDeals) > 5 ? flashDeals.subList(0,5) : flashDeals},
+                    first=${flashDeals[0]}">
+    <div class="container">
+      <div class="sale-off" id="saleOff" aria-label="Sale off deals">
+        <div class="sale-off-thumbs" role="tablist">
+          <button type="button" class="sale-off-thumb"
+                  th:each="product, st : ${saleItems}"
+                  th:classappend="${st.index == 0} ? 'active'"
+                  th:attr="data-index=${st.index},
+                           data-id=${product.id},
+                           data-name=${product.name},
+                           data-slug=${product.slug},
+                           data-image=${product.imageUrl},
+                           data-price=${#numbers.formatDecimal(product.price, 1, 2)},
+                           data-original=${product.originalPrice != null ? #numbers.formatDecimal(product.originalPrice, 1, 2) : ''},
+                           data-discount=${product.discountPercent != null ? product.discountPercent : 0},
+                           data-rating=${product.rating != null ? product.rating : 0},
+                           data-ends=${product.flashDealEndsAt != null ? #temporals.format(product.flashDealEndsAt, 'yyyy-MM-dd''T''HH:mm:ss') : '2026-12-31T23:59:59'}"
+                  role="tab"
+                  th:aria-selected="${st.index == 0}"
+                  th:aria-label="${product.name}">
+            <img th:src="${product.imageUrl}" th:alt="${product.name}" loading="lazy"/>
+          </button>
+        </div>
+
+        <div class="sale-off-info">
+          <div class="sale-off-watermark" aria-hidden="true">SALE OFF</div>
+          <h3 class="sale-off-title" id="saleOffTitle" th:text="${first.name}">Product</h3>
+          <div class="sale-off-stars" id="saleOffStars"
+               th:with="full=${first.rating != null ? T(java.lang.Math).round(first.rating) : 0}">
+            <span th:each="i : ${#numbers.sequence(1,5)}"
+                  th:classappend="${i <= full} ? 'on'"
+                  th:text="${i <= full} ? '★' : '☆'">☆</span>
+          </div>
+          <div class="sale-off-prices">
+            <span class="sale-off-now" id="saleOffPrice"
+                  th:text="${'$' + #numbers.formatDecimal(first.price, 1, 2)}">$0.00</span>
+            <span class="sale-off-was" id="saleOffOriginal"
+                  th:style="${first.originalPrice != null and first.discountPercent != null and first.discountPercent > 0} ? '' : 'display:none'"
+                  th:text="${first.originalPrice != null ? '$' + #numbers.formatDecimal(first.originalPrice, 1, 2) : ''}">$0.00</span>
+          </div>
+          <div class="sale-off-countdown" id="saleOffCountdown"
+               th:attr="data-countdown=${first.flashDealEndsAt != null ? #temporals.format(first.flashDealEndsAt, 'yyyy-MM-dd''T''HH:mm:ss') : '2026-12-31T23:59:59'}">
+            <div class="sale-off-unit"><strong data-d>00</strong><span>Days</span></div>
+            <div class="sale-off-unit"><strong data-h>00</strong><span>Hours</span></div>
+            <div class="sale-off-unit"><strong data-m>00</strong><span>Mins</span></div>
+            <div class="sale-off-unit"><strong data-s>00</strong><span>Secs</span></div>
+          </div>
+          <div class="sale-off-actions">
+            <form th:action="@{/wishlist/toggle}" method="post" sec:authorize="isAuthenticated()" id="saleOffWishForm">
+              <input type="hidden" name="productId" id="saleOffWishId" th:value="${first.id}"/>
+              <input type="hidden" name="redirect" value="/"/>
+              <button type="submit" class="sale-off-icon-btn" title="Wishlist" aria-label="Add to wishlist">♡</button>
+            </form>
+            <a th:href="@{/login}" class="sale-off-icon-btn" sec:authorize="!isAuthenticated()" title="Wishlist" aria-label="Login to wishlist">♡</a>
+
+            <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()" id="saleOffCartForm" class="sale-off-quick-form">
+              <input type="hidden" name="productId" id="saleOffCartId" th:value="${first.id}"/>
+              <input type="hidden" name="redirect" value="/"/>
+              <button type="submit" class="sale-off-quick">Quick Add</button>
+            </form>
+            <a th:href="@{/login}" class="sale-off-quick" sec:authorize="!isAuthenticated()">Quick Add</a>
+
+            <a class="sale-off-icon-btn" id="saleOffView"
+               th:href="@{/product/{slug}(slug=${first.slug})}" title="View product" aria-label="View product">⌕</a>
+          </div>
+        </div>
+
+        <div class="sale-off-visual">
+          <span class="sale-off-badge" id="saleOffBadge"
+                th:style="${first.discountPercent != null and first.discountPercent > 0} ? '' : 'display:none'"
+                th:text="${first.discountPercent != null and first.discountPercent > 0 ? '-' + first.discountPercent + '%' : ''}">-20%</span>
+          <button type="button" class="sale-off-nav prev" id="saleOffPrev" aria-label="Previous deal">‹</button>
+          <img id="saleOffImage" th:src="${first.imageUrl}" th:alt="${first.name}"/>
+          <button type="button" class="sale-off-nav next" id="saleOffNext" aria-label="Next deal">›</button>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:1.75rem">
+        <div>
+          <h2 class="section-title">Flash Deals</h2>
+          <p class="section-sub">Limited-time discounts from verified sellers</p>
+        </div>
+        <a th:href="@{/deals}">See all →</a>
+      </div>
+      <div class="product-grid">
+        <th:block th:each="product : ${flashDeals}">
+          <div th:replace="~{fragments/card :: card}"></div>
+        </th:block>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Featured Technology</h2>
+          <p class="section-sub">Standout picks across computers, gaming, networking &amp; more</p>
+        </div>
+        <a th:href="@{/products}">See all →</a>
+      </div>
+      <div class="product-grid">
+        <th:block th:each="product : ${featured}">
+          <div th:replace="~{fragments/card :: card}"></div>
+        </th:block>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sellers -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Trusted Sellers</h2>
+          <p class="section-sub">Verified stores for every kind of modern technology</p>
+        </div>
+        <a th:href="@{/sellers}">All sellers →</a>
+      </div>
+      <div class="seller-grid">
+        <a th:each="s : ${sellers}" th:href="@{/seller/{id}(id=${s.id})}" class="seller-card">
+          <img th:src="${s.logoUrl}" th:alt="${s.storeName}" class="seller-logo"/>
+          <div class="seller-info">
+            <h3>
+              <span th:text="${s.storeName}">Store</span>
+              <span class="badge badge-verified" th:if="${s.verified}">✓ Verified</span>
+              <span class="badge badge-top" th:if="${s.level.name() == 'TOP'}">Top Seller</span>
+            </h3>
+            <div class="rating-row">
+              <span th:replace="~{fragments/stars :: rating(${s.rating})}"></span>
+              <span th:text="${s.rating}">4.9</span>
+            </div>
+            <div class="seller-stats">
+              <span th:text="${s.totalProducts + ' products'}">0 products</span> ·
+              <span th:text="${s.location}">Phnom Penh</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Become Seller -->
+  <section class="section">
+    <div class="container">
+      <div class="home-seller-cta">
+        <div class="home-seller-cta-copy">
+          <h2>Start Selling on MME</h2>
+          <p>List computers, networking gear, cameras, gaming, DIY electronics, and more — reach tech buyers across Cambodia.</p>
+        </div>
+        <a th:href="@{/become-seller}" class="btn btn-lg home-seller-cta-btn">Become a Seller</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+<script th:src="@{/js/main.js(v=cta1)}"></script>
+</body>
+</html>

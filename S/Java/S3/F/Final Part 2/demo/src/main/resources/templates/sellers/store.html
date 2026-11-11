@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Store — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content">
+  <div class="container" style="padding-top:1.5rem">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <a th:href="@{/sellers}">Sellers</a>
+      <span class="sep">/</span>
+      <span th:text="${seller.storeName}">Store</span>
+    </nav>
+
+    <div class="store-banner"
+         th:style="${'background-image:url(' + (seller.bannerUrl != null ? seller.bannerUrl : 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=1200&amp;h=400&amp;fit=crop') + ')'}">
+    </div>
+
+    <div class="store-header">
+      <img th:src="${seller.logoUrl}" th:alt="${seller.storeName}"/>
+      <div style="flex:1">
+        <h1 style="font-size:1.5rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
+          <span th:text="${seller.storeName}">Store</span>
+          <span class="badge badge-verified" th:if="${seller.verified}">✓ Verified</span>
+          <span class="badge badge-top" th:if="${seller.level.name() == 'TOP'}">Top Seller</span>
+        </h1>
+        <p th:text="${seller.description}" style="color:var(--text-secondary);margin-top:.35rem;max-width:560px">Store description</p>
+        <div class="seller-stats" style="margin-top:.5rem">
+          <span th:text="${seller.rating + ' ★'}">4.9 ★</span> ·
+          <span th:text="${seller.totalProducts + ' products'}">0 products</span> ·
+          <span th:text="${(seller.totalSales != null ? seller.totalSales : 0) + ' sales'}">0 sales</span> ·
+          <span th:text="${(seller.followers != null ? seller.followers : 0) + ' followers'}">0 followers</span> ·
+          <span th:text="${seller.location}">Phnom Penh</span>
+        </div>
+      </div>
+      <div style="align-self:flex-start">
+        <span th:replace="~{fragments/follow :: btn(${seller.id}, ${following != null and following}, ${'/seller/' + seller.id})}"></span>
+      </div>
+    </div>
+
+    <nav class="store-nav">
+      <a href="#products" class="active">Products</a>
+      <a href="#about">About</a>
+      <a th:href="@{/products(q=${seller.storeName})}">All Items</a>
+    </nav>
+
+    <section id="products" style="padding:1.5rem 0">
+      <div th:if="${products.totalElements == 0}" class="empty-state">
+        <div class="icon">📦</div>
+        <h3>No products listed yet</h3>
+        <p>This seller hasn't published any products.</p>
+      </div>
+      <div class="product-grid" th:if="${products.totalElements > 0}">
+        <th:block th:each="product : ${products.content}"><div th:replace="~{fragments/card :: card}"></div></th:block>
+      </div>
+      <div class="pagination" th:if="${products.totalPages > 1}">
+        <a th:if="${products.number > 0}"
+           th:href="@{/seller/{id}(id=${seller.id},page=${products.number - 1})}">← Prev</a>
+        <th:block th:each="i : ${#numbers.sequence(0, products.totalPages - 1)}">
+          <span class="current" th:if="${i == products.number}" th:text="${i + 1}">1</span>
+          <a th:if="${i != products.number}"
+             th:href="@{/seller/{id}(id=${seller.id},page=${i})}" th:text="${i + 1}">1</a>
+        </th:block>
+        <a th:if="${products.number < products.totalPages - 1}"
+           th:href="@{/seller/{id}(id=${seller.id},page=${products.number + 1})}">Next →</a>
+      </div>
+    </section>
+
+    <section id="about" class="form-card" style="margin-bottom:2rem">
+      <h3>About the Store</h3>
+      <p th:text="${seller.description}" style="color:var(--text-secondary);line-height:1.7">Description</p>
+      <p style="margin-top:.75rem;font-size:.9rem;color:var(--text-muted)">
+        Location: <span th:text="${seller.location}">Phnom Penh</span> ·
+        Joined: <span th:text="${seller.joinedAt != null ? #temporals.format(seller.joinedAt, 'MMM yyyy') : '—'}">Jan 2025</span> ·
+        Response rate: <span th:text="${seller.responseRate + '%'}">95%</span>
+      </p>
+    </section>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

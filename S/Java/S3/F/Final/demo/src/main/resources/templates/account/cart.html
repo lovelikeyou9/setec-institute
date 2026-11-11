@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Shopping Cart — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+<div th:if="${error}" class="container" style="padding-top:1rem"><div class="alert alert-error" th:text="${error}"></div></div>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/dash-sidebar :: sidebar}"></aside>
+    <div class="dash-main">
+      <h1 style="font-size:1.4rem;margin-bottom:.35rem">Shopping Cart</h1>
+      <p style="color:var(--text-secondary);margin-bottom:1.5rem">Review items from multiple sellers before checkout.</p>
+
+      <div th:if="${groupedCart == null or #maps.isEmpty(groupedCart)}" class="empty-state">
+        <div class="icon">🛒</div>
+        <h3>Your cart is empty</h3>
+        <p>Add routers, cameras, consoles, components, or any tech gear to get started.</p>
+        <a th:href="@{/products}" class="btn btn-primary" style="margin-top:1rem">Browse Products</a>
+      </div>
+
+      <div class="cart-layout" th:if="${groupedCart != null and !#maps.isEmpty(groupedCart)}">
+        <div>
+          <form th:action="@{/cart/select-all}" method="post" style="margin-bottom:.75rem;display:inline">
+            <input type="hidden" name="selected" value="true"/>
+            <input type="hidden" name="redirect" value="/account/cart"/>
+            <button type="submit" class="btn btn-outline btn-sm">Select All</button>
+          </form>
+          <form th:action="@{/cart/select-all}" method="post" style="display:inline;margin-left:.35rem">
+            <input type="hidden" name="selected" value="false"/>
+            <input type="hidden" name="redirect" value="/account/cart"/>
+            <button type="submit" class="btn btn-outline btn-sm">Deselect All</button>
+          </form>
+
+          <div class="cart-seller-group" th:each="entry : ${groupedCart}" style="margin-top:1rem">
+            <div class="cart-seller-head">
+              <span th:text="${entry.key.storeName}">Seller</span>
+              <span class="badge badge-verified" th:if="${entry.key.verified}">✓</span>
+            </div>
+
+            <div class="cart-item" th:each="item : ${entry.value}">
+              <form th:action="@{/cart/toggle}" method="post">
+                <input type="hidden" name="itemId" th:value="${item.id}"/>
+                <input type="hidden" name="redirect" value="/account/cart"/>
+                <input type="checkbox" th:checked="${item.selected}" onchange="this.form.submit()"/>
+              </form>
+              <a th:href="@{/product/{slug}(slug=${item.product.slug})}">
+                <img th:src="${item.product.imageUrl}" th:alt="${item.product.name}"/>
+              </a>
+              <div>
+                <a th:href="@{/product/{slug}(slug=${item.product.slug})}"
+                   th:text="${item.product.name}" style="font-weight:600">Product</a>
+                <div class="price-row" style="margin-top:.35rem">
+                  <span class="price">$<th:block th:text="${#numbers.formatDecimal(item.product.price, 1, 2)}">0</th:block></span>
+                </div>
+                <form th:action="@{/cart/remove}" method="post" style="margin-top:.5rem">
+                  <input type="hidden" name="itemId" th:value="${item.id}"/>
+                  <input type="hidden" name="redirect" value="/account/cart"/>
+                  <button type="submit" class="btn btn-outline btn-sm">Remove</button>
+                </form>
+              </div>
+              <div>
+                <form th:action="@{/cart/update}" method="post" style="display:flex;align-items:center;gap:.35rem">
+                  <input type="hidden" name="itemId" th:value="${item.id}"/>
+                  <input type="hidden" name="redirect" value="/account/cart"/>
+                  <div class="qty-selector">
+                    <button type="button" onclick="var i=this.parentElement.querySelector('input[name=quantity]');i.value=Math.max(1,+i.value-1);i.form.submit()">−</button>
+                    <input type="number" name="quantity" th:value="${item.quantity}" min="1" onchange="this.form.submit()"/>
+                    <button type="button" onclick="var i=this.parentElement.querySelector('input[name=quantity]');i.value=+i.value+1;i.form.submit()">+</button>
+                  </div>
+                </form>
+                <div style="text-align:right;margin-top:.5rem;font-weight:700;color:var(--accent)">
+                  $<th:block th:text="${#numbers.formatDecimal(item.product.price.doubleValue() * item.quantity, 1, 2)}">0</th:block>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="cart-summary">
+          <h3 style="margin-bottom:1rem">Order Summary</h3>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>$<th:block th:text="${#numbers.formatDecimal(subtotal, 1, 2)}">0.00</th:block></span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>Calculated at checkout</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>$<th:block th:text="${#numbers.formatDecimal(subtotal, 1, 2)}">0.00</th:block></span>
+          </div>
+          <a th:href="@{/checkout}" class="btn btn-accent btn-block" style="width:100%;margin-top:1rem;text-align:center">Proceed to Checkout</a>
+          <a th:href="@{/products}" class="btn btn-outline btn-block" style="width:100%;margin-top:.5rem;text-align:center">Continue Shopping</a>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

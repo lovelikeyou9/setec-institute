@@ -1,0 +1,49 @@
+
+
+-- FullName: Chou Yamata(SV2.6)
+-- test_8_F
+-- on ora1@localhost:orcl
+
+-- 1. Find employees who have salary greater than last_name of Abel
+-- Using Subquery to solve query
+-- Main Query or Outer Query
+SELECT * FROM EMPLOYEES;
+
+SELECT EMPLOYEE_ID, LAST_NAME, SALARY, DEPARTMENT_ID
+FROM EMPLOYEES;
+
+-- Find salary of Abel
+-- Find the first result => Inner Query or Subquery
+SELECT * FROM EMPLOYEES;
+
+SELECT SALARY FROM EMPLOYEES;
+
+SELECT SALARY FROM EMPLOYEES
+WHERE LAST_NAME = 'Abel';
+
+SELECT EMPLOYEE_ID, LAST_NAME, SALARY, DEPARTMENT_ID 
+FROM EMPLOYEES
+WHERE SALARY > (SELECT SALARY FROM EMPLOYEES
+               WHERE LAST_NAME = 'Abel');
+
+-- FullName: Chou Yamata(SV2.6)
+-- 2. Find employees who have salary as the same salary of Kochhar
+SELECT EMPLOYEE_ID, LAST_NAME, SALARY, DEPARTMENT_ID 
+FROM EMPLOYEES
+WHERE SALARY = (SELECT SALARY FROM EMPLOYEES
+               WHERE LAST_NAME = 'Kochhar')
+             AND LAST_NAME <> (SELECT LAST_NAME FROM EMPLOYEES
+               WHERE LAST_NAME = 'Kochhar');
+
+-- 3.1 Find employees who have the highest salary
+SELECT EMPLOYEE_ID, LAST_NAME, SALARY, DEPARTMENT_ID 
+FROM EMPLOYEES
+WHERE SALARY = (SELECT MAX(SALARY) FROM EMPLOYEES);
+
+-- 3.2 Find employees who have the lowest salary
+-- 2 Lines
+SELECT EMPLOYEE_ID, LAST_NAME, SALARY, DEPARTMENT_ID 
+FROM EMPLOYEES
+WHERE SALARY = (SELECT MAX(SALARY) FROM EMPLOYEES)
+             OR SALARY = (SELECT MIN(SALARY) FROM EMPLOYEES);
+

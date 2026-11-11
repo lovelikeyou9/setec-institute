@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+<div class="row g-4 mt-1">
+  <div class="col-lg-3">
+    <div class="admin-sidebar">
+      <div class="fw-bold mb-3">Admin Panel</div>
+      <a href="{{ url_for('admin.dashboard') }}" class="{% if request.endpoint == 'admin.dashboard' %}active{% endif %}">Dashboard</a>
+      <a href="{{ url_for('admin.products') }}" class="{% if 'product' in request.endpoint %}active{% endif %}">Products</a>
+      <a href="{{ url_for('admin.categories') }}" class="{% if 'categor' in request.endpoint %}active{% endif %}">Categories</a>
+      <a href="{{ url_for('admin.orders') }}" class="{% if 'order' in request.endpoint %}active{% endif %}">Orders</a>
+      <a href="{{ url_for('admin.customers') }}" class="{% if 'customer' in request.endpoint %}active{% endif %}">Customers</a>
+      <a href="{{ url_for('main.index') }}">← Back to Store</a>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    {% block admin_content %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

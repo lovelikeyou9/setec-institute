@@ -1,0 +1,6 @@
+@WebAPINoDB_HostAddress = http://localhost:5045
+
+GET {{WebAPINoDB_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

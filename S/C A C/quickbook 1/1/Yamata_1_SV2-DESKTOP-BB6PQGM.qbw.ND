@@ -1,0 +1,9 @@
+// This is QuickBooks configuration File. It exists while users are connected
+// to a company file. Do not delete this file yourself. QuickBooks may not
+// operate correctly if you manually delete this file. 
+[NetConnect]
+ServerIp=fe80::16d2:40e4:b3bc:93ee%8
+EngineName=QB_DESKTOP-BB6PQGM_18
+ServerPort=10180
+FilePath=C:\Users\Admin\OneDrive\Desktop\S\_upload_setec\setec-institute\S\C A C\quickbook 1\1\Yamata_1_SV2-DESKTOP-BB6PQGM.qbw
+ServerMode=1

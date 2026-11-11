@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Reviews — Admin</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: adminSidebar}"></aside>
+    <div class="dash-main">
+      <h1 style="font-size:1.4rem;margin-bottom:1rem">Reviews</h1>
+
+      <div th:if="${#lists.isEmpty(reviews)}" class="empty-state">
+        <h3>No reviews</h3>
+        <p>Customer product reviews will be listed here.</p>
+      </div>
+
+      <div class="data-table-wrap" th:if="${!#lists.isEmpty(reviews)}">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>User</th>
+              <th>Rating</th>
+              <th>Comment</th>
+              <th>Verified</th>
+              <th>Hidden</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="r : ${reviews}">
+              <td th:text="${r.product.name}">Product</td>
+              <td th:text="${r.user.fullName}">User</td>
+              <td th:text="${r.rating + ' ★'}">5 ★</td>
+              <td style="max-width:280px" th:text="${r.comment}">Comment</td>
+              <td>
+                <span class="status-pill" th:classappend="${r.verifiedPurchase} ? 'green' : 'gray'"
+                      th:text="${r.verifiedPurchase ? 'Yes' : 'No'}">Yes</span>
+              </td>
+              <td>
+                <span class="status-pill" th:classappend="${r.hidden} ? 'red' : 'green'"
+                      th:text="${r.hidden ? 'Hidden' : 'Visible'}">Visible</span>
+              </td>
+              <td th:text="${r.createdAt != null ? #temporals.format(r.createdAt, 'dd MMM yyyy') : '—'}">01 Jan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

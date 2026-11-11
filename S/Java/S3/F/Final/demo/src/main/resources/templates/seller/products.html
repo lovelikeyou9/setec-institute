@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">My Products — Seller</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+    <div class="dash-main">
+      <div class="section-head" style="margin-bottom:1.25rem">
+        <h1 style="font-size:1.4rem">My Products</h1>
+        <button type="button" class="btn btn-accent" data-modal-open="modalAddProduct">+ Add Product</button>
+      </div>
+
+      <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+      <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+      <form class="dash-search" th:action="@{/seller-dashboard/products}" method="get">
+        <input type="search" name="q" th:value="${q}" placeholder="Search my products..."/>
+        <label class="dash-sort">
+          <span>Category</span>
+          <select name="category" onchange="this.form.submit()">
+            <option value="">All</option>
+            <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"
+                    th:selected="${selectedCategory != null and selectedCategory == c.id}">CPU</option>
+          </select>
+        </label>
+        <label class="dash-sort">
+          <span>Brand</span>
+          <select name="brand" onchange="this.form.submit()">
+            <option value="">All</option>
+            <option th:each="b : ${brands}" th:value="${b.id}" th:text="${b.name}"
+                    th:selected="${selectedBrand != null and selectedBrand == b.id}">ASUS</option>
+          </select>
+        </label>
+        <label class="dash-sort">
+          <span>Sort</span>
+          <select name="sort" onchange="this.form.submit()">
+            <option value="newest" th:selected="${sort == null or sort == 'newest'}">Newest</option>
+            <option value="oldest" th:selected="${sort == 'oldest'}">Oldest</option>
+            <option value="name_asc" th:selected="${sort == 'name_asc'}">Name A–Z</option>
+            <option value="name_desc" th:selected="${sort == 'name_desc'}">Name Z–A</option>
+            <option value="price_asc" th:selected="${sort == 'price_asc'}">Price: Low to High</option>
+            <option value="price_desc" th:selected="${sort == 'price_desc'}">Price: High to Low</option>
+            <option value="stock_desc" th:selected="${sort == 'stock_desc'}">Stock: High to Low</option>
+            <option value="popular" th:selected="${sort == 'popular'}">Most Sold</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        <a th:if="${(q != null and !#strings.isEmpty(q)) or selectedCategory != null or selectedBrand != null}"
+           th:href="@{/seller-dashboard/products}" class="btn btn-outline btn-sm">Clear</a>
+      </form>
+
+      <div th:if="${#lists.isEmpty(products)}" class="empty-state">
+        <div class="icon">📦</div>
+        <h3>No products found</h3>
+        <p>List your first GPU, CPU, or laptop to start selling.</p>
+        <button type="button" class="btn btn-primary" style="margin-top:1rem" data-modal-open="modalAddProduct">Add Product</button>
+      </div>
+
+      <div class="data-table-wrap" th:if="${!#lists.isEmpty(products)}">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Sold</th><th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="p : ${products}"
+                class="product-row-click"
+                data-view-product
+                th:attr="data-id=${p.id},
+                         data-name=${p.name},
+                         data-slug=${p.slug},
+                         data-seller=${p.seller.storeName},
+                         data-category=${p.category.name},
+                         data-brand=${p.brand.name},
+                         data-price=${#numbers.formatDecimal(p.price, 1, 2)},
+                         data-original=${p.originalPrice != null ? #numbers.formatDecimal(p.originalPrice, 1, 2) : ''},
+                         data-stock=${p.stock},
+                         data-sku=${p.sku},
+                         data-warranty=${p.warranty},
+                         data-image=${p.imageUrl},
+                         data-description=${p.description},
+                         data-specs=${p.specifications},
+                         data-active=${p.active},
+                         data-sold=${p.soldCount},
+                         data-edit-action=@{/seller-dashboard/products/{id}/edit(id=${p.id})},
+                         data-field-name=${p.name},
+                         data-field-categoryId=${p.category.id},
+                         data-field-brandId=${p.brand.id},
+                         data-field-price=${p.price},
+                         data-field-originalPrice=${p.originalPrice},
+                         data-field-stock=${p.stock},
+                         data-field-sku=${p.sku},
+                         data-field-warranty=${p.warranty},
+                         data-field-imageUrl=${p.imageUrl},
+                         data-field-description=${p.description},
+                         data-field-specifications=${p.specifications},
+                         data-field-active=${p.active}">
+              <td>
+                <button type="button" class="table-thumb-btn" data-view-product tabindex="-1">
+                  <img th:src="${p.imageUrl}" th:alt="${p.name}" class="table-thumb"/>
+                </button>
+              </td>
+              <td>
+                <button type="button" class="table-link-btn" data-view-product th:text="${p.name}">Product</button>
+              </td>
+              <td th:text="${p.category.name}">CPU</td>
+              <td th:text="${'$' + #numbers.formatDecimal(p.price, 1, 2)}">$0</td>
+              <td>
+                <span th:text="${p.stock}">0</span>
+                <span class="status-pill red" th:if="${p.stock < 10}" style="margin-left:.25rem">Low</span>
+              </td>
+              <td th:text="${p.soldCount}">0</td>
+              <td>
+                <span class="status-pill" th:classappend="${p.active} ? 'green' : 'gray'"
+                      th:text="${p.active ? 'Active' : 'Inactive'}">Active</span>
+              </td>
+              <td class="table-actions" onclick="event.stopPropagation()">
+                <button type="button" class="btn btn-outline btn-sm"
+                        data-edit="editProductForm"
+                        data-modal-open="modalEditProduct"
+                        th:attr="data-action=@{/seller-dashboard/products/{id}/edit(id=${p.id})},
+                                 data-field-name=${p.name},
+                                 data-field-categoryId=${p.category.id},
+                                 data-field-brandId=${p.brand.id},
+                                 data-field-price=${p.price},
+                                 data-field-originalPrice=${p.originalPrice},
+                                 data-field-stock=${p.stock},
+                                 data-field-sku=${p.sku},
+                                 data-field-warranty=${p.warranty},
+                                 data-field-imageUrl=${p.imageUrl},
+                                 data-field-description=${p.description},
+                                 data-field-specifications=${p.specifications},
+                                 data-field-active=${p.active}">Edit</button>
+                <button type="button" class="btn btn-danger btn-sm"
+                        th:attr="data-delete=@{/seller-dashboard/products/{id}/delete(id=${p.id})}, data-label=${'product ' + p.name}">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="modalViewProduct">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Product Details</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <div class="modal-body">
+      <div class="product-view">
+        <div class="product-view-media">
+          <img id="viewProductImage" src="" alt=""/>
+        </div>
+        <div class="product-view-info">
+          <p class="product-view-meta"><span id="viewProductId"></span> · Sold <span id="viewProductSold">0</span></p>
+          <h3 id="viewProductName">Product</h3>
+          <div class="product-view-tags">
+            <span class="status-pill gray" id="viewProductCategory">Category</span>
+            <span class="status-pill gray" id="viewProductBrand">Brand</span>
+            <span class="status-pill" id="viewProductActive">Active</span>
+          </div>
+          <div class="product-view-price">
+            <strong id="viewProductPrice">$0.00</strong>
+            <span id="viewProductOriginal"></span>
+          </div>
+          <dl class="product-view-dl">
+            <div><dt>Stock</dt><dd id="viewProductStock">0</dd></div>
+            <div><dt>SKU</dt><dd id="viewProductSku">—</dd></div>
+            <div><dt>Warranty</dt><dd id="viewProductWarranty">—</dd></div>
+          </dl>
+          <div class="product-view-block">
+            <h4>Description</h4>
+            <p id="viewProductDescription">—</p>
+          </div>
+          <div class="product-view-block">
+            <h4>Specifications</h4>
+            <pre id="viewProductSpecs">—</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" data-modal-close>Close</button>
+      <a id="viewProductStorefront" href="#" class="btn btn-outline" target="_blank" rel="noopener">Open storefront</a>
+      <button type="button" class="btn btn-primary" id="viewProductEditBtn">Edit</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalAddProduct">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Add Product</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form th:action="@{/seller-dashboard/products/add}" method="post" enctype="multipart/form-data">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group full"><label>Product Name *</label><input type="text" name="name" required/></div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select name="categoryId" required>
+              <option value="">Select category</option>
+              <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}">CPU</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Brand *</label>
+            <select name="brandId" required>
+              <option value="">Select brand</option>
+              <option th:each="b : ${brands}" th:value="${b.id}" th:text="${b.name}">ASUS</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Price *</label><input type="number" name="price" required min="0" step="0.01"/></div>
+          <div class="form-group"><label>Original Price</label><input type="number" name="originalPrice" min="0" step="0.01"/></div>
+          <div class="form-group"><label>Stock *</label><input type="number" name="stock" required min="0" value="10"/></div>
+          <div class="form-group"><label>SKU</label><input type="text" name="sku"/></div>
+          <div class="form-group"><label>Warranty</label><input type="text" name="warranty"/></div>
+          <div class="form-group full">
+            <label>Product Image *</label>
+            <input type="file" name="imageFile" accept="image/*" required/>
+            <small style="color:var(--text-muted);font-size:.75rem">Choose an image file (PNG, JPG, WEBP…)</small>
+          </div>
+          <div class="form-group full"><label>Description *</label><textarea name="description" rows="3" required></textarea></div>
+          <div class="form-group full"><label>Specifications</label><textarea name="specifications" rows="4"></textarea></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-accent">Publish Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalEditProduct">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Edit Product</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form id="editProductForm" method="post" action="#" enctype="multipart/form-data">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group full"><label>Product Name *</label><input type="text" name="name" required/></div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select name="categoryId" required>
+              <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}">CPU</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Brand *</label>
+            <select name="brandId" required>
+              <option th:each="b : ${brands}" th:value="${b.id}" th:text="${b.name}">ASUS</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Price *</label><input type="number" name="price" required min="0" step="0.01"/></div>
+          <div class="form-group"><label>Original Price</label><input type="number" name="originalPrice" min="0" step="0.01"/></div>
+          <div class="form-group"><label>Stock *</label><input type="number" name="stock" required min="0"/></div>
+          <div class="form-group"><label>SKU</label><input type="text" name="sku"/></div>
+          <div class="form-group"><label>Warranty</label><input type="text" name="warranty"/></div>
+          <div class="form-group full">
+            <label>Product Image *</label>
+            <input type="file" name="imageFile" accept="image/*"/>
+            <small style="color:var(--text-muted);font-size:.75rem;display:block;margin-top:.35rem">
+              Choose a new image, or leave empty to keep the current one.
+            </small>
+            <img id="editProductImagePreview" src="" alt="" class="table-thumb"
+                 style="margin-top:.5rem;width:80px;height:80px;object-fit:cover;display:none"/>
+          </div>
+          <div class="form-group full"><label>Description *</label><textarea name="description" rows="3" required></textarea></div>
+          <div class="form-group full"><label>Specifications</label><textarea name="specifications" rows="4"></textarea></div>
+          <div class="form-group"><label><input type="checkbox" name="active" value="true"/> Active</label></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalDelete">
+  <div class="modal">
+    <div class="modal-header"><h3>Confirm Delete</h3><button type="button" class="modal-close" data-modal-close>×</button></div>
+    <form id="deleteForm" method="post" action="#">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <div class="modal-body"><p>Are you sure you want to delete <strong id="deleteLabel">this item</strong>?</p></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users CRUD</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        header, main { max-width: 1000px; margin: 0 auto; padding: 1.25rem; }
+        header { display: flex; justify-content: space-between; align-items: center; }
+        a.btn, button.btn {
+            background: #38bdf8;
+            color: #082f49;
+            text-decoration: none;
+            border: 0;
+            border-radius: 8px;
+            padding: 0.5rem 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        a.link { color: #7dd3fc; margin-right: 0.75rem; }
+        a.danger { color: #f87171; }
+        table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 12px; overflow: hidden; }
+        th, td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid rgba(148,163,184,0.2); }
+        th { background: #334155; }
+        .msg { padding: 0.7rem 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .ok { background: rgba(74,222,128,0.15); color: #4ade80; }
+        .error { background: rgba(248,113,113,0.15); color: #f87171; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Users</h1>
+    <div>
+        <a class="btn" th:href="@{/users/new}">Add User</a>
+        <a class="btn" th:href="@{/admin}">Back to Admin</a>
+    </div>
+</header>
+<main>
+    <div th:if="${success}" class="msg ok" th:text="${success}"></div>
+    <div th:if="${error}" class="msg error" th:text="${error}"></div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>UserName</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.userName}"></td>
+            <td th:text="${u.role}"></td>
+            <td>
+                <a class="link" th:href="@{/users/edit/{id}(id=${u.id})}">Edit</a>
+                <a class="link danger" th:href="@{/users/delete/{id}(id=${u.id})}"
+                   onclick="return confirm('Delete this user?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  {% include 'front/share/header.html' %}
+
+
+</head>
+<body>
+
+  {% include 'front/share/navbar.html' %}
+
+
+  <main>
+    <section class="hero-section text-white">
+      <div class="container py-4">
+        <div class="col-lg-7 pt-4 pb-3">
+          <p class="eyebrow text-gold">Smart devices, sharp prices</p>
+          <h1 class="display-5 fw-bold mb-3">Electronics built for work, play, and everyday upgrades.</h1>
+          <p class="mb-4">Shop laptops, phones, audio, gaming gear, and accessories from trusted brands with a simple checkout flow.</p>
+          <a class="btn btn-teal me-2" href="products.html">Shop products</a>
+          <a class="btn btn-light" href="products.html">Browse catalog</a>
+        </div>
+        <div class="row g-3 hero-card-row pb-4">
+          <div class="col-sm-6 col-lg-3">
+            <a class="hero-card" href="products.html">
+              <span>Laptops</span>
+              <strong>Work-ready ultrabooks</strong>
+            </a>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <a class="hero-card" href="products.html">
+              <span>Phones</span>
+              <strong>Flagship mobile picks</strong>
+            </a>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <a class="hero-card" href="products.html">
+              <span>Audio</span>
+              <strong>Headphones and speakers</strong>
+            </a>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <a class="hero-card" href="products.html">
+              <span>Gaming</span>
+              <strong>Controllers and gear</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-soft py-5">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <div>
+            <p class="eyebrow">Best picks</p>
+            <h2 class="fw-bold mb-0">Popular electronics</h2>
+          </div>
+          <a class="link-teal fw-bold" href="products.html">View all</a>
+        </div>
+        <div class="row g-4">
+
+
+          {% for product in products %}
+          <div class="col-md-6 col-lg-3">
+            <div class="card product-card h-100">
+              <img src="{{ product.image }}" class="card-img-top product-image" alt="{{ product.title }}">
+              <div class="card-body">
+                <p class="product-meta">{{ product.category }}</p>
+                <h3 class="h5 product-name">{{ product.title }}</h3>
+                <p class="price">{{ product.price }}</p>
+                <a class="btn btn-teal w-100" href="{{ url_for('product', product_id=product.id) }}">View product</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {% include 'front/share/footer.html' %}
+
+</body>
+</html>

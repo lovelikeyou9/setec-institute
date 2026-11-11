@@ -1,0 +1,8 @@
+-- FullName: Chou Yamata(SV2.6)
+CREATE OR REPLACE VIEW VIEW_DEPT_LOCATE AS
+SELECT d.department_id, d.department_name, l.location_id, l.street_address, l.city, l.country_id FROM departments d JOIN locations l
+ON d.location_id = l.location_id
+WHERE d.location_id <> 1700
+ORDER BY department_id DESC;
+
+SELECT * FROM VIEW_DEPT_LOCATE;

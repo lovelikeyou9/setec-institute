@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Account{% endblock %}
+{% block content %}
+<h1 class="section-title mt-3">My Account</h1>
+<div class="row g-4">
+  <div class="col-md-6">
+    <div class="summary-card">
+      <h2 class="h5 fw-bold">Profile</h2>
+      <p class="mb-1"><strong>Name:</strong> {{ user.name }}</p>
+      <p class="mb-1"><strong>Email:</strong> {{ user.email }}</p>
+      <p class="mb-1"><strong>Role:</strong> {{ user.role }}</p>
+      <p class="mb-0"><strong>Joined:</strong> {{ user.created_at.strftime('%Y-%m-%d') if user.created_at else '-' }}</p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="summary-card">
+      <h2 class="h5 fw-bold">Quick Links</h2>
+      <a class="btn btn-outline-brand me-2 mb-2" href="{{ url_for('order.my_orders') }}">My Orders</a>
+      <a class="btn btn-outline-secondary me-2 mb-2" href="{{ url_for('cart.view_cart') }}">Cart</a>
+      <a class="btn btn-outline-danger mb-2" href="{{ url_for('auth.logout') }}">Logout</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

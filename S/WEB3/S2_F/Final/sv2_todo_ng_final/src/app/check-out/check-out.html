@@ -1,0 +1,130 @@
+<div class="checkout-wrapper">
+    <h2 class="mb-4">Checkout</h2>
+    <div class="row g-4">
+        <!-- Billing Details -->
+        <div class="col-lg-7">
+            <h4 class="mb-3">Billing Details</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Full Name *</label>
+                    <input type="text" class="form-control" id="fullname" placeholder="John Doe" required />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" class="form-control" id="email" placeholder="john@example.com" required />
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="+1 234 567 890" required />
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address *</label>
+                    <input type="text" class="form-control" id="address" placeholder="123 Main St" required />
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="city" class="form-label">City *</label>
+                        <input type="text" class="form-control" id="city" placeholder="City" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="postal" class="form-label">Postal Code *</label>
+                        <input type="text" class="form-control" id="postal" placeholder="12345" required />
+                    </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="country" class="form-label">Country *</label>
+                    <select class="form-select" id="country" required>
+                        <option value="">Choose...</option>
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>United Kingdom</option>
+                        <option>Australia</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <!-- Payment Method -->
+                <h4 class="mt-5 mb-3">Payment Method</h4>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard"
+                            value="creditCard" checked />
+                        <label class="form-check-label" for="creditCard">Credit Card</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal" />
+                        <label class="form-check-label" for="paypal">PayPal</label>
+                    </div>
+                </div>
+
+                <div id="creditCardFields">
+                    <div class="mb-3">
+                        <label for="cardNumber" class="form-label">Card Number *</label>
+                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456"
+                            required />
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="expiryDate" class="form-label">Expiry Date *</label>
+                            <input type="month" class="form-control" id="expiryDate" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cvv" class="form-label">CVV *</label>
+                            <input type="password" class="form-control" id="cvv" placeholder="123" maxlength="4"
+                                required />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-5">
+            <h4 class="mb-3">Order Summary</h4>
+            <div class="order-summary">
+
+                @for (item of cartService.getItem(); track item.id){
+                <div class="summary-item">
+                    <img class="mr-3 small-img" [src]="item.imageUrl"  [alt]="item.imageUrl" onerror="this.src='/image/No-Image-Placeholder.png';">
+                    
+                    <h5>{{ item.name.split(' ').slice(0,-2).join(' ') }}</h5>
+                    
+                </div>
+                <h6>Quantity: {{ item.qty | number }} </h6>
+                <h5>{{ (item.price * item.qty) | currency }}</h5>
+                }
+
+                
+                <div class="summary-item">
+                    <span>Shipping</span>
+                    <span>$5.00</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span>{{ cartService.getTotal() | currency }}</span>
+                </div>
+            </div>
+            <button class="btn btn-primary mt-4">Place Order</button>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Toggle credit card fields based on payment method
+    const creditCardRadio = document.getElementById('creditCard');
+    const paypalRadio = document.getElementById('paypal');
+    const creditCardFields = document.getElementById('creditCardFields');
+
+    function togglePaymentFields() {
+        creditCardFields.style.display = creditCardRadio.checked ? 'block' : 'none';
+    }
+
+    creditCardRadio.addEventListener('change', togglePaymentFields);
+    paypalRadio.addEventListener('change', togglePaymentFields);
+
+    // Initialize display
+    togglePaymentFields();
+</script>

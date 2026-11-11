@@ -1,0 +1,37 @@
+-- Calculator on Day ( + , - )
+-- 1. GET CURRENT DATE + 2 Day, CURRENT Date - 3 Days
+ SELECT SYSDATE, SYSDATE + 2 AS "+2 Days"
+       ,SYSDATE - 3 AS "-3 Days"
+FROM DUAL;
+
+-- 2. GET CURRENT DATE, CURRENT DATE + 3 Day - 2 Day
+-- CURRENT DATE + 2 Week, CURRENT DATE - 1 Week
+SELECT SYSDATE, SYSDATE + 3 - 2, SYSDATE + 2 * 7 AS "2 Week"
+      ,SYSDATE - 1 * 7 AS "-1 Week"
+FROM DUAL;
+
+-- 3. Display last_name, current date, hire_date
+-- from table employees
+SELECT LAST_NAME, SYSDATE, HIRE_DATE, SYSDATE - HIRE_DATE
+FROM EMPLOYEES;
+
+SELECT LAST_NAME, SYSDATE, HIRE_DATE, ROUND(SYSDATE - HIRE_DATE) AS "Day of Working"
+      ,ROUND((SYSDATE - HIRE_DATE)/7) AS "Week of Working"
+FROM EMPLOYEES;
+
+-- GET CURRENT DATE, GET CURRENT + 1 Hour
+SELECT SYSDATE, SYSDATE + 1 / 24 AS "1 HOUR", SYSDATE - 3 / 24
+FROM DUAL;
+-- 24h = 1 Day
+-- 1h  = X Day => X = 1/24
+
+-- 5. GET CURRENT DATE, GET CURRENT DATE + 5 Days + 2 Weeks - 3 Hours
+SELECT
+    SYSDATE,
+    ((SYSDATE + 5 * 2) - 3 / 24) AS "Result"
+FROM DUAL;
+
+SELECT
+    SYSDATE AS current_date,
+    SYSDATE + 5 + (2 * 7) - (3 / 24) AS calculated_date
+FROM DUAL;

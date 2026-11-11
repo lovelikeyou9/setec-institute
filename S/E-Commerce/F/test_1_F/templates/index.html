@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% from "_macros.html" import product_card with context %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero animate-rise">
+  <div class="hero-glow"></div>
+  <div class="position-relative" style="z-index:1">
+    <p class="text-uppercase small mb-2" style="letter-spacing:.12em;opacity:.8">TechStore Computer Store</p>
+    <h1>Build Your Perfect PC</h1>
+    <p>Premium Computer Hardware & Accessories — from gaming GPUs to pro laptops, ready for checkout.</p>
+    <div class="d-flex flex-wrap gap-2 mt-4">
+      <a href="{{ url_for('product.product_list') }}" class="btn btn-light btn-lg rounded-pill px-4">Shop Now</a>
+      <a href="{{ url_for('product.product_list', sort='newest') }}" class="btn btn-outline-light btn-lg rounded-pill px-4">View Products</a>
+    </div>
+  </div>
+</section>
+
+<section class="mt-5 animate-rise delay-1">
+  <h2 class="section-title">Shop by Category</h2>
+  <p class="section-sub">Find the parts and gear you need.</p>
+  <div class="row g-3">
+    {% for c in categories %}
+    <div class="col-6 col-md-3">
+      <a class="category-card" href="{{ url_for('product.product_list', category=c.id) }}">
+        <i class="bi {{ c.icon or 'bi-cpu' }}"></i>
+        <div class="fw-semibold">{{ c.name }}</div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="mt-5 animate-rise delay-2">
+  <div class="d-flex justify-content-between align-items-end mb-2">
+    <div>
+      <h2 class="section-title">Featured Products</h2>
+      <p class="section-sub mb-0">Hand-picked hardware for builders and gamers.</p>
+    </div>
+    <a href="{{ url_for('product.product_list') }}" class="btn btn-outline-brand btn-sm">See all</a>
+  </div>
+  <div class="row g-3">
+    {% for p in featured %}
+    <div class="col-6 col-lg-3">{{ product_card(p) }}</div>
+    {% else %}
+    <p class="text-muted">No products yet. Run the app once to seed sample data.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="mt-5">
+  <h2 class="section-title">Best Sellers</h2>
+  <p class="section-sub">Popular picks customers love.</p>
+  <div class="row g-3">
+    {% for p in best_sellers %}
+    <div class="col-6 col-lg-3">{{ product_card(p) }}</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="mt-5">
+  <h2 class="section-title">New Products</h2>
+  <p class="section-sub">Fresh arrivals in stock now.</p>
+  <div class="row g-3">
+    {% for p in new_products %}
+    <div class="col-6 col-lg-3">{{ product_card(p) }}</div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

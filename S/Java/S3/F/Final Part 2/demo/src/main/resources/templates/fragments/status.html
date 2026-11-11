@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- Usage: <span th:replace="~{fragments/status :: orderPill(${o.status})}"></span> -->
+<span th:fragment="orderPill(status)"
+      class="status-pill"
+      th:classappend="${T(com.example.demo.util.StatusLabels).orderTone(status)}"
+      th:text="${T(com.example.demo.util.StatusLabels).order(status)}">Status</span>
+
+<span th:fragment="payoutPill(status)"
+      class="status-pill"
+      th:classappend="${T(com.example.demo.util.StatusLabels).payoutTone(status)}"
+      th:text="${T(com.example.demo.util.StatusLabels).payout(status)}">Payout</span>
+</body>
+</html>

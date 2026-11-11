@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="dash-body">
+<div class="dash-shell">
+    <div th:replace="~{fragments/dash :: sidebar('products', ${staff})}"></div>
+    <div class="dash-main">
+        <div th:replace="~{fragments/dash :: top(${staff}, 'View / Search Products')}"></div>
+        <div class="dash-content">
+            <div class="alert alert-error" th:if="${error}" th:text="${error}"></div>
+            <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+
+            <div class="dash-panel">
+                <div class="dash-panel-pad">
+                    <form th:action="@{/products}" method="get" class="dash-search-row">
+                        <input type="text" name="q" th:value="${q}" placeholder="Search product name...">
+                        <button class="btn-buy" type="submit">Search</button>
+                        <a class="btn-edit" th:href="@{/products}">Clear</a>
+                        <a th:if="${staff.role == 'User'}" class="btn-buy" th:href="@{/cart}">Cart (<span th:text="${cartCount}">0</span>)</a>
+                    </form>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>PID</th><th>Name</th><th>Category</th><th>Price</th>
+                                <th>Stock</th><th>Expire</th><th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p : ${products}">
+                                <td th:text="${p.PId}"></td>
+                                <td th:text="${p.PName}"></td>
+                                <td th:text="${catNames[p.catID]}"></td>
+                                <td th:text="'$' + ${#numbers.formatDecimal(p.price, 1, 2)}"></td>
+                                <td th:text="${p.SQty}"></td>
+                                <td th:text="${p.expiredDate}"></td>
+                                <td class="actions" th:if="${staff.role == 'Admin' or staff.role == 'Stock'}">
+                                    <a class="btn-edit" th:href="@{/stock/products/edit/{id}(id=${p.PId})}">Edit</a>
+                                    <a class="btn-del" th:href="@{/stock/products/delete/{id}(id=${p.PId})}"
+                                       onclick="return confirm('Delete this product?')">Delete</a>
+                                </td>
+                                <td th:if="${staff.role == 'User'}">
+                                    <form th:action="@{/cart/add/{id}(id=${p.PId})}" method="post"
+                                          style="display:flex;gap:8px;align-items:center"
+                                          th:if="${p.SQty > 0}">
+                                        <input class="qty-input" type="number" name="qty" value="1" min="1" th:max="${p.SQty}">
+                                        <button class="btn-buy" type="submit">Add to Cart</button>
+                                    </form>
+                                    <span th:if="${p.SQty <= 0}" style="color:#b42318;font-weight:700">Out of stock</span>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(products)}">
+                                <td colspan="7">No products found.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

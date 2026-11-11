@@ -1,0 +1,56 @@
+-- 1
+SELECT last_name,
+       hire_date,
+       hire_date + 14 + 5 AS new_date
+FROM employees;
+
+-- 2
+SELECT sysdate,
+       sysdate + 2
+              + (3/24)
+              + (10/1440) AS new_datetime
+FROM dual;
+
+-- 3
+SELECT last_name,
+       hire_date,
+       hire_date + (10/24) AS hire_plus_10_hours
+FROM employees;
+
+-- 4
+SELECT last_name,
+       hire_date,
+       hire_date + (20/1440) AS hire_plus_20_minutes
+FROM employees;
+
+-- 5
+SELECT last_name,
+       hire_date,
+       hire_date + (30/86400) AS hire_plus_30_seconds
+FROM employees;
+
+-- 6
+SELECT last_name,
+       hire_date,
+       (sysdate - hire_date) AS days_worked,
+       (sysdate - hire_date)/7 AS weeks_worked
+FROM employees;
+
+-- 7
+SELECT last_name,
+       hire_date,
+       FLOOR((sysdate - hire_date)/7) AS weeks,
+       MOD((sysdate - hire_date), 7) AS remaining_days
+FROM employees;
+
+-- 8
+SELECT last_name,
+       hire_date,
+       TO_CHAR(
+         hire_date + 14
+                   + 2
+                   + (2/24)
+                   + (2/1440),
+         'dd-mm-yyyy hh24:mi:ss AM'
+       ) AS formatted_date
+FROM employees;

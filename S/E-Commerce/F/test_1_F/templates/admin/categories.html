@@ -1,0 +1,50 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Categories{% endblock %}
+{% block admin_content %}
+<h1 class="section-title">Categories</h1>
+<div class="row g-4">
+  <div class="col-md-5">
+    <div class="summary-card">
+      <h2 class="h6 fw-bold">Add Category</h2>
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          {{ form.name(class="form-control") }}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          {{ form.description(class="form-control", rows=2) }}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Icon class</label>
+          {{ form.icon(class="form-control", placeholder="bi-cpu") }}
+        </div>
+        {{ form.submit(class="btn btn-brand") }}
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="summary-card">
+      <table class="table">
+        <thead><tr><th>Name</th><th>Icon</th><th></th></tr></thead>
+        <tbody>
+          {% for c in categories %}
+          <tr>
+            <td>{{ c.name }}</td>
+            <td><i class="bi {{ c.icon }}"></i> {{ c.icon }}</td>
+            <td class="text-nowrap">
+              <a class="btn btn-sm btn-outline-brand" href="{{ url_for('admin.category_update', category_id=c.id) }}">Edit</a>
+              <form class="d-inline" method="post" action="{{ url_for('admin.category_delete', category_id=c.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

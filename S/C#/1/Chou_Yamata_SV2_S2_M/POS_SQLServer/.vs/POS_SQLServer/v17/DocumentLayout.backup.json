@@ -1,0 +1,483 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formimagepreview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formimagepreview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formimagepreview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formimagepreview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formeditproduct.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formeditproduct.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\showorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\showorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\productcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\productcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\mydata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|..\\..\\2_F\\POS_System_Product\\POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2_f\\pos_system_product\\pos_system_product\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formviewproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formviewproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formviewproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formviewproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formeditproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formeditproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formeditproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formeditproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formaddproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formaddproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\formaddproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\formaddproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\pos_sqlserver\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E29109-BE00-420A-8C9A-5134DD3A4C05}|POS_SQLServer\\POS_SQLServer.csproj|solutionrelative:pos_sqlserver\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\DBConnection1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Product1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Program.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-03T08:17:53.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Form2.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Form2.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Form2.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Form2.cs [Design]",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Form2.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-03T08:16:57.906Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ShowOrderDetail.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwA4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T15:04:06.984Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PaymentForm.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T15:03:40.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form2.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Form2.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Form2.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Form2.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Form2.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T15:03:27.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FormEditProduct.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormEditProduct.Designer.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormEditProduct.Designer.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormEditProduct.Designer.cs",
+              "RelativeToolTip": "POS_SQLServer\\FormEditProduct.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T13:11:02.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\Program.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\Program.cs",
+              "RelativeToolTip": "POS_SQLServer\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T09:07:33.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FormImagePreview.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormImagePreview.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormImagePreview.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormImagePreview.cs",
+              "RelativeToolTip": "POS_SQLServer\\FormImagePreview.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T08:33:13.59Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FormImagePreview.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormImagePreview.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormImagePreview.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormImagePreview.cs [Design]",
+              "RelativeToolTip": "POS_SQLServer\\FormImagePreview.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T08:31:47.598Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PaymentForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\PaymentForm.cs [Design]",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\PaymentForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T08:27:07.379Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "FormViewProduct.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormViewProduct.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormViewProduct.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormViewProduct.cs",
+              "RelativeToolTip": "POS_SQLServer\\FormViewProduct.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAkwB0AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T06:24:41.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "FormViewProduct.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormViewProduct.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormViewProduct.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormViewProduct.cs [Design]",
+              "RelativeToolTip": "POS_SQLServer\\FormViewProduct.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T05:31:20.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "FormAddProduct.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormAddProduct.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormAddProduct.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormAddProduct.cs",
+              "RelativeToolTip": "POS_SQLServer\\FormAddProduct.cs",
+              "ViewState": "AgIAAAwBAAAAAAAAAAAqwK4AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:55:24.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FormEditProduct.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormEditProduct.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormEditProduct.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormEditProduct.cs",
+              "RelativeToolTip": "POS_SQLServer\\FormEditProduct.cs",
+              "ViewState": "AgIAAJYBAAAAAAAAAAAQwFcBAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:58:13.064Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "FormEditProduct.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormEditProduct.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormEditProduct.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormEditProduct.cs [Design]",
+              "RelativeToolTip": "POS_SQLServer\\FormEditProduct.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:52:36.324Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "FormAddProduct.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormAddProduct.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\FormAddProduct.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\FormAddProduct.cs [Design]",
+              "RelativeToolTip": "POS_SQLServer\\FormAddProduct.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:47:02.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "LogInForm.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\LogInForm.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\LogInForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\LogInForm.cs",
+              "RelativeToolTip": "POS_SQLServer\\LogInForm.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAqwCoAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:38:13.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "LogInForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\LogInForm.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\LogInForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\LogInForm.cs [Design]",
+              "RelativeToolTip": "POS_SQLServer\\LogInForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:38:11.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DBConnection.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\DBConnection.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\DBConnection.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\DBConnection.cs",
+              "RelativeToolTip": "POS_SQLServer\\DBConnection.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAkwAUAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:05:41.771Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "DBConnection1.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\DBConnection1.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\DBConnection1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\DBConnection1.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\DBConnection1.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T16:41:34.543Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProductControl.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwDkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-06T13:54:54.141Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\Form1.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\Form1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\Form1.cs",
+              "RelativeToolTip": "POS_SQLServer\\Form1.cs",
+              "ViewState": "AgIAAEsBAAAAAAAAAAAewMMAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T07:43:58.817Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Product1.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Product1.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Product1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Product1.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Product1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T07:42:00.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ShowOrderDetail.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs [Design]",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T07:21:38.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProductControl.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\ProductControl.cs [Design]",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\ProductControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T07:21:35.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Product.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Product.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Product.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T07:21:22.568Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\Form1.cs",
+              "RelativeDocumentMoniker": "POS_SQLServer\\Form1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\Chou_Yamata_SV2_S2_M\\POS_SQLServer\\POS_SQLServer\\Form1.cs [Design]",
+              "RelativeToolTip": "POS_SQLServer\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T08:49:19.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MyData.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\MyData.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\MyData.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\MyData.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\MyData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T07:42:25.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAcwAIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T07:36:43.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "RelativeDocumentMoniker": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\POS_System_Product\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\..\\2_F\\POS_System_Product\\POS_System_Product\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T07:34:14.171Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

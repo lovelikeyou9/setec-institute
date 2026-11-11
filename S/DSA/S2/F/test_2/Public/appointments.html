@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hospital Appointments</title>
+    <style>
+        /* Reset-ish */
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            color: #1b2230;
+            background: #f5f7fb;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .page-header h1 {
+            margin: 0 0 6px 0;
+            font-size: 1.6rem;
+            letter-spacing: -0.2px;
+        }
+
+        .lead {
+            margin: 0;
+            color: #5b6878;
+            font-size: 0.95rem;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin: 18px 0 20px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .control-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 160px;
+        }
+
+        .control-item label {
+            font-size: 0.85rem;
+            color: #334155;
+        }
+
+        .control-item select,
+        .control-item input[type="text"] {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            font-size: 0.95rem;
+        }
+
+        /* Search Button */
+        #search-btn {
+            padding: 8px 16px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            user-select: none;
+            margin-top: 22px;
+            height: 38px;
+        }
+
+        #search-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Add Appointment Link styled as button */
+        .btn-add {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            user-select: none;
+            margin-bottom: 20px;
+        }
+
+        .btn-add:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Appointments grid */
+        .appointments {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: 1fr;
+        }
+
+        /* Card */
+        .appt-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+            border: 1px solid #e6eef6;
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+        }
+
+        /* Left/main */
+        .appt-main {
+            flex: 0 0 220px;
+            min-width: 160px;
+        }
+
+        .appt-id {
+            margin: 0 0 6px 0;
+            font-size: 1.05rem;
+            color: #0f1724;
+        }
+
+        .meta {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 8px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #0f1724;
+            background: #eef2ff;
+            border: 1px solid rgba(12, 74, 110, 0.06);
+        }
+
+        .badge.status.completed {
+            background: #ecfdf5;
+            border-color: rgba(8, 145, 105, 0.12);
+        }
+
+        .badge.status.scheduled {
+            background: #fff7ed;
+            border-color: rgba(245, 158, 11, 0.12);
+        }
+
+        .badge.dept {
+            background: #eef2ff;
+        }
+
+        /* Right / info */
+        .appt-info {
+            flex: 1;
+            position: relative;
+        }
+
+        .row {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        dl {
+            margin: 0;
+            min-width: 120px;
+        }
+
+        dt {
+            font-size: 0.78rem;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+
+        dd {
+            margin: 0;
+            font-weight: 600;
+            color: #0f1724;
+        }
+
+        /* Notes */
+        .notes dt {
+            font-weight: 700;
+        }
+
+        .notes dd {
+            font-weight: 400;
+            color: #334155;
+            margin-top: 6px;
+        }
+
+        /* Footer */
+        .card-footer {
+            margin-top: 12px;
+            color: #64748b;
+            font-size: 0.86rem;
+        }
+
+        /* Buttons inside appointment card */
+        .btn-edit,
+        .btn-delete {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+            user-select: none;
+            display: inline-block;
+            margin-top: 12px;
+            margin-right: 10px;
+        }
+
+        .btn-edit {
+            background-color: #10b981;
+            /* green */
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: #059669;
+        }
+
+        .btn-delete {
+            background-color: #ef4444;
+            /* red */
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Page footer */
+        .page-footer {
+            margin-top: 22px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width:820px) {
+            .appt-card {
+                flex-direction: column;
+            }
+
+            .appt-main {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .appt-info {
+                width: 100%;
+            }
+
+            .row {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1>Appointments</h1>
+            <p class="lead">List of scheduled appointments — paste your JSON and render with your JavaScript.</p>
+        </header>
+
+
+
+        <!-- Search / filters area -->
+        <section class="controls">
+            <div class="control-item">
+                <label for="search-input">Search</label>
+                <input type="text" id="search-input" placeholder="Search appointments" />
+                <button id="search-btn" class="btn">Search</button>
+            </div>
+
+            <div class="control-item">
+                <label for="filter-status">Status</label>
+                <select id="filter-status" disabled>
+                    <option>All</option>
+                    <option>Scheduled</option>
+                    <option>Completed</option>
+                    <option>Cancelled</option>
+                </select>
+            </div>
+            <div class="control-item">
+                <label for="filter-dept">Department</label>
+                <select id="filter-dept" disabled>
+                    <option>All</option>
+                </select>
+            </div>
+
+            <!-- Add Appointment Link -->
+            <a href="#" style="float: right; background-color: #2563eb; color: white; padding: 8px; border-radius: 6px; text-decoration: none; font-weight: 800;">Add Appointment</a>
+
+        </section>
+
+        <!-- Appointments list -->
+        <section class="appointments" aria-live="polite" action="/submit" method="POST">
+            <!-- Example card — replace/populate with JS from JSON -->
+            <article class="appt-card" data-appointment-id="APT1001">
+                <div class="appt-main">
+                    <h2 class="appt-id" name="cat">Appointment ID: APT1001</h2>
+                    <div class="meta">
+                        <span class="badge dept">Cardiology</span>
+                        <span class="badge status completed">Completed</span>
+                    </div>
+                    <p class="reason">Chest pain evaluation</p>
+                </div>
+
+                <div class="appt-info">
+                    <div class="row">
+                        <dl>
+                            <dt>Patient</dt>
+                            <dd>P1001</dd>
+                        </dl>
+                        <dl>
+                            <dt>Doctor</dt>
+                            <dd>D2001</dd>
+                        </dl>
+                    </div>
+
+                    <div class="row">
+                        <dl>
+                            <dt>Appointment Date</dt>
+                            <dd><!-- JS: formatted date/time --></dd>
+                        </dl>
+                        <dl>
+                            <dt>Duration</dt>
+                            <dd>30 min</dd>
+                        </dl>
+                    </div>
+
+                    <div class="row notes">
+                        <dt>Notes</dt>
+                        <dd>Patient reported intermittent chest discomfort</dd>
+                    </div>
+
+                    <footer class="card-footer">
+                        <small>Created at: <!-- JS: created_at --></small>
+                    </footer>
+
+                    <!-- Buttons visible -->
+                    <button class="btn-edit" type="button">Edit</button>
+                    <button class="btn-delete" type="button">Delete</button>
+                </div>
+            </article>
+            <!-- End example card -->
+        </section>
+
+        <footer class="page-footer">
+            <small>Tip: use your script to loop the JSON and clone .appt-card or render templates into
+                .appointments.</small>
+        </footer>
+    </main>
+</body>
+
+</html>

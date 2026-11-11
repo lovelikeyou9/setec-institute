@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Order #{{ order.id }}{% endblock %}
+{% block content %}
+<h1 class="section-title mt-3">Order #{{ order.id }}</h1>
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="summary-card">
+      <h2 class="h5 fw-bold">Items</h2>
+      <table class="table mt-3">
+        <thead>
+          <tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          {% for item in order.items %}
+          <tr>
+            <td>{{ item.product_name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ '%.2f'|format(item.price) }}</td>
+            <td>${{ '%.2f'|format(item.line_total) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="summary-card">
+      <p><strong>Status:</strong> {{ order.status }}</p>
+      <p><strong>Payment:</strong> {{ order.payment_status }}</p>
+      <p><strong>Method:</strong> {{ order.payment_method or 'stripe' }}</p>
+      <p><strong>Shipping:</strong> {{ order.shipping_address }}</p>
+      <p><strong>Customer:</strong> {{ order.customer_name }}<br>{{ order.customer_email }}<br>{{ order.customer_phone }}</p>
+      <p><strong>Shipping cost:</strong> ${{ '%.2f'|format(order.shipping_cost or 0) }}</p>
+      <p class="mb-0"><strong>Total:</strong> ${{ '%.2f'|format(order.total_amount) }}</p>
+      {% if order.visa_transaction_id %}
+      <p class="small text-muted mt-2 mb-0">Visa TX: {{ order.visa_transaction_id }}</p>
+      {% endif %}
+      {% if order.payment_status != 'Paid' and (order.payment_method or 'stripe') == 'stripe' %}
+      <p class="small text-muted mt-3 mb-0">Stripe payments are confirmed only after the webhook marks the order as Paid.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

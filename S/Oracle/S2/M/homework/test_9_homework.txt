@@ -1,0 +1,130 @@
+
+
+-- test_8_homework
+-- on sys@localhost:orcl
+-- 1
+DROP USER Nita;
+
+-- 2
+CREATE USER Nita IDENTIFIED BY "123"
+DEFAULT TABLESPACE USERS
+QUOTA 5M ON USERS;
+
+SELECT * FROM DBA_USERS
+WHERE UPPER(USERNAME)=UPPER('Nita');
+
+-- 3
+GRANT CREATE SESSION TO "Nita";
+
+GRANT CONNECT TO SV26;
+
+-- 4
+-- New Connection
+click New Connection at left button box
+
+General
+Connection Type > choose TNS
+User: "Nita"
+Password: 123
+
+click Test Connection
+
+right 
+
+-- 5
+GRANT DBA TO Nita;
+GRANT CREATE TABLE TO Nita;
+GRANT CREATE VIEW TO Nita;
+GRANT CREATE PROCEDURE TO Nita;
+-- or
+GRANT DBA TO "Nita";
+GRANT RESOURCE TO SV26;
+GRANT CONNECT TO SV26;
+
+-- 6
+SELECT * FROM DBA_ROLE_PRIVS
+WHERE UPPER(GRANTEE)=UPPER('Nita');
+-- or
+SELECT * FROM DBA_ROLE_PRIVS
+WHERE GRANTEE = 'NITA';
+
+SELECT * FROM DBA_ROLES
+WHERE ROLE IN ('CONNECT','DBA','RESOURCE');
+
+
+-- on Nita@localhost:orcl
+-- 1
+CREATE TABLE categories(
+  categoryid NUMBER(7) PRIMARY KEY,
+  categoryname VARCHAR2(20) UNIQUE,
+  description VARCHAR2(25),
+  created_date DATE NOT NULL
+);
+
+-- 2
+INSERT INTO categories
+VALUES ( 1, 'Coca', 'All food items', SYSDATE);
+
+COMMIT;
+
+SELECT * FROM categories;
+
+-- 3
+CREATE USER "Abel" IDENTIFIED BY 123
+DEFAULT TABLESPACE USERS
+QUOTA 5M ON USERS;
+
+-- 4
+CREATE ROLE ROLE_SUPER;
+
+SELECT * FROM DBA_ROLES 
+WHERE UPPER(ROLE) = UPPER('ROLE_SUPER');
+-- or
+SELECT * FROM DBA_SYS_PRIVS 
+WHERE UPPER(GRANTEE) = UPPER('ROLE_SUPER');
+
+-- 5
+-- or
+GRANT CREATE SESSION TO "ROLE_SUPER";
+GRANT CREATE TABLE TO "ROLE_SUPER";
+-- or
+GRANT CREATE SESSION, CREATE TABLE TO "ROLE_SUPER";
+
+-- 6
+GRANT ROLE_SUPER TO "Abel";
+
+SELECT * FROM DBA_ROLE_PRIVS
+WHERE UPPER(GRANTEE) = UPPER('Abel');
+
+-- 7
+-- New Connection
+click New Connection at left button box
+
+General
+Connection Type > choose TNS
+User: "Abel"
+Password: 123
+
+click Test Connection
+
+right ON 
+
+-- 8
+-- on Abel@localhost:orcl
+CREATE TABLE products (
+    productid NUMBER(7) PRIMARY KEY,
+    productname VARCHAR2(20) UNIQUE,
+    qty NUMBER(10) NOT NULL,
+    price NUMBER(10,2) NOT NULL,
+    description VARCHAR2(25),
+    created_date DATE NOT NULL
+);
+
+-- 9
+INSERT INTO products
+VALUES (1, 'Coke', 10, 1.50, 'Soft drink', SYSDATE);
+
+COMMIT;
+
+SELECT * FROM products;
+

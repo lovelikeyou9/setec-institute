@@ -1,0 +1,45 @@
+
+-- test_10_homework
+-- 1. Create table
+CREATE TABLE product (
+    product_id NUMBER PRIMARY KEY,
+    product_name VARCHAR2(100),
+    qty NUMBER,
+    price NUMBER(10,2),
+    amount NUMBER GENERATED ALWAYS AS (qty * price) VIRTUAL
+);
+
+-- 2. Create sequence
+CREATE SEQUENCE prod_seq
+START WITH 1
+INCREMENT BY 1;
+
+-- 3. Create index
+CREATE INDEX idx_pro_name
+ON product(product_name);
+
+-- 4. Create synonyms
+CREATE SYNONYM prod FOR product;
+CREATE SYNONYM prod_id_seq FOR prod_seq;
+
+-- A. Coca
+INSERT INTO prod
+(product_id, product_name, qty, price)
+VALUES
+(prod_id_seq.NEXTVAL, 'Coca', 100, 1.25);
+
+-- B. Fanta
+INSERT INTO prod
+(product_id, product_name, qty, price)
+VALUES
+(prod_id_seq.NEXTVAL, 'Fanta', 240, 0.70);
+
+-- C. Idol
+INSERT INTO prod
+(product_id, product_name, qty, price)
+VALUES
+(prod_id_seq.NEXTVAL, 'Idol', 755, 0.88);
+
+COMMIT;
+
+SELECT * FROM product;

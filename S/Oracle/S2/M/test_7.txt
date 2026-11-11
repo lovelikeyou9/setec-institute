@@ -1,0 +1,41 @@
+-- Test_7
+-- on MengLy@localhost:orcl
+SELECT * FROM PRODUCTS;
+
+-- Drop table PRODUCTS     // delete anything
+DROP TABLE PRODUCTS;
+
+SELECT * FROM PRODUCTS;   -- did not see because it already deleted
+
+-- Find table PRODUCTS in receyclebin
+SELECT * FROM RECYCLEBIN;
+
+SELECT * FROM RECYCLEBIN
+WHERE UPPER(ORIGINAL_NAME)=UPPER('PRODUCTS');  -- check information/data under DROPTIME column
+                                               -- copy OBJECT_NAME: BIN$P4AraJ9GSgmyVzqtRnqcAw==$0
+
+-- Verify Data on recyclebin
+SELECT * FROM "BIN$P4AraJ9GSgmyVzqtRnqcAw==$0";
+
+-- Method 1. Recovery Table PRODUCTS from RECYCLEBIN
+FLASHBACK TABLE "BIN$P4AraJ9GSgmyVzqtRnqcAw==$0" TO BEFORE DROP;       -- use for data we delete long time ago
+-- it works we have to high-light all code > right click Execute > right click on left-side box Database Explorer - MengLy@....
+
+SELECT * FROM RECYCLEBIN
+WHERE UPPER(ORIGINAL_NAME)=UPPER('PRODUCTS');
+
+SELECT * FROM PRODUCTS;
+
+DROP TABLE PRODUCTS;
+
+SELECT * FROM PRODUCTS;
+
+SELECT * FROM RECYCLEBIN
+WHERE UPPER(ORIGINAL_NAME)=UPPER('PRODUCTS');      -- copy OBJECT_NAME: BIN$7Lmtr46DQhiJAVEPTj3pgg==$0
+
+-- Method 2. Recovery Table PRODUCTS from RECYCLEBIN -> ORIGINAL_NAME
+SELECT * FROM "BIN$q0ITvs/CTxqe2yGrEZ0pGQ==$0";
+
+FLASHBACK TABLE PRODUCTS TO BEFORE DROP;      -- it works only if it just delete
+
+SELECT * FROM PRODUCTS;

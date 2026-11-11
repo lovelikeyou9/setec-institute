@@ -1,0 +1,100 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\3\\customize textbox\\customize textbox\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|solutionrelative:customize textbox\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\customize textbox\\numberbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|solutionrelative:customize textbox\\numberbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\customize textbox\\floatingbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|solutionrelative:customize textbox\\floatingbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\customize textbox\\letterbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|solutionrelative:customize textbox\\letterbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\customize textbox\\stringbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23A82E78-C1A8-49D9-8C98-9202AA94E192}|Customize TextBox\\Customize TextBox.csproj|solutionrelative:customize textbox\\stringbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StringBox.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\StringBox.cs",
+              "RelativeDocumentMoniker": "Customize TextBox\\StringBox.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\StringBox.cs",
+              "RelativeToolTip": "Customize TextBox\\StringBox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T12:25:23.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LetterBox.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\LetterBox.cs",
+              "RelativeDocumentMoniker": "Customize TextBox\\LetterBox.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\LetterBox.cs",
+              "RelativeToolTip": "Customize TextBox\\LetterBox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T11:49:40.785Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FloatingBox.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\FloatingBox.cs",
+              "RelativeDocumentMoniker": "Customize TextBox\\FloatingBox.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\FloatingBox.cs",
+              "RelativeToolTip": "Customize TextBox\\FloatingBox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T11:30:06.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NumberBox.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\NumberBox.cs",
+              "RelativeDocumentMoniker": "Customize TextBox\\NumberBox.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\NumberBox.cs",
+              "RelativeToolTip": "Customize TextBox\\NumberBox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T11:04:19.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\Form1.cs",
+              "RelativeDocumentMoniker": "Customize TextBox\\Form1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\3\\Customize TextBox\\Customize TextBox\\Form1.cs [Design]",
+              "RelativeToolTip": "Customize TextBox\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T11:01:15.588Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

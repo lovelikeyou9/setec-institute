@@ -1,0 +1,63 @@
+
+
+-- Fullname: Chou Yamata(SV2.6)
+-- test_10_F
+-- Create index, sequence, synonym in Oracle
+-- 1. Create table EMP_SV26
+DROP TABLE EMP_SV26;
+
+SELECT * FROM EMP_SV26;
+
+CREATE TABLE EMP_SV26(
+  EMP_ID NUMBER(10) PRIMARY KEY,
+  EMP_NAME VARCHAR2(50) NOT NULL,
+  SALARY NUMBER(20, 2) NOT NULL,
+  EMAIL VARCHAR2(30)
+);
+
+SELECT * FROM EMP_SV26;
+
+-- 2. Create index named idx_emp_name on EMP_SV26
+CREATE INDEX idx_emp_name ON EMP_SV26( EMP_NAME );
+
+SELECT * FROM USER_INDEXES WHERE INDEX_NAME LIKE '%IDX%';
+
+-- if we want to delete Index
+-- DROP INDEX IDX_EMP_NAME;
+
+-- 3. Create index named idx_emp_name_salary on Multiple columns
+CREATE INDEX idx_emp_name_salary ON EMP_SV26( EMP_NAME, SALARY );
+
+SELECT * FROM USER_INDEXES WHERE INDEX_NAME LIKE '%IDX%';
+
+-- 4. Create squence named SEQ_EMP generate AutoNumber
+CREATE SEQUENCE SEQ_EMP
+  START WITH 1
+  INCREMENT BY 1
+  MAXVALUE 9999;
+
+SELECT * FROM USER_SEQUENCES WHERE SEQUENCE_NAME LIKE '%SEQ%';
+
+SELECT * FROM USER_SEQUENCES WHERE SEQUENCE_NAME LIKE 'SEQ%';
+
+-- 5. Add record into table EMP_SV26
+INSERT INTO EMP_SV26
+  VALUES(SEQ_EMP.NEXTVAL, 'Chou Yamata', 950, 'lovelikeyou9@gmail.com');
+
+SELECT * FROM EMP_SV26;
+
+-- 6. Check current using sequence SEQ_EMP
+SELECT * FROM DUAL;
+
+SELECT SEQ_EMP.CURRVAL FROM DUAL;
+
+-- 7. Create synonym named SYN_EMPLOYEES
+CREATE SYNONYM SYN_EMPLOYEES FOR EMP_SV26;
+
+SELECT * FROM SYN_EMPLOYEES;
+
+SELECT * FROM USER_SYNONYMS WHERE SYNONYM_NAME LIKE 'SYN%';
+
+SELECT * FROM USER_SYNONYMS;
+
+-- DROP SYNONYM SYN_EMPLOYEES;

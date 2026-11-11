@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #f0fdf4;
+            color: #14532d;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #14532d;
+            color: #ecfdf5;
+        }
+        header a {
+            color: #14532d;
+            background: #86efac;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 0.5rem 0.9rem;
+            font-weight: 600;
+        }
+        main { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
+        .card {
+            background: #fff;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        h1 { margin-top: 0; }
+    </style>
+</head>
+<body>
+<header>
+    <strong>User Dashboard</strong>
+    <a th:href="@{/logout}">Logout</a>
+</header>
+<main>
+    <div class="card">
+        <h1>Welcome</h1>
+        <p>Logged in as: <strong th:text="${username}">user</strong></p>
+        <p>Role: <span th:text="${authorities}">ROLE_USER</span></p>
+        <p>This is the user dashboard page.</p>
+    </div>
+</main>
+</body>
+</html>

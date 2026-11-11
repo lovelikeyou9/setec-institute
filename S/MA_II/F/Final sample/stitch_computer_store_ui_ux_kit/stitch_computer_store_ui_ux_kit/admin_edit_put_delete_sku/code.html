@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="admin_nav" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#ffffff;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary-fixed-dim": "#aac7ff", "on-primary-fixed-variant": "#00458e", "on-error": "#ffffff", "surface-container": "#eceef0", "tertiary-fixed-dim": "#bec6e0", "on-error-container": "#93000a", "primary-fixed": "#d7e3ff", "on-tertiary-fixed": "#131b2e", "tertiary": "#485066", "on-surface-variant": "#414753", "surface": "#ffffff", "secondary-fixed": "#b6ebff", "surface-tint": "#005cba", "secondary-fixed-dim": "#47d6ff", "on-tertiary": "#ffffff", "surface-container-low": "#f2f4f6", "tertiary-fixed": "#dae2fd", "surface-dim": "#d8dadc", "on-primary-fixed": "#001b3e", "on-secondary-container": "#00566a", "secondary-container": "#00d2ff", "on-tertiary-container": "#e2e8ff", "surface-container-highest": "#e0e3e5", "surface-bright": "#ffffff", "error": "#ba1a1a", "on-secondary": "#ffffff", "secondary": "#00677f", "surface-container-lowest": "#ffffff", "on-surface": "#191c1e", "inverse-surface": "#2d3133", "on-secondary-fixed-variant": "#004e60", "on-tertiary-fixed-variant": "#3f465c", "tertiary-container": "#60687f", "on-primary-container": "#dfe8ff", "on-secondary-fixed": "#001f28", "surface-container-high": "#e6e8ea", "background": "#ffffff", "inverse-on-surface": "#eff1f3", "outline": "#727784", "primary": "#004e9f", "primary-container": "#0066cc", "inverse-primary": "#aac7ff", "on-background": "#191c1e", "error-container": "#ffdad6", "surface-variant": "#e0e3e5", "outline-variant": "#c1c6d5", "on-primary": "#ffffff" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "gutter": "1.5rem", "gutter-mobile": "1rem", "space-xl": "2.5rem", "margin": "2rem", "space-lg": "1.5rem", "space-md": "1rem", "space-xs": "0.25rem", "margin-mobile": "1rem", "space-sm": "0.5rem" }, fontFamily: { "body-md": ["Geist"], "body-sm": ["Geist"], "spec-data": ["JetBrains Mono"], "spec-metric": ["JetBrains Mono"], "display": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "body-lg": ["Geist"], "headline-sm": ["Space Grotesk"], "display-mobile": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "label-caps": ["JetBrains Mono"] }, fontSize: { "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "spec-data": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "spec-metric": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "600" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5 px-2 py-1 bg-surface-container-high rounded"><span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span><span class="font-label-caps text-[10px] text-on-surface font-bold tracking-wider uppercase">NEXUS ADMIN</span></div><div class="hidden sm:flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container text-tertiary font-spec-data text-[10px]"><span class="material-symbols-outlined text-[12px] text-primary">dns</span><span>LIVE</span></div></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1 px-2 py-1 bg-surface-container rounded font-spec-data text-[11px] text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span>DB 4ms</span></div><button aria-label="System Alerts" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-error transition-colors relative"><span class="material-symbols-outlined text-[22px]">notification_important</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Sub-header / Back Bar -->
+<div class="px-gutter-mobile py-space-sm bg-surface-container-lowest flex items-center justify-between sticky top-16 z-30 shadow-sm">
+<a class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors text-body-sm font-body-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to Inventory</span>
+</a>
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant hidden sm:inline">SKU: NX-GPU-4090-STX</span>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-caps text-[10px] font-bold tracking-wider">LIVE IN STOREFRONT</span>
+</div>
+</div>
+</div>
+<div class="px-gutter-mobile py-space-md flex flex-col gap-space-lg max-w-4xl mx-auto w-full">
+<!-- Product Header Summary Card -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-space-md">
+<div class="w-20 h-20 rounded bg-surface-container-low p-1.5 flex items-center justify-center shrink-0">
+<img class="w-full h-full object-contain" data-alt="Pristine studio product shot of an ASUS ROG Strix GeForce RTX 4090 OC graphics card on a clean laboratory white background, sleek industrial aluminum shroud, triple axial fans, precision milled fin stack, soft cyan ambient light reflection, high-tech hardware photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDgNdF13sREOzfK4anPUsXBT-dt8cs7YOIULQ_D7e70HUq7LJY2w5JeZxuMukTuF4h9eRLseeBBw7Zif_LHO2EemARni_8pctGU5feMrZDshyz5-4X53UhMXgTzo4LCYYUgIintLn8ypoHvHfkYjTu_X-ziAA_cUeyGPTaDCvemFk-Iv5EMCRgCkeGahoPutolI7HucyGjcc3x5sO_cL7IVyhLJblJ5XgJ6MdwBTc51B_iUF1dAm1QWQ"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-caps text-label-caps text-primary bg-primary-fixed px-1.5 py-0.5 rounded">GPU ARCHITECTURE</span>
+<span class="font-spec-data text-[12px] text-tertiary">#NX-GPU-4090-STX</span>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface truncate">ASUS ROG Strix GeForce RTX 4090 OC 24GB</h1>
+<!-- Live Telemetry Strip -->
+<div class="mt-2.5 flex flex-wrap items-center gap-2 text-body-sm font-body-sm">
+<div class="flex items-center gap-1.5 px-2 py-1 bg-surface-container-low rounded">
+<span class="material-symbols-outlined text-primary text-[15px]">inventory</span>
+<span class="text-on-surface-variant">Stock:</span>
+<span class="font-spec-metric text-[14px] text-on-surface font-bold" id="telemetry-stock-badge">7 Units</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 bg-surface-container-low rounded">
+<span class="material-symbols-outlined text-tertiary text-[15px]">location_on</span>
+<span class="text-on-surface-variant">Bin:</span>
+<span class="font-spec-data text-spec-data text-on-surface">WH-A04</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 bg-surface-container-low rounded">
+<span class="material-symbols-outlined text-secondary text-[15px]">speed</span>
+<span class="text-on-surface-variant">Velocity:</span>
+<span class="font-spec-data text-spec-data text-on-surface">14 sold / 48h</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 1: Nomenclature & Status (PUT) -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded bg-primary-container"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">1. Nomenclature &amp; Catalog Visibility</h2>
+</div>
+<span class="font-label-caps text-label-caps text-tertiary">METHOD: PUT</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Product Title (Public Display)</label>
+<input class="h-10 px-3 bg-surface-container-low text-on-surface font-body-md text-body-md rounded focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" type="text" value="ASUS ROG Strix GeForce RTX 4090 OC 24GB Gaming GPU"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Silicon Category</label>
+<div class="relative">
+<select class="w-full h-10 px-3 pr-8 bg-surface-container-low text-on-surface font-body-md text-body-md rounded appearance-none focus:outline-none">
+<option selected="" value="gpu">Graphics Processing Unit (GPU)</option>
+<option value="cpu">Central Processing Unit (CPU)</option>
+<option value="asic">Cryptographic Accelerator / ASIC</option>
+<option value="npu">Neural Processing Unit (NPU)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Lifecycle State</label>
+<div class="grid grid-cols-3 gap-1 bg-surface-container-low p-1 rounded">
+<button class="py-1.5 px-2 text-center rounded font-label-caps text-[11px] bg-surface-container-lowest text-primary shadow-xs font-semibold" type="button">Active</button>
+<button class="py-1.5 px-2 text-center rounded font-label-caps text-[11px] text-on-surface-variant hover:text-on-surface transition-colors" type="button">Hidden</button>
+<button class="py-1.5 px-2 text-center rounded font-label-caps text-[11px] text-on-surface-variant hover:text-error transition-colors" type="button">Discontinued</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Real-time Stock Adjustments (PUT) -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded bg-secondary-container"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">2. Telemetry &amp; Inventory Allocation</h2>
+</div>
+<span class="font-label-caps text-label-caps text-tertiary">LOCATION: US-EAST-WH</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md items-center">
+<!-- Interactive Stock Stepper -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Live Quantity On Hand</span>
+<span class="font-spec-data text-[12px] text-secondary font-medium">In Sync (DB ID: #4090S)</span>
+</div>
+<div class="flex items-center justify-between gap-3 mt-1">
+<button aria-label="Decrease quantity" class="w-12 h-12 bg-surface-container-lowest hover:bg-surface-container text-on-surface rounded shadow-xs flex items-center justify-center text-headline-sm active:scale-95 transition-transform" id="stock-dec-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<div class="flex-1 flex flex-col items-center justify-center bg-surface-container-lowest h-12 rounded shadow-xs">
+<span class="font-spec-metric text-[24px] text-primary leading-none" id="current-stock-val">7</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant uppercase mt-0.5">Physical Units</span>
+</div>
+<button aria-label="Increase quantity" class="w-12 h-12 bg-surface-container-lowest hover:bg-surface-container text-on-surface rounded shadow-xs flex items-center justify-center text-headline-sm active:scale-95 transition-transform" id="stock-inc-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<!-- Quick adjustment pills -->
+<div class="flex items-center gap-1.5 pt-2">
+<button class="flex-1 py-1.5 px-2 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-on-surface-variant rounded text-spec-data font-spec-data text-[11px] shadow-xs transition-colors text-center" onclick="adjustStock(10)" type="button">+10 Batch</button>
+<button class="flex-1 py-1.5 px-2 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-on-surface-variant rounded text-spec-data font-spec-data text-[11px] shadow-xs transition-colors text-center" onclick="adjustStock(25)" type="button">+25 Freight</button>
+<button class="flex-1 py-1.5 px-2 bg-surface-container-lowest hover:bg-tertiary-container hover:text-on-tertiary text-on-surface-variant rounded text-spec-data font-spec-data text-[11px] shadow-xs transition-colors text-center" onclick="resetStockCount()" type="button">Recount</button>
+</div>
+</div>
+<!-- Bin & Warning Parameters -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Bin / Rack Allocation</label>
+<div class="flex items-center gap-2">
+<div class="relative flex-1">
+<input class="w-full h-10 px-3 bg-surface-container-low text-on-surface font-spec-data text-spec-data rounded focus:bg-surface-container-lowest focus:outline-none" type="text" value="WH-A04 (East Bay 2)"/>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-on-surface-variant text-[18px]">warehouse</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1 mt-2">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Low Stock Warning Threshold</label>
+<span class="font-spec-data text-spec-data text-error font-bold">3 Units</span>
+</div>
+<div class="relative flex items-center">
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="20" min="1" type="range" value="3"/>
+</div>
+<span class="text-[11px] font-body-sm text-tertiary">Triggers automated automated supply webhook when stock drops below threshold.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Pricing, Margin & Discounts (PUT) -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded bg-primary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">3. Financial Ledger &amp; Margins</h2>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed">
+<span class="material-symbols-outlined text-[14px]">calculate</span>
+<span class="font-label-caps text-[11px]">AUTO-RECALCULATED</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">MSRP (Baseline)</label>
+<div class="relative">
+<span class="absolute left-3 top-2 font-spec-data text-on-surface-variant">$</span>
+<input class="w-full h-10 pl-7 pr-3 bg-surface-container-low text-on-surface font-spec-metric text-[16px] rounded focus:bg-surface-container-lowest focus:outline-none" id="input-msrp" type="text" value="1,999.99"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Wholesale Procurement</label>
+<div class="relative">
+<span class="absolute left-3 top-2 font-spec-data text-on-surface-variant">$</span>
+<input class="w-full h-10 pl-7 pr-3 bg-surface-container-low text-on-surface font-spec-metric text-[16px] rounded focus:bg-surface-container-lowest focus:outline-none" id="input-cost" type="text" value="1,620.00"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Flash Discount</label>
+<span class="font-label-caps text-[10px] text-secondary font-bold">-$100.00</span>
+</div>
+<div class="relative">
+<span class="absolute left-3 top-2 font-spec-data text-on-surface-variant">$</span>
+<input class="w-full h-10 pl-7 pr-3 bg-surface-container-low text-primary font-spec-metric text-[16px] rounded focus:bg-surface-container-lowest focus:outline-none font-bold" id="input-sale" type="text" value="1,899.99"/>
+</div>
+</div>
+</div>
+<!-- Real-time Margin Visualization -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-fixed text-on-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">trending_up</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Calculated Unit Margin</span>
+<div class="flex items-baseline gap-2">
+<span class="font-spec-metric text-spec-metric text-primary">+17.2%</span>
+<span class="font-spec-data text-spec-data text-on-surface font-semibold">($279.99 net/unit)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-32 h-2.5 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 82%;"></div>
+<div class="h-full bg-secondary-container" style="width: 18%;"></div>
+</div>
+<span class="font-label-caps text-[10px] text-tertiary">TARGET: 15%</span>
+</div>
+</div>
+</div>
+<!-- Section 4: Specifications Payload (PUT) -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded bg-tertiary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">4. Hardware Architecture Specifications</h2>
+</div>
+<button class="text-primary hover:underline font-label-caps text-[11px] flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">add</span>
+<span>Add Custom Spec</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Boost Clock (GPU Core)</label>
+<div class="flex items-center bg-surface-container-low rounded px-3 py-1">
+<input class="w-full h-8 bg-transparent text-on-surface font-spec-metric text-[15px] focus:outline-none" type="text" value="2640"/>
+<span class="font-label-caps text-[11px] text-tertiary">MHz</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">VRAM Framebuffer</label>
+<div class="flex items-center bg-surface-container-low rounded px-3 py-1">
+<input class="w-full h-8 bg-transparent text-on-surface font-spec-metric text-[15px] focus:outline-none" type="text" value="24GB GDDR6X"/>
+<span class="material-symbols-outlined text-[16px] text-tertiary">memory</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Thermal Design Power</label>
+<div class="flex items-center bg-surface-container-low rounded px-3 py-1">
+<input class="w-full h-8 bg-transparent text-on-surface font-spec-metric text-[15px] focus:outline-none" type="text" value="450"/>
+<span class="font-label-caps text-[11px] text-tertiary">Watts</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 5: DANGER ZONE (DELETE) -->
+<div class="bg-error-container/40 p-space-md rounded-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[24px]">warning</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-error font-bold">5. Danger Zone: Delist or Terminate SKU</h2>
+<p class="font-label-caps text-[11px] text-error uppercase tracking-wider">High Impact Operations</p>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">
+        Delisting will immediately remove this SKU from customer search, active rig configurators, and cart checkouts. Permanent deletion will purge telemetry data and audit logs irrevocably.
+      </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md pt-1">
+<!-- Soft Delist -->
+<div class="bg-surface-container-lowest p-space-md rounded flex flex-col justify-between gap-3 shadow-xs">
+<div>
+<div class="flex items-center gap-2 text-on-surface font-headline-sm text-[16px] font-semibold mb-1">
+<span class="material-symbols-outlined text-tertiary text-[18px]">visibility_off</span>
+<span>Soft Catalog Delist</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[12px]">
+              Item remains in inventory database for warranty claims and warehouse reconciliation, but is hidden from the public storefront API.
+            </p>
+</div>
+<button class="w-full py-2 px-3 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-[11px] font-bold rounded transition-colors text-center" type="button">
+            DELIST FROM PUBLIC CATALOG (SOFT DELETE)
+          </button>
+</div>
+<!-- Hard Delete -->
+<div class="bg-surface-container-lowest p-space-md rounded flex flex-col justify-between gap-3 shadow-xs">
+<div>
+<div class="flex items-center gap-2 text-error font-headline-sm text-[16px] font-semibold mb-1">
+<span class="material-symbols-outlined text-error text-[18px]">delete_forever</span>
+<span>Hard Purge Deletion</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[12px]">
+              Irrevocably deletes SKU #NX-GPU-4090-STX, wiping historical price curves and component associations. Requires admin authentication.
+            </p>
+</div>
+<button class="w-full py-2 px-3 bg-error hover:bg-error/90 text-on-error font-label-caps text-[11px] font-bold rounded transition-colors flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98]" onclick="triggerSafetyModal()" type="button">
+<span class="material-symbols-outlined text-[16px]">delete_forever</span>
+<span>PERMANENTLY DELETE SKU (HARD DELETE)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Execution Bar -->
+<div class="sticky bottom-16 w-full bg-surface-container-lowest py-3 px-gutter-mobile shadow-[0_-4px_12px_rgba(0,0,0,0.05)] z-40">
+<div class="max-w-4xl mx-auto flex items-center justify-between gap-space-md">
+<button class="py-2.5 px-4 bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-caps text-[11px] rounded transition-colors" type="button">
+        Discard Changes
+      </button>
+<div class="flex items-center gap-3">
+<span class="hidden sm:inline font-spec-data text-[12px] text-tertiary">2 modifications pending</span>
+<button class="py-2.5 px-5 bg-primary-container hover:bg-primary text-on-primary font-label-caps text-[11px] font-bold tracking-wider rounded shadow-md flex items-center gap-2 active:scale-95 transition-all" id="commit-put-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+<span>COMMIT UPDATE (PUT /api/v1/sku/NX-GPU-4090-STX)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Delete Confirmation Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-xs flex items-center justify-center p-gutter-mobile hidden" id="safety-modal">
+<div class="bg-surface-container-lowest rounded-lg max-w-md w-full p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Confirm Hardware Purge</h3>
+<p class="font-label-caps text-[11px] text-error font-bold">PERMANENT ACTION</p>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        You are about to irreversibly destroy record <span class="font-spec-data text-on-surface font-bold">NX-GPU-4090-STX</span>. To proceed, please confirm this deliberate administrative action.
+      </p>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Type "DELETE-NX-4090" to enable</label>
+<input class="h-10 px-3 bg-surface-container-low text-on-surface font-spec-data text-spec-data rounded focus:outline-none" id="confirm-delete-input" placeholder="DELETE-NX-4090" type="text"/>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2">
+<button class="py-2 px-3 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-[11px] rounded transition-colors" onclick="closeSafetyModal()" type="button">
+          Cancel
+        </button>
+<button class="py-2 px-4 bg-error opacity-40 cursor-not-allowed text-on-error font-label-caps text-[11px] font-bold rounded transition-all" disabled="" id="confirm-purge-btn" type="button">
+          Execute Hard Purge
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let currentStock = 7;
+  const stockDisplay = document.getElementById('current-stock-val');
+  const telemetryStock = document.getElementById('telemetry-stock-badge');
+
+  function updateStockUI() {
+    stockDisplay.textContent = currentStock;
+    telemetryStock.textContent = currentStock + ' Units';
+  }
+
+  document.getElementById('stock-inc-btn').addEventListener('click', () => {
+    currentStock++;
+    updateStockUI();
+  });
+
+  document.getElementById('stock-dec-btn').addEventListener('click', () => {
+    if (currentStock > 0) {
+      currentStock--;
+      updateStockUI();
+    }
+  });
+
+  window.adjustStock = function(amount) {
+    currentStock += amount;
+    updateStockUI();
+  };
+
+  window.resetStockCount = function() {
+    currentStock = 7;
+    updateStockUI();
+  };
+
+  // Danger modal trigger
+  window.triggerSafetyModal = function() {
+    const modal = document.getElementById('safety-modal');
+    modal.classList.remove('hidden');
+  };
+
+  window.closeSafetyModal = function() {
+    const modal = document.getElementById('safety-modal');
+    modal.classList.add('hidden');
+    document.getElementById('confirm-delete-input').value = '';
+    const purgeBtn = document.getElementById('confirm-purge-btn');
+    purgeBtn.disabled = true;
+    purgeBtn.classList.add('opacity-40', 'cursor-not-allowed');
+  };
+
+  document.getElementById('confirm-delete-input').addEventListener('input', (e) => {
+    const purgeBtn = document.getElementById('confirm-purge-btn');
+    if (e.target.value === 'DELETE-NX-4090') {
+      purgeBtn.disabled = false;
+      purgeBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+    } else {
+      purgeBtn.disabled = true;
+      purgeBtn.classList.add('opacity-40', 'cursor-not-allowed');
+    }
+  });
+
+  // Micro-delight feedback on commit
+  document.getElementById('commit-put-btn').addEventListener('click', function() {
+    const btn = this;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span><span>COMMITTING (PUT)...</span>';
+    btn.classList.add('bg-secondary');
+    
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span><span>COMMITTED 200 OK</span>';
+      btn.classList.remove('bg-secondary');
+      btn.classList.add('bg-primary');
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.remove('bg-primary');
+      }, 2000);
+    }, 700);
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-on-surface-variant transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-caps text-[10px]">Dashboard</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-on-surface-variant transition-colors" data-path="inventory" href="#"><span class="material-symbols-outlined text-[22px]">inventory_2</span><span class="font-label-caps text-[10px]">Inventory</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-on-surface-variant transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined text-[22px]">local_shipping</span><span class="font-label-caps text-[10px]">Orders</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-on-surface-variant transition-colors" data-path="analytics" href="#"><span class="material-symbols-outlined text-[22px]">monitoring</span><span class="font-label-caps text-[10px]">Analytics</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-on-surface-variant transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[22px]">tune</span><span class="font-label-caps text-[10px]">Settings</span></a></div></nav></body></html>

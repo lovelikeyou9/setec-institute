@@ -1,0 +1,86 @@
+Great! Let's begin the full testing checklist to make sure everything works smoothly in your POS system.
+
+✅ FULL TESTING CHECKLIST
+✅ 1. Launch the app
+App should show LogInForm.
+
+After successful login, Form1 should load and display the product grid.
+
+✅ 2. Add Product
+Click Add New.
+
+Fill in:
+
+Product Name
+
+Price (e.g., 12.99)
+
+Quantity (e.g., 100)
+
+Select category from ComboBox
+
+Click Browse → Select an image
+
+Click Save
+
+✅ Product should appear in dataGridView1.
+
+✅ 3. Edit Product
+Select a product in the grid.
+
+Click Edit.
+
+Modify a field (e.g., name or price).
+
+Change image if desired (use Browse).
+
+Click Save
+
+✅ Grid should update with new values.
+
+✅ 4. View Product (Image Preview)
+Double-click a row in the grid.
+
+View form should show product info and image.
+
+✅ Hovering on the image should show zoomed preview.
+
+✅ Click Close to return.
+
+✅ 5. Delete Product (if added)
+Would you like to add a Delete button to remove a product?
+
+If yes, I’ll guide you next.
+
+If no, skip this.
+
+✅ 6. Cancel or Reset Buttons
+In Add/Edit forms:
+
+Click Cancel to close the form without saving.
+
+Click Reset to clear all inputs.
+
+✅ 7. Validation Handling
+Try leaving fields blank or typing wrong values:
+
+Blank name → show "Please enter product name"
+
+Invalid price → "Invalid price"
+
+Unselected category → "Please select a valid category"
+
+✅ Validation messages should show and prevent saving.
+
+✅ Ready to add Delete button now?
+Or do you want to stop here and finalize the current flow?
+
+Reply:
+
+Add Delete
+
+Done (wrap up project)
+
+Continue testing (if any step fails)
+
+Let me know how your tests go ✅

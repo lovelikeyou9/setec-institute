@@ -1,0 +1,53 @@
+-- 1
+SELECT last_name, salary
+   ,LPAD(salary, 10, '$') AS LPAD_SALARY
+   ,RPAD(salary, 5, '*') AS RPAD_SALARY
+FROM employees;
+
+-- 2
+SELECT last_name, job_id
+   ,REPLACE(REPLACE(job_id, '_', '-'), 'CLERK', 'STAFF') AS REPLACE_JOBID
+FROM employees;
+
+-- 3
+SELECT last_name
+   ,TRIM('y' FROM last_name) AS TRIM_LASTNAME
+   ,TRIM('S' FROM email) AS TRIM_EMAIL
+FROM employees;
+
+-- 4
+SELECT last_name
+   ,LPAD(last_name, 10, '#') AS LPAD_LASTNAME
+   ,RPAD(last_name, 15, '*') AS RPAD_LASTNAME
+FROM employees;
+
+-- 5
+SELECT last_name, job_id
+    ,REPLACE(REPLACE(job_id, '_', '/'), 'ST', 'SU') AS REPLACE_JOBID
+FROM employees;
+
+-- 6
+SELECT last_name, salary
+    ,(LENGTH(last_name) - LENGTH(REPLACE(LOWER(last_name), 'an', ''))) / 2 AS COUNT_AN
+FROM employees
+WHERE LOWER(last_name) LIKE '%an%';
+
+-- or
+SELECT last_name, salary
+    ,REGEXP_COUNT(LOWER(last_name), 'an') AS COUNT_AN
+FROM employees
+WHERE REGEXP_COUNT(LOWER(last_name), 'an') <> 0;
+
+-- 7
+SELECT last_name,
+    salary,
+    (LENGTH(LOWER(last_name)) - LENGTH(REPLACE(LOWER(last_name), 's', ''))) AS COUNT_S
+FROM employees
+WHERE LOWER(last_name) LIKE '%s%';
+
+-- or
+SELECT 
+    last_name, salary
+    ,REGEXP_COUNT(LOWER(last_name), 's') AS COUNT_S
+FROM employees
+WHERE REGEXP_COUNT(LOWER(last_name), 's') <> 0;

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Brands — Seller</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+    <div class="dash-main">
+      <h1 style="font-size:1.4rem;margin-bottom:1rem">Brands</h1>
+      <p class="section-sub" style="margin-top:-.5rem">Browse brands and open your products for each brand</p>
+
+      <form class="dash-search" th:action="@{/seller-dashboard/brands}" method="get">
+        <input type="search" name="q" th:value="${q}" placeholder="Search brands..."/>
+        <label class="dash-sort">
+          <span>Sort</span>
+          <select name="sort" onchange="this.form.submit()">
+            <option value="name_asc" th:selected="${sort == null or sort == 'name_asc'}">Name A–Z</option>
+            <option value="name_desc" th:selected="${sort == 'name_desc'}">Name Z–A</option>
+            <option value="products" th:selected="${sort == 'products'}">Most products</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        <a th:if="${q != null and !#strings.isEmpty(q)}" th:href="@{/seller-dashboard/brands}" class="btn btn-outline btn-sm">Clear</a>
+      </form>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Logo</th><th>Name</th><th>Slug</th><th>My Products</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr th:each="b : ${brands}">
+              <td>
+                <img class="table-thumb" th:if="${b.logoUrl != null and !#strings.isEmpty(b.logoUrl)}"
+                     th:src="${b.logoUrl}" th:alt="${b.name}"/>
+                <span th:unless="${b.logoUrl != null and !#strings.isEmpty(b.logoUrl)}" class="table-thumb-empty">—</span>
+              </td>
+              <td th:text="${b.name}">ASUS</td>
+              <td th:text="${b.slug}">asus</td>
+              <td th:text="${counts[b.id] != null ? counts[b.id] : 0}">0</td>
+              <td>
+                <a class="btn btn-outline btn-sm"
+                   th:href="@{/seller-dashboard/products(brand=${b.id})}">View products</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

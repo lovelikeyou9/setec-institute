@@ -1,0 +1,116 @@
+<!--
+<div 
+    class="bg-white/90 backdrop-blur-lg w-80 h-[480px] rounded-2xl shadow-xl hover:shadow-2xl p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1">
+
+     Image Section 
+    <div routerLink="/product-detail"
+        class="relative rounded-2xl bg-gradient-to-tr from-gray-50 via-white to-gray-100 flex justify-center flex-shrink-0 h-[220px] overflow-hidden">
+        Dots
+        <div class="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-gray-500 cursor-pointer transition-all hover:scale-125"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-gray-300 cursor-pointer transition-all hover:scale-125"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-gray-300 cursor-pointer transition-all hover:scale-125"></span>
+        </div>
+         Image 
+        <img [src]="product.imageUrl" onerror="this.src='/image/No-Image-Placeholder.png';" alt="Watch"
+            class="max-h-full object-contain transform transition-transform duration-300 hover:scale-105">
+    </div>
+
+     Text Section 
+    <div routerLink="/product-detail" class="text-gray-700 flex-1 overflow-hidden">
+        <small class="text-[11px] uppercase tracking-[0.15em] font-semibold text-gray-400">
+            SKAGEN 233XLTTM <span style="color: red;">({{ product.qty }})</span>
+        </small>
+        <h4 class="mt-1 mb-3 font-bold text-xl text-gray-900 leading-snug hover:text-gray-700 transition-colors">
+            {{ product.name }} <span class="font-extrabold"></span>
+        </h4>
+        
+        <p class="text-[13px] text-gray-500 mb-1 font-medium"></p>
+        <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">
+            
+        </p>
+        
+    </div>
+
+     Buttons Section 
+    <div class="flex items-center gap-3 flex-shrink-0">
+        
+        <div class="font-extrabold text-xl tracking-tight">{{ product.price | currency }}</div>
+        
+        <div class="ml-auto flex items-center gap-3">
+             Wishlist 
+            <button aria-label="Add to wishlist"
+                class="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full w-9 h-9 flex items-center justify-center text-gray-300 text-lg shadow-sm transition-all hover:text-red-500 hover:border-red-500 hover:shadow-md">
+                &#10084;
+            </button>
+            
+             Add to cart 
+            <input type="button"
+            class="btn-block bg-gray-900 btn-outline-success text-white rounded-full px-3 py-1.5 text-[12px] font-semibold shadow-md hover:bg-gray-700 active:scale-95 transition-all"
+            value="Add Cart"
+            (click)="onAddToCart(product)"
+            >
+        </div>
+    </div>
+
+</div>
+-->
+
+
+<div 
+    class="bg-white/90 backdrop-blur-lg w-80 h-[480px] rounded-2xl shadow-xl hover:shadow-2xl p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1">
+
+    <!-- Image Section -->
+    <div routerLink="/product-detail"
+        class="relative rounded-2xl bg-gradient-to-tr from-gray-50 via-white to-gray-100 flex justify-center flex-shrink-0 h-[220px] overflow-hidden">
+        <!-- Dots -->
+        <div class="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-gray-500 cursor-pointer transition-all hover:scale-125"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-gray-300 cursor-pointer transition-all hover:scale-125"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-gray-300 cursor-pointer transition-all hover:scale-125"></span>
+        </div>
+        <!-- Image -->
+        <div style=" cursor: point;" [routerLink]="['/product-detail']" [queryParams]="{product_id: product.id}">
+        <img [src]="product.imageUrl" onerror="this.src='/image/No-Image-Placeholder.png';" alt="Watch"
+            class="max-h-full object-contain transform transition-transform duration-300 hover:scale-105">
+        </div>
+    </div>
+
+    <!-- Text Section -->
+    <div routerLink="/product-detail" class="text-gray-700 flex-1 overflow-hidden">
+        <small class="text-[11px] uppercase tracking-[0.15em] font-semibold text-gray-400">
+            SKAGEN 233XLTTM <span style="color: red;">({{ product.qty }})</span>
+        </small>
+        <h4 class="mt-1 mb-3 font-bold text-xl text-gray-900 leading-snug hover:text-gray-700 transition-colors">
+            {{ product.name }} <span class="font-extrabold"></span>
+        </h4>
+        
+        <p class="text-[13px] text-gray-500 mb-1 font-medium"></p>
+        <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">
+            
+        </p>
+        
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="flex items-center gap-3 flex-shrink-0">
+        
+        <div class="font-extrabold text-xl tracking-tight">{{ product.price | currency }}</div>
+        
+        <div class="ml-auto flex items-center gap-3">
+            <!-- Wishlist -->
+            <button aria-label="Add to wishlist"
+                class="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full w-9 h-9 flex items-center justify-center text-gray-300 text-lg shadow-sm transition-all hover:text-red-500 hover:border-red-500 hover:shadow-md">
+                &#10084;
+            </button>
+            
+            <!-- Add to cart -->
+            <input type="button"
+            class="btn-block bg-gray-900 btn-outline-success text-white rounded-full px-3 py-1.5 text-[12px] font-semibold shadow-md hover:bg-gray-700 active:scale-95 transition-all"
+            value="Add Cart"
+            (click)="onAddToCart(product)"
+            >
+        </div>
+    </div>
+
+</div>

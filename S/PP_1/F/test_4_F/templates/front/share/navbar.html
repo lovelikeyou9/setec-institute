@@ -1,0 +1,22 @@
+
+  <!-- Header -->
+  <header class="border-bottom bg-white sticky-top">
+    <nav class="navbar site-navbar container py-3">
+      <!--      <a class="navbar-brand fw-bold text-teal" href="/index.html">SV2.6 Shop</a>-->
+<!--      <a class="navbar-brand fw-bold text-teal" href="/">SV2.6 Shop</a>-->
+      <a class="navbar-brand fw-bold text-teal" href="{{ url_for('home') }}">SV2.6 Shop</a>
+      <input class="nav-toggle" type="checkbox" id="navToggleHome">
+      <label class="hamburger-button" for="navToggleHome" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <div class="navbar-nav nav-menu ms-auto gap-3">
+        <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
+        <a class="nav-link" href="{{ url_for('products') }}">Products</a>
+        <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+        <a class="nav-link" href="{{ url_for('cart') }}">Cart</a>
+      </div>
+    </nav>
+  </header>
+

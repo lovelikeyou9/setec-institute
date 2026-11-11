@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Shopping Cart{% endblock %}
+{% block content %}
+<section class="cart-page mt-3">
+  <div class="cart-header">
+    <div>
+      <p class="cart-eyebrow">TechStore</p>
+      <h1 class="section-title mb-1">Shopping Cart</h1>
+      <p class="cart-subtitle mb-0">
+        {% if cart.items %}
+          {{ cart.item_count }} item{{ 's' if cart.item_count != 1 else '' }} ready for checkout
+        {% else %}
+          Your bag is waiting for the next upgrade
+        {% endif %}
+      </p>
+    </div>
+    {% if cart.items %}
+    <a href="{{ url_for('product.product_list') }}" class="btn btn-outline-brand btn-sm">
+      <i class="bi bi-arrow-left"></i> Continue shopping
+    </a>
+    {% endif %}
+  </div>
+
+  {% if cart.items %}
+  <div class="row g-4 align-items-start">
+    <div class="col-lg-8">
+      <div class="cart-list">
+        {% for item in cart.items %}
+        <article class="cart-row">
+          <a class="cart-thumb" href="{{ url_for('product.product_detail', product_id=item.product.id) }}">
+            <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}"
+                 onerror="this.src='{{ url_for('static', filename='images/products/placeholder.jpg') }}'">
+          </a>
+
+          <div class="cart-info">
+            <div class="cart-brand">{{ item.product.brand }}</div>
+            <a class="cart-name" href="{{ url_for('product.product_detail', product_id=item.product.id) }}">
+              {{ item.product.name }}
+            </a>
+            <div class="cart-meta">
+              {% if item.product.in_stock %}
+              <span class="stock-pill in"><i class="bi bi-check-circle"></i> In stock</span>
+              {% else %}
+              <span class="stock-pill out">Out of stock</span>
+              {% endif %}
+              {% if item.product.has_discount %}
+              <span class="stock-pill sale">Save {{ item.product.discount_percent }}%</span>
+              {% endif %}
+            </div>
+            <div class="cart-unit d-lg-none">
+              ${{ '%.2f'|format(item.product.effective_price) }} each
+            </div>
+          </div>
+
+          <div class="cart-price d-none d-lg-block">
+            <div class="label">Price</div>
+            <div class="value">${{ '%.2f'|format(item.product.effective_price) }}</div>
+            {% if item.product.has_discount %}
+            <div class="old">${{ '%.2f'|format(item.product.price) }}</div>
+            {% endif %}
+          </div>
+
+          <div class="cart-qty-wrap">
+            <div class="label">Qty</div>
+            <form method="post" action="{{ url_for('cart.update_cart') }}" class="cart-qty-form">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="item_id" value="{{ item.id }}">
+              <div class="qty-control">
+                <button type="button" data-qty-minus aria-label="Decrease quantity">−</button>
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.stock_quantity }}">
+                <button type="button" data-qty-plus aria-label="Increase quantity">+</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="cart-line">
+            <div class="label">Subtotal</div>
+            <div class="value">${{ '%.2f'|format(item.line_total) }}</div>
+            <form method="post" action="{{ url_for('cart.remove_from_cart') }}" class="mt-2">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="item_id" value="{{ item.id }}">
+              <button class="cart-remove" type="submit">
+                <i class="bi bi-trash3"></i> Remove
+              </button>
+            </form>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <aside class="cart-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-lines">
+          <div class="summary-line">
+            <span>Items ({{ cart.item_count }})</span>
+            <span>${{ '%.2f'|format(subtotal) }}</span>
+          </div>
+          <div class="summary-line">
+            <span>Shipping</span>
+            <span>${{ '%.2f'|format(shipping) }}</span>
+          </div>
+          <div class="summary-line muted">
+            <span>Tax</span>
+            <span>Calculated at checkout</span>
+          </div>
+        </div>
+        <div class="summary-total">
+          <span>Total</span>
+          <strong>${{ '%.2f'|format(total) }}</strong>
+        </div>
+        <a href="{{ url_for('checkout.checkout') }}" class="btn btn-brand w-100 btn-lg cart-checkout-btn">
+          Proceed to Checkout
+        </a>
+        <a href="{{ url_for('product.product_list') }}" class="btn btn-outline-secondary w-100 mt-2">
+          Continue Shopping
+        </a>
+        <ul class="cart-trust">
+          <li><i class="bi bi-shield-lock"></i> Secure Stripe checkout</li>
+          <li><i class="bi bi-truck"></i> Fast standard shipping</li>
+          <li><i class="bi bi-arrow-repeat"></i> Easy order tracking</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+  {% else %}
+  <div class="cart-empty">
+    <div class="cart-empty-icon"><i class="bi bi-bag"></i></div>
+    <h2>Your cart is empty</h2>
+    <p>Browse laptops, GPUs, CPUs, and accessories to start your build.</p>
+    <a href="{{ url_for('product.product_list') }}" class="btn btn-brand btn-lg">Browse Products</a>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

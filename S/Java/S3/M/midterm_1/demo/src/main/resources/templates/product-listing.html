@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="topbar">
+    <div class="container inner">
+        <a href="#">Hot Deals</a>
+        <a href="#">Track Your Order</a>
+        <a href="#">Store Locator</a>
+    </div>
+</div>
+
+<header class="header">
+    <div class="container">
+        <div class="header-row">
+            <a class="logo" th:href="@{/}">
+                <span class="logo-icon">🛍</span> eCommax
+            </a>
+            <a class="shop-now-btn" th:href="@{/shop}">☰ SHOP NOW</a>
+            <div class="search-wrap">
+                <form class="search-box" th:action="@{/shop}" method="get">
+                    <input type="text" name="q" th:value="${q}" placeholder="ENTER YOUR KEYWORD">
+                    <button type="submit" aria-label="Search">🔍</button>
+                </form>
+                <div class="trending"><span>SEARCH TRENDING</span> iPhone, Huawei Mateview, GoPro, Headphone, Macbook Pro</div>
+            </div>
+            <div class="header-actions">
+                <div class="item">❤<br><strong>Wishlist</strong></div>
+                <div class="item">
+                    <a th:if="${staff != null and staff.role == 'User'}" th:href="@{/cart}">
+                        🛒<br>
+                        <strong th:text="'$' + ${#numbers.formatDecimal(cartTotal, 1, 2)} + ' (' + ${cartCount} + ')'">$0.00 (0)</strong>
+                    </a>
+                    <th:block th:unless="${staff != null and staff.role == 'User'}">
+                        🛒<br><strong>$0.00</strong>
+                    </th:block>
+                </div>
+                <div class="item" th:if="${staff == null}"><a th:href="@{/login}">👤<br><strong>Login</strong></a></div>
+                <div class="item" th:if="${staff != null and staff.role == 'User'}"><a th:href="@{/products}">⚙<br><strong th:text="${staff.userName}">Account</strong></a></div>
+                <div class="item" th:if="${staff != null and staff.role != 'User'}"><a th:href="@{/dashboard}">⚙<br><strong th:text="${staff.userName}">Account</strong></a></div>
+            </div>
+        </div>
+        <nav class="nav">
+            <a th:href="@{/}">HOME</a>
+            <a th:href="@{/#collections}">COLLECTIONS</a>
+            <a class="active" th:href="@{/shop}">PRODUCTS</a>
+            <a th:href="@{/shop}">SHOP</a>
+        </nav>
+    </div>
+</header>
+
+<section class="container listing-hero">
+    <h1>Product Listing</h1>
+    <p>Browse all products available in our store</p>
+</section>
+
+<section class="container listing-layout">
+    <!-- LEFT FILTER SIDEBAR -->
+    <aside class="filter-sidebar">
+        <form th:action="@{/shop}" method="get" id="filterForm">
+            <div class="filter-block">
+                <h3>Search products</h3>
+                <input class="filter-input" type="text" name="q" th:value="${q}" placeholder="Search products...">
+            </div>
+
+            <div class="filter-block">
+                <h3>Price Range</h3>
+                <div class="price-inputs">
+                    <div>
+                        <label>Min $</label>
+                        <input class="filter-input" type="number" step="0.01" name="minPrice"
+                               th:value="${minPrice}" th:placeholder="${#numbers.formatDecimal(priceMinBound, 1, 0)}">
+                    </div>
+                    <div>
+                        <label>Max $</label>
+                        <input class="filter-input" type="number" step="0.01" name="maxPrice"
+                               th:value="${maxPrice}" th:placeholder="${#numbers.formatDecimal(priceMaxBound, 1, 0)}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-block">
+                <label class="check-row">
+                    <input type="checkbox" name="inStock" value="true" th:checked="${inStock}">
+                    <span>In Stock</span>
+                </label>
+            </div>
+
+            <div class="filter-block">
+                <h3>Category</h3>
+                <label class="check-row">
+                    <input type="radio" name="cat" value="" th:checked="${selectedCat == null}">
+                    <span>All Categories</span>
+                </label>
+                <label class="check-row" th:each="c : ${categories}">
+                    <input type="radio" name="cat" th:value="${c.catID}"
+                           th:checked="${selectedCat != null and selectedCat == c.catID}">
+                    <span>
+                        <th:block th:text="${c.catName}">Category</th:block>
+                        <small th:text="'(' + ${catCounts.getOrDefault(c.catID, 0)} + ')'">(0)</small>
+                    </span>
+                </label>
+            </div>
+
+            <div class="filter-actions">
+                <button class="btn-buy" type="submit">Filter</button>
+                <a class="btn-edit" th:href="@{/shop}">Clear</a>
+            </div>
+        </form>
+    </aside>
+
+    <!-- RIGHT PRODUCT GRID -->
+    <div class="listing-main">
+        <div class="listing-count" th:text="${products.size()} + ' products'">0 products</div>
+
+        <div class="product-grid listing-grid">
+            <div class="product-card" th:each="p : ${products}">
+                <div class="thumb">📱</div>
+                <div class="cat" th:text="${catNames[p.catID]}">Category</div>
+                <h3 th:text="${p.PName}">Product</h3>
+                <div class="stars">★★★★★ <span>6 reviews</span></div>
+                <div class="price" th:text="'$' + ${#numbers.formatDecimal(p.price, 1, 2)}">$0.00</div>
+                <div class="listing-stock" th:text="'In stock: ' + ${p.SQty}">In stock</div>
+
+                <form th:if="${staff != null and staff.role == 'User' and p.SQty > 0}"
+                      th:action="@{/cart/add/{id}(id=${p.PId})}" method="post"
+                      class="listing-buy">
+                    <input type="hidden" name="redirect" value="/shop">
+                    <input class="qty-input" type="number" name="qty" value="1" min="1" th:max="${p.SQty}">
+                    <button class="btn-buy" type="submit">Add to Cart</button>
+                </form>
+                <div th:if="${staff != null and staff.role == 'User' and p.SQty <= 0}" class="listing-oos">Out of stock</div>
+                <a th:if="${staff == null}" class="btn-buy listing-login" th:href="@{/login}">Login to Buy</a>
+            </div>
+        </div>
+
+        <div class="empty-listing" th:if="${#lists.isEmpty(products)}">
+            No products found.
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bottom" style="border:none;padding-top:0">
+            <div>Copyright © 2024 eCommax Midterm. All rights reserved.</div>
+            <div><a th:href="@{/}">Back to Home</a></div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

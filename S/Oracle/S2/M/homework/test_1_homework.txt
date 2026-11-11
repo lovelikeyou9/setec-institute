@@ -1,0 +1,30 @@
+-- 1
+SELECT username, account_status, lock_date, created FROM dba_users
+WHERE username IN ('ORA1', 'SYSTEM', 'SYS');
+
+-- 2
+ALTER USER ora1 IDENTIFIED BY "!#244@7$";
+
+-- 3
+ALTER USER ora1 IDENTIFIED BY ora123;
+
+-- 4
+ALTER USER ora1 ACCOUNT LOCK;
+
+-- for check
+SELECT username, account_status FROM dba_users
+WHERE username = 'ORA1';
+
+-- 5
+ALTER USER ora1 ACCOUNT UNLOCK;
+
+-- verify
+
+SELECT username, account_status FROM dba_users
+WHERE username = 'ORA1';
+
+-- 6
+ALTER USER ora1 IDENTIFIED BY ora1 ACCOUNT UNLOCK;
+
+-- or
+ALTER USER ORA1 ACCOUNT UNLOCK IDENTIFIED BY ora1;

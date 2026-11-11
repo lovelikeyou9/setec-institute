@@ -1,0 +1,30 @@
+
+-- test_9_F
+-- FullName: Chou Yamata(Sv2.6)
+-- 1
+SELECT last_name, salary FROM employees
+WHERE salary > ALL (SELECT salary from employees
+                    WHERE department_id=80);
+
+-- 2
+SELECT last_name, salary FROM employees
+WHERE salary > ANY (SELECT salary FROM employees
+                    WHERE department_id=80);
+
+-- 3
+SELECT last_name, salary FROM employees
+WHERE manager_id = ALL (SELECT employee_id FROM EMPLOYEES
+                        WHERE last_name='King');
+              
+SELECT e.last_name AS employee_name,
+       e.salary,
+       m.last_name AS manager_name
+FROM employees e
+JOIN employees m
+ON e.manager_id = m.employee_id
+WHERE m.last_name = 'King';
+
+SELECT * FROM employees;  
+
+SELECT employee_id, EMPLOYEE_ID, last_name FROM EMPLOYEES
+                        WHERE last_name='King';

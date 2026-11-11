@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="rl-checkout">
+<header class="rl-header">
+    <div class="container rl-header-inner">
+        <a class="logo" th:href="@{/}"><span class="logo-icon">🛍</span> eCommax</a>
+        <div class="rl-secure">Order confirmed</div>
+        <a class="rl-back" th:href="@{/shop}">Continue shopping</a>
+    </div>
+</header>
+
+<section class="container rl-success">
+    <div class="rl-success-card">
+        <div class="rl-success-badge">✓</div>
+        <h1>Thank you for your purchase</h1>
+        <p class="rl-hint">Your order has been placed successfully. A confirmation was prepared for your account.</p>
+
+        <div class="rl-success-box">
+            <div class="rl-line"><span>Customer</span><strong th:text="${fullName}">Name</strong></div>
+            <div class="rl-line"><span>Payment</span><strong th:text="${paymentMethod}">Method</strong></div>
+            <div class="rl-line"><span>Ship to</span><strong th:text="${address}">Address</strong></div>
+            <div class="rl-line"><span>Phone</span><strong th:text="${phone}">Phone</strong></div>
+            <div class="rl-line rl-total"><span>Total paid</span>
+                <strong th:text="'$' + ${#numbers.formatDecimal(orderTotal, 1, 2)}">$0.00</strong>
+            </div>
+        </div>
+
+        <div class="rl-success-actions">
+            <a class="rl-pay-btn" th:href="@{/history}" style="text-decoration:none;text-align:center">View order history</a>
+            <a class="rl-link" th:href="@{/shop}">Back to store</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

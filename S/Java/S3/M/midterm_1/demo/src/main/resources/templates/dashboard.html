@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="dash-body">
+<div class="dash-shell">
+    <div th:replace="~{fragments/dash :: sidebar('dashboard', ${staff})}"></div>
+
+    <div class="dash-main">
+        <div th:replace="~{fragments/dash :: top(${staff}, 'Dashboard')}"></div>
+
+        <div class="dash-content">
+            <div class="dash-cards">
+                <div class="dash-card">
+                    <div class="dash-card-top"><span>Total Sales</span><small>USD</small></div>
+                    <h3 th:text="'$ ' + ${#numbers.formatDecimal(totalSales, 1, 2)}">$ 0.00</h3>
+                    <div class="dash-ratios">
+                        <span class="up">Orders <th:block th:text="${totalOrders}">0</th:block></span>
+                        <span class="down">Expired <th:block th:text="${expiredCount}">0</th:block></span>
+                    </div>
+                    <div class="dash-card-foot">Items sold <strong th:text="${totalSoldQty}">0</strong></div>
+                </div>
+
+                <div class="dash-card">
+                    <div class="dash-card-top"><span>Products</span><small>Stock</small></div>
+                    <h3 th:text="${productCount}">0</h3>
+                    <div class="mini-chart visits">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="dash-card-foot">In stock qty <strong th:text="${stockQty}">0</strong></div>
+                </div>
+
+                <div class="dash-card">
+                    <div class="dash-card-top"><span>Categories</span><small>Active</small></div>
+                    <h3 th:text="${categoryCount}">0</h3>
+                    <div class="mini-chart bars">
+                        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                    </div>
+                    <div class="dash-card-foot">Staff accounts <strong th:text="${staffCount}">0</strong></div>
+                </div>
+
+                <div class="dash-card">
+                    <div class="dash-card-top"><span>Operation Effect</span><small>In-stock %</small></div>
+                    <div class="donut-wrap">
+                        <div class="donut" th:style="'--p:' + ${operationEffect}">
+                            <span th:text="${operationEffect} + '%'">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-panel">
+                <div class="dash-panel-head">
+                    <div class="dash-tabs">
+                        <button class="on" type="button">Sales</button>
+                        <button type="button">Stock</button>
+                    </div>
+                    <div class="dash-filters">
+                        <button type="button">All day</button>
+                        <button type="button">All week</button>
+                        <button type="button">All month</button>
+                        <button class="on" type="button">All year</button>
+                        <span class="dash-date">2026-01-01 ~ 2026-12-31</span>
+                    </div>
+                </div>
+
+                <div class="dash-panel-body">
+                    <div class="dash-chart-box">
+                        <h4>Store Sales Trend</h4>
+                        <div class="bar-chart">
+                            <div class="bar-col" th:each="entry : ${soldByCat}">
+                                <div class="bar-pair">
+                                    <div class="bar a" th:style="'height:' + (${16 + entry.value * 6}) + 'px'"></div>
+                                    <div class="bar b" th:style="'height:' + (${10 + entry.value * 4}) + 'px'"></div>
+                                </div>
+                                <small th:text="${catNames[entry.key]}">Cat</small>
+                            </div>
+                            <div class="bar-col" th:if="${#maps.isEmpty(soldByCat)}">
+                                <div class="bar-pair">
+                                    <div class="bar a" style="height:30px"></div>
+                                    <div class="bar b" style="height:18px"></div>
+                                </div>
+                                <small>No sales</small>
+                            </div>
+                        </div>
+                        <p class="dash-note" th:if="${topCategory != null}">
+                            Top sale category:
+                            <strong th:text="${topCategory.catName}">Cat</strong>
+                            <span th:text="'(' + ${topSold} + ' sold)'"></span>
+                        </p>
+                    </div>
+
+                    <div class="dash-rank">
+                        <h4>Sales ranking</h4>
+                        <ol>
+                            <li th:each="p,stat : ${salesRanking}">
+                                <span class="rank-no" th:classappend="${stat.index < 3} ? ' top'" th:text="${stat.index + 1}">1</span>
+                                <span class="rank-name" th:text="${p.PName}">Product</span>
+                                <strong th:text="${soldByProduct.getOrDefault(p.PId, 0)}">0</strong>
+                            </li>
+                            <li th:if="${#lists.isEmpty(salesRanking)}">
+                                <span class="rank-name">No products yet</span>
+                                <strong>0</strong>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-quick" th:if="${staff.role == 'Admin'}">
+                <a th:href="@{/admin/expired}">Expired Products</a>
+                <a th:href="@{/admin/top-sale}">Top Sale Category</a>
+                <a th:href="@{/admin/staff}">Manage Staff</a>
+                <a th:href="@{/admin/users}">Manage Users</a>
+                <a th:href="@{/history}">Purchase History</a>
+            </div>
+            <div class="dash-quick" th:if="${staff.role == 'Stock'}">
+                <a th:href="@{/stock/products}">Manage Products</a>
+                <a th:href="@{/stock/categories}">Manage Categories</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

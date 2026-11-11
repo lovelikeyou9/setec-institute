@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header class="site-header" th:fragment="header">
+  <div class="container header-top">
+    <a th:href="@{/}" class="logo" aria-label="MME — Modern Multiple Technology">
+      <img class="logo-icon" th:src="@{/images/mme-icon.png}" src="/images/mme-icon.png" alt="MME" width="40" height="40"/>
+      <span class="logo-copy">
+        <span class="logo-text">MME</span>
+        <span class="logo-tagline">Modern Multiple Technology</span>
+      </span>
+    </a>
+
+    <div class="search-wrap">
+      <form class="search-form" th:action="@{/products}" method="get" autocomplete="off">
+        <input type="search" name="q" id="searchInput" placeholder="Search routers, drones, consoles, GPUs, chargers..."
+               th:value="${q}" aria-label="Search"/>
+        <button type="submit" aria-label="Search">Search</button>
+      </form>
+      <div class="search-dropdown" id="searchDropdown">
+        <h4>Suggestions</h4>
+        <div id="suggestList"></div>
+        <h4>Popular Searches</h4>
+        <a th:each="s : ${popularSearches}" th:href="@{/products(q=${s})}" th:text="${s}">RTX 5070</a>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <a th:href="@{/admin}" class="btn btn-primary btn-sm nav-hide-mobile"
+         sec:authorize="hasRole('ADMIN')" style="margin-right:.15rem">Admin</a>
+      <a th:href="@{/seller-dashboard}" class="btn btn-outline btn-sm nav-hide-mobile"
+         sec:authorize="hasRole('SELLER')" style="margin-right:.15rem">Seller</a>
+
+      <a th:href="@{/account/wishlist}" class="btn-icon" title="Wishlist" aria-label="Wishlist"
+         sec:authorize="isAuthenticated()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge-count" th:if="${wishlistCount > 0}" th:text="${wishlistCount}">0</span>
+      </a>
+      <a th:href="@{/login}" class="btn-icon" title="Wishlist" aria-label="Wishlist"
+         sec:authorize="!isAuthenticated()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </a>
+      <a th:href="@{/account/cart}" class="btn-icon" title="Cart" aria-label="Cart"
+         sec:authorize="isAuthenticated()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="badge-count" th:if="${cartCount > 0}" th:text="${cartCount}">0</span>
+      </a>
+      <a th:href="@{/login}" class="btn-icon" title="Cart" aria-label="Cart"
+         sec:authorize="!isAuthenticated()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </a>
+      <a th:href="@{/notifications}" class="btn-icon" title="Notifications" aria-label="Notifications" sec:authorize="isAuthenticated()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="badge-count" th:if="${unreadNotifications > 0}" th:text="${unreadNotifications}">0</span>
+      </a>
+
+      <div class="user-menu" sec:authorize="isAuthenticated()">
+        <button type="button" class="user-btn" id="userMenuBtn">
+          <img class="user-avatar-img" th:if="${currentUser != null and currentUser.avatarUrl != null and !#strings.isEmpty(currentUser.avatarUrl)}"
+               th:src="${currentUser.avatarUrl}" th:alt="${currentUser.fullName}"/>
+          <span class="user-avatar" th:unless="${currentUser != null and currentUser.avatarUrl != null and !#strings.isEmpty(currentUser.avatarUrl)}"
+                th:text="${currentUser != null ? #strings.substring(currentUser.fullName,0,1) : 'U'}">U</span>
+          <span class="nav-hide-mobile" th:text="${currentUser != null ? currentUser.fullName : 'Account'}">Account</span>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin Dashboard</a>
+          <a th:href="@{/admin/products}" sec:authorize="hasRole('ADMIN')">Products List</a>
+          <a th:href="@{/admin/categories}" sec:authorize="hasRole('ADMIN')">Category</a>
+          <a th:href="@{/admin/brands}" sec:authorize="hasRole('ADMIN')">Brand</a>
+          <a th:href="@{/admin/users}" sec:authorize="hasRole('ADMIN')">Users</a>
+          <a th:href="@{/admin/sellers}" sec:authorize="hasRole('ADMIN')">Sellers</a>
+          <div class="divider" sec:authorize="hasRole('ADMIN')"></div>
+
+          <a th:if="${currentSellerId != null}"
+             th:href="@{/profile/seller/{id}(id=${currentSellerId})}"
+             sec:authorize="hasRole('SELLER')">Profile</a>
+          <a th:href="@{/seller-dashboard/settings}" sec:authorize="hasRole('SELLER')">Edit Profile</a>
+          <a th:href="@{/seller-dashboard}" sec:authorize="hasRole('SELLER')">Seller Dashboard</a>
+          <a th:href="@{/seller-dashboard/products}" sec:authorize="hasRole('SELLER')">My Products</a>
+          <a th:href="@{/seller-dashboard/orders}" sec:authorize="hasRole('SELLER')">Seller Orders</a>
+          <div class="divider" sec:authorize="hasRole('SELLER')"></div>
+
+          <a th:if="${currentUser != null}"
+             th:href="@{/profile/{id}(id=${currentUser.id})}"
+             sec:authorize="hasRole('CUSTOMER')">Profile</a>
+          <a th:href="@{/account/settings}" sec:authorize="hasRole('CUSTOMER')">Edit Profile</a>
+          <a th:href="@{/account}" sec:authorize="hasRole('CUSTOMER')">My Account</a>
+          <a th:href="@{/account/orders}" sec:authorize="hasRole('CUSTOMER')">My Orders</a>
+          <a th:href="@{/account/wishlist}">Wishlist</a>
+          <a th:href="@{/account/cart}">Cart</a>
+          <a th:href="@{/become-seller}" sec:authorize="hasRole('CUSTOMER')">Become a Seller</a>
+          <div class="divider"></div>
+          <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="header-auth" sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}" class="btn btn-outline btn-sm">Login</a>
+        <a th:href="@{/register}" class="btn btn-primary btn-sm">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <div class="container nav-links">
+      <a th:href="@{/}" th:classappend="${currentPath == '/' or currentPath == '/home'} ? 'active'">Home</a>
+      <a th:href="@{/categories}" th:classappend="${#strings.startsWith(currentPath,'/categor')} ? 'active'">Categories</a>
+      <a th:href="@{/products}" th:classappend="${#strings.startsWith(currentPath,'/product')} ? 'active'">Products</a>
+      <a th:href="@{/deals}" th:classappend="${currentPath == '/deals'} ? 'active'">Deals</a>
+      <a th:href="@{/sellers}" th:classappend="${#strings.contains(currentPath,'/seller') and !#strings.startsWith(currentPath,'/seller-')} ? 'active'">Sellers</a>
+
+      <span class="nav-divider" aria-hidden="true" th:if="${navMenuGroups != null and !navMenuGroups.isEmpty()}"></span>
+
+      <div class="mega-nav mega-nav-browse" th:if="${navMenuGroups != null and !navMenuGroups.isEmpty()}">
+        <a th:href="@{/categories}" class="mega-nav-btn" id="browseTechBtn" aria-expanded="false" aria-haspopup="true" role="button">
+          Browse Technology ▾
+        </a>
+        <div class="mega-panel mega-panel-browse" role="menu" aria-label="Browse technology categories">
+          <div class="mega-browse-columns">
+            <section class="mega-browse-col" th:each="g : ${navMenuGroups}">
+              <div class="mega-panel-head">
+                <span class="mega-panel-icon" th:text="${g.icon}">💻</span>
+                <strong th:text="${g.title}">Group</strong>
+              </div>
+              <div class="mega-panel-list">
+                <a th:each="item : ${g.items}"
+                   th:href="@{/products(category=${item.id})}"
+                   class="mega-panel-item">
+                  <span class="mega-panel-thumb" th:if="${item.imageUrl != null and !#strings.isEmpty(item.imageUrl)}">
+                    <img th:src="${item.imageUrl}" th:alt="${item.name}" loading="lazy"/>
+                  </span>
+                  <span class="mega-panel-fallback" th:unless="${item.imageUrl != null and !#strings.isEmpty(item.imageUrl)}"
+                        th:text="${item.icon}">🔧</span>
+                  <span th:text="${item.name}">CPU</span>
+                </a>
+              </div>
+            </section>
+          </div>
+          <div class="mega-browse-foot">
+            <a th:href="@{/categories}">View all categories →</a>
+            <a th:href="@{/products}">Shop all products →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+</body>
+</html>

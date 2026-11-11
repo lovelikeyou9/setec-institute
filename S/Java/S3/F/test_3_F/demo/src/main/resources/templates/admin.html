@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        header a {
+            color: #0f172a;
+            background: #38bdf8;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 0.5rem 0.9rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        main { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+        h1 { margin: 0 0 0.35rem; }
+        .sub { color: #64748b; margin-bottom: 1.5rem; }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+        .card span { color: #64748b; font-size: 0.9rem; }
+        .card h2 { margin: 0.4rem 0 0; font-size: 2rem; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        th, td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: #e2e8f0; }
+        .panel-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .panel-title a {
+            background: #0ea5e9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 0.45rem 0.8rem;
+            font-weight: 600;
+        }
+        @media (max-width: 800px) {
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <strong>Admin Dashboard</strong>
+    <div>
+        <a th:href="@{/users}">Manage Users</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+</header>
+<main>
+    <h1>Dashboard</h1>
+    <p class="sub">Welcome, <strong th:text="${username}">admin</strong></p>
+
+    <div class="cards">
+        <div class="card">
+            <span>Total Users</span>
+            <h2 th:text="${totalUsers}">0</h2>
+        </div>
+        <div class="card">
+            <span>Admin</span>
+            <h2 th:text="${adminCount}">0</h2>
+        </div>
+        <div class="card">
+            <span>User</span>
+            <h2 th:text="${userCount}">0</h2>
+        </div>
+    </div>
+
+    <div class="panel-title">
+        <h3>Recent Users</h3>
+        <a th:href="@{/users}">CRUD Users</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>UserName</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.userName}"></td>
+            <td th:text="${u.role}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

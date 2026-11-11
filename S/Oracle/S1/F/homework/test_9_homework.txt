@@ -1,0 +1,48 @@
+-- 1
+SELECT last_name, 
+       sysdate, 
+       hire_date,
+       ROUND((sysdate - hire_date)/7, 0) AS "Weeks Between"
+FROM employees;
+
+-- 2
+SELECT sysdate,
+       ADD_MONTHS(sysdate, 2) AS "Sysdate + 2 Months",
+       ADD_MONTHS(sysdate, 24) AS "Sysdate + 2 Years"
+FROM dual;
+
+-- 3
+SELECT last_name,
+       hire_date,
+       ADD_MONTHS(hire_date, -24) AS "Hire Date - 2 Years"
+FROM employees;
+
+-- 4
+SELECT last_name,
+       sysdate,
+       hire_date,
+       ROUND(MONTHS_BETWEEN(sysdate, hire_date), 0) AS "Months Between"
+FROM employees;
+
+-- 5
+SELECT last_name,
+       sysdate,
+       hire_date,
+       ROUND(MONTHS_BETWEEN(sysdate, hire_date), 0) AS "Months Between",
+       ROUND(sysdate - hire_date, 0) AS "Days Between"
+FROM employees;
+
+-- 6
+SELECT sysdate,
+       sysdate + INTERVAL '2' YEAR + INTERVAL '2' MONTH + INTERVAL '14' DAY AS "Future Date"
+FROM dual;
+
+-- 7
+SELECT sysdate,
+       NEXT_DAY(sysdate, 'MONDAY') AS "Next Monday"
+FROM dual;
+
+-- 8
+SELECT sysdate,
+       LAST_DAY(sysdate) AS "Last Day of Month"
+FROM dual;

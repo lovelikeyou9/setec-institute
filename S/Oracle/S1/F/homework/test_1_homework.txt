@@ -1,0 +1,49 @@
+-- 1
+SELECT LOWER(first_name), UPPER(last_name), INITCAP(email) FROM employees
+WHERE salary >= 11000;
+
+-- 2
+SELECT 
+    LOWER(last_name) AS lower_lastname,
+    UPPER(last_name) AS upper_lastname,
+    INITCAP(last_name) AS initcap_lastname
+FROM employees;
+
+-- 3
+SELECT 
+    CONCAT(
+        CONCAT(INITCAP(first_name), ' '),
+        INITCAP(last_name)
+    ) AS "Full Name"
+FROM employees;
+
+-- 4
+SELECT 
+    CONCAT(
+        CONCAT(LOWER(first_name), LOWER(last_name)),
+        '@gmail.com'
+    ) AS Email
+FROM employees;
+
+-- 5
+SELECT last_name || ' earns ' || salary || ' monthly but wants ' || (3 * salary) AS "Dream Salaries" FROM employees;
+
+-- 6
+SELECT 
+    last_name, salary,
+    CONCAT(
+        CONCAT(last_name, ' has salary: '),
+        salary
+    ) AS "Name and Salary"
+FROM employees;
+
+-- 7
+SELECT last_name || q'[ salary with bonus: ]' || (12 * salary) AS "Name and Salary" FROM employees;
+
+-- 8
+SELECT
+    CONCAT(
+        CONCAT(last_name, q'['s total salary: ]'),
+        (salary * NVL(commission_pct, 0) + salary)
+    ) AS "Total Salary"
+FROM employees;

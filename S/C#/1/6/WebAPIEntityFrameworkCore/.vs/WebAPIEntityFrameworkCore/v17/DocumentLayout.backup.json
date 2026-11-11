@@ -1,0 +1,118 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\6\\webapientityframeworkcore\\webapientityframeworkcore\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|solutionrelative:webapientityframeworkcore\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\6\\webapientityframeworkcore\\webapientityframeworkcore\\models\\putproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|solutionrelative:webapientityframeworkcore\\models\\putproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\6\\webapientityframeworkcore\\webapientityframeworkcore\\models\\postproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|solutionrelative:webapientityframeworkcore\\models\\postproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\6\\webapientityframeworkcore\\webapientityframeworkcore\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|solutionrelative:webapientityframeworkcore\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\6\\webapientityframeworkcore\\webapientityframeworkcore\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|solutionrelative:webapientityframeworkcore\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\6\\webapientityframeworkcore\\webapientityframeworkcore\\models\\applicationddcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55DA2D38-C8F9-4BD0-A025-9E22A21B6E9C}|WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore.csproj|solutionrelative:webapientityframeworkcore\\models\\applicationddcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PutProduct.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Models\\PutProduct.cs",
+              "RelativeDocumentMoniker": "WebAPIEntityFrameworkCore\\Models\\PutProduct.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Models\\PutProduct.cs",
+              "RelativeToolTip": "WebAPIEntityFrameworkCore\\Models\\PutProduct.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T06:48:52.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PostProduct.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Models\\PostProduct.cs",
+              "RelativeDocumentMoniker": "WebAPIEntityFrameworkCore\\Models\\PostProduct.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Models\\PostProduct.cs",
+              "RelativeToolTip": "WebAPIEntityFrameworkCore\\Models\\PostProduct.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA8wAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T06:45:39.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "WebAPIEntityFrameworkCore\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "WebAPIEntityFrameworkCore\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAqwBwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T07:54:37.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "WebAPIEntityFrameworkCore\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Models\\Product.cs",
+              "RelativeToolTip": "WebAPIEntityFrameworkCore\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T07:29:54.451Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationDdContext.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Models\\ApplicationDdContext.cs",
+              "RelativeDocumentMoniker": "WebAPIEntityFrameworkCore\\Models\\ApplicationDdContext.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\Models\\ApplicationDdContext.cs",
+              "RelativeToolTip": "WebAPIEntityFrameworkCore\\Models\\ApplicationDdContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T07:25:07.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\appsettings.json",
+              "RelativeDocumentMoniker": "WebAPIEntityFrameworkCore\\appsettings.json",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\6\\WebAPIEntityFrameworkCore\\WebAPIEntityFrameworkCore\\appsettings.json",
+              "RelativeToolTip": "WebAPIEntityFrameworkCore\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-21T07:03:46.05Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

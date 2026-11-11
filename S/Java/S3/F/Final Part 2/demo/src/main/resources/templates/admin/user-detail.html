@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">User Profile — Admin</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: adminSidebar}"></aside>
+    <div class="dash-main">
+      <div class="section-head" style="margin-bottom:1rem">
+        <div>
+          <a th:href="@{/admin/users}" class="btn btn-outline btn-sm" style="margin-bottom:.5rem">← Users Lists</a>
+          <h1 style="font-size:1.4rem" th:text="${profileUser.fullName}">User</h1>
+          <p style="color:var(--text-muted);margin:.25rem 0 0" th:text="${profileUser.email}">email</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start">
+          <a th:if="${profileUser.role.name() != 'ADMIN'}"
+             th:href="@{/profile/{id}(id=${profileUser.id})}"
+             class="btn btn-primary btn-sm" target="_blank" rel="noopener">View Profile</a>
+          <a th:if="${linkedSellerId != null}"
+             th:href="@{/profile/seller/{id}(id=${linkedSellerId})}"
+             class="btn btn-outline btn-sm" target="_blank" rel="noopener">Seller Profile</a>
+        </div>
+      </div>
+
+      <div class="exec-kpi-grid">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Total Spent</span><span class="exec-ico teal">$</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(totalSpent, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up" th:text="${orderCount + ' orders · avg $' + #numbers.formatDecimal(avgOrder, 1, 'COMMA', 2, 'POINT')}">0 orders</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Units Bought</span><span class="exec-ico green">▣</span></div>
+          <strong th:text="${unitsBought}">0</strong>
+          <em class="purple" th:text="${wishlistCount + ' wishlist items'}">0 wishlist</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>This Month</span><span class="exec-ico gold">◷</span></div>
+          <strong th:text="${ordersMonth}">0</strong>
+          <em class="warn" th:text="${'$' + #numbers.formatDecimal(spentMonth, 1, 'COMMA', 2, 'POINT') + ' spent'}">$0</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>This Year</span><span class="exec-ico purple">◎</span></div>
+          <strong th:text="${ordersYear}">0</strong>
+          <em class="purple" th:text="${'$' + #numbers.formatDecimal(spentYear, 1, 'COMMA', 2, 'POINT') + ' spent'}">$0</em>
+        </article>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Account Information</h3><p>Profile &amp; contact</p></div>
+          </div>
+          <dl class="profile-dl">
+            <div><dt>Full name</dt><dd th:text="${profileUser.fullName}">Name</dd></div>
+            <div><dt>Email</dt><dd th:text="${profileUser.email}">email</dd></div>
+            <div><dt>Phone</dt><dd th:text="${profileUser.phone != null ? profileUser.phone : '—'}">—</dd></div>
+            <div><dt>Role</dt><dd th:text="${profileUser.role.name()}">CUSTOMER</dd></div>
+            <div><dt>Status</dt><dd th:text="${profileUser.enabled ? 'Active' : 'Banned'}">Active</dd></div>
+            <div><dt>Joined</dt><dd th:text="${profileUser.createdAt != null ? #temporals.format(profileUser.createdAt, 'dd MMM yyyy HH:mm') : '—'}">—</dd></div>
+            <div><dt>Orders today</dt><dd th:text="${ordersToday + ' · $' + #numbers.formatDecimal(spentToday, 1, 'COMMA', 2, 'POINT')}">0</dd></div>
+            <div><dt>Saved addresses</dt><dd th:text="${#lists.size(addresses)}">0</dd></div>
+          </dl>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Purchase Trend</h3><p>Orders &amp; spend · FY<span th:text="${year}">2026</span></p></div>
+          </div>
+          <div class="exec-chart-lg"><canvas id="userTrendChart"></canvas></div>
+        </section>
+      </div>
+
+      <div class="exec-grid-2" style="margin-top:1rem">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Usually Buys</h3><p>Top categories</p></div>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Category</th><th>Units</th><th>Spent</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(topCategories)}"><td colspan="3" style="text-align:center;color:var(--text-muted)">No purchases yet</td></tr>
+                <tr th:each="row : ${topCategories}">
+                  <td th:text="${row.label}">CPU</td>
+                  <td th:text="${row.qty}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.amount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Favorite Products</h3><p>Most purchased items</p></div>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Product</th><th>Units</th><th>Spent</th></tr></thead>
+              <tbody>
+                <tr th:if="${#lists.isEmpty(topProducts)}"><td colspan="3" style="text-align:center;color:var(--text-muted)">No purchases yet</td></tr>
+                <tr th:each="row : ${topProducts}">
+                  <td th:text="${row.label}">Product</td>
+                  <td th:text="${row.qty}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.amount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <section class="exec-card" style="margin-top:1rem">
+        <div class="exec-card-head">
+          <div><h3>Recent Orders</h3><p>Latest purchases</p></div>
+        </div>
+        <div class="data-table-wrap" style="border:none;box-shadow:none">
+          <table class="data-table">
+            <thead><tr><th>Order</th><th>Seller</th><th>Status</th><th>Total</th><th>Date</th></tr></thead>
+            <tbody>
+              <tr th:if="${#lists.isEmpty(recentOrders)}"><td colspan="5" style="text-align:center;color:var(--text-muted)">No orders yet</td></tr>
+              <tr th:each="o : ${recentOrders}">
+                <td th:text="${o.orderNumber}">CH-001</td>
+                <td th:text="${o.seller != null ? o.seller.storeName : '—'}">Store</td>
+                <td><span class="status-pill yellow" th:text="${o.status.name()}">STATUS</span></td>
+                <td th:text="${'$' + #numbers.formatDecimal(o.total, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                <td th:text="${o.placedAt != null ? #temporals.format(o.placedAt, 'dd MMM yyyy') : '—'}">01 Jan</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+<script th:inline="javascript">
+  const months = /*[[${months}]]*/ [];
+  const ordersTrend = /*[[${ordersTrend}]]*/ [];
+  const spendTrend = /*[[${spendTrend}]]*/ [];
+  Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+  Chart.defaults.color = '#5a6570';
+  new Chart(document.getElementById('userTrendChart'), {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [
+        { label: 'Orders', data: ordersTrend, borderColor: '#1d4ed8', backgroundColor: 'rgba(37,99,235,.15)', fill: true, tension: .35, pointRadius: 0 },
+        { label: 'Spend ($)', data: spendTrend, borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,.12)', fill: true, tension: .35, pointRadius: 0 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, grid: { color: '#eef2f6' } }, x: { grid: { display: false } } } }
+  });
+</script>
+</body>
+</html>

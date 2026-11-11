@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "ed65e43f-8cda-4d73-9da8-078c64ed1c60",
+		"name": "Product API",
+		"description": "CRUD for Product Laravel Controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21565376",
+		"_collection_link": "https://www.postman.com/winter-firefly-844042/workspace/fakestoreapi/collection/21565376-ed65e43f-8cda-4d73-9da8-078c64ed1c60?action=share&source=collection_link&creator=21565376"
+	},
+	"item": [
+		{
+			"name": "List All product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sv-gen-api.bczin2zin2takeo.us/api/product",
+					"protocol": "https",
+					"host": [
+						"sv-gen-api",
+						"bczin2zin2takeo",
+						"us"
+					],
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sv-gen-api.bczin2zin2takeo.us/api/product?id=1",
+					"protocol": "https",
+					"host": [
+						"sv-gen-api",
+						"bczin2zin2takeo",
+						"us"
+					],
+					"path": [
+						"api",
+						"product"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Coca\",\n  \"price\": 0.5,\n  \"qty\": 100,\n  \"imageUrl\": \"https://example.com/coca.jpg\"\n}"
+				},
+				"url": {
+					"raw": "https://sv-gen-api.bczin2zin2takeo.us/api/create",
+					"protocol": "https",
+					"host": [
+						"sv-gen-api",
+						"bczin2zin2takeo",
+						"us"
+					],
+					"path": [
+						"api",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Coca-Cola\",\n  \"price\": 0.6,\n  \"qty\": 90,\n  \"imageUrl\": \"https://example.com/coca-updated.jpg\"\n}"
+				},
+				"url": {
+					"raw": "https://sv-gen-api.bczin2zin2takeo.us/api/product/1",
+					"protocol": "https",
+					"host": [
+						"sv-gen-api",
+						"bczin2zin2takeo",
+						"us"
+					],
+					"path": [
+						"api",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sv-gen-api.bczin2zin2takeo.us/api/product/1",
+					"protocol": "https",
+					"host": [
+						"sv-gen-api",
+						"bczin2zin2takeo",
+						"us"
+					],
+					"path": [
+						"api",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

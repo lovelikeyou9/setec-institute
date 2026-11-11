@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">My Account — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/dash-sidebar :: sidebar}"></aside>
+    <div class="dash-main">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
+        <div>
+          <h1 style="font-size:1.4rem;margin-bottom:.35rem">Welcome back, <span th:text="${currentUser.fullName}">Customer</span></h1>
+          <p style="color:var(--text-secondary)">Manage your orders, wishlist, and account settings.</p>
+        </div>
+        <a class="btn btn-outline btn-sm" th:href="@{/profile/{id}(id=${currentUser.id})}">View public profile</a>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="label">Total Orders</div>
+          <div class="value brand" th:text="${totalOrders}">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">In Progress</div>
+          <div class="value accent" th:text="${pendingOrders}">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Delivered</div>
+          <div class="value" th:text="${completedOrders}">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Wishlist</div>
+          <div class="value" th:text="${wishlistItems}">0</div>
+        </div>
+      </div>
+
+      <h2 style="font-size:1.1rem;margin-bottom:1rem">Recent Orders</h2>
+      <div th:if="${#lists.isEmpty(orders)}" class="empty-state">
+        <div class="icon">📦</div>
+        <h3>No orders yet</h3>
+        <p>When you place an order, it will show up here.</p>
+        <a th:href="@{/products}" class="btn btn-primary" style="margin-top:1rem">Start Shopping</a>
+      </div>
+      <div class="data-table-wrap" th:if="${!#lists.isEmpty(orders)}">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Seller</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="o, iter : ${orders}" th:if="${iter.index < 5}">
+              <td th:text="${o.orderNumber}">CH-001</td>
+              <td th:text="${o.seller.storeName}">Store</td>
+              <td th:text="${o.placedAt != null ? #temporals.format(o.placedAt, 'dd MMM yyyy') : '—'}">01 Jan</td>
+              <td>
+                <span th:replace="~{fragments/status :: orderPill(${o.status})}"></span>
+              </td>
+              <td th:text="${'$' + #numbers.formatDecimal(o.total, 1, 2)}">$0</td>
+              <td><a th:href="@{/orders/{n}(n=${o.orderNumber})}" class="btn btn-outline btn-sm">Track</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <a th:if="${!#lists.isEmpty(orders)}" th:href="@{/account/orders}" style="display:inline-block;margin-top:1rem">View all orders →</a>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+1🤔
+History company of Stripe
+Stripe, Inc. is an American financial technology company founded by brothers Patrick Collison and John Collison.
+
+1.1🤔
+How Stripe process
+2009: Patrick and John Collison started working on what became Stripe.
+
+2010: Stripe was incorporated and began developing its payment infrastructure.
+
+2011: Stripe launched publicly, initially focusing on making online payments easier for developers.
+
+2013: Stripe expanded its payment services and introduced more tools for online businesses.
+
+2016–2019: Expanded internationally and added more payment, billing, fraud-prevention, and business tools.
+
+2020s: Stripe became a major global payments/financial infrastructure company serving businesses around the world.
+
+1.2🤔
+How Stripe earn/income money?
+Stripe earns income mainly by charging fees to businesses (merchants) that use Stripe.
+
+https://chatgpt.com/s/p_6aa0d9a4a5b481919a08b15b1c9c1f80
+
+1.3🤔
+Overview about company Stripe
+
+Stripe is a financial technology (fintech) and technology company that provides payment and financial infrastructure for businesses. Its mission is to increase the GDP of the internet.
+
+https://chatgpt.com/s/p_6aa0da01a86c8191ac34f85f0db2cc41
+
+
+
+
+2🤔
+History company of Visa
+Visa Inc. is a global payments technology company. Unlike Stripe, Visa is a card/payment network, connecting banks, merchants, and cardholders.
+
+
+
+3🤔
+What is Sandbox?
+Sandbox means a safe testing environment where you can test Stripe payments without using real money.
+
+Real world
+Your Website
+     ↓
+Stripe Live
+     ↓
+Real Visa Card
+     ↓
+REAL MONEY 💰
+Sandbox / Test Mode
+Your Website
+     ↓
+Stripe Sandbox
+     ↓
+Test Visa Card
+     ↓
+NO REAL MONEY
+
+For example, you can use Stripe's test card details to simulate:
+Payment successful ✅
+Payment declined ❌
+Insufficient funds ❌
+3D Secure authentication
+
+
+
+In your project
+You should use:
+Sandbox/Test Mode
+       ↓
+pk_test_...    ← Publishable key
+sk_test_...    ← Secret key
+       ↓
+Test Visa card
+       ↓
+Payment succeeds
+       ↓
+Order = PAID
+
+So when you saw:
+"You're testing in a sandbox. Changes you make here don't affect real customers or payments."
+
+
+https://chatgpt.com/s/p_6aa11624ffbc8191bd3393a610bfe3a6
+
+
+4🤔
+[ pk_test_... ] and [ sk_test_... ] what is from user or bank?
+
+Neither. pk_test_... and sk_test_... come from Stripe, not from the user or the bank.
+
+Think of it like this:
+Your Stripe account
+       ↓
+     STRIPE
+       ↓
+ ┌───────────────┐
+ │ pk_test_...   │ ← Publishable key
+ │ sk_test_...   │ ← Secret key
+ └───────────────┘
+What about the Visa card?
+The user/customer provides the card information during checkout:
+Customer
+   ↓
+Visa test card
+   ↓
+Stripe
+
+If you mean what the two Stripe keys are for:
+1. pk_test_... — Publishable key
+    - Used on the frontend
+    - Helps your website communicate with Stripe
+    - Can be exposed publicly
+2. sk_test_... — Secret key
+    - Used on your backend/server
+    - Lets your server securely create/manage Stripe payments
+    - Must be kept secret
+
+
+
+5🤔
+[ pk_live_... ← frontend ]
+[ sk_live_... ← backend ]
+is have my money?
+No. pk_live_... and sk_live_... do not themselves contain your money.
+
+They are live API keys that allow your application to communicate with your real Stripe account.
+
+If a customer pays you $50:
+Customer
+   ↓
+Visa card
+   ↓
+Stripe Live
+   ↓
+$50 payment
+   ↓
+Your Stripe balance
+   ↓
+Payout to your bank account
+So:
+🔑 Live keys = access/authorization credentials
+💰 Stripe balance = where payment funds are held before payout
+🏦 Bank account = where Stripe can send your payout
+
+
+
+6🤔
+bank will send money to them?
+
+If you mean “Does the bank send the customer's money to Stripe?” — yes, generally the payment flow is like this:
+Customer
+   ↓
+Customer's bank
+   ↓
+Visa network
+   ↓
+Stripe
+   ↓
+Your Stripe balance
+   ↓
+Your bank account
+
+For example, a customer pays $50 with a Visa card:
+  1. Customer's bank authorizes the $50 payment.
+  2. The card payment is processed through the card network.
+  3. Stripe receives/processes the payment funds.
+  4. Stripe records the funds in your Stripe balance, minus applicable fees.
+  5. Stripe later pays out the available funds to your connected bank account.
+
+https://chatgpt.com/s/p_6aa11db1c7d0819193a38aad3ff37aee
+
+
+7🤔
+explain until they get my money
+
+1. CUSTOMER
+   Customer wants to buy your $50 product
+          ↓
+2. VISA CARD
+   Customer enters their Visa card
+          ↓
+3. CUSTOMER'S BANK
+   The customer's bank checks:
+   "Can this customer pay $50?"
+          ↓
+4. VISA NETWORK
+   Visa helps route the payment between
+   the customer's bank and Stripe
+          ↓
+5. STRIPE
+   Stripe processes the payment
+   Payment = $50
+          ↓
+6. YOUR STRIPE BALANCE
+   The payment is added to your Stripe balance
+   (after applicable Stripe fees)
+          ↓
+7. STRIPE PAYOUT
+   Stripe sends the available payout
+   to your connected bank account
+          ↓
+8. YOUR BANK ACCOUNT
+   Your bank receives the payout
+          ↓
+9. YOU 💰
+   You now have the money in your bank account
+
+
+
+Sure. Here is a simple real-money example using a $50 Visa purchase:
+
+Example: Customer pays $50
+1. Customer buys your product for $50.
+  - Product price = $50
+  - Customer chooses Visa.
+2. Customer enters their Visa card.
+  - Card details are entered into the Stripe payment page.
+3. Stripe asks the customer's bank to authorize the payment.
+  - The bank checks whether the card is valid and whether the customer can pay $50.
+  - If everything is okay → Approved ✅
+4. The payment travels through the card network.
+  - The Visa network helps route the transaction between the customer's bank and Stripe/payment processor.
+5. Stripe processes the $50 payment.
+  - Stripe records the successful payment in your Stripe account.
+6. Money becomes available in your Stripe balance.
+   Example:
+     $50 payment
+     - Stripe fees
+     - = amount available for payout
+7. Stripe sends a payout to your connected bank account.
+  - This happens according to your Stripe payout schedule.
+8. Your bank receives the payout.
+9. You have the money in your bank account. 💰
+
+
+Money becomes available in your Stripe balance.
+
+Example:
+$50 payment
+- Stripe fees
+= amount available for payout
+Stripe sends a payout to your connected bank account.
+This happens according to your Stripe payout schedule.
+Your bank receives the payout.
+You have the money in your bank account. 💰
+
+
+Full flow:
+Customer
+   │
+   │ Pays $50
+   ▼
+Visa Card
+   │
+   ▼
+Customer's Bank
+   │
+   │ Approves $50
+   ▼
+Visa Network
+   │
+   ▼
+Stripe
+   │
+   │ Successful payment
+   ▼
+Your Stripe Balance
+   │
+   │ Payout
+   ▼
+Your Bank Account
+   │
+   ▼
+YOU 💰
+
+
+
+----------------------------------------
+TEST / SANDBOX
+pk_test_ + sk_test_ → NO REAL MONEY
+
+LIVE
+pk_live_ + sk_live_ → REAL MONEY
+----------------------------------------
+
+
+
+
+8🤔
+when user buy
+what stripe take
+example
+id or name or else?
+
+
+For example, your website can send Stripe:
+- Product ID: 101
+- Product name: Headset
+- Amount: $50
+- Quantity: 1
+- Currency: USD
+
+Stripe also creates its own payment/checkout IDs, such as:
+- Payment ID: pi_...
+- Checkout Session ID: cs_...
+
+Simple flow:
+Your Website
+   ↓
+Product ID + price + quantity
+   ↓
+Stripe
+   ↓
+Customer enters Visa details
+   ↓
+Payment processed
+
+
+Your data
+├── Product ID: 101
+├── Product Name: Headset
+└── Quantity: 1
+
+Stripe data
+├── Amount: $50
+├── Currency: USD
+├── PaymentIntent ID: pi_...
+└── Checkout Session ID: cs_...
+
+
+
+
+9🤔
+Sure. The flow is:
+CUSTOMER
+   ↓
+Select Headset
+   ↓
+Your Website
+   ├── Product ID: 101
+   ├── Name: Headset
+   ├── Quantity: 1
+   └── Price: $50
+   ↓
+Your Backend
+   ↓
+Create Stripe Checkout Session
+   ↓
+STRIPE
+   ├── Checkout Session: cs_...
+   ├── PaymentIntent: pi_...
+   ├── Amount: $50
+   └── Currency: USD
+   ↓
+Customer enters Visa card
+   ↓
+Customer's Bank
+   ↓
+Visa Network
+   ↓
+Payment approved ✅
+   ↓
+STRIPE
+   ↓
+Your Backend
+   ↓
+Save/update your Order
+   ├── Product ID: 101
+   ├── Quantity: 1
+   ├── Amount: $50
+   ├── Payment ID: pi_...
+   └── Session ID: cs_...
+   ↓
+Order = PAID
+
+
+
+10🤔
+Yes. Here is the complete flow from the beginning until you receive the money:
+
+1. YOU
+   Create Stripe account
+        ↓
+2. STRIPE
+   Give you API keys
+   pk_live_... + sk_live_...
+        ↓
+3. YOUR WEBSITE
+   Customer views your products
+        ↓
+4. CUSTOMER
+   Chooses Headset
+   Price = $50
+        ↓
+5. YOUR WEBSITE
+   Add to Cart
+        ↓
+6. YOUR BACKEND
+   Sends product/price information to Stripe
+        ↓
+7. STRIPE
+   Creates Checkout Session
+   cs_...
+        ↓
+8. CUSTOMER
+   Enters Visa card
+        ↓
+9. CUSTOMER'S BANK
+   Checks and authorizes $50
+        ↓
+10. VISA NETWORK
+    Processes/routes the card transaction
+        ↓
+11. STRIPE
+    Payment succeeds
+    PaymentIntent = pi_...
+        ↓
+12. STRIPE
+    Funds become available in your Stripe balance
+    (minus applicable fees)
+        ↓
+13. STRIPE
+    Sends payout to your connected bank account
+        ↓
+14. YOUR BANK
+    Receives the payout
+        ↓
+15. YOU 💰
+    Receive the money
+
+
+
+11🤔
+Stripe will give me [ cs_... or pi_.... ]
+Stripe creates those IDs:
+
+Customer
+   ↓
+Your Website
+   ↓
+Your Backend
+   ↓
+Stripe
+   ↓
+Stripe creates:
+   cs_...  ← Checkout Session ID
+   pi_...  ← PaymentIntent ID
+   ↓
+Your Backend receives the IDs
+   ↓
+Your Database saves them
+
+
+
+
+12🤔
+So your project flow is basically
+ACCOUNT
+   ↓
+TEST/SANDBOX
+   ↓
+API KEYS
+   ↓
+WEBSITE
+   ↓
+PRODUCT
+   ↓
+CART
+   ↓
+CHECKOUT
+   ↓
+STRIPE
+   ↓
+VISA
+   ↓
+CUSTOMER'S BANK
+   ↓
+PAYMENT SUCCESS/FAIL
+   ↓
+WEBHOOK
+   ↓
+YOUR DATABASE
+   ↓
+ORDER = PAID
+   ↓
+STRIPE BALANCE
+   ↓
+PAYOUT
+   ↓
+YOUR BANK
+   ↓
+YOU 💰
+
+
+

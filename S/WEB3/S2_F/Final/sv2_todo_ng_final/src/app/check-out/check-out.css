@@ -1,0 +1,67 @@
+body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2rem 1rem;
+}
+
+.checkout-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+}
+
+h2,
+h4 {
+    font-weight: 700;
+    color: #212529;
+}
+
+label {
+    font-weight: 600;
+}
+
+.order-summary {
+    background: #f8f9fa;
+    padding: 1.5rem 1.8rem;
+    border-radius: 12px;
+    box-shadow: inset 0 0 5px #ddd;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.summary-item.total {
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-top: 2px solid #dee2e6;
+    padding-top: 0.7rem;
+    color: #212529;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #004085;
+}
+
+.small-img {
+  width: 80px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px; /* optional for rounded corners */
+}

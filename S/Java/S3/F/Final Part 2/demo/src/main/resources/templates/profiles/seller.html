@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Seller Profile — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content">
+  <div class="container profile-page" style="padding-top:1.5rem;padding-bottom:2.5rem">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <a th:href="@{/sellers}">Sellers</a>
+      <span class="sep">/</span>
+      <span th:text="${seller.storeName}">Store</span>
+    </nav>
+
+    <div class="store-banner profile-cover"
+         th:style="|background-image:url('${seller.bannerUrl != null and !#strings.isEmpty(seller.bannerUrl) ? #strings.replace(seller.bannerUrl,' ','%20') : '/uploads/avatars/cover%20photos/photo_2026-10-09_09-47-15.jpg'}');|">
+    </div>
+
+    <section class="profile-store-panel">
+      <img class="profile-store-logo" th:src="${seller.logoUrl}" th:alt="${seller.storeName}"/>
+      <div class="profile-store-info">
+        <div class="profile-store-title-row">
+          <h1 th:text="${seller.storeName}">Store</h1>
+          <span class="status-pill" th:classappend="${rankTone}" th:text="${rankLabel}">Top Seller</span>
+          <span class="badge badge-verified" th:if="${seller.verified}">✓ Verified</span>
+        </div>
+        <p class="profile-store-desc" th:text="${seller.description}">Store description</p>
+        <div class="profile-stars">
+          <span class="stars">
+            <th:block th:each="i : ${#numbers.sequence(1,5)}">
+              <span th:classappend="${i <= starFull} ? ' on'" th:text="${i <= starFull ? '★' : '★'}">★</span>
+            </th:block>
+          </span>
+          <strong th:text="${#numbers.formatDecimal(stars, 1, 1)}">4.9</strong>
+          <span class="muted" th:text="${'(' + reviewCount + ' reviews)'}">(0 reviews)</span>
+          <span class="dot" th:if="${seller.location != null}">·</span>
+          <span class="muted" th:text="${seller.location}">Phnom Penh</span>
+        </div>
+      </div>
+      <div class="profile-store-actions">
+        <th:block th:if="${currentSellerId == null or currentSellerId != seller.id}">
+          <span th:replace="~{fragments/follow :: btn(${seller.id}, ${following}, ${'/seller/' + seller.id})}"></span>
+        </th:block>
+        <a class="btn btn-outline btn-sm" th:if="${ownerUserId != null}"
+           th:href="@{/profile/{id}(id=${ownerUserId})}">Owner profile</a>
+        <a class="btn btn-primary btn-sm" th:if="${currentSellerId != null and currentSellerId == seller.id}"
+           th:href="@{/seller-dashboard/settings}">Edit store &amp; cover</a>
+      </div>
+    </section>
+
+    <div class="profile-kpi-grid">
+      <article class="profile-kpi">
+        <span class="label">Rank</span>
+        <strong th:text="${rankLabel}">Trusted Seller</strong>
+      </article>
+      <article class="profile-kpi">
+        <span class="label">Stars</span>
+        <strong th:text="${#numbers.formatDecimal(stars, 1, 1) + ' ★'}">4.9 ★</strong>
+      </article>
+      <article class="profile-kpi">
+        <span class="label">Products selling</span>
+        <strong th:text="${#numbers.formatInteger(productsSelling, 1, 'COMMA')}">0</strong>
+      </article>
+      <article class="profile-kpi">
+        <span class="label">Units sold</span>
+        <strong th:text="${#numbers.formatInteger(unitsSold, 1, 'COMMA')}">0</strong>
+      </article>
+      <article class="profile-kpi">
+        <span class="label">Followers</span>
+        <strong th:text="${#numbers.formatInteger(followers, 1, 'COMMA')}">0</strong>
+      </article>
+      <article class="profile-kpi">
+        <span class="label">Response rate</span>
+        <strong th:text="${responseRate + '%'}">95%</strong>
+      </article>
+    </div>
+
+    <nav class="store-nav">
+      <a href="#products" class="active">Products</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <section id="products" class="profile-section">
+      <div class="section-head" style="margin-bottom:1rem">
+        <h2 class="profile-section-title">Products for sale</h2>
+      </div>
+      <div th:if="${products.totalElements == 0}" class="empty-state">
+        <div class="icon">📦</div>
+        <h3>No products listed yet</h3>
+        <p>This seller hasn't published any products.</p>
+      </div>
+      <div class="product-grid" th:if="${products.totalElements > 0}">
+        <th:block th:each="product : ${products.content}"><div th:replace="~{fragments/card :: card}"></div></th:block>
+      </div>
+      <div class="pagination" th:if="${products.totalPages > 1}">
+        <a th:if="${products.number > 0}"
+           th:href="@{/seller/{id}(id=${seller.id},page=${products.number - 1})}">← Prev</a>
+        <th:block th:each="i : ${#numbers.sequence(0, products.totalPages - 1)}">
+          <span class="current" th:if="${i == products.number}" th:text="${i + 1}">1</span>
+          <a th:if="${i != products.number}"
+             th:href="@{/seller/{id}(id=${seller.id},page=${i})}" th:text="${i + 1}">1</a>
+        </th:block>
+        <a th:if="${products.number < products.totalPages - 1}"
+           th:href="@{/seller/{id}(id=${seller.id},page=${products.number + 1})}">Next →</a>
+      </div>
+    </section>
+
+    <section id="reviews" class="form-card profile-section">
+      <h3 class="profile-section-title">Customer reviews</h3>
+      <div th:if="${#lists.isEmpty(reviews)}" class="empty-state" style="padding:1.5rem">
+        <div class="icon">⭐</div>
+        <h3>No reviews yet</h3>
+        <p>Reviews from buyers will appear here.</p>
+      </div>
+      <article class="review-card" th:each="r : ${reviews}">
+        <div class="review-header">
+          <a class="review-avatar" th:href="@{/profile/{id}(id=${r.user.id})}"
+             th:text="${#strings.substring(r.user.fullName,0,1)}">U</a>
+          <div class="review-meta">
+            <div class="review-name-row">
+              <a class="table-link-btn" th:href="@{/profile/{id}(id=${r.user.id})}" th:text="${r.user.fullName}">Buyer</a>
+              <span class="badge badge-verified" th:if="${r.verifiedPurchase}">Verified Purchase ✓</span>
+            </div>
+            <div class="rating-row">
+              <span class="stars">
+                <th:block th:each="i : ${#numbers.sequence(1,5)}">
+                  <span th:classappend="${i <= r.rating} ? ' on'" th:text="'★'">★</span>
+                </th:block>
+              </span>
+              <span th:text="${r.rating}">5</span>
+              <span class="muted" th:if="${r.product != null}">
+                · <a th:href="@{/product/{slug}(slug=${r.product.slug})}" th:text="${r.product.name}">Product</a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p class="review-body" th:text="${r.comment}">Review comment</p>
+        <div class="seller-reply" th:if="${r.sellerResponse != null and !#strings.isEmpty(r.sellerResponse)}">
+          <strong>Seller response:</strong>
+          <p th:text="${r.sellerResponse}">Thanks!</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="about" class="form-card profile-section">
+      <h3 class="profile-section-title">About the store</h3>
+      <p class="profile-about-text" th:text="${seller.description}">Description</p>
+      <dl class="profile-about-dl">
+        <div><dt>Location</dt><dd th:text="${seller.location != null ? seller.location : '—'}">Phnom Penh</dd></div>
+        <div><dt>Joined</dt><dd th:text="${seller.joinedAt != null ? #temporals.format(seller.joinedAt, 'MMM yyyy') : '—'}">Jan 2025</dd></div>
+        <div><dt>Rank</dt><dd th:text="${rankLabel}">Verified</dd></div>
+        <div><dt>Response rate</dt><dd th:text="${responseRate + '%'}">95%</dd></div>
+      </dl>
+    </section>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

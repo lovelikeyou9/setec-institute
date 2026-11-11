@@ -1,0 +1,177 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\2\\pos_system_product\\pos_system_product\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\paymentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\mydata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\mydata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\productcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\productcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\showorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\showorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\productcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\productcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\pos_system_product\\showorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B6AB465F-093E-495B-9B07-7F3C78DB773B}|POS_System_Product\\POS_System_Product.csproj|solutionrelative:pos_system_product\\showorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\Program.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\Program.cs",
+              "RelativeToolTip": "POS_System_Product\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T10:10:19.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PaymentForm.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\PaymentForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "RelativeToolTip": "POS_System_Product\\PaymentForm.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAAwHkAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T13:17:58.198Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PaymentForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\PaymentForm.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\PaymentForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\PaymentForm.cs [Design]",
+              "RelativeToolTip": "POS_System_Product\\PaymentForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T12:59:29.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MyData.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\MyData.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\MyData.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\MyData.cs",
+              "RelativeToolTip": "POS_System_Product\\MyData.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAQwIAAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T12:31:41.88Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ShowOrderDetail.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\ShowOrderDetail.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "RelativeToolTip": "POS_System_Product\\ShowOrderDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T02:22:05.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ShowOrderDetail.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\ShowOrderDetail.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\ShowOrderDetail.cs [Design]",
+              "RelativeToolTip": "POS_System_Product\\ShowOrderDetail.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-03T07:10:41.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ProductControl.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\ProductControl.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "RelativeToolTip": "POS_System_Product\\ProductControl.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAuwFEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T02:12:41.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductControl.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\ProductControl.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\ProductControl.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\ProductControl.cs [Design]",
+              "RelativeToolTip": "POS_System_Product\\ProductControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T02:09:24.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\Form1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "RelativeToolTip": "POS_System_Product\\Form1.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAawDMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T03:03:18.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\Form1.cs",
+              "RelativeDocumentMoniker": "POS_System_Product\\Form1.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2\\POS_System_Product\\POS_System_Product\\Form1.cs [Design]",
+              "RelativeToolTip": "POS_System_Product\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T02:04:33.385Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

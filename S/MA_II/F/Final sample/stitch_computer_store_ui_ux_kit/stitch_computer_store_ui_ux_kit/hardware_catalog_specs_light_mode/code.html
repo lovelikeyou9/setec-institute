@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#004e9f", "primary-container": "#00b4d8", "secondary": "#0284c7", "surface": "#ffffff", "surface-container-lowest": "#ffffff", "surface-container-low": "#f8fafc", "surface-container": "#f1f5f9", "surface-container-high": "#e2e8f0", "surface-container-highest": "#cbd5e1", "on-surface": "#0f172a", "on-surface-variant": "#475569", "outline": "#94a3b8", "outline-variant": "#e2e8f0" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "2.5rem", "space-lg": "1.5rem", "gutter": "1.5rem", "space-xs": "0.25rem", "margin-mobile": "1rem", "gutter-mobile": "0.75rem", "margin": "2rem", "space-sm": "0.5rem", "space-md": "1rem" }, fontFamily: { "spec-code-sm": ["JetBrains Mono"], "headline-md": ["Plus Jakarta Sans"], "spec-code-md": ["JetBrains Mono"], "headline-lg": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "spec-code-lg": ["JetBrains Mono"], "body-lg": ["Inter"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "body-md": ["Inter"], "label-sm": ["JetBrains Mono"], "label-md": ["Inter"] }, fontSize: { "spec-code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "spec-code-md": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.025em", "fontWeight": "800" }], "spec-code-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#ffffff;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-white font-body-md text-body-md text-slate-900 antialiased min-h-screen flex flex-col selection:bg-cyan-100 selection:text-cyan-900"><header class="fixed top-0 w-full z-50 pt-safe bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><img alt="NEXUS PC Hardware Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VekO7HWFQJ7naXYLl5aToO4_3ghqJLzruEFyiDJTeTikPxSY15yOLHZK148NYZ_01qiS_3NcxKOZJ9Y1PqrehMjOslvLLZMxdGqY59gVqF3Tfy7XvIovqm2GEGVS1GEfT2iN3HoOFt8NjV8OgjEVHjl-cCj1U4GCczuoFF701SyzBCQrN0PqiB4t5Jt9vwcxq3XHa2G1p1Rqop9j4B-oG33IE0kCcTNy0MsmD0D6qssEvTorF-aFBei6XA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-slate-900">NEXUS PC</span><span class="font-spec-code-sm text-spec-code-sm text-cyan-600 uppercase tracking-widest hidden sm:inline-block font-semibold">Catalog</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Toggle Search" class="w-11 h-11 flex items-center justify-center rounded-lg text-slate-600 hover:text-cyan-600 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-xl">search</span></button><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center rounded-lg text-slate-600 hover:text-cyan-600 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_6px_rgba(6,182,212,0.6)]"></span></button><a class="ml-space-xs flex items-center justify-center p-0.5 rounded-full ring-2 ring-slate-200 transition-transform active:scale-95" data-path="profile" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2mvaApXROC66O0KfbRBcXkmFfwbrk4NuBjPT6T1NILYRun-jwsmRPUgzvKMO_cGt8-pTyysZ8CQAZ6N7MnVn_5p9Z4XCtMFeZSarAhV8ycUf9l-4cph2kYKHaxkvLD2KW5GXgEnpcZJFvu5MYf8R4Pq3rh2krC4TzNLIVOdKX63uTcC414giCEeFYevNWE-Cq_0qE_TUvWbH2ZniYqkY-rfQ5Xyb-j5sZ8TR-IZds9GB-emQ0dysKAQ"/></a></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-white"><div class="flex flex-col w-full pb-24">
+<!-- Interactive Category Horizontal Rail -->
+<section class="w-full bg-white px-margin-mobile py-space-sm border-b border-slate-200">
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar scroll-smooth">
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-cyan-500 text-white font-headline-sm text-[13px] leading-5 font-bold tracking-tight shadow-[0_2px_8px_rgba(6,182,212,0.35)] shrink-0 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-lg">developer_board</span>
+<span>Graphics Cards (GPUs)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-slate-100 text-slate-700 font-headline-sm text-[13px] leading-5 font-medium shrink-0 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg text-slate-500">memory</span>
+<span>Processors (CPUs)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-slate-100 text-slate-700 font-headline-sm text-[13px] leading-5 font-medium shrink-0 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg text-slate-500">grid_view</span>
+<span>Motherboards</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-slate-100 text-slate-700 font-headline-sm text-[13px] leading-5 font-medium shrink-0 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg text-slate-500">memory_alt</span>
+<span>Memory (RAM)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-slate-100 text-slate-700 font-headline-sm text-[13px] leading-5 font-medium shrink-0 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg text-slate-500">hard_drive</span>
+<span>Storage (NVMe)</span>
+</button>
+</div>
+</section>
+<!-- Spec Filtering Chips & Sort Row -->
+<section class="w-full px-margin-mobile pt-space-md pb-space-xs">
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar">
+<!-- Active Chip 1 -->
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-md bg-cyan-50 border border-cyan-200 text-cyan-800 font-spec-code-sm text-spec-code-sm shadow-xs shrink-0">
+<span class="text-slate-500">Chipset:</span>
+<span class="font-bold text-cyan-700">RTX 40 Series</span>
+<button aria-label="Remove filter" class="flex items-center justify-center w-3.5 h-3.5 rounded hover:bg-cyan-100 text-cyan-600 transition-colors">
+<span class="material-symbols-outlined text-xs">close</span>
+</button>
+</div>
+<!-- Active Chip 2 -->
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-md bg-cyan-50 border border-cyan-200 text-cyan-800 font-spec-code-sm text-spec-code-sm shadow-xs shrink-0">
+<span class="text-slate-500">VRAM:</span>
+<span class="font-bold text-cyan-700">≥16GB</span>
+<button aria-label="Remove filter" class="flex items-center justify-center w-3.5 h-3.5 rounded hover:bg-cyan-100 text-cyan-600 transition-colors">
+<span class="material-symbols-outlined text-xs">close</span>
+</button>
+</div>
+<!-- Dropdown Filter: Brand -->
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded-md bg-white border border-slate-200 text-slate-700 font-spec-code-sm text-spec-code-sm hover:text-slate-900 hover:bg-slate-50 shadow-xs shrink-0 transition-colors">
+<span>Brand: All</span>
+<span class="material-symbols-outlined text-xs text-slate-400">expand_more</span>
+</button>
+<!-- Dropdown Filter: Sort -->
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded-md bg-white border border-slate-200 text-slate-700 font-spec-code-sm text-spec-code-sm hover:text-slate-900 hover:bg-slate-50 shadow-xs shrink-0 transition-colors">
+<span>Sort: High → Low</span>
+<span class="material-symbols-outlined text-xs text-slate-400">swap_vert</span>
+</button>
+</div>
+</section>
+<!-- Metric Telemetry & View Toggles -->
+<section class="w-full px-margin-mobile py-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_6px_rgba(6,182,212,0.6)] animate-pulse"></span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-500 uppercase tracking-wider">
+        Showing <span class="font-bold text-slate-900">42</span> Hardware Items
+      </span>
+</div>
+<div class="flex items-center gap-space-xs">
+<!-- Layout Mode Toggle -->
+<div class="flex items-center p-0.5 rounded-md bg-slate-100 border border-slate-200 shadow-xs">
+<button aria-label="List View" class="w-7 h-7 flex items-center justify-center rounded bg-white text-cyan-600 shadow-xs">
+<span class="material-symbols-outlined text-base">view_stream</span>
+</button>
+<button aria-label="Grid View" class="w-7 h-7 flex items-center justify-center rounded text-slate-500 hover:text-slate-900 transition-colors">
+<span class="material-symbols-outlined text-base">grid_view</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Hardware Cards Feed -->
+<section class="w-full px-margin-mobile flex flex-col gap-space-md mt-space-xs">
+<!-- Card 1: MSI RTX 4090 SUPRIM X -->
+<article class="relative flex flex-col w-full rounded-xl bg-white border border-slate-200 p-space-md shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+<!-- Ambient Highlight -->
+<div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-cyan-100/50 blur-2xl pointer-events-none"></div>
+<!-- Header Meta: Vendor Badge & Stock -->
+<div class="flex items-center justify-between w-full mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-cyan-50 text-cyan-700 border border-cyan-100 font-spec-code-sm text-[10px] uppercase font-bold tracking-wider">MSI Gaming</span>
+<span class="font-spec-code-sm text-[11px] text-slate-500">Ada Lovelace</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-xs py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-label-sm text-label-sm uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]"></span>
+<span class="font-semibold">In Stock • Warehouse</span>
+</div>
+</div>
+<!-- Main Visual & Component Title Layout -->
+<div class="flex gap-space-md items-center">
+<!-- GPU Visual Well -->
+<div class="relative w-28 h-24 rounded-lg bg-slate-50 border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="MSI GeForce RTX 4090 SUPRIM X graphics card metallic brushed aluminum finish triple torx fan cooling RGB light bar on matte dark industrial workstation background cyberpunk lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDRCW65POoT1JgJvrbbBDN6dzjx7-8utrx8ApZQ3NrFrLL3NSY-MpZV69vK8u7VSgncoMQ8eaA_toHKu7qLmIOIBT9CIS80C9OsEogoSYg6Ka4tJGIuM7nUBh8fvsvfU7aWIMGbLWK3ZbxmIxfrY3r-dkn7yAdsjcOXPw0ZdjJWsVnmnI4HJWJaZSL0tbZWBvwp-Ajy4eJJZl7hSbpxt-XX7t0NX2sRUCOysvk50a7M8lPrcb3xhs3gg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-100/40 via-transparent to-transparent pointer-events-none"></div>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<h2 class="font-headline-sm text-[17px] leading-5 font-bold text-slate-900 tracking-tight truncate">
+            GeForce RTX 4090 SUPRIM X 24G
+          </h2>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-500 mt-1">24GB GDDR6X • OC Mode</span>
+<!-- Price and Efficiency -->
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-spec-code-lg text-spec-code-lg font-bold text-slate-900">$1,749.99</span>
+<span class="font-spec-code-sm text-[11px] text-emerald-600 font-semibold">MSRP Level</span>
+</div>
+</div>
+</div>
+<!-- Architectural Spec Matrix (Monospaced Telemetry) -->
+<div class="grid grid-cols-4 gap-space-xs mt-space-sm p-space-xs rounded-lg bg-slate-50 border border-slate-200">
+<div class="flex flex-col items-center justify-center py-1 text-center">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">VRAM</span>
+<span class="font-spec-code-sm text-spec-code-sm text-cyan-700 font-bold">24GB X</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Boost Clock</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">2625 MHz</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Bus Width</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">384-Bit</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Thermal TDP</span>
+<span class="font-spec-code-sm text-spec-code-sm text-red-600 font-bold">450W</span>
+</div>
+</div>
+<!-- Action Footer: Selection, Wishlist, Add to Rig -->
+<div class="flex items-center justify-between gap-space-sm mt-space-md pt-space-xs">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500 cursor-pointer" type="checkbox"/>
+<span class="font-spec-code-sm text-spec-code-sm text-cyan-700 font-semibold">Comparing</span>
+</label>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Add to Wishlist" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-red-500 border border-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md h-9 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-spec-code-sm text-spec-code-sm font-bold shadow-[0_2px_8px_rgba(6,182,212,0.4)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-base">add_shopping_cart</span>
+<span>+ Cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2: ASUS TUF RTX 4080 SUPER -->
+<article class="relative flex flex-col w-full rounded-xl bg-white border border-slate-200 p-space-md shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+<!-- Header Meta: Vendor Badge & Stock -->
+<div class="flex items-center justify-between w-full mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-100 font-spec-code-sm text-[10px] uppercase font-bold tracking-wider">ASUS TUF</span>
+<span class="font-spec-code-sm text-[11px] text-slate-500">Dual BIOS</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-xs py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-label-sm text-label-sm uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="font-semibold">In Stock</span>
+</div>
+</div>
+<!-- Main Visual & Component Title Layout -->
+<div class="flex gap-space-md items-center">
+<div class="relative w-28 h-24 rounded-lg bg-slate-50 border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="ASUS TUF Gaming GeForce RTX 4080 SUPER graphics card rugged military dark gunmetal shroud axial tech triple fans RGB accent minimalist dark studio tech rendering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsYsyn-hFwj8GvECt_JXVYLpLi8i-eFIDnhLxZtm6uWnWtNV3UuvUq6gxD4_StME-yld9QdEvdynZAU8zTgbpwK9htsH6ZFJITzYZ4Z9C1unMsmkk0SmUBnh_Xo7jtaiFCetE7B957Qe6J2ifFqBC7d_M_hfdUVrnzMldFyJMliKOkJnI-uVUPdB1ZDKevJCTK4yKDwX027SGFu8M5acKX6ngIWkfkesOKjf7LSQp0wErEmQkQ3LAtPw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-100/40 via-transparent to-transparent pointer-events-none"></div>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<h2 class="font-headline-sm text-[17px] leading-5 font-bold text-slate-900 tracking-tight truncate">
+            TUF RTX 4080 SUPER 16GB
+          </h2>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-500 mt-1">16GB GDDR6X • Military-Grade</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-spec-code-lg text-spec-code-lg font-bold text-slate-900">$1,049.99</span>
+<span class="font-spec-code-sm text-[11px] text-slate-500 font-medium">Free Shipping</span>
+</div>
+</div>
+</div>
+<!-- Architectural Spec Matrix -->
+<div class="grid grid-cols-4 gap-space-xs mt-space-sm p-space-xs rounded-lg bg-slate-50 border border-slate-200">
+<div class="flex flex-col items-center justify-center py-1 text-center">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">VRAM</span>
+<span class="font-spec-code-sm text-spec-code-sm text-cyan-700 font-bold">16GB X</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Boost Clock</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">2580 MHz</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Cooling</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">Axial 3X</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Thermal TDP</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">320W</span>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex items-center justify-between gap-space-sm mt-space-md pt-space-xs">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500 cursor-pointer" type="checkbox"/>
+<span class="font-spec-code-sm text-spec-code-sm text-cyan-700 font-semibold">Comparing</span>
+</label>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Add to Wishlist" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-red-500 border border-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md h-9 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-spec-code-sm text-spec-code-sm font-bold shadow-[0_2px_8px_rgba(6,182,212,0.4)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-base">add_shopping_cart</span>
+<span>+ Cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3: Sapphire Nitro+ AMD Radeon RX 7900 XTX -->
+<article class="relative flex flex-col w-full rounded-xl bg-white border border-slate-200 p-space-md shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+<!-- Header Meta: Vendor Badge & Stock Warning -->
+<div class="flex items-center justify-between w-full mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-100 font-spec-code-sm text-[10px] uppercase font-bold tracking-wider">Sapphire Nitro+</span>
+<span class="font-spec-code-sm text-[11px] text-slate-500">RDNA 3</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-xs py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-label-sm text-label-sm uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span>
+<span class="font-semibold">Only 4 Left</span>
+</div>
+</div>
+<!-- Main Visual & Component Title Layout -->
+<div class="flex gap-space-md items-center">
+<div class="relative w-28 h-24 rounded-lg bg-slate-50 border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Sapphire Nitro+ AMD Radeon RX 7900 XTX graphics card silver and matte black die-cast frame illuminated LED light bar futuristic component shot moody dark cyberpunk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi6w-AS0l1ynveG3g04oqGa7YLLY8tgyKbeDx-gsTiqTEaG_J051Ylo4z66_mn7VeFEQ9Feb8mw4ctSUgPUz_4LGhMeBD82OrBpJaAeD9nfLsbqpGjRqwK_hTDCzNtJWae6U1kMcAfvEa3i-V7UEw_Z1VlDb3L5UL3eUANvRqhNLEFXN-9z6mLTqXWulhajJJlzaSMiZOesp8O0_PzPdkeW4QlLr90E2b3lr7p_OLXoaSGH8HwZZRIFw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-100/40 via-transparent to-transparent pointer-events-none"></div>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<h2 class="font-headline-sm text-[17px] leading-5 font-bold text-slate-900 tracking-tight truncate">
+            Radeon RX 7900 XTX 24GB
+          </h2>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-500 mt-1">Vapor-X Cooling • Dual BIOS</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-spec-code-lg text-spec-code-lg font-bold text-slate-900">$979.99</span>
+<span class="font-spec-code-sm text-[11px] text-indigo-600 font-semibold">Save $50</span>
+</div>
+</div>
+</div>
+<!-- Architectural Spec Matrix -->
+<div class="grid grid-cols-4 gap-space-xs mt-space-sm p-space-xs rounded-lg bg-slate-50 border border-slate-200">
+<div class="flex flex-col items-center justify-center py-1 text-center">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">VRAM</span>
+<span class="font-spec-code-sm text-spec-code-sm text-cyan-700 font-bold">24GB GDDR6</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Engine Clock</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">2680 MHz</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Memory Bus</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">384-Bit</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Chamber</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">Vapor-X</span>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex items-center justify-between gap-space-sm mt-space-md pt-space-xs">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input class="w-4 h-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500 cursor-pointer" type="checkbox"/>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-600 font-medium">Compare</span>
+</label>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Add to Wishlist" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-red-500 border border-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md h-9 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-spec-code-sm text-spec-code-sm font-bold shadow-[0_2px_8px_rgba(6,182,212,0.4)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-base">add_shopping_cart</span>
+<span>+ Cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 4: Gigabyte RTX 4070 Ti SUPER Gaming OC -->
+<article class="relative flex flex-col w-full rounded-xl bg-white border border-slate-200 p-space-md shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+<!-- Header Meta: Vendor Badge & Stock -->
+<div class="flex items-center justify-between w-full mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-cyan-50 text-cyan-700 border border-cyan-100 font-spec-code-sm text-[10px] uppercase font-bold tracking-wider">Gigabyte</span>
+<span class="font-spec-code-sm text-[11px] text-slate-500">Windforce 3X</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-xs py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-label-sm text-label-sm uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="font-semibold">In Stock</span>
+</div>
+</div>
+<!-- Main Visual & Component Title Layout -->
+<div class="flex gap-space-md items-center">
+<div class="relative w-28 h-24 rounded-lg bg-slate-50 border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Gigabyte GeForce RTX 4070 Ti SUPER Gaming OC graphics card triple black fan heatsink glowing edge ring accents industrial cyber hardware display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8bnGGSnXSEjSx7NZlm85r89LvB2pHTATpusQPCGDNAttieGtOIYIHldZLTzFSSJQko8-iWTg4hFWxXUEPY2yQUP7s7O9pXO_Nb13R6HnTKwunWxN95_Jc0p8FBatywrgLeATK0XNeGNxqtGq5nJXxsBWimo8Fi8bhGOHNPahVpO5NS61Kvbg8R9Hcyts0TBMDcONVGKAo_wKCtqpLIW5HjMNQA26W8YKDHKJvf1Jk-btW_2_N0sgw3A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-100/40 via-transparent to-transparent pointer-events-none"></div>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<h2 class="font-headline-sm text-[17px] leading-5 font-bold text-slate-900 tracking-tight truncate">
+            RTX 4070 Ti SUPER Gaming OC
+          </h2>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-500 mt-1">16GB GDDR6X • Anti-Sag Bracket</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-spec-code-lg text-spec-code-lg font-bold text-slate-900">$829.99</span>
+<span class="font-spec-code-sm text-[11px] text-emerald-600 font-semibold">Low Power Draw</span>
+</div>
+</div>
+</div>
+<!-- Architectural Spec Matrix -->
+<div class="grid grid-cols-4 gap-space-xs mt-space-sm p-space-xs rounded-lg bg-slate-50 border border-slate-200">
+<div class="flex flex-col items-center justify-center py-1 text-center">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">VRAM</span>
+<span class="font-spec-code-sm text-spec-code-sm text-cyan-700 font-bold">16GB X</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Cooling</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">3X Blade</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Bus Width</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">256-Bit</span>
+</div>
+<div class="flex flex-col items-center justify-center py-1 text-center border-l border-slate-200">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-slate-500 font-medium">Thermal TDP</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-800 font-bold">285W</span>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex items-center justify-between gap-space-sm mt-space-md pt-space-xs">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input class="w-4 h-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500 cursor-pointer" type="checkbox"/>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-600 font-medium">Compare</span>
+</label>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Add to Wishlist" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-red-500 border border-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md h-9 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-spec-code-sm text-spec-code-sm font-bold shadow-[0_2px_8px_rgba(6,182,212,0.4)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-base">add_shopping_cart</span>
+<span>+ Cart</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Persistent Dynamic Hardware Comparison Bar -->
+<aside class="sticky bottom-0 z-40 w-full px-margin-mobile pb-space-sm pt-space-xs pointer-events-none">
+<div class="flex items-center justify-between w-full p-space-sm rounded-xl bg-white/95 backdrop-blur-xl border border-slate-200 shadow-xl pointer-events-auto">
+<div class="flex items-center gap-space-sm min-w-0">
+<!-- Floating Counter Badge with Glow Pulse -->
+<div class="relative flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-500 text-white font-spec-code-sm text-spec-code-sm font-bold shadow-[0_2px_8px_rgba(6,182,212,0.4)] shrink-0">
+          2
+        </div>
+<!-- Live Benchmark Differentials -->
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-[13px] leading-4 font-bold text-slate-900 truncate">
+            RTX 4090 vs RTX 4080 SUPER
+          </span>
+<span class="font-spec-code-sm text-[11px] text-cyan-700 font-medium truncate">
+            Δ +8GB VRAM • +130W TDP • +$700
+          </span>
+</div>
+</div>
+<!-- Action Button -->
+<button class="flex items-center gap-1 px-space-md py-2 rounded-lg bg-slate-900 text-white hover:bg-cyan-600 font-spec-code-sm text-spec-code-sm font-bold shadow-sm transition-colors shrink-0">
+<span>Matrix</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</aside>
+</div>
+<script>
+  // Dynamic client micro-interactions for wishlists and checkbox triggers
+  document.querySelectorAll('button[aria-label="Add to Wishlist"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const icon = btn.querySelector('.material-symbols-outlined');
+      const isFilled = icon.style.fontVariationSettings?.includes("'FILL' 1");
+      if (isFilled) {
+        icon.style.fontVariationSettings = "'FILL' 0";
+        btn.classList.remove('text-red-500');
+        btn.classList.add('text-slate-500');
+      } else {
+        icon.style.fontVariationSettings = "'FILL' 1";
+        btn.classList.remove('text-slate-500');
+        btn.classList.add('text-red-500');
+      }
+    });
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-lg" data-active-classes="text-cyan-600"><div class="h-20 px-space-xs flex items-center justify-around"><a class="flex-1 flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs text-slate-500 hover:text-slate-900 transition-colors" data-path="store" href="#"><span class="material-symbols-outlined text-2xl">storefront</span><span class="font-label-sm text-label-sm uppercase tracking-wider font-medium">Store</span></a><a aria-current="page" class="flex-1 flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs transition-colors text-cyan-600" data-path="catalog" href="#"><span class="material-symbols-outlined text-2xl font-bold">memory</span><span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">Catalog</span></a><a class="relative flex-1 flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs text-slate-500 hover:text-slate-900 transition-colors" data-path="cart" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-2xl">shopping_cart</span><span class="absolute -top-1.5 -right-2.5 min-w-[18px] h-[18px] px-1 rounded-full bg-cyan-500 text-white font-spec-code-sm text-[10px] leading-[18px] font-bold text-center shadow-[0_2px_6px_rgba(6,182,212,0.5)]">3</span></div><span class="font-label-sm text-label-sm uppercase tracking-wider font-medium">Cart</span></a><a class="flex-1 flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs text-slate-500 hover:text-slate-900 transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined text-2xl">bookmark</span><span class="font-label-sm text-label-sm uppercase tracking-wider font-medium">Saved</span></a><a class="flex-1 flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs text-slate-500 hover:text-slate-900 transition-colors" data-path="profile" href="#"><span class="material-symbols-outlined text-2xl">tune</span><span class="font-label-sm text-label-sm uppercase tracking-wider font-medium">Profile</span></a></div></nav></body></html>

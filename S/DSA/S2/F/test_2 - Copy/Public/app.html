@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Add Appointment</title>
+    <style>
+        body {
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            background: #f5f7fb;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 16px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Add New Appointment</h1>
+        <form id="add-form">
+            <label for="appointment_id">Appointment ID</label>
+            <input type="text" id="appointment_id" name="appointment_id" required>
+
+            <label for="patient_id">Patient ID</label>
+            <input type="text" id="patient_id" name="patient_id" required>
+
+            <label for="doctor_id">Doctor ID</label>
+            <input type="text" id="doctor_id" name="doctor_id" required>
+
+            <label for="department">Department</label>
+            <input type="text" id="department" name="department" required>
+
+            <label for="appointment_date">Appointment Date & Time</label>
+            <input type="datetime-local" id="appointment_date" name="appointment_date" required>
+
+            <label for="duration">Duration (minutes)</label>
+            <input type="number" id="duration" name="duration" required>
+
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option>Scheduled</option>
+                <option>Completed</option>
+                <option>Cancelled</option>
+            </select>
+
+            <label for="reason">Reason</label>
+            <textarea id="reason" name="reason"></textarea>
+
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes"></textarea>
+
+            <button type="submit">Add Appointment</button>
+        </form>
+
+        <a href="/">← Back to Appointments</a>
+    </main>
+
+    <script>
+        const form = document.getElementById('add-form');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                appointment_id: form.appointment_id.value,
+                patient_id: form.patient_id.value,
+                doctor_id: form.doctor_id.value,
+                department: form.department.value,
+                appointment_date: form.appointment_date.value,
+                duration: form.duration.value,
+                status: form.status.value,
+                reason: form.reason.value,
+                notes: form.notes.value,
+                created_at: new Date()
+            };
+
+            try {
+                const res = await fetch('/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (res.ok) {
+                    alert('Appointment added successfully!');
+                    window.location.href = '/';
+                } else {
+                    alert('Failed to add appointment.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Error: Could not connect to server.');
+            }
+        });
+    </script>
+</body>
+
+</html>

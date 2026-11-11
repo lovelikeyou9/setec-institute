@@ -1,0 +1,181 @@
+[{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8f3"
+  },
+  "department_id": "DEPT001",
+  "name": "Cardiology",
+  "head": "Dr. John Smith",
+  "location": "Floor 1, East Wing",
+  "contact": "ext. 1201",
+  "services": [
+    "Echocardiography",
+    "Cardiac Catheterization",
+    "Stress Tests"
+  ],
+  "established": {
+    "$date": "2010-05-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8f4"
+  },
+  "department_id": "DEPT002",
+  "name": "Neurology",
+  "head": "Dr. Emily Johnson",
+  "location": "Floor 2, West Wing",
+  "contact": "ext. 2201",
+  "services": [
+    "EEG",
+    "EMG",
+    "Nerve Conduction Studies"
+  ],
+  "established": {
+    "$date": "2012-08-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8f5"
+  },
+  "department_id": "DEPT003",
+  "name": "Orthopedics",
+  "head": "Dr. Robert Williams",
+  "location": "Floor 1, North Wing",
+  "contact": "ext. 1301",
+  "services": [
+    "Joint Replacement",
+    "Arthroscopy",
+    "Fracture Care"
+  ],
+  "established": {
+    "$date": "2011-11-30T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8f6"
+  },
+  "department_id": "DEPT004",
+  "name": "Pediatrics",
+  "head": "Dr. Maria Garcia",
+  "location": "Floor 3, East Wing",
+  "contact": "ext. 3201",
+  "services": [
+    "Well-child Visits",
+    "Immunizations",
+    "Developmental Screening"
+  ],
+  "established": {
+    "$date": "2013-03-17T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8f7"
+  },
+  "department_id": "DEPT005",
+  "name": "Oncology",
+  "head": "Dr. David Brown",
+  "location": "Floor 4, South Wing",
+  "contact": "ext. 4201",
+  "services": [
+    "Chemotherapy",
+    "Radiation Therapy",
+    "Hematology"
+  ],
+  "established": {
+    "$date": "2014-07-08T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8f8"
+  },
+  "department_id": "DEPT006",
+  "name": "Radiology",
+  "head": "Dr. Sarah Miller",
+  "location": "Basement Level",
+  "contact": "ext. 0101",
+  "services": [
+    "X-ray",
+    "MRI",
+    "CT Scan",
+    "Ultrasound"
+  ],
+  "established": {
+    "$date": "2009-09-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8f9"
+  },
+  "department_id": "DEPT007",
+  "name": "Emergency",
+  "head": "Dr. Michael Davis",
+  "location": "Ground Floor",
+  "contact": "ext. 911",
+  "services": [
+    "Trauma Care",
+    "Critical Care",
+    "Triage"
+  ],
+  "established": {
+    "$date": "2008-12-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8fa"
+  },
+  "department_id": "DEPT008",
+  "name": "Surgery",
+  "head": "Dr. Jessica Rodriguez",
+  "location": "Floor 2, East Wing",
+  "contact": "ext. 2301",
+  "services": [
+    "General Surgery",
+    "Laparoscopic Surgery",
+    "Vascular Surgery"
+  ],
+  "established": {
+    "$date": "2010-04-18T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8fb"
+  },
+  "department_id": "DEPT009",
+  "name": "Psychiatry",
+  "head": "Dr. James Martinez",
+  "location": "Floor 3, West Wing",
+  "contact": "ext. 3301",
+  "services": [
+    "Counseling",
+    "Psychotherapy",
+    "Medication Management"
+  ],
+  "established": {
+    "$date": "2015-06-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395b7a611906215cb5f8fc"
+  },
+  "department_id": "DEPT010",
+  "name": "Physical Therapy",
+  "head": "Dr. Jennifer Wilson",
+  "location": "Floor 1, South Wing",
+  "contact": "ext. 1401",
+  "services": [
+    "Rehabilitation",
+    "Sports Medicine",
+    "Pain Management"
+  ],
+  "established": {
+    "$date": "2016-02-28T00:00:00.000Z"
+  }
+}]

@@ -1,0 +1,63 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block admin_content %}
+<h1 class="section-title">{{ title }}</h1>
+<div class="summary-card">
+  <form method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Name</label>
+        {{ form.name(class="form-control") }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Brand</label>
+        {{ form.brand(class="form-control") }}
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Price</label>
+        {{ form.price(class="form-control", step="0.01") }}
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Discount Price</label>
+        {{ form.discount_price(class="form-control", step="0.01") }}
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Stock</label>
+        {{ form.stock_quantity(class="form-control") }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Category</label>
+        {{ form.category_id(class="form-select") }}
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Rating</label>
+        {{ form.rating(class="form-control", step="0.1") }}
+      </div>
+      <div class="col-md-3 d-flex align-items-end">
+        <div class="form-check mb-2">
+          {{ form.is_featured(class="form-check-input") }}
+          <label class="form-check-label">Featured</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Description</label>
+        {{ form.description(class="form-control", rows=3) }}
+      </div>
+      <div class="col-12">
+        <label class="form-label">Specifications</label>
+        {{ form.specifications(class="form-control", rows=4) }}
+      </div>
+      <div class="col-12">
+        <label class="form-label">Image</label>
+        {{ form.image(class="form-control") }}
+        {% if product and product.image %}
+        <div class="mt-2"><img src="{{ product.image_url }}" alt="" style="height:80px;border-radius:8px"></div>
+        {% endif %}
+      </div>
+    </div>
+    <button class="btn btn-brand mt-4" type="submit">Save Product</button>
+    <a href="{{ url_for('admin.products') }}" class="btn btn-outline-secondary mt-4">Cancel</a>
+  </form>
+</div>
+{% endblock %}

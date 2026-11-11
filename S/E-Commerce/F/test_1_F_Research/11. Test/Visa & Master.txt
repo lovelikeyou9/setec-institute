@@ -1,0 +1,17 @@
+Visa
+Card number: 4242 4242 4242 4242
+Expiry month: 12
+Expiry year: 34
+CVC: 123
+Name: Chou Yamata
+ZIP / Postal code: 12345
+Country: Cambodia
+
+Master
+Card number: 5555 5555 5555 4444
+Expiry month: 12
+Expiry year: 34
+CVC: 123
+Name: Chou Yamata
+ZIP / Postal code: 12345
+Country: Cambodia

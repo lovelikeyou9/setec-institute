@@ -1,0 +1,109 @@
+index.js or is call server.js
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const path = require('path');
+const Appointments = require('./Public/models/appointments');
+const Billings = require('./Public/models/billings');
+const Departments = require('./Public/models/departments');
+const Doctors = require('./Public/models/doctors');
+const MedicalRecords = require('./Public/models/medicalRecords');
+const Patients = require('./Public/models/patients');
+const Prescriptions = require('./Public/models/prescriptions');
+const Staffs = require('./Public/models/staffs');
+
+const app = express();
+const PORT = 3000;
+
+// Serve static files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, 'Public')));
+
+// Parse incoming JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Connect to MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/hospital', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => console.log('Connected to MongoDB'));
+
+
+
+
+
+/* ====== APPOINTMENTS API ROUTES ====== */
+
+// Get all appointments
+app.get('/api/appointments', async (req, res) => {
+  try {
+    const appointments = await Appointments.find().sort({ created_at: -1 });
+    res.json(appointments);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get one appointment by ID
+app.get('/api/appointments/:id', async (req, res) => {
+  try {
+    const appt = await Appointments.findById(req.params.id);
+    if (!appt) return res.status(404).json({ error: 'Appointment not found' });
+    res.json(appt);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Create a new appointment
+app.post('/api/appointments', async (req, res) => {
+  try {
+    const { appointment_id, patient_id, doctor_id, department, appointment_date, duration, status, reason, notes } = req.body;
+    const newAppt = await Appointments.create({ appointment_id, patient_id, doctor_id, department, appointment_date, duration, status, reason, notes });
+    res.status(201).json(newAppt);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update an appointment
+app.put('/api/appointments/:id', async (req, res) => {
+  try {
+    const { appointment_id, patient_id, doctor_id, department, appointment_date, duration, status, reason, notes } = req.body;
+    const updatedAppt = await Appointments.findByIdAndUpdate(
+      req.params.id,
+      { appointment_id, patient_id, doctor_id, department, appointment_date, duration, status, reason, notes },
+      { new: true }
+    );
+    if (!updatedAppt) return res.status(404).json({ error: 'Appointment not found' });
+    res.json(updatedAppt);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete an appointment
+app.delete('/api/appointments/:id', async (req, res) => {
+  try {
+    const deleted = await Appointments.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ error: 'Appointment not found' });
+    res.json({ message: 'Appointment deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
+
+
+

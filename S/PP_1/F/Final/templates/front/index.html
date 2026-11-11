@@ -1,0 +1,198 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+
+<body>
+
+{% include 'front/share/navbar.html' %}
+
+<!-- HERO -->
+<section class="bg-primary text-white py-5">
+  <div class="container py-4">
+    <div class="row align-items-center">
+
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold">Discover Your Perfect Style</h1>
+        <p class="lead text-white-50">
+          Shop the latest fashion collections designed for comfort, confidence, and style.
+        </p>
+        <a href="{{ url_for('products') }}" class="btn btn-light btn-lg mt-3">
+          Shop Now
+        </a>
+      </div>
+
+      <div class="col-lg-6 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
+         class="img-fluid"
+         style="max-height:300px;"
+         alt="Fashion Collection">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 text-center">
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4">
+          <h5>🚚 Fast Delivery</h5>
+          <p class="text-muted">Same day delivery in Phnom Penh</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4">
+          <h5>🔒 Secure Payment</h5>
+          <p class="text-muted">100% safe checkout system</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4">
+          <h5>💻 Quality Products</h5>
+          <p class="text-muted">Only original and verified items</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS PREVIEW -->
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="fw-bold">Popular Products</h3>
+      <a href="{{ url_for('products') }}" class="btn btn-outline-primary btn-sm">
+        View All
+      </a>
+    </div>
+
+    <div class="row g-4">
+
+      {% for p in products[:6] %}
+      <div class="col-md-4 col-lg-2">
+        <div class="card card-hover h-100 border-0 shadow-sm">
+
+          <img src="{{ p.image }}" class="card-img-top product-img">
+
+          <div class="card-body">
+            <h6 class="fw-bold">{{ p.title[:20] }}...</h6>
+            <p class="text-primary fw-bold">${{ p.price }}</p>
+
+            <a href="{{ url_for('product', product_id=p.id) }}"
+               class="btn btn-sm btn-primary w-100">
+              View
+            </a>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+{% include 'front/share/footer.html' %}
+
+</body>
+</html>
+
+
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+
+<!--  {% include 'front/share/header.html' %}-->
+
+
+<!--</head>-->
+<!--<body>-->
+
+<!--  {% include 'front/share/navbar.html' %}-->
+
+
+<!--  <main>-->
+<!--    <section class="hero-section text-white">-->
+<!--      <div class="container py-4">-->
+<!--        <div class="col-lg-7 pt-4 pb-3">-->
+<!--          <p class="eyebrow text-gold">Smart devices, sharp prices</p>-->
+<!--          <h1 class="display-5 fw-bold mb-3">Electronics built for work, play, and everyday upgrades.</h1>-->
+<!--          <p class="mb-4">Shop laptops, phones, audio, gaming gear, and accessories from trusted brands with a simple checkout flow.</p>-->
+<!--          <a class="btn btn-teal me-2" href="products.html">Shop products</a>-->
+<!--          <a class="btn btn-light" href="products.html">Browse catalog</a>-->
+<!--        </div>-->
+<!--        <div class="row g-3 hero-card-row pb-4">-->
+<!--          <div class="col-sm-6 col-lg-3">-->
+<!--            <a class="hero-card" href="products.html">-->
+<!--              <span>Laptops</span>-->
+<!--              <strong>Work-ready ultrabooks</strong>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-sm-6 col-lg-3">-->
+<!--            <a class="hero-card" href="products.html">-->
+<!--              <span>Phones</span>-->
+<!--              <strong>Flagship mobile picks</strong>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-sm-6 col-lg-3">-->
+<!--            <a class="hero-card" href="products.html">-->
+<!--              <span>Audio</span>-->
+<!--              <strong>Headphones and speakers</strong>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-sm-6 col-lg-3">-->
+<!--            <a class="hero-card" href="products.html">-->
+<!--              <span>Gaming</span>-->
+<!--              <strong>Controllers and gear</strong>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    <section class="bg-soft py-5">-->
+<!--      <div class="container">-->
+<!--        <div class="d-flex justify-content-between align-items-end mb-4">-->
+<!--          <div>-->
+<!--            <p class="eyebrow">Best picks</p>-->
+<!--            <h2 class="fw-bold mb-0">Popular electronics</h2>-->
+<!--          </div>-->
+<!--          <a class="link-teal fw-bold" href="products.html">View all</a>-->
+<!--        </div>-->
+<!--        <div class="row g-4">-->
+
+
+<!--          {% for product in products %}-->
+<!--          <div class="col-md-6 col-lg-3">-->
+<!--            <div class="card product-card h-100">-->
+<!--              <img src="{{ product.image }}" class="card-img-top product-image" alt="{{ product.title }}">-->
+<!--              <div class="card-body">-->
+<!--                <p class="product-meta">{{ product.category }}</p>-->
+<!--                <h3 class="h5 product-name">{{ product.title }}</h3>-->
+<!--                <p class="price">{{ product.price }}</p>-->
+<!--                <a class="btn btn-teal w-100" href="{{ url_for('product', product_id=product.id) }}">View product</a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          {% endfor %}-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--  </main>-->
+
+<!--  {% include 'front/share/footer.html' %}-->
+
+<!--</body>-->
+<!--</html>-->

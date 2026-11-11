@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Admin Dashboard — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/admin-sidebar :: adminSidebar}"></aside>
+    <div class="dash-main">
+      <div class="exec-head">
+        <div>
+          <h1>Marketplace Performance Dashboard</h1>
+          <p>GMV, escrow fees (<span th:text="${commissionRate}">3%</span>) &amp; payout queue · Calendar Year <span th:text="${year}">2026</span></p>
+        </div>
+        <div class="exec-head-actions">
+          <span class="exec-range">Jan 1 – Dec 31, <th:block th:text="${year}">2026</th:block></span>
+          <a th:href="@{/admin/commissions}" class="btn btn-outline btn-sm">Commissions</a>
+          <a th:href="@{/admin/orders}" class="btn btn-primary btn-sm">Orders / Escrow</a>
+        </div>
+      </div>
+
+      <div class="exec-kpi-grid">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Gross Merchandise Vol</span><span class="exec-ico teal">$</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(gmv, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up" th:text="${gmvDelta + ' vs last month'}">+14.2%</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span th:text="${'Fees earned (' + (commissionRate != null ? commissionRate : '3%') + ')'}">Fees earned (3%)</span><span class="exec-ico gold">%</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(feesEarned != null ? feesEarned : fees, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up">Released after payout to sellers</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Fees in escrow</span><span class="exec-ico green">◷</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(feesInEscrow != null ? feesInEscrow : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="warn" th:text="${(escrowOrders != null ? escrowOrders : 0) + ' orders · not yours until release'}">0 in escrow</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Sales held (escrow)</span><span class="exec-ico purple">$</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(escrowSales != null ? escrowSales : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="purple" th:text="${totalUsers + ' users · ' + totalSellers + ' sellers'}">users</em>
+        </article>
+      </div>
+
+      <div class="exec-kpi-grid" style="margin-top:1rem">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Await confirm &amp; hold</span><span class="exec-ico teal">1</span></div>
+          <strong th:text="${awaitHold != null ? awaitHold : 0}">0</strong>
+          <em class="warn">Customer paid — hold funds</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Await confirm delivered</span><span class="exec-ico green">2</span></div>
+          <strong th:text="${awaitDelivered != null ? awaitDelivered : 0}">0</strong>
+          <em class="up">Seller shipped / out for delivery</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Await pay seller</span><span class="exec-ico gold">3</span></div>
+          <strong th:text="${awaitPayout != null ? awaitPayout : 0}">0</strong>
+          <em class="warn" th:text="${'Deduct ' + (commissionRate != null ? commissionRate : '3%') + ' then release'}">Deduct 3% then release</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Catalog / pending</span><span class="exec-ico purple">▣</span></div>
+          <strong th:text="${totalProducts}">0</strong>
+          <em class="purple" th:text="${pendingSellers + ' sellers · ' + pendingOrders + ' open orders'}">pending</em>
+        </article>
+      </div>
+
+      <div class="exec-grid-2">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div>
+              <h3>Orders &amp; Revenue Trend</h3>
+              <p>Monthly marketplace activity</p>
+            </div>
+          </div>
+          <div class="exec-chart-lg"><canvas id="adminTrendChart"></canvas></div>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div>
+              <h3>Revenue by Category</h3>
+              <p th:text="${usingEstimate} ? 'Estimated from sold volume' : 'From completed orders'">Breakdown</p>
+            </div>
+            <strong class="exec-donut-total" th:text="${'$' + #numbers.formatDecimal(gmv, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          </div>
+          <div class="exec-donut-wrap">
+            <div class="exec-chart-donut"><canvas id="adminCategoryChart"></canvas></div>
+            <ul class="exec-legend">
+              <li th:each="row, st : ${categoryRows}">
+                <span class="dot" th:classappend="'c' + st.index"></span>
+                <div>
+                  <strong th:text="${row.label}">CPU</strong>
+                  <small th:text="${'$' + #numbers.formatDecimal(row.value, 1, 'COMMA', 2, 'POINT') + ' / ' + row.percent + '%'}">$0</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="exec-grid-3">
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Activation Funnel</h3><p>Platform engagement path</p></div>
+          </div>
+          <div class="exec-chart-md"><canvas id="adminFunnelChart"></canvas></div>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Top Countries by GMV</h3><p>Revenue by destination</p></div>
+          </div>
+          <div class="exec-chart-md"><canvas id="adminCountryChart"></canvas></div>
+          <ul class="exec-legend" style="margin-top:.75rem">
+            <li th:each="row, st : ${countryRows}">
+              <span class="dot" th:classappend="'c' + st.index"></span>
+              <div>
+                <strong th:text="${row.label}">Cambodia</strong>
+                <small th:text="${'$' + #numbers.formatDecimal(row.value, 1, 'COMMA', 2, 'POINT') + ' / ' + row.percent + '%'}">$0</small>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section class="exec-card">
+          <div class="exec-card-head">
+            <div><h3>Seller Performance</h3><p>Top stores</p></div>
+          </div>
+          <div class="exec-mini-table-wrap">
+            <table class="exec-mini-table">
+              <thead><tr><th>Store</th><th>SKU</th><th>ARPU</th><th>Health</th></tr></thead>
+              <tbody>
+                <tr th:each="row : ${perfRows}">
+                  <td th:text="${row.name}">Store</td>
+                  <td th:text="${row.products}">0</td>
+                  <td th:text="${'$' + #numbers.formatDecimal(row.arpu, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                  <td><span class="health" th:classappend="${#strings.toLowerCase(row.health)}" th:text="${row.health}">Good</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <section class="exec-card" style="margin-top:1rem">
+        <div class="exec-card-head">
+          <div><h3>Recent Orders</h3><p>Latest marketplace transactions</p></div>
+          <a th:href="@{/admin/orders}" class="btn btn-outline btn-sm">View all</a>
+        </div>
+        <div class="data-table-wrap" style="border:none;box-shadow:none">
+          <table class="data-table">
+            <thead>
+              <tr><th>Order</th><th>Seller</th><th>Customer</th><th>Status</th><th>Total</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+              <tr th:if="${#lists.isEmpty(recentOrders)}"><td colspan="6" style="text-align:center;color:var(--text-muted)">No orders yet</td></tr>
+              <tr th:each="o : ${recentOrders}">
+                <td th:text="${o.orderNumber}">CH-001</td>
+                <td th:text="${o.seller.storeName}">Store</td>
+                <td th:text="${o.recipientName}">Buyer</td>
+                <td><span th:replace="~{fragments/status :: orderPill(${o.status})}"></span></td>
+                <td th:text="${'$' + #numbers.formatDecimal(o.total, 1, 'COMMA', 2, 'POINT')}">$0</td>
+                <td th:text="${o.placedAt != null ? #temporals.format(o.placedAt, 'dd MMM') : '—'}">01 Jan</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="exec-footnote">MME Analytics · Generated for FY<span th:text="${year}">2026</span> reporting · Figures in USD</p>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+<script th:inline="javascript">
+  const months = /*[[${months}]]*/ [];
+  const ordersTrend = /*[[${ordersTrend}]]*/ [];
+  const revenueTrend = /*[[${revenueTrend}]]*/ [];
+  const categoryLabels = /*[[${categoryLabels}]]*/ [];
+  const categoryValues = /*[[${categoryValues}]]*/ [];
+  const funnelLabels = /*[[${funnelLabels}]]*/ [];
+  const funnelValues = /*[[${funnelValues}]]*/ [];
+  const countryLabels = /*[[${countryLabels}]]*/ [];
+  const countryValues = /*[[${countryValues}]]*/ [];
+  const palette = ['#2563eb', '#f59e0b', '#10b981', '#8b5cf6', '#0d7377'];
+
+  Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+  Chart.defaults.color = '#5a6570';
+
+  new Chart(document.getElementById('adminTrendChart'), {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [
+        { label: 'Orders', data: ordersTrend, borderColor: '#1d4ed8', backgroundColor: 'rgba(37,99,235,.18)', fill: true, tension: .35, pointRadius: 0 },
+        { label: 'Revenue', data: revenueTrend, borderColor: '#38bdf8', backgroundColor: 'rgba(56,189,248,.12)', fill: true, tension: .35, pointRadius: 0 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, grid: { color: '#eef2f6' } }, x: { grid: { display: false } } } }
+  });
+
+  new Chart(document.getElementById('adminCategoryChart'), {
+    type: 'doughnut',
+    data: { labels: categoryLabels, datasets: [{ data: categoryValues, backgroundColor: palette, borderWidth: 0 }] },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false } } }
+  });
+
+  new Chart(document.getElementById('adminFunnelChart'), {
+    type: 'bar',
+    data: { labels: funnelLabels, datasets: [{ data: funnelValues, backgroundColor: ['#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8'], borderRadius: 8 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, grid: { color: '#eef2f6' } }, y: { grid: { display: false } } } }
+  });
+
+  new Chart(document.getElementById('adminCountryChart'), {
+    type: 'bar',
+    data: { labels: countryLabels, datasets: [{ data: countryValues, backgroundColor: ['#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe'], borderRadius: 8 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, grid: { color: '#eef2f6' } }, y: { grid: { display: false } } } }
+  });
+</script>
+</body>
+</html>

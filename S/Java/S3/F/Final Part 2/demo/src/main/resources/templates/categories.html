@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Categories — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content">
+  <div class="container" style="padding-top:1.5rem">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <span>Categories</span>
+    </nav>
+    <div class="section-head">
+      <div>
+        <h1 class="section-title">Shop by Category</h1>
+        <p class="section-sub">Computers, networking, gaming, cameras, power, DIY, and pro IT gear</p>
+      </div>
+      <a th:href="@{/products}">Browse all products →</a>
+    </div>
+
+    <div class="cat-groups" th:if="${menuGroups != null and !menuGroups.isEmpty()}">
+      <section class="cat-group" th:each="g : ${menuGroups}">
+        <div class="cat-group-head">
+          <span class="cat-group-icon" th:text="${g.icon}">💻</span>
+          <h2 th:text="${g.title}">Computers &amp; Components</h2>
+        </div>
+        <div class="cat-grid cat-grid-media">
+          <a th:each="item : ${g.items}" th:href="@{/products(category=${item.id})}" class="cat-card cat-card-media">
+            <div class="cat-thumb" th:if="${item.imageUrl != null and !#strings.isEmpty(item.imageUrl)}">
+              <img th:src="${item.imageUrl}" th:alt="${item.name}" loading="lazy"/>
+            </div>
+            <div class="cat-icon" th:unless="${item.imageUrl != null and !#strings.isEmpty(item.imageUrl)}"
+                 th:text="${item.icon}">💻</div>
+            <span th:text="${item.name}">CPU</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <div class="cat-grid" th:if="${menuGroups == null or menuGroups.isEmpty()}">
+      <a th:each="c : ${categories}" th:href="@{/products(category=${c.id})}" class="cat-card cat-card-media">
+        <div class="cat-thumb" th:if="${c.imageUrl != null and !#strings.isEmpty(c.imageUrl)}">
+          <img th:src="${c.imageUrl}" th:alt="${c.name}" loading="lazy"/>
+        </div>
+        <div class="cat-icon" th:unless="${c.imageUrl != null and !#strings.isEmpty(c.imageUrl)}"
+             th:text="${c.icon}">💻</div>
+        <span th:text="${c.name}">CPU</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

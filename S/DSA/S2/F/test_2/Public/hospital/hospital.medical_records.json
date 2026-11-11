@@ -1,0 +1,872 @@
+[{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f8fd"
+  },
+  "record_id": "MR20230001",
+  "patient_id": "P1001",
+  "visit_date": {
+    "$date": "2023-01-05T00:00:00.000Z"
+  },
+  "doctor_id": "DOC101",
+  "department": "Cardiology",
+  "diagnosis": "Hypertension",
+  "treatment": "Prescribed Lisinopril 10mg daily",
+  "medications": [
+    "Lisinopril"
+  ],
+  "tests_ordered": [
+    "Blood pressure monitoring",
+    "Complete blood count"
+  ],
+  "follow_up": {
+    "$date": "2023-02-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f8fe"
+  },
+  "record_id": "MR20230002",
+  "patient_id": "P1001",
+  "visit_date": {
+    "$date": "2023-02-10T00:00:00.000Z"
+  },
+  "doctor_id": "DOC101",
+  "department": "Cardiology",
+  "diagnosis": "Stable hypertension",
+  "treatment": "Continued medication, lifestyle modifications",
+  "medications": [
+    "Lisinopril"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-05-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f8ff"
+  },
+  "record_id": "MR20230003",
+  "patient_id": "P1002",
+  "visit_date": {
+    "$date": "2023-01-15T00:00:00.000Z"
+  },
+  "doctor_id": "DOC102",
+  "department": "Neurology",
+  "diagnosis": "Migraine",
+  "treatment": "Prescribed Sumatriptan 50mg as needed",
+  "medications": [
+    "Sumatriptan"
+  ],
+  "tests_ordered": [
+    "MRI brain"
+  ],
+  "follow_up": {
+    "$date": "2023-03-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f900"
+  },
+  "record_id": "MR20230004",
+  "patient_id": "P1003",
+  "visit_date": {
+    "$date": "2023-01-20T00:00:00.000Z"
+  },
+  "doctor_id": "DOC103",
+  "department": "Orthopedics",
+  "diagnosis": "Fractured wrist",
+  "treatment": "Cast applied for 6 weeks",
+  "medications": [
+    "Acetaminophen"
+  ],
+  "tests_ordered": [
+    "X-ray wrist"
+  ],
+  "follow_up": {
+    "$date": "2023-03-03T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f901"
+  },
+  "record_id": "MR20230005",
+  "patient_id": "P1004",
+  "visit_date": {
+    "$date": "2023-01-25T00:00:00.000Z"
+  },
+  "doctor_id": "DOC104",
+  "department": "Pediatrics",
+  "diagnosis": "Ear infection",
+  "treatment": "Amoxicillin 250mg 3x daily for 10 days",
+  "medications": [
+    "Amoxicillin"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-02-04T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f902"
+  },
+  "record_id": "MR20230006",
+  "patient_id": "P1005",
+  "visit_date": {
+    "$date": "2023-02-01T00:00:00.000Z"
+  },
+  "doctor_id": "DOC105",
+  "department": "Oncology",
+  "diagnosis": "Routine chemotherapy",
+  "treatment": "Cycle 3 of 6 completed",
+  "medications": [
+    "Paclitaxel",
+    "Carboplatin"
+  ],
+  "tests_ordered": [
+    "CBC",
+    "Liver function tests"
+  ],
+  "follow_up": {
+    "$date": "2023-02-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f903"
+  },
+  "record_id": "MR20230007",
+  "patient_id": "P1006",
+  "visit_date": {
+    "$date": "2023-02-05T00:00:00.000Z"
+  },
+  "doctor_id": "DOC106",
+  "department": "Radiology",
+  "diagnosis": "Knee pain",
+  "treatment": "X-ray showed mild osteoarthritis",
+  "medications": [
+    "Ibuprofen"
+  ],
+  "tests_ordered": [
+    "X-ray knee"
+  ],
+  "follow_up": {
+    "$date": "2023-05-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f904"
+  },
+  "record_id": "MR20230008",
+  "patient_id": "P1007",
+  "visit_date": {
+    "$date": "2023-02-10T00:00:00.000Z"
+  },
+  "doctor_id": "DOC107",
+  "department": "Emergency",
+  "diagnosis": "Anaphylactic reaction",
+  "treatment": "Epinephrine injection, Benadryl 50mg",
+  "medications": [
+    "Epinephrine",
+    "Diphenhydramine"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-02-17T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f905"
+  },
+  "record_id": "MR20230009",
+  "patient_id": "P1008",
+  "visit_date": {
+    "$date": "2023-02-15T00:00:00.000Z"
+  },
+  "doctor_id": "DOC108",
+  "department": "Surgery",
+  "diagnosis": "Appendicitis",
+  "treatment": "Appendectomy performed",
+  "medications": [
+    "Cefazolin",
+    "Oxycodone"
+  ],
+  "tests_ordered": [
+    "CT abdomen"
+  ],
+  "follow_up": {
+    "$date": "2023-02-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f906"
+  },
+  "record_id": "MR20230010",
+  "patient_id": "P1009",
+  "visit_date": {
+    "$date": "2023-02-20T00:00:00.000Z"
+  },
+  "doctor_id": "DOC109",
+  "department": "Psychiatry",
+  "diagnosis": "Generalized anxiety disorder",
+  "treatment": "Started Sertraline 50mg daily",
+  "medications": [
+    "Sertraline"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-03-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f907"
+  },
+  "record_id": "MR20230011",
+  "patient_id": "P1010",
+  "visit_date": {
+    "$date": "2023-02-25T00:00:00.000Z"
+  },
+  "doctor_id": "DOC110",
+  "department": "Physical Therapy",
+  "diagnosis": "Lower back pain",
+  "treatment": "6 weeks of physical therapy prescribed",
+  "medications": [],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-03-11T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f908"
+  },
+  "record_id": "MR20230012",
+  "patient_id": "P1011",
+  "visit_date": {
+    "$date": "2023-03-01T00:00:00.000Z"
+  },
+  "doctor_id": "DOC101",
+  "department": "Cardiology",
+  "diagnosis": "Atrial fibrillation",
+  "treatment": "Started Metoprolol 25mg twice daily",
+  "medications": [
+    "Metoprolol"
+  ],
+  "tests_ordered": [
+    "EKG",
+    "Echocardiogram"
+  ],
+  "follow_up": {
+    "$date": "2023-04-01T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f909"
+  },
+  "record_id": "MR20230013",
+  "patient_id": "P1012",
+  "visit_date": {
+    "$date": "2023-03-05T00:00:00.000Z"
+  },
+  "doctor_id": "DOC102",
+  "department": "Neurology",
+  "diagnosis": "Carpal tunnel syndrome",
+  "treatment": "Wrist splint, consider surgery if no improvement",
+  "medications": [
+    "Naproxen"
+  ],
+  "tests_ordered": [
+    "Nerve conduction study"
+  ],
+  "follow_up": {
+    "$date": "2023-05-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f90a"
+  },
+  "record_id": "MR20230014",
+  "patient_id": "P1013",
+  "visit_date": {
+    "$date": "2023-03-10T00:00:00.000Z"
+  },
+  "doctor_id": "DOC103",
+  "department": "Orthopedics",
+  "diagnosis": "Rotator cuff tear",
+  "treatment": "Physical therapy, possible surgery",
+  "medications": [
+    "Ibuprofen"
+  ],
+  "tests_ordered": [
+    "MRI shoulder"
+  ],
+  "follow_up": {
+    "$date": "2023-04-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f90b"
+  },
+  "record_id": "MR20230015",
+  "patient_id": "P1014",
+  "visit_date": {
+    "$date": "2023-03-15T00:00:00.000Z"
+  },
+  "doctor_id": "DOC104",
+  "department": "Pediatrics",
+  "diagnosis": "Asthma exacerbation",
+  "treatment": "Albuterol inhaler, prednisone taper",
+  "medications": [
+    "Albuterol",
+    "Prednisone"
+  ],
+  "tests_ordered": [
+    "Pulmonary function tests"
+  ],
+  "follow_up": {
+    "$date": "2023-03-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f90c"
+  },
+  "record_id": "MR20230016",
+  "patient_id": "P1015",
+  "visit_date": {
+    "$date": "2023-03-20T00:00:00.000Z"
+  },
+  "doctor_id": "DOC105",
+  "department": "Oncology",
+  "diagnosis": "Lymphoma follow-up",
+  "treatment": "PET scan shows remission",
+  "medications": [],
+  "tests_ordered": [
+    "PET scan"
+  ],
+  "follow_up": {
+    "$date": "2023-06-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f90d"
+  },
+  "record_id": "MR20230017",
+  "patient_id": "P1016",
+  "visit_date": {
+    "$date": "2023-03-25T00:00:00.000Z"
+  },
+  "doctor_id": "DOC106",
+  "department": "Radiology",
+  "diagnosis": "Abdominal pain",
+  "treatment": "CT showed unremarkable findings",
+  "medications": [],
+  "tests_ordered": [
+    "CT abdomen"
+  ],
+  "follow_up": {
+    "$date": "2023-04-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f90e"
+  },
+  "record_id": "MR20230018",
+  "patient_id": "P1017",
+  "visit_date": {
+    "$date": "2023-04-01T00:00:00.000Z"
+  },
+  "doctor_id": "DOC107",
+  "department": "Emergency",
+  "diagnosis": "Ankle sprain",
+  "treatment": "RICE protocol, ankle brace",
+  "medications": [
+    "Ibuprofen"
+  ],
+  "tests_ordered": [
+    "X-ray ankle"
+  ],
+  "follow_up": {
+    "$date": "2023-04-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f90f"
+  },
+  "record_id": "MR20230019",
+  "patient_id": "P1018",
+  "visit_date": {
+    "$date": "2023-04-05T00:00:00.000Z"
+  },
+  "doctor_id": "DOC108",
+  "department": "Surgery",
+  "diagnosis": "Gallstones",
+  "treatment": "Laparoscopic cholecystectomy scheduled",
+  "medications": [],
+  "tests_ordered": [
+    "Ultrasound abdomen"
+  ],
+  "follow_up": {
+    "$date": "2023-04-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f910"
+  },
+  "record_id": "MR20230020",
+  "patient_id": "P1019",
+  "visit_date": {
+    "$date": "2023-04-10T00:00:00.000Z"
+  },
+  "doctor_id": "DOC109",
+  "department": "Psychiatry",
+  "diagnosis": "Major depressive disorder",
+  "treatment": "Increased Fluoxetine to 40mg daily",
+  "medications": [
+    "Fluoxetine"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-05-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f911"
+  },
+  "record_id": "MR20230021",
+  "patient_id": "P1020",
+  "visit_date": {
+    "$date": "2023-04-15T00:00:00.000Z"
+  },
+  "doctor_id": "DOC110",
+  "department": "Physical Therapy",
+  "diagnosis": "Post-knee surgery rehab",
+  "treatment": "Therapy 3x/week for 4 weeks",
+  "medications": [],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-04-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f912"
+  },
+  "record_id": "MR20230022",
+  "patient_id": "P1021",
+  "visit_date": {
+    "$date": "2023-04-20T00:00:00.000Z"
+  },
+  "doctor_id": "DOC101",
+  "department": "Cardiology",
+  "diagnosis": "Hyperlipidemia",
+  "treatment": "Started Atorvastatin 20mg nightly",
+  "medications": [
+    "Atorvastatin"
+  ],
+  "tests_ordered": [
+    "Lipid panel"
+  ],
+  "follow_up": {
+    "$date": "2023-07-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f913"
+  },
+  "record_id": "MR20230023",
+  "patient_id": "P1022",
+  "visit_date": {
+    "$date": "2023-04-25T00:00:00.000Z"
+  },
+  "doctor_id": "DOC102",
+  "department": "Neurology",
+  "diagnosis": "Epilepsy follow-up",
+  "treatment": "Adjusted Lamotrigine dosage",
+  "medications": [
+    "Lamotrigine"
+  ],
+  "tests_ordered": [
+    "EEG"
+  ],
+  "follow_up": {
+    "$date": "2023-07-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f914"
+  },
+  "record_id": "MR20230024",
+  "patient_id": "P1023",
+  "visit_date": {
+    "$date": "2023-05-01T00:00:00.000Z"
+  },
+  "doctor_id": "DOC103",
+  "department": "Orthopedics",
+  "diagnosis": "Hip arthritis",
+  "treatment": "Cortisone injection given",
+  "medications": [],
+  "tests_ordered": [
+    "X-ray hip"
+  ],
+  "follow_up": {
+    "$date": "2023-08-01T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f915"
+  },
+  "record_id": "MR20230025",
+  "patient_id": "P1024",
+  "visit_date": {
+    "$date": "2023-05-05T00:00:00.000Z"
+  },
+  "doctor_id": "DOC104",
+  "department": "Pediatrics",
+  "diagnosis": "ADHD evaluation",
+  "treatment": "Started Methylphenidate 10mg daily",
+  "medications": [
+    "Methylphenidate"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-06-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f916"
+  },
+  "record_id": "MR20230026",
+  "patient_id": "P1025",
+  "visit_date": {
+    "$date": "2023-05-10T00:00:00.000Z"
+  },
+  "doctor_id": "DOC105",
+  "department": "Oncology",
+  "diagnosis": "Prostate cancer screening",
+  "treatment": "PSA level normal",
+  "medications": [],
+  "tests_ordered": [
+    "PSA test"
+  ],
+  "follow_up": {
+    "$date": "2024-05-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f917"
+  },
+  "record_id": "MR20230027",
+  "patient_id": "P1026",
+  "visit_date": {
+    "$date": "2023-05-15T00:00:00.000Z"
+  },
+  "doctor_id": "DOC106",
+  "department": "Radiology",
+  "diagnosis": "Suspected pneumonia",
+  "treatment": "Chest X-ray confirmed, antibiotics prescribed",
+  "medications": [
+    "Azithromycin"
+  ],
+  "tests_ordered": [
+    "Chest X-ray"
+  ],
+  "follow_up": {
+    "$date": "2023-05-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f918"
+  },
+  "record_id": "MR20230028",
+  "patient_id": "P1027",
+  "visit_date": {
+    "$date": "2023-05-20T00:00:00.000Z"
+  },
+  "doctor_id": "DOC107",
+  "department": "Emergency",
+  "diagnosis": "Food poisoning",
+  "treatment": "IV fluids, antiemetics",
+  "medications": [
+    "Ondansetron"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-05-23T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f919"
+  },
+  "record_id": "MR20230029",
+  "patient_id": "P1028",
+  "visit_date": {
+    "$date": "2023-05-25T00:00:00.000Z"
+  },
+  "doctor_id": "DOC108",
+  "department": "Surgery",
+  "diagnosis": "Inguinal hernia",
+  "treatment": "Hernia repair scheduled",
+  "medications": [],
+  "tests_ordered": [
+    "Ultrasound groin"
+  ],
+  "follow_up": {
+    "$date": "2023-06-01T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f91a"
+  },
+  "record_id": "MR20230030",
+  "patient_id": "P1029",
+  "visit_date": {
+    "$date": "2023-06-01T00:00:00.000Z"
+  },
+  "doctor_id": "DOC109",
+  "department": "Psychiatry",
+  "diagnosis": "Bipolar disorder",
+  "treatment": "Started Lithium 300mg twice daily",
+  "medications": [
+    "Lithium"
+  ],
+  "tests_ordered": [
+    "Lithium level",
+    "Thyroid function"
+  ],
+  "follow_up": {
+    "$date": "2023-06-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f91b"
+  },
+  "record_id": "MR20230031",
+  "patient_id": "P1030",
+  "visit_date": {
+    "$date": "2023-06-05T00:00:00.000Z"
+  },
+  "doctor_id": "DOC110",
+  "department": "Physical Therapy",
+  "diagnosis": "Post-stroke rehab",
+  "treatment": "Therapy 5x/week for 6 weeks",
+  "medications": [],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-06-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f91c"
+  },
+  "record_id": "MR20230032",
+  "patient_id": "P1001",
+  "visit_date": {
+    "$date": "2023-06-10T00:00:00.000Z"
+  },
+  "doctor_id": "DOC101",
+  "department": "Cardiology",
+  "diagnosis": "Hypertension follow-up",
+  "treatment": "BP well controlled, continue current regimen",
+  "medications": [
+    "Lisinopril"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-09-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f91d"
+  },
+  "record_id": "MR20230033",
+  "patient_id": "P1002",
+  "visit_date": {
+    "$date": "2023-06-15T00:00:00.000Z"
+  },
+  "doctor_id": "DOC102",
+  "department": "Neurology",
+  "diagnosis": "Migraine follow-up",
+  "treatment": "Sumatriptan effective, no changes",
+  "medications": [
+    "Sumatriptan"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-09-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f91e"
+  },
+  "record_id": "MR20230034",
+  "patient_id": "P1003",
+  "visit_date": {
+    "$date": "2023-06-20T00:00:00.000Z"
+  },
+  "doctor_id": "DOC103",
+  "department": "Orthopedics",
+  "diagnosis": "Wrist fracture follow-up",
+  "treatment": "Cast removed, start PT",
+  "medications": [],
+  "tests_ordered": [
+    "X-ray wrist"
+  ],
+  "follow_up": {
+    "$date": "2023-07-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f91f"
+  },
+  "record_id": "MR20230035",
+  "patient_id": "P1004",
+  "visit_date": {
+    "$date": "2023-06-25T00:00:00.000Z"
+  },
+  "doctor_id": "DOC104",
+  "department": "Pediatrics",
+  "diagnosis": "Annual checkup",
+  "treatment": "Vaccines up to date",
+  "medications": [],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2024-06-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f920"
+  },
+  "record_id": "MR20230036",
+  "patient_id": "P1005",
+  "visit_date": {
+    "$date": "2023-07-01T00:00:00.000Z"
+  },
+  "doctor_id": "DOC105",
+  "department": "Oncology",
+  "diagnosis": "Chemotherapy cycle 4",
+  "treatment": "Tolerating treatment well",
+  "medications": [
+    "Paclitaxel",
+    "Carboplatin"
+  ],
+  "tests_ordered": [
+    "CBC",
+    "Liver function"
+  ],
+  "follow_up": {
+    "$date": "2023-07-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f921"
+  },
+  "record_id": "MR20230037",
+  "patient_id": "P1006",
+  "visit_date": {
+    "$date": "2023-07-05T00:00:00.000Z"
+  },
+  "doctor_id": "DOC106",
+  "department": "Radiology",
+  "diagnosis": "Chronic back pain",
+  "treatment": "MRI ordered",
+  "medications": [
+    "Meloxicam"
+  ],
+  "tests_ordered": [
+    "MRI spine"
+  ],
+  "follow_up": {
+    "$date": "2023-07-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f922"
+  },
+  "record_id": "MR20230038",
+  "patient_id": "P1007",
+  "visit_date": {
+    "$date": "2023-07-10T00:00:00.000Z"
+  },
+  "doctor_id": "DOC107",
+  "department": "Emergency",
+  "diagnosis": "Laceration repair",
+  "treatment": "5 stitches to right forearm",
+  "medications": [],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-07-17T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f923"
+  },
+  "record_id": "MR20230039",
+  "patient_id": "P1008",
+  "visit_date": {
+    "$date": "2023-07-15T00:00:00.000Z"
+  },
+  "doctor_id": "DOC108",
+  "department": "Surgery",
+  "diagnosis": "Appendectomy follow-up",
+  "treatment": "Wound healing well",
+  "medications": [],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-08-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395cdd611906215cb5f924"
+  },
+  "record_id": "MR20230040",
+  "patient_id": "P1009",
+  "visit_date": {
+    "$date": "2023-07-20T00:00:00.000Z"
+  },
+  "doctor_id": "DOC109",
+  "department": "Psychiatry",
+  "diagnosis": "Anxiety follow-up",
+  "treatment": "Sertraline increased to 100mg",
+  "medications": [
+    "Sertraline"
+  ],
+  "tests_ordered": [],
+  "follow_up": {
+    "$date": "2023-08-20T00:00:00.000Z"
+  }
+}]

@@ -1,0 +1,244 @@
+package m_chou_yamata_online_sale_processing;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+
+public class M_Chou_Yamata_Online_Sale_Processing {
+
+    static ArrayList<Product> products = new ArrayList<>();
+    static ArrayList<Customer> customers = new ArrayList<>();
+    static ArrayList<Order> orders = new ArrayList<>();
+    
+    static Scanner sc = new Scanner(System.in);
+    
+    static {
+        products.add(new Product(1, "Coca", 20, 1.5));
+        products.add(new Product(2, "Hotdog", 10, 2));
+        products.add(new Product(3, "Sandwich", 5, 1));
+    }
+    
+    
+    
+    public static void main(String[] args) {
+
+        int choose;
+        
+        do {
+            System.out.println("==== Market Online ====");
+            System.out.println("1. View Product");
+            System.out.println("2. Add Product");
+            System.out.println("3. Register Customer");
+            System.out.println("4. Create Order");
+            System.out.println("5. View Order");
+            System.out.println("6. Process Order");
+            System.out.println("7. View Customer");
+            System.out.println("8. Exit");
+            System.out.print("Choose: ");
+            choose = sc.nextInt();
+            
+            System.out.println("#------------------------------------#");
+            switch ( choose ) {
+                case 1: viewProducts(); break;
+                case 2: addProduct(); break;
+                case 3: registerCustomer(); break;
+                case 4: createOrder(); break;
+                case 5: viewOrders(); break;
+                case 6: processOrders(); break;
+                case 7: viewCustomer(); break;
+            }
+            
+        }while ( choose != 8 );
+ 
+    }
+    
+    
+    //  1
+    static void viewProducts(){
+        
+        if ( products.isEmpty() ){
+            System.out.println("Product is empty.");
+            System.out.println("--------------------------");
+            return;
+        }
+        
+        for ( Product p : products ) {
+            p.product_display();
+        }
+        
+    }
+    
+    //  2
+    static void addProduct() {
+        
+        System.out.println("--- Add Product ---");
+        
+        System.out.print("ID    : ");
+        int id = sc.nextInt();
+        
+        System.out.print("Name  : ");
+        String name = sc.next();
+        
+        System.out.print("Qty   : ");
+        int qty = sc.nextInt();
+        
+        System.out.print("Price : ");
+        double price = sc.nextDouble();
+        
+        products.add( new Product(id, name, qty, price) );
+        System.out.println("Product added.");
+        System.out.println("--------------------------");
+        
+    }
+    
+    
+    //  3
+    static void registerCustomer() {
+    
+        System.out.println("--- Register Custoemr ---");
+        
+        System.out.print("ID   : ");
+        int id = sc.nextInt();
+        
+        System.out.print("Name : ");
+        String name = sc.next();
+        
+        System.out.print("Tel  : ");
+        String tel = sc.next();
+        
+        customers.add( new Customer( id, name, tel ) );
+        System.out.println("Customer registered.");
+        System.out.println("--------------------------");
+        
+    }
+    
+    
+    //  4
+    static void createOrder() {
+    
+        System.out.println("--- Create Order ---");
+        
+        if ( products.isEmpty() || customers.isEmpty() ) {
+            System.out.println("Do not have product or customer.");
+            System.out.println("--------------------------");
+            return;
+        } /* isEmpty() is from ArrayList
+             isEmpty() for check have empty or not
+             return ; is return not things
+             when void get return; void will stop working
+          */
+        
+        
+        System.out.print("Order ID: ");
+        int order_id_CO = sc.nextInt();
+        
+        System.out.println("Select Customer: ");
+        for ( Customer c : customers ) c.customer_display();
+        int id_C_CO = sc.nextInt();
+        
+        System.out.println("Select Product: ");
+        for ( Product p : products ) p.product_display();
+        int id_P_CO = sc.nextInt();
+        
+        System.out.print("Qty: ");
+        int qty_CO = sc.nextInt();
+        
+        Customer customer_CO = null;   // for reset field value inside customer
+        Product product_CO = null;     // it will reset only 1 time before for loop start processing
+                                       // only reset in createOrder and no reset anywhere but not
+                                          // reset field of Customer and Product
+                                   
+        for ( Customer c : customers ) {
+            if ( c.customer_id == id_C_CO ) {
+                customer_CO = c;
+            }
+        }
+        
+        for ( Product p : products ) {
+            if ( p.product_id == id_P_CO ) {
+                product_CO = p;
+            }
+        }
+        
+        if ( customer_CO != null && product_CO != null ) {
+            orders.add(new Order(order_id_CO, customer_CO, product_CO, qty_CO));
+            System.out.println("Order created.");
+        } else {
+            System.out.println("Invalid selected.");
+        }
+        
+        
+        
+    }
+    
+    //  5
+    static void viewOrders(){
+        
+        System.out.println("--- View Orders ---");
+        
+        if ( orders.isEmpty() ) {
+            System.out.println("Order is empty.");
+            System.out.println("--------------------------");
+            return;
+        }  
+        
+        for ( Order o : orders  ) {
+            o.order_display();
+        }
+        
+    }
+    
+    //  6
+    static void processOrders() {
+        
+        System.out.println("--- Process Orders ---");
+        
+        for ( Order o : orders ) {
+            if(!o.order_processed) {
+                if(o.order_product.product_qty >= o.order_qty){
+                    o.order_product.product_qty -= o.order_qty;
+                    o.order_processed = true;
+                    System.out.println("Processed Order: " + o.order_id);
+                    System.out.println("--------------------------");
+                } else {
+                    System.out.println("Not enough stock for Order: "  + o.order_id );
+                    System.out.println("--------------------------");
+                }
+            }
+            
+        }
+        
+    }
+    
+    //  7
+    static void viewCustomer (){
+        
+        System.out.println("--- View Custoemr ---");
+        
+        if ( customers.isEmpty() ){
+            System.out.println("Customer is empty.");
+            System.out.println("--------------------------");
+            return;
+        }
+        
+        for ( Customer c : customers ) {
+            c.customer_display();
+        }
+        
+        /*
+        System.out.println("--- View Custoemr ---");
+                
+        for (int i = 0; i < customers.size(); i++) {
+            customers.get(i).customer_display();
+        }
+        */
+        System.out.println("--------------------------");
+        
+    }
+    
+    
+    
+
+}
+

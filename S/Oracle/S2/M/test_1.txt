@@ -1,0 +1,21 @@
+-- Fullname: Chou Yamata - SV2.6
+-- 1. check users in oracle database
+SELECT USERNAME, ACCOUNT_STATUS, LOCK_DATE, CREATED FROM DBA_USERS
+WHERE USERNAME IN ('ORA1','SYSTEM','SYS');
+
+SELECT COUNT(*) FROM DBA_USERS;
+
+-- 2. change password user ora1 to 123
+ALTER USER ORA1 IDENTIFIED BY 123;
+
+-- 3. change password user system to oracle
+ALTER USER SYSTEM IDENTIFIED BY oracle;
+
+-- 4. change strong password user ora1 to @aba$100 or @aba$!100
+ALTER USER ORA1 INDENTIFIED BY "@aba$100";
+
+-- 5. lock user ora1
+ALTER USER ORA1 ACCOUNT LOCK;
+
+-- 6. unlock user ora1
+ALTER USER ORA1 ACCOUNT UNLOCK;

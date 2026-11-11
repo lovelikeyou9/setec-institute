@@ -1,0 +1,32 @@
+<!-- Main Slider -->
+@if(true){
+  <app-main-slider></app-main-slider>
+}
+
+
+
+
+
+
+
+
+
+
+<!-- product card -->
+
+<!--
+  <div class="row">
+    <app-product-card class="col-lg-3 col-md-3 mt-4"></app-product-card>
+    <app-product-card class="col-lg-3 col-md-3 mt-4"></app-product-card>
+    <app-product-card class="col-lg-3 col-md-3 mt-4"></app-product-card>
+    <app-product-card class="col-lg-3 col-md-3 mt-4"></app-product-card>
+    <app-product-card class="col-lg-3 col-md-3 mt-4"></app-product-card>
+    <app-product-card class="col-lg-3 col-md-3 mt-4"></app-product-card>
+  </div>
+   -->
+
+<div class="row">
+    @for(product of products.getProducts(); track product.id){
+    <app-product-card [product]="product" (addToCart)="onAddToCart($event)" class="col-lg-3 col-md-3 mt-4"></app-product-card>
+    }
+</div>

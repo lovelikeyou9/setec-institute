@@ -1,0 +1,9 @@
+Server Name: DESKTOP-BB6PQGM\MSSQLSERVER_01
+username: SV2_Chou_Yamata
+password: 12345
+no: 6
+
+Server Name: 192.168.5.64\MSSQLSERVER_01
+username: SV2_Chou_Yamata
+password: 12345
+no: 6

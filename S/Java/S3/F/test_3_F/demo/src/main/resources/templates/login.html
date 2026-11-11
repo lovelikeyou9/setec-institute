@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --accent: #38bdf8;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --danger: #f87171;
+            --ok: #4ade80;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.18), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.12), transparent 35%),
+                var(--bg);
+        }
+        .box {
+            width: min(420px, 92vw);
+            background: color-mix(in srgb, var(--card) 92%, white 8%);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+        h1 { margin: 0 0 0.35rem; font-size: 1.6rem; }
+        p { margin: 0 0 1.4rem; color: var(--muted); }
+        label { display: block; margin: 0.8rem 0 0.35rem; font-size: 0.9rem; color: var(--muted); }
+        input {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: #0b1220;
+            color: var(--text);
+        }
+        button {
+            margin-top: 1.25rem;
+            width: 100%;
+            border: 0;
+            border-radius: 10px;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #082f49;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .msg { margin-bottom: 1rem; padding: 0.7rem 0.85rem; border-radius: 8px; font-size: 0.9rem; }
+        .error { background: rgba(248, 113, 113, 0.15); color: var(--danger); }
+        .ok { background: rgba(74, 222, 128, 0.15); color: var(--ok); }
+        .hint { margin-top: 1rem; font-size: 0.85rem; color: var(--muted); }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1>Sign in</h1>
+    <p>Use your username and password</p>
+
+    <div th:if="${param.error}" class="msg error">Invalid username or password</div>
+    <div th:if="${param.logout}" class="msg ok">You have been logged out</div>
+
+    <form th:action="@{/login}" method="post">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" required autofocus>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="hint">
+        Demo accounts:<br>
+        admin / admin123 → Admin page<br>
+        user / 1234 → User page
+    </div>
+</div>
+</body>
+</html>

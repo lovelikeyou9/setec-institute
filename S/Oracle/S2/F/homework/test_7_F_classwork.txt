@@ -1,0 +1,34 @@
+
+-- test_7_F_classwork
+-- 1
+CREATE OR REPLACE VIEW VIEW_EMP_DEPT_LOCATION AS
+SELECT e.employee_id, e.last_name, e.salary, e.department_id,
+    d.department_name,
+    l.location_id, l.city
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id
+JOIN locations l
+ON d.location_id = l.location_id
+WHERE l.city NOT IN ('Seattle', 'South San Francisco')
+ORDER BY e.department_id ASC;
+
+SELECT * FROM VIEW_EMP_DEPT_LOCATION;
+
+-- 2
+CREATE OR REPLACE VIEW VIEW_EMP_DEPT_LOCATE_COUNTRY AS
+SELECT e.employee_id, e.last_name, e.salary, e.department_id,
+    d.department_name,
+    l.location_id, l.city,
+    c.country_id, c.country_name
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id
+JOIN locations l
+ON d.location_id = l.location_id
+JOIN countries c
+ON l.country_id = c.country_id
+WHERE d.department_name NOT IN ('IT', 'Shipping', 'Executive')
+ORDER BY e.salary DESC;
+
+SELECT * FROM VIEW_EMP_DEPT_LOCATE_COUNTRY;

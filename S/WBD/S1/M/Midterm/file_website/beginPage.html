@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engineer Portfolio — Demo Landing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="../beginPage.html" style="text-decoration:none;"><div  class="logo">CoolTECH</div></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav" id="nav">
+                <div class="nav-left">
+                    <a></a><a></a>
+                    <a href="#projects">Projects</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#experience">Experience</a>
+                    <a href="./blog/blog.html">Blog</a>
+                    <a href="./about/about.html">About</a>
+                </div>
+                <div class="nav-right">
+                    <a href="#contact" class="btn">Contact Me</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="overlay">
+            <h1>Power <span class="accent">Programming & Robotics</span> With My Skills</h1>
+            <p>
+                I combine programming, mechatronics, and robotics engineering to build innovative and automated
+                solutions.
+            </p>
+            <div class="actions">
+                <a href="#contact" class="btn">Contact Me</a>
+                <a href="#projects" class="btn ghost">View Projects</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Core Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2>Core Skills</h2>
+            <p>My expertise covers programming, embedded systems, and robotics engineering solutions.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-code" style="font-size: 60px; color: #9c6bff; margin-bottom: 18px;"></i>
+                    <h3>Programming</h3>
+                    <p>Proficient in C++, Python, and software development for embedded and desktop systems.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cogs" style="font-size: 60px; color: #5ad3ff; margin-bottom: 18px;"></i>
+                    <h3>Mechatronics</h3>
+                    <p>Design and integration of mechanical, electronic, and software systems.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot" style="font-size: 60px; color: #ff6b9c; margin-bottom: 18px;"></i>
+                    <h3>Robotics Engineering</h3>
+                    <p>Building autonomous and semi-autonomous robots for industrial and personal use.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How I Work Section -->
+    <section class="section light" id="experience">
+        <div class="container">
+            <h2>How I Work</h2>
+            <p>My workflow combines planning, coding, and testing to deliver reliable engineering solutions.</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <i class="fas fa-project-diagram" style="font-size: 60px; color: #9c6bff; margin-bottom: 18px;"></i>
+                    <h3>Plan</h3>
+                    <p>Analyze project requirements and design system architecture for efficiency.</p>
+                </div>
+                <div class="step-card">
+                    <i class="fas fa-laptop-code" style="font-size: 60px; color: #5ad3ff; margin-bottom: 18px;"></i>
+                    <h3>Develop</h3>
+                    <p>Write clean and optimized code, integrating hardware and software seamlessly.</p>
+                </div>
+                <div class="step-card">
+                    <i class="fas fa-rocket" style="font-size: 60px; color: #ff6b9c; margin-bottom: 18px;"></i>
+                    <h3>Test & Deploy</h3>
+                    <p>Validate solutions, debug systems, and deploy functional robotics or software projects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Showcase Section -->
+    <section class="section dark" id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <p>
+                Explore my programming and robotics projects, including embedded systems, automation, and AI-integrated
+                devices.
+            </p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="./image/Autonomous-military-drones.png" alt="Autonomous Drone">
+                    <h3>Autonomous Drone</h3>
+                    <div class="project-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">ROS</span>
+                        <span class="tag">Computer Vision</span>
+                    </div>
+                    <p>Developed an autonomous drone with obstacle avoidance and computer vision capabilities.</p>
+                </div>
+                <div class="project-card">
+                    <img src="./image/sadas.jpg" alt="Smart Home System">
+                    <h3>Smart Home System</h3>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">IoT</span>
+                        <span class="tag">Embedded Systems</span>
+                    </div>
+                    <p>Created an integrated smart home system with automated lighting, security, and climate control.
+                    </p>
+                </div>
+                <div class="project-card">
+                    <img src="./image/a60fd68d7c4c0ca4cde059e43e0a36eb_original.avif" alt="Industrial Robot Arm">
+                    <h3>Industrial Robot Arm</h3>
+                    <div class="project-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">Mechatronics</span>
+                        <span class="tag">Control Systems</span>
+                    </div>
+                    <p>Designed and programmed a 6-axis industrial robot arm for precision manufacturing tasks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="blog-container">
+            <div class="blog-header">
+                <h2>BLOG</h2>
+                <p>Insights, tutorials, and thoughts on programming, robotics, and AI</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="./image/1696066464102.jpg" alt="FUNDAI & Interacting">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">AI & Robotics</span>
+                        <h3 class="blog-card-title">FUNDAI & Interacting: The Future of Human-Robot Collaboration</h3>
+                        <p class="blog-card-excerpt">Exploring how FUNDAI technology is revolutionizing the way humans
+                            and robots interact in industrial and domestic environments.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Oct 22, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="./image/1748587717.webp" alt="Machine Learning in Robotics">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Machine Learning</span>
+                        <h3 class="blog-card-title">Implementing Machine Learning Algorithms in Autonomous Systems</h3>
+                        <p class="blog-card-excerpt">A deep dive into the practical implementation of ML algorithms for
+                            robotics applications and autonomous decision-making.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Oct 15, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="./image/mceclip0_1688048747.png" alt="Embedded Systems">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Embedded Systems</span>
+                        <h3 class="blog-card-title">Optimizing Embedded Systems for Real-Time Robotics Applications</h3>
+                        <p class="blog-card-excerpt">Techniques and best practices for developing efficient embedded
+                            systems that meet the demanding requirements of robotics.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Oct 8, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- End Page / Contact Section -->
+    <section class="section light" id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p>Feel free to contact me for collaborations, projects, or just to say hello!</p>
+            <div class="contact-links"
+                style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:30px;">
+                <a href="tel:+1234567890" class="btn"><i class="fas fa-phone"></i> +1 234 567 890</a>
+                <a href="mailto:hello@cooltech.com" class="btn"><i class="fas fa-envelope"></i> hello@cooltech.com</a>
+                <a href="https://github.com" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://linkedin.com" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="footer-section" id="resources">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>PRODUCTS</h3>
+                    <ul>
+                        <li><a href="#">Scale Data Engine</a></li>
+                        <li><a href="#">Scale GenAI Platform</a></li>
+                        <li><a href="#">Scale Donovan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>GOVERNMENT</h3>
+                    <ul>
+                        <li><a href="#">Public Sector</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>COMPANY</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>RESOURCES</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Customers</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">AI Readiness Report 2024</a></li>
+                        <li><a href="#">Research</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>GUIDES</h3>
+                    <ul>
+                        <li><a href="#">Data Labeling</a></li>
+                        <li><a href="#">ML Model Training</a></li>
+                        <li><a href="#">Diffusion Models</a></li>
+                        <li><a href="#">Guide to AI for eCommerce</a></li>
+                        <li><a href="#">Computer Vision Applications</a></li>
+                        <li><a href="#">Large Language Models</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>FOLLOW US</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 CoolTECH — Portfolio Website</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function () {
+            document.getElementById('nav').classList.toggle('active');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    document.getElementById('nav').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;family=Space+Grotesk:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "secondary-container": "#00d2ff",
+        "error-container": "#ffdad6",
+        "on-tertiary-container": "#e2e8ff",
+        "inverse-primary": "#aac7ff",
+        "surface-container-lowest": "#ffffff",
+        "surface": "#ffffff",
+        "on-primary-fixed-variant": "#00458e",
+        "tertiary": "#485066",
+        "on-secondary": "#ffffff",
+        "on-secondary-fixed-variant": "#004e60",
+        "on-primary-fixed": "#001b3e",
+        "surface-variant": "#e0e3e5",
+        "on-primary": "#ffffff",
+        "on-tertiary-fixed-variant": "#3f465c",
+        "on-tertiary-fixed": "#131b2e",
+        "primary": "#004e9f",
+        "tertiary-fixed-dim": "#bec6e0",
+        "secondary-fixed": "#b6ebff",
+        "secondary-fixed-dim": "#47d6ff",
+        "on-background": "#0f172a",
+        "tertiary-container": "#60687f",
+        "primary-fixed-dim": "#aac7ff",
+        "secondary": "#00677f",
+        "inverse-on-surface": "#eff1f3",
+        "outline-variant": "#e2e8f0",
+        "on-error": "#ffffff",
+        "outline": "#64748b",
+        "on-secondary-fixed": "#001f28",
+        "error": "#ba1a1a",
+        "on-secondary-container": "#00566a",
+        "surface-tint": "#005cba",
+        "on-primary-container": "#dfe8ff",
+        "on-tertiary": "#ffffff",
+        "background": "#ffffff",
+        "surface-container-highest": "#e2e8f0",
+        "primary-fixed": "#d7e3ff",
+        "primary-container": "#0066cc",
+        "surface-container": "#f1f5f9",
+        "inverse-surface": "#2d3133",
+        "surface-container-low": "#f8fafc",
+        "surface-bright": "#ffffff",
+        "tertiary-fixed": "#dae2fd",
+        "surface-dim": "#f1f5f9",
+        "surface-container-high": "#e2e8f0",
+        "on-surface": "#0f172a",
+        "on-error-container": "#93000a",
+        "on-surface-variant": "#475569"
+      },
+      borderRadius: {
+        "DEFAULT": "0.125rem",
+        "lg": "0.375rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "space-xl": "2.5rem",
+        "space-xs": "0.25rem",
+        "gutter-mobile": "1rem",
+        "space-sm": "0.5rem",
+        "space-md": "1rem",
+        "margin-mobile": "1rem",
+        "space-lg": "1.5rem",
+        "margin": "2rem",
+        "gutter": "1.5rem"
+      },
+      fontFamily: {
+        "display-mobile": ["Space Grotesk"],
+        "body-lg": ["Geist"],
+        "body-sm": ["Geist"],
+        "label-caps": ["JetBrains Mono"],
+        "headline-lg-mobile": ["Space Grotesk"],
+        "display": ["Space Grotesk"],
+        "headline-md": ["Space Grotesk"],
+        "headline-sm": ["Space Grotesk"],
+        "spec-data": ["JetBrains Mono"],
+        "spec-metric": ["JetBrains Mono"],
+        "headline-lg": ["Space Grotesk"],
+        "body-md": ["Geist"],
+        "spec-code-sm": ["JetBrains Mono"],
+        "spec-code-md": ["JetBrains Mono"],
+        "label-sm": ["JetBrains Mono"],
+        "label-md": ["Geist"]
+      },
+      fontSize: {
+        "display-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+        "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+        "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+        "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+        "spec-data": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+        "spec-metric": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "600" }],
+        "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+        "spec-code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+        "spec-code-md": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+        "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+        "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+      }
+    }
+  }
+};</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#ffffff;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-blue-100 selection:text-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.05)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"><button aria-label="Go Back" class="w-11 h-11 flex items-center justify-center rounded-lg text-slate-800 hover:text-primary hover:bg-slate-100 transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-2xl">arrow_back</span></button><img alt="NEXUS PC Hardware Logo" class="h-7 w-auto object-contain hidden xs:block brightness-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VekO7HWFQJ7naXYLl5aToO4_3ghqJLzruEFyiDJTeTikPxSY15yOLHZK148NYZ_01qiS_3NcxKOZJ9Y1PqrehMjOslvLLZMxdGqY59gVqF3Tfy7XvIovqm2GEGVS1GEfT2iN3HoOFt8NjV8OgjEVHjl-cCj1U4GCczuoFF701SyzBCQrN0PqiB4t5Jt9vwcxq3XHa2G1p1Rqop9j4B-oG33IE0kCcTNy0MsmD0D6qssEvTorF-aFBei6XA"/><h1 class="font-headline-sm text-headline-sm font-bold tracking-tight text-slate-900 truncate">Hardware Detail</h1></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center rounded-lg text-slate-700 hover:text-primary hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white"></span></button><div class="flex items-center justify-center p-0.5 rounded-full"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2mvaApXROC66O0KfbRBcXkmFfwbrk4NuBjPT6T1NILYRun-jwsmRPUgzvKMO_cGt8-pTyysZ8CQAZ6N7MnVn_5p9Z4XCtMFeZSarAhV8ycUf9l-4cph2kYKHaxkvLD2KW5GXgEnpcZJFvu5MYf8R4Pq3rh2krC4TzNLIVOdKX63uTcC414giCEeFYevNWE-Cq_0qE_TUvWbH2ZniYqkY-rfQ5Xyb-j5sZ8TR-IZds9GB-emQ0dysKAQ"/></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface"><div class="flex flex-col w-full pb-24">
+<!-- Top Badges & Highlights Carousel Strip -->
+<div class="px-margin-mobile pt-space-md flex items-center gap-space-xs overflow-x-auto no-scrollbar">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200/80 font-label-sm text-label-sm uppercase tracking-wider shrink-0 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+      Flagship Edition
+    </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/80 font-label-sm text-label-sm uppercase tracking-wider shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[15px] text-emerald-600">verified</span>
+      4K / 8K VR Ready
+    </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-label-sm text-label-sm uppercase tracking-wider shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[15px] text-amber-500">bolt</span>
+      Free Overnight Shipping
+    </span>
+</div>
+<!-- Hardware Showcase & Interactive View Box -->
+<div class="px-margin-mobile mt-space-md">
+<div class="relative w-full rounded-2xl bg-slate-50 border border-slate-200/90 p-space-md overflow-hidden shadow-sm flex flex-col items-center">
+<!-- Glow Underlay -->
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50/70 via-slate-50/40 to-slate-50 pointer-events-none"></div>
+<!-- Top Tools Overlay -->
+<div class="relative w-full flex items-center justify-between z-10">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/95 border border-slate-200/80 shadow-xs">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-label-sm text-label-sm text-slate-700 uppercase tracking-wider font-semibold">In Stock: 7 Units</span>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 transition-all shadow-xs" id="view-mode-toggle">
+<span class="material-symbols-outlined text-[16px]">360</span>
+<span class="font-spec-code-sm text-spec-code-sm uppercase tracking-wider font-bold">3D Orbit</span>
+</button>
+</div>
+<!-- Main Render Display -->
+<div class="relative w-full aspect-[4/3] flex items-center justify-center my-space-sm select-none">
+<img class="w-full h-full object-contain filter drop-shadow-[0_16px_28px_rgba(15,23,42,0.12)] transition-all duration-300 transform scale-100" data-alt="High tech studio angled render of ASUS ROG Strix GeForce RTX 4090 OC graphics card with triple axial tech fans, RGB light bar glowing electric cyan and deep indigo, brushed metal structural exoskeleton shroud on deep black background." id="main-display-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB418k5aQWKbPhZmDbGM0Yy0OJ4p0G1KjgcrN3jtt53-drqZBGqAPV3mtKRVpprWTVL7WZThmEFEAhwyMfK9NCr9-5Ko3bG3UkAl467v-8wroRdSVXcMIzlmQlk9oujU4Ls2jNluiqxSmokimme_nu1QubCOGVduzITEDGZEtvjVI3T7SDXpU86FGEpyBgceEKc4hyx8YkLExEL6GQvLUiUTWSAXfpXXQUrd-H0hVQ2ifkfehf3g473vQ"/>
+<!-- Interactive Rotation Drag Indicator -->
+<div class="absolute bottom-1 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-slate-200 backdrop-blur-sm text-slate-600 font-spec-code-sm text-spec-code-sm pointer-events-none shadow-xs">
+<span class="material-symbols-outlined text-sm text-blue-600 animate-pulse">drag_pan</span>
+<span class="font-medium">Swipe or select angle</span>
+</div>
+</div>
+<!-- Angles / Part Thumbnails -->
+<div class="relative w-full grid grid-cols-4 gap-space-xs z-10 pt-space-xs">
+<button class="thumb-btn active-thumb p-1 rounded-xl bg-white border-2 border-blue-600 shadow-sm transition-all flex flex-col items-center" onclick="switchHardwareView(0)">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-slate-100 flex items-center justify-center">
+<img class="w-full h-full object-contain p-1" data-alt="Front view of triple axial-tech fan array on ASUS ROG Strix RTX 4090 GPU highlighting fan blades and industrial frame with cold cyan studio ambient backlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXwAc_MSCx_dEmOjfY1J6SI-Zpy4AQepsfD9S_yOl5JK6eXdszTSdOSAFEMHuuYGdsvon9kB_MxDl69F2MZySyY7UC84eBGsMk_ZRzMjtXKRxrKfoOXI7VU59fnl3SWvSQVBsS0rdur7ElaLWOeQR7vGmfkHJoMUxBx3Tb3psEvucLxszqqrVvUwAxaVt0R4x_4uj6gOTPgivhv-Z1t5mAN7mUWbMRiaeFkhEzCTKXXsTphaYD95hM8g"/>
+</div>
+<span class="font-label-sm text-label-sm mt-1 text-slate-900 font-semibold truncate">Front Fan</span>
+</button>
+<button class="thumb-btn p-1 rounded-xl bg-white border border-slate-200 transition-all flex flex-col items-center hover:border-slate-300" onclick="switchHardwareView(1)">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-slate-100 flex items-center justify-center">
+<img class="w-full h-full object-contain p-1" data-alt="Milled metal backplate of ASUS ROG Strix GeForce RTX 4090 graphics card with illuminated ROG logo and flow-through cooling vent against obsidian backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRQih0BGa8WRx9zb8-DntQXOmS18lWvvKQ_CZDgZU_uVa0jy0lMl1b7J4k8TxRFxDSDf7Od5IPTai3cwG9_4HmhnVOkKArke5iKkRAOP20jxK0EKrZJGnGGxWr6y3RG6-YTcUwSnsuts-JlpODvLkEzTnnl9cOQbRvnjjwmMbrPuCr_-OCqfn2aep_bgsWujwJGMydwHrgpdthFkvbLZJaHL4u-7pB5cBo8kUlAabJO1rIfAYjR48vlA"/>
+</div>
+<span class="font-label-sm text-label-sm mt-1 text-slate-600 font-medium truncate">Backplate</span>
+</button>
+<button class="thumb-btn p-1 rounded-xl bg-white border border-slate-200 transition-all flex flex-col items-center hover:border-slate-300" onclick="switchHardwareView(2)">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-slate-100 flex items-center justify-center">
+<img class="w-full h-full object-contain p-1" data-alt="Close-up macro of gold-plated DisplayPort 1.4a and HDMI 2.1a video outputs on stainless steel bracket of flagship graphics card." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFR7rQMXE6yYa5V_8nOg0OFad75TI61Elr9ZRYp1KnfOmP1ReUpUAuLRz39D-LrM3wz00CL97bPn664fB86q7NFvfRaD03DMj-vcUHFTu8ZOcHV7BxwgZ-aEyVtpQHF7feBM08Y9akYDrdW7QFVjYeP-4NFDMpXduZIG95i8skiPUmZG5i4TMd3CGSTfotTo6X-cmx9Tce2h66hsoBoQhx57sC8vhTbzkQeRtd3a9LKGdcu79pbs_t6Q"/>
+</div>
+<span class="font-label-sm text-label-sm mt-1 text-slate-600 font-medium truncate">I/O Ports</span>
+</button>
+<button class="thumb-btn p-1 rounded-xl bg-white border border-slate-200 transition-all flex flex-col items-center hover:border-slate-300" onclick="switchHardwareView(3)">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-slate-100 flex items-center justify-center">
+<img class="w-full h-full object-contain p-1" data-alt="Detailed view of high tension 3.5-slot PCIe bracket with die-cast aluminum frame and 16-pin 12VHPWR connector on RTX 4090 hardware." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcncMha04z9gQ34yQJ5a7jT5mpz67GcPvaMaBaVQZ4vnqGy_4JG7L3rAUSeiL04qMFyHgDf_mUx0on6qQWjyedQPGGIpURioLbhS5sSfA1rBedQpkUSCLSHv9mHNlbHHBOfIDRYoKudb7QuZLv7VPe_XWNhwNdOCIgQ9EN6vB3_jvHWA2kWDeNxHTLFcGHyJFhQ54I45sE5UnZu_2kZfNUonLdHMdym2gtOorrqrxi1-J3N2YdDlHQag"/>
+</div>
+<span class="font-label-sm text-label-sm mt-1 text-slate-600 font-medium truncate">Bracket</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Title, Vendor, SKU & Benchmark -->
+<div class="px-margin-mobile mt-space-lg flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm tracking-wider uppercase text-blue-700 font-bold">ASUS REPUBLIC OF GAMERS</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-500 font-medium">SKU: ROG-4090-O24G</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-slate-900 font-extrabold tracking-tight">
+      ROG Strix GeForce RTX® 4090 OC Edition 24GB
+    </h1>
+<div class="flex items-center flex-wrap gap-x-space-md gap-y-1 mt-1">
+<div class="flex items-center gap-1.5">
+<div class="flex text-amber-500">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-spec-code-md text-spec-code-md font-bold text-slate-900">4.9</span>
+<span class="font-body-sm text-body-sm text-slate-500 underline decoration-slate-300 underline-offset-2 hover:text-slate-700">(384 reviews)</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-spec-code-sm text-spec-code-sm">
+<span class="material-symbols-outlined text-[14px] text-blue-600">trophy</span>
+<span class="font-bold">Rank #1 in GPU Benchmarks</span>
+</div>
+</div>
+</div>
+<!-- Pricing & Financing Card -->
+<div class="px-margin-mobile mt-space-md">
+<div class="p-space-md rounded-2xl bg-slate-50 border border-slate-200/90 flex flex-col gap-2.5 shadow-xs">
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-2.5">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-black text-slate-900 tracking-tight">$1,999.99</span>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-400 line-through">$2,199.99</span>
+</div>
+<span class="font-label-sm text-label-sm text-emerald-800 bg-emerald-100/80 border border-emerald-200 px-2 py-0.5 rounded-md font-bold">SAVE $200</span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/80 text-slate-600">
+<span class="material-symbols-outlined text-[20px] text-blue-600">account_balance_wallet</span>
+<p class="font-body-sm text-body-sm text-slate-600">
+          or <strong class="text-slate-900 font-bold">$166.66/mo</strong> with 0% APR via Affirm
+        </p>
+</div>
+</div>
+</div>
+<!-- Rig Compatibility Checker Widget -->
+<div class="px-margin-mobile mt-space-lg">
+<div class="rounded-2xl bg-emerald-50/40 border border-emerald-200/70 p-space-md flex flex-col gap-space-sm relative overflow-hidden shadow-xs">
+<!-- Top Accent Line -->
+<div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-500"></div>
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">memory</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-slate-900">Rig Compatibility Check</h2>
+<p class="font-spec-code-sm text-spec-code-sm text-slate-500">Target Profile: Enthusiast Tower Mk.II</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 font-label-sm text-label-sm font-bold shrink-0 shadow-2xs">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+          PASS
+        </span>
+</div>
+<!-- Telemetry Compatibility Attributes -->
+<div class="grid grid-cols-1 gap-2 pt-space-xs">
+<div class="p-3 rounded-xl bg-white border border-slate-200/90 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">straighten</span>
+<span class="font-body-sm text-body-sm text-slate-700 font-medium">Physical Clearance</span>
+</div>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-900 font-bold">357.6mm (Fits ATX Mid/Full)</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-slate-200/90 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">view_column</span>
+<span class="font-body-sm text-body-sm text-slate-700 font-medium">Chassis Expansion Slots</span>
+</div>
+<span class="font-spec-code-sm text-spec-code-sm text-slate-900 font-bold">Requires 3.5 Slots</span>
+</div>
+<div class="p-3 rounded-xl bg-blue-50/70 border border-blue-200/90 flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-700 text-[18px]">bolt</span>
+<span class="font-body-sm text-body-sm text-slate-900 font-semibold">Power Supply (PSU)</span>
+</div>
+<span class="font-spec-code-sm text-spec-code-sm text-blue-700 font-bold">≥ 1000W Required</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5 text-slate-600 font-label-sm text-label-sm pl-6">
+<span class="material-symbols-outlined text-[14px] text-blue-600">info</span>
+<span>Needs dedicated 16-pin 12VHPWR cable (or 4x 8-pin adapter)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Specification Matrix Sheet -->
+<div class="px-margin-mobile mt-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm font-bold text-slate-900">Architectural Specs</h2>
+<span class="font-spec-code-sm text-spec-code-sm text-blue-700 font-bold px-2 py-0.5 rounded bg-blue-50 border border-blue-200">Ada Lovelace 4N</span>
+</div>
+<div class="rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-xs">
+<!-- Spec Row 1 -->
+<div class="flex items-center justify-between px-space-md py-3.5 bg-white border-b border-slate-100">
+<span class="font-label-md text-label-md text-slate-600 font-medium">CUDA Cores</span>
+<span class="font-spec-code-md text-spec-code-md font-bold text-slate-900">16,384 Units</span>
+</div>
+<!-- Spec Row 2 -->
+<div class="flex items-center justify-between px-space-md py-3.5 bg-slate-50 border-b border-slate-100">
+<span class="font-label-md text-label-md text-slate-600 font-medium">Engine Clock (OC Mode)</span>
+<span class="font-spec-code-md text-spec-code-md font-bold text-blue-700">2640 MHz (Boost)</span>
+</div>
+<!-- Spec Row 3 -->
+<div class="flex items-center justify-between px-space-md py-3.5 bg-white border-b border-slate-100">
+<span class="font-label-md text-label-md text-slate-600 font-medium">Memory Size &amp; Type</span>
+<span class="font-spec-code-md text-spec-code-md font-bold text-slate-900">24GB GDDR6X</span>
+</div>
+<!-- Spec Row 4 -->
+<div class="flex items-center justify-between px-space-md py-3.5 bg-slate-50 border-b border-slate-100">
+<span class="font-label-md text-label-md text-slate-600 font-medium">Memory Bus Interface</span>
+<span class="font-spec-code-md text-spec-code-md font-bold text-slate-900">384-Bit (1,008 GB/s)</span>
+</div>
+<!-- Spec Row 5 -->
+<div class="flex items-center justify-between px-space-md py-3.5 bg-white border-b border-slate-100">
+<span class="font-label-md text-label-md text-slate-600 font-medium">Power Terminals</span>
+<span class="font-spec-code-md text-spec-code-md font-bold text-slate-900">1x 16-pin (12VHPWR)</span>
+</div>
+<!-- Spec Row 6 -->
+<div class="flex items-center justify-between px-space-md py-3.5 bg-slate-50">
+<span class="font-label-md text-label-md text-slate-600 font-medium">Display Connectors</span>
+<span class="font-spec-code-md text-spec-code-md font-bold text-slate-900">2x HDMI 2.1a, 3x DP 1.4a</span>
+</div>
+</div>
+</div>
+<!-- Protection Plan Selector -->
+<div class="px-margin-mobile mt-space-lg flex flex-col gap-space-sm">
+<h2 class="font-headline-sm text-headline-sm font-bold text-slate-900">Hardware Protection</h2>
+<div class="flex flex-col gap-2.5">
+<!-- Included Plan -->
+<label class="flex items-center justify-between p-space-md rounded-2xl bg-white border-2 border-blue-600/30 hover:border-blue-500 cursor-pointer select-none transition-all shadow-xs">
+<div class="flex items-center gap-space-sm">
+<input checked="" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-slate-300" name="warranty" onchange="updateProtection(0)" type="radio" value="standard"/>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-bold text-slate-900">Standard Warranty</span>
+<span class="font-body-sm text-body-sm text-slate-500">3-Year ASUS Global Manufacturer Coverage</span>
+</div>
+</div>
+<span class="font-spec-code-sm text-spec-code-sm font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full uppercase">Included</span>
+</label>
+<!-- NEXUS Care+ Extended -->
+<label class="flex items-center justify-between p-space-md rounded-2xl bg-white border border-slate-200 hover:border-blue-400 hover:bg-slate-50/50 transition-all cursor-pointer select-none shadow-xs">
+<div class="flex items-center gap-space-sm">
+<input class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-slate-300" name="warranty" onchange="updateProtection(89)" type="radio" value="nexus_care"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-body-md text-body-md font-bold text-slate-900">NEXUS Care+ Platinum</span>
+<span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-label-sm text-[10px] font-bold">RECOMMENDED</span>
+</div>
+<span class="font-body-sm text-body-sm text-slate-500">2-Year Instant Advance Swap &amp; Surge Guard</span>
+</div>
+</div>
+<span class="font-spec-code-md text-spec-code-md font-bold text-blue-600">+$89.00</span>
+</label>
+</div>
+</div>
+<!-- Sticky Bottom Buy & Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-t border-slate-200 p-space-md shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+<div class="max-w-md mx-auto flex items-center gap-space-sm">
+<!-- Quantity Incrementer -->
+<div class="flex items-center bg-slate-100 border border-slate-200 rounded-xl p-1 shrink-0">
+<button aria-label="Decrease quantity" class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-700 hover:text-blue-600 hover:bg-white transition-colors" onclick="changeQty(-1)">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-7 text-center font-spec-code-md text-spec-code-md font-bold text-slate-900" id="product-qty">1</span>
+<button aria-label="Increase quantity" class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-700 hover:text-blue-600 hover:bg-white transition-colors" onclick="changeQty(1)">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Wishlist Ghost Action Button -->
+<button aria-label="Save to Wishlist" class="w-11 h-11 flex items-center justify-center rounded-xl bg-slate-100 border border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition-colors shrink-0" id="wishlist-btn" onclick="toggleWishlist()">
+<span class="material-symbols-outlined text-[20px]" id="wishlist-icon">favorite</span>
+</button>
+<!-- Primary Electric Cyan/Blue CTA Trigger -->
+<button class="flex-1 h-11 px-space-md bg-gradient-to-r from-cyan-400 to-blue-600 text-white rounded-xl font-spec-code-md text-spec-code-md font-bold flex items-center justify-center gap-1.5 shadow-[0_4px_14px_rgba(0,102,204,0.35)] active:scale-95 hover:opacity-95 transition-all" onclick="addToRigAction()">
+<span class="material-symbols-outlined text-[18px]">speed</span>
+<span id="cta-label">Add to Rig • $1,999.99</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  let currentQty = 1;
+  let basePrice = 1999.99;
+  let addOnWarranty = 0;
+  let isWishlisted = false;
+  let is3DMode = false;
+
+  const viewData = [
+    { title: "Front Fan Array", alt: "Front view of triple axial-tech fan array on ASUS ROG Strix RTX 4090 GPU highlighting fan blades and industrial frame with cold cyan studio ambient backlight." },
+    { title: "Reinforced Backplate", alt: "Milled metal backplate of ASUS ROG Strix GeForce RTX 4090 graphics card with illuminated ROG logo and flow-through cooling vent against obsidian backdrop." },
+    { title: "I/O Ports Terminal", alt: "Close-up macro of gold-plated DisplayPort 1.4a and HDMI 2.1a video outputs on stainless steel bracket of flagship graphics card." },
+    { title: "PCIe Retention Bracket", alt: "Detailed view of high tension 3.5-slot PCIe bracket with die-cast aluminum frame and 16-pin 12VHPWR connector on RTX 4090 hardware." }
+  ];
+
+  function switchHardwareView(index) {
+    const mainImg = document.getElementById("main-display-image");
+    const buttons = document.querySelectorAll(".thumb-btn");
+
+    buttons.forEach((btn, idx) => {
+      const label = btn.querySelector("span");
+      if (idx === index) {
+        btn.classList.remove("border-slate-200");
+        btn.classList.add("border-2", "border-blue-600", "shadow-sm");
+        if (label) {
+          label.classList.remove("text-slate-600", "font-medium");
+          label.classList.add("text-slate-900", "font-semibold");
+        }
+      } else {
+        btn.classList.remove("border-2", "border-blue-600", "shadow-sm");
+        btn.classList.add("border", "border-slate-200");
+        if (label) {
+          label.classList.remove("text-slate-900", "font-semibold");
+          label.classList.add("text-slate-600", "font-medium");
+        }
+      }
+    });
+
+    if (mainImg) {
+      mainImg.style.opacity = "0.3";
+      mainImg.style.transform = "scale(0.96)";
+      setTimeout(() => {
+        mainImg.setAttribute("data-alt", viewData[index].alt);
+        mainImg.style.opacity = "1";
+        mainImg.style.transform = "scale(1)";
+      }, 150);
+    }
+  }
+
+  function changeQty(delta) {
+    currentQty = Math.max(1, Math.min(3, currentQty + delta));
+    const qtyElem = document.getElementById("product-qty");
+    if (qtyElem) qtyElem.innerText = currentQty;
+    updateCTAPrice();
+  }
+
+  function updateProtection(cost) {
+    addOnWarranty = cost;
+    updateCTAPrice();
+  }
+
+  function updateCTAPrice() {
+    const total = (basePrice + addOnWarranty) * currentQty;
+    const formatted = total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const ctaLabel = document.getElementById("cta-label");
+    if (ctaLabel) {
+      ctaLabel.innerText = `Add to Rig \u2022 $${formatted}`;
+    }
+  }
+
+  function toggleWishlist() {
+    isWishlisted = !isWishlisted;
+    const icon = document.getElementById("wishlist-icon");
+    const btn = document.getElementById("wishlist-btn");
+    if (icon && btn) {
+      if (isWishlisted) {
+        icon.style.fontVariationSettings = "'FILL' 1";
+        btn.classList.remove("text-slate-600");
+        btn.classList.add("text-rose-600", "bg-rose-50", "border-rose-200");
+      } else {
+        icon.style.fontVariationSettings = "'FILL' 0";
+        btn.classList.remove("text-rose-600", "bg-rose-50", "border-rose-200");
+        btn.classList.add("text-slate-600");
+      }
+    }
+  }
+
+  const toggleBtn = document.getElementById("view-mode-toggle");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      is3DMode = !is3DMode;
+      const mainImg = document.getElementById("main-display-image");
+      if (is3DMode) {
+        toggleBtn.classList.add("bg-blue-600", "text-white", "border-blue-600");
+        toggleBtn.classList.remove("bg-white", "text-blue-700", "border-slate-200");
+        if (mainImg) mainImg.classList.add("animate-pulse");
+      } else {
+        toggleBtn.classList.remove("bg-blue-600", "text-white", "border-blue-600");
+        toggleBtn.classList.add("bg-white", "text-blue-700", "border-slate-200");
+        if (mainImg) mainImg.classList.remove("animate-pulse");
+      }
+    });
+  }
+
+  function addToRigAction() {
+    const btn = document.getElementById("cta-label");
+    if (btn) {
+      const original = btn.innerText;
+      btn.innerText = "Locked to Rig Cart!";
+      setTimeout(() => {
+        btn.innerText = original;
+      }, 1600);
+    }
+  }
+</script></main></body></html>

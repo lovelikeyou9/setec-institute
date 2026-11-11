@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Product — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+<div th:if="${error}" class="container" style="padding-top:1rem"><div class="alert alert-error" th:text="${error}"></div></div>
+
+<main class="main-content">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <a th:href="@{/products}">Products</a>
+      <span class="sep">/</span>
+      <a th:href="@{/products(category=${product.category.id})}" th:text="${product.category.name}">Category</a>
+      <span class="sep">/</span>
+      <span th:text="${product.name}">Product</span>
+    </nav>
+
+    <div class="detail-layout">
+      <div class="gallery">
+        <div class="gallery-main">
+          <img th:src="${product.imageUrl}" th:alt="${product.name}" id="mainImage"/>
+        </div>
+        <div class="gallery-thumbs" th:if="${product.galleryUrls != null and !#strings.isEmpty(product.galleryUrls)}">
+          <button type="button" class="active" th:attr="data-src=${product.imageUrl}">
+            <img th:src="${product.imageUrl}" th:alt="${product.name}"/>
+          </button>
+          <button type="button" th:each="url : ${#strings.arraySplit(product.galleryUrls, ',')}"
+                  th:if="${!#strings.isEmpty(#strings.trim(url))}"
+                  th:attr="data-src=${#strings.trim(url)}">
+            <img th:src="${#strings.trim(url)}" th:alt="${product.name}"/>
+          </button>
+        </div>
+      </div>
+
+      <div class="detail-info">
+        <div class="product-card-brand" th:text="${product.brand.name}">ASUS</div>
+        <h1 th:text="${product.name}">Product Name</h1>
+
+        <div class="detail-stats">
+          <div class="rating-row">
+            <span th:replace="~{fragments/stars :: rating(${product.rating})}"></span>
+            <span th:text="${product.rating}">4.8</span>
+            <span th:text="|(${product.reviewCount} reviews)|">(0 reviews)</span>
+          </div>
+          <span th:text="|Sold ${product.soldCount}|">Sold 0</span>
+          <span th:if="${product.inStock}" class="status-pill green">In Stock</span>
+          <span th:unless="${product.inStock}" class="status-pill red">Out of Stock</span>
+          <span th:if="${product.conditionType != null}" th:text="${product.conditionType}" class="status-pill blue">NEW</span>
+        </div>
+
+        <div class="price-row" style="margin-bottom:1.25rem">
+          <span class="price price-lg">$<th:block th:text="${#numbers.formatDecimal(product.price, 1, 2)}">0.00</th:block></span>
+          <span class="price-old" th:if="${product.originalPrice != null and product.originalPrice > product.price}">
+            $<th:block th:text="${#numbers.formatDecimal(product.originalPrice, 1, 2)}">0.00</th:block>
+          </span>
+          <span class="badge badge-sale" th:if="${product.discountPercent != null and product.discountPercent > 0}"
+                th:text="|${product.discountPercent}% OFF|">12% OFF</span>
+        </div>
+
+        <div class="option-group" th:if="${product.colorOptions != null and !#strings.isEmpty(product.colorOptions)}">
+          <label>Color</label>
+          <div class="option-pills">
+            <button type="button" th:each="opt, iter : ${#strings.arraySplit(product.colorOptions, ',')}"
+                    th:classappend="${iter.index == 0} ? 'active'"
+                    th:text="${#strings.trim(opt)}">Black</button>
+          </div>
+        </div>
+
+        <div class="option-group" th:if="${product.storageOptions != null and !#strings.isEmpty(product.storageOptions)}">
+          <label>Storage</label>
+          <div class="option-pills">
+            <button type="button" th:each="opt, iter : ${#strings.arraySplit(product.storageOptions, ',')}"
+                    th:classappend="${iter.index == 0} ? 'active'"
+                    th:text="${#strings.trim(opt)}">512GB</button>
+          </div>
+        </div>
+
+        <div class="option-group" th:if="${product.ramOptions != null and !#strings.isEmpty(product.ramOptions)}">
+          <label>RAM</label>
+          <div class="option-pills">
+            <button type="button" th:each="opt, iter : ${#strings.arraySplit(product.ramOptions, ',')}"
+                    th:classappend="${iter.index == 0} ? 'active'"
+                    th:text="${#strings.trim(opt)}">16GB</button>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <label>Quantity</label>
+          <div class="qty-selector">
+            <button type="button" data-qty="-">−</button>
+            <input type="number" id="qty" name="quantity" value="1" min="1" th:max="${product.stock}"/>
+            <button type="button" data-qty="+">+</button>
+          </div>
+          <span style="font-size:.85rem;color:var(--text-muted);margin-left:.75rem"
+                th:text="|${product.stock} available|">0 available</span>
+        </div>
+
+        <div class="detail-actions">
+          <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()" id="addCartForm">
+            <input type="hidden" name="productId" th:value="${product.id}"/>
+            <input type="hidden" name="quantity" id="cartQty" value="1"/>
+            <input type="hidden" name="redirect" th:value="@{/product/{slug}(slug=${product.slug})}"/>
+            <button type="submit" class="btn btn-accent" onclick="document.getElementById('cartQty').value=document.getElementById('qty').value">Add to Cart</button>
+          </form>
+          <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()">
+            <input type="hidden" name="productId" th:value="${product.id}"/>
+            <input type="hidden" name="quantity" id="buyQty" value="1"/>
+            <input type="hidden" name="redirect" value="/checkout"/>
+            <button type="submit" class="btn btn-primary" onclick="document.getElementById('buyQty').value=document.getElementById('qty').value">Buy Now</button>
+          </form>
+          <a th:href="@{/login}" class="btn btn-accent" sec:authorize="!isAuthenticated()">Login to Buy</a>
+          <form th:action="@{/wishlist/toggle}" method="post" sec:authorize="isAuthenticated()">
+            <input type="hidden" name="productId" th:value="${product.id}"/>
+            <input type="hidden" name="redirect" th:value="@{/product/{slug}(slug=${product.slug})}"/>
+            <button type="submit" class="btn btn-outline">♡ Wishlist</button>
+          </form>
+        </div>
+
+        <div class="product-share" th:attr="data-share-title=${product.name}">
+          <span class="product-share-label">Share</span>
+          <div th:replace="~{fragments/social :: socialShare}"></div>
+        </div>
+
+        <div class="seller-box">
+          <img th:src="${product.seller.logoUrl}" th:alt="${product.seller.storeName}"/>
+          <div>
+            <strong th:text="${product.seller.storeName}">Seller</strong>
+            <span class="badge badge-verified" th:if="${product.seller.verified}">✓ Verified</span>
+            <div class="rating-row" style="margin-top:.25rem">
+              <span th:replace="~{fragments/stars :: rating(${product.seller.rating})}"></span>
+              <span th:text="${product.seller.rating}">4.9</span>
+              <span th:text="|· ${product.seller.location}|">· Phnom Penh</span>
+            </div>
+          </div>
+          <div class="seller-box-actions">
+            <a th:href="@{/seller/{id}(id=${product.seller.id})}" class="btn btn-outline btn-sm">View Profile</a>
+            <span th:replace="~{fragments/follow :: btn(${product.seller.id}, ${followingSeller}, ${'/product/' + product.slug})}"></span>
+            <a th:href="@{/seller/{id}(id=${product.seller.id})}" class="btn btn-ghost btn-sm">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab-nav">
+        <button type="button" class="active" data-tab="tab-desc">Description</button>
+        <button type="button" data-tab="tab-specs">Specifications</button>
+        <button type="button" data-tab="tab-reviews">Reviews</button>
+        <button type="button" data-tab="tab-seller">Seller Info</button>
+        <button type="button" data-tab="tab-shipping">Shipping</button>
+        <button type="button" data-tab="tab-warranty">Warranty</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-desc">
+        <p th:text="${product.description}" style="line-height:1.7;color:var(--text-secondary);white-space:pre-wrap">Description</p>
+      </div>
+
+      <div class="tab-panel" id="tab-specs">
+        <table class="spec-table" th:if="${specRows != null and !#lists.isEmpty(specRows)}">
+          <tr th:each="row : ${specRows}">
+            <td th:text="${row[0]}">Key</td>
+            <td th:text="${row[1]}">Value</td>
+          </tr>
+        </table>
+        <p th:if="${specRows == null or #lists.isEmpty(specRows)}" style="color:var(--text-secondary)">No specifications listed.</p>
+      </div>
+
+      <div class="tab-panel" id="tab-reviews">
+        <div th:if="${#lists.isEmpty(reviews)}" class="empty-state">
+          <div class="icon">⭐</div>
+          <h3>No reviews yet</h3>
+          <p>Be the first to review this product after purchase.</p>
+        </div>
+        <div class="review-card" th:each="r : ${reviews}">
+          <div class="review-header">
+            <a class="review-avatar" th:href="@{/profile/{id}(id=${r.user.id})}"
+               th:text="${#strings.substring(r.user.fullName,0,1)}">U</a>
+            <div>
+              <a class="table-link-btn" th:href="@{/profile/{id}(id=${r.user.id})}" th:text="${r.user.fullName}">Buyer</a>
+              <span class="badge badge-verified" th:if="${r.verifiedPurchase}" style="margin-left:.35rem">Verified Purchase ✓</span>
+              <div class="rating-row">
+                <span th:replace="~{fragments/stars :: rating(${r.rating})}"></span>
+                <span th:text="${r.rating}">5</span>
+              </div>
+            </div>
+          </div>
+          <p th:text="${r.comment}" style="color:var(--text-secondary)">Review comment</p>
+          <div class="seller-reply" th:if="${r.sellerResponse != null and !#strings.isEmpty(r.sellerResponse)}">
+            <strong>Seller response:</strong>
+            <p th:text="${r.sellerResponse}" style="margin-top:.35rem">Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-seller">
+        <div class="seller-box" style="background:transparent;border:none;padding:0">
+          <img th:src="${product.seller.logoUrl}" th:alt="${product.seller.storeName}" style="width:64px;height:64px;border-radius:12px"/>
+          <div>
+            <h3 th:text="${product.seller.storeName}">Store</h3>
+            <p th:text="${product.seller.description}" style="color:var(--text-secondary);margin:.5rem 0;max-width:520px">Desc</p>
+            <div class="seller-stats">
+              <span th:text="|Rating ${product.seller.rating}|">Rating</span> ·
+              <span th:text="|${product.seller.totalProducts} products|">products</span> ·
+              <span th:text="|${sellerFollowers} followers|">followers</span> ·
+              <span th:text="|Response ${product.seller.responseRate}%|">response</span>
+            </div>
+            <a th:href="@{/seller/{id}(id=${product.seller.id})}" class="btn btn-primary btn-sm" style="margin-top:.75rem">View Seller Profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-shipping">
+        <p style="line-height:1.7;color:var(--text-secondary)">
+          Standard delivery across Cambodia in 2–4 business days ($2.00).<br/>
+          Express delivery available in Phnom Penh and major cities (1 business day, $5.00).<br/>
+          Seller ships from <strong th:text="${product.seller.location}">Phnom Penh</strong>.
+        </p>
+      </div>
+
+      <div class="tab-panel" id="tab-warranty">
+        <p style="line-height:1.7;color:var(--text-secondary)"
+           th:text="|This product includes ${product.warranty != null ? product.warranty : 'manufacturer'} warranty covered by ${product.seller.storeName}.|">Warranty</p>
+      </div>
+    </div>
+
+    <section class="section" th:if="${related != null and !#lists.isEmpty(related)}">
+      <div class="section-head">
+        <h2 class="section-title">Related Products</h2>
+      </div>
+      <div class="product-grid">
+        <th:block th:each="product : ${related}">
+          <div th:replace="~{fragments/card :: card}"></div>
+        </th:block>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

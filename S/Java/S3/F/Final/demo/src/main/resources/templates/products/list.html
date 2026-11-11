@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Products — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+<div th:if="${error}" class="container" style="padding-top:1rem"><div class="alert alert-error" th:text="${error}"></div></div>
+
+<main class="main-content products-page">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <span th:if="${category == null}">Products</span>
+      <a th:if="${category != null}" th:href="@{/products}">Products</a>
+      <th:block th:if="${category != null}">
+        <span class="sep">/</span>
+        <span th:text="${category.name}">Category</span>
+      </th:block>
+    </nav>
+
+    <div class="products-hero">
+      <div>
+        <h1 class="products-title" th:text="${category != null ? category.name : 'All Technology'}">All Technology</h1>
+        <p class="products-sub">
+          Computers, networking, gaming, cameras, power, DIY &amp; pro IT from verified sellers
+        </p>
+      </div>
+      <button type="button" class="btn btn-outline btn-sm products-filter-toggle" id="productsFilterToggle" aria-expanded="false">
+        Filters
+      </button>
+    </div>
+
+    <div class="products-chips" th:if="${navMenuGroups != null and !navMenuGroups.isEmpty()}">
+      <a th:href="@{/products}"
+         class="products-chip"
+         th:classappend="${category == null and selectedCategory == null} ? 'active'">All</a>
+      <a th:each="g : ${navMenuGroups}"
+         th:href="@{/products(category=${g.items[0].id})}"
+         class="products-chip"
+         th:with="activeGroup=${selectedCategory != null and #lists.contains(g.items.![id], selectedCategory)}"
+         th:classappend="${activeGroup} ? 'active'">
+        <span th:text="${g.icon}">💻</span>
+        <span th:text="${g.title}">Group</span>
+      </a>
+    </div>
+
+    <div class="list-layout">
+      <aside class="filter-panel" id="productsFilterPanel">
+        <div class="filter-panel-head">
+          <h3>Filters</h3>
+          <button type="button" class="filter-panel-close" id="productsFilterClose" aria-label="Close filters">×</button>
+        </div>
+        <form th:action="@{/products}" method="get" id="filterForm">
+          <input type="hidden" name="q" th:value="${q}"/>
+
+          <div class="filter-group">
+            <h4>Category</h4>
+            <div class="filter-group-scroll">
+              <th:block th:if="${navMenuGroups != null and !navMenuGroups.isEmpty()}">
+                <details class="filter-cat-group" th:each="g, gStat : ${navMenuGroups}"
+                         th:with="isActive=${(selectedCategory != null and #lists.contains(g.items.![id], selectedCategory)) or (selectedCategory == null and gStat.index == 0)}"
+                         th:attr="open=${isActive ? true : null}">
+                  <summary class="filter-cat-title">
+                    <span th:text="${g.icon}">💻</span>
+                    <span th:text="${g.title}">Group</span>
+                  </summary>
+                  <th:block th:each="item : ${g.items}">
+                    <label th:each="c : ${categories}" th:if="${c.slug == item.slug}">
+                      <input type="radio" name="category" th:value="${c.id}"
+                             th:checked="${selectedCategory != null and selectedCategory == c.id}"/>
+                      <span th:text="${c.name}">CPU</span>
+                    </label>
+                  </th:block>
+                </details>
+              </th:block>
+              <th:block th:if="${navMenuGroups == null or navMenuGroups.isEmpty()}">
+                <label th:each="c : ${categories}">
+                  <input type="radio" name="category" th:value="${c.id}"
+                         th:checked="${selectedCategory != null and selectedCategory == c.id}"/>
+                  <span th:text="${c.name}">CPU</span>
+                </label>
+              </th:block>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h4>Brand</h4>
+            <div class="filter-group-scroll filter-group-scroll-sm">
+              <label th:each="b : ${brands}">
+                <input type="radio" name="brand" th:value="${b.id}"
+                       th:checked="${selectedBrand != null and selectedBrand == b.id}"/>
+                <span th:text="${b.name}">ASUS</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h4>Price Range</h4>
+            <div class="price-inputs">
+              <input type="number" name="minPrice" placeholder="Min" min="0" step="1" th:value="${minPrice}"/>
+              <span>–</span>
+              <input type="number" name="maxPrice" placeholder="Max" min="0" step="1" th:value="${maxPrice}"/>
+            </div>
+            <label style="margin-top:.5rem"><input type="radio" name="pricePreset" value="0-100"
+              onclick="document.querySelector('[name=minPrice]').value=0;document.querySelector('[name=maxPrice]').value=100"/> Under $100</label>
+            <label><input type="radio" name="pricePreset" value="100-500"
+              onclick="document.querySelector('[name=minPrice]').value=100;document.querySelector('[name=maxPrice]').value=500"/> $100 – $500</label>
+            <label><input type="radio" name="pricePreset" value="500-1000"
+              onclick="document.querySelector('[name=minPrice]').value=500;document.querySelector('[name=maxPrice]').value=1000"/> $500 – $1,000</label>
+            <label><input type="radio" name="pricePreset" value="1000-"
+              onclick="document.querySelector('[name=minPrice]').value=1000;document.querySelector('[name=maxPrice]').value=''"/> $1,000+</label>
+          </div>
+
+          <div class="filter-group">
+            <h4>Condition</h4>
+            <label><input type="radio" name="condition" value="NEW" th:checked="${condition == 'NEW'}"/> New</label>
+            <label><input type="radio" name="condition" value="REFURBISHED" th:checked="${condition == 'REFURBISHED'}"/> Refurbished</label>
+            <label><input type="radio" name="condition" value="USED" th:checked="${condition == 'USED'}"/> Used</label>
+          </div>
+
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label><input type="radio" name="rating" value="4" th:checked="${rating == 4}"/> ★★★★ &amp; up</label>
+            <label><input type="radio" name="rating" value="3" th:checked="${rating == 3}"/> ★★★ &amp; up</label>
+            <label><input type="radio" name="rating" value="2" th:checked="${rating == 2}"/> ★★ &amp; up</label>
+          </div>
+
+          <div class="filter-group">
+            <h4>Seller &amp; Stock</h4>
+            <label>
+              <input type="checkbox" name="verified" value="true" th:checked="${verified == true}"/>
+              Verified sellers only
+            </label>
+            <label>
+              <input type="checkbox" name="inStock" value="true" th:checked="${inStock == true}"/>
+              In Stock
+            </label>
+          </div>
+
+          <input type="hidden" name="sort" th:value="${sort != null ? sort : 'recommended'}"/>
+          <div class="filter-actions">
+            <button type="submit" class="btn btn-primary btn-block">Apply Filters</button>
+            <a th:href="@{/products}" class="btn btn-outline btn-block">Clear All</a>
+          </div>
+        </form>
+      </aside>
+
+      <div class="products-main">
+        <div class="list-toolbar">
+          <div class="list-toolbar-count">
+            <strong th:text="${products.totalElements}">0</strong>
+            <span th:text="${products.totalElements == 1 ? ' result' : ' results'}"> results</span>
+            <span th:if="${q != null and !q.isEmpty()}" th:text="${' for &quot;' + q + '&quot;'}"> for ""</span>
+          </div>
+          <form th:action="@{/products}" method="get" class="list-sort-form">
+            <input type="hidden" name="q" th:if="${q != null and !#strings.isEmpty(q)}" th:value="${q}"/>
+            <input type="hidden" name="category" th:if="${selectedCategory != null}" th:value="${selectedCategory}"/>
+            <input type="hidden" name="brand" th:if="${selectedBrand != null}" th:value="${selectedBrand}"/>
+            <input type="hidden" name="minPrice" th:if="${minPrice != null}" th:value="${minPrice}"/>
+            <input type="hidden" name="maxPrice" th:if="${maxPrice != null}" th:value="${maxPrice}"/>
+            <input type="hidden" name="condition" th:if="${condition != null and !#strings.isEmpty(condition)}" th:value="${condition}"/>
+            <input type="hidden" name="rating" th:if="${rating != null}" th:value="${rating}"/>
+            <input type="hidden" name="verified" th:if="${verified != null}" th:value="${verified}"/>
+            <input type="hidden" name="inStock" th:if="${inStock != null}" th:value="${inStock}"/>
+            <label for="sortSelect">Sort by</label>
+            <select name="sort" id="sortSelect" onchange="this.form.submit()">
+              <option value="recommended" th:selected="${sort == null or sort == 'recommended'}">Recommended</option>
+              <option value="popular" th:selected="${sort == 'popular'}">Most Popular</option>
+              <option value="newest" th:selected="${sort == 'newest'}">Newest</option>
+              <option value="price-asc" th:selected="${sort == 'price-asc'}">Price: Low to High</option>
+              <option value="price-desc" th:selected="${sort == 'price-desc'}">Price: High to Low</option>
+              <option value="rating" th:selected="${sort == 'rating'}">Top Rated</option>
+            </select>
+          </form>
+        </div>
+
+        <div th:if="${products.totalElements == 0}" class="empty-state">
+          <div class="icon">🖥️</div>
+          <h3>No products found</h3>
+          <p>Try adjusting your filters or search another technology category.</p>
+          <a th:href="@{/products}" class="btn btn-primary" style="margin-top:1rem">Browse All Products</a>
+        </div>
+
+        <div class="product-grid" th:if="${products.totalElements > 0}">
+          <th:block th:each="product : ${products.content}">
+            <div th:replace="~{fragments/card :: card}"></div>
+          </th:block>
+        </div>
+
+        <div class="pagination" th:if="${products.totalPages > 1}">
+          <a th:if="${products.number > 0}"
+             th:href="@{/products(q=${q},category=${selectedCategory},brand=${selectedBrand},minPrice=${minPrice},maxPrice=${maxPrice},condition=${condition},rating=${rating},verified=${verified},inStock=${inStock},sort=${sort},page=${products.number - 1})}">← Prev</a>
+          <th:block th:each="i : ${#numbers.sequence(0, products.totalPages - 1)}">
+            <span class="current" th:if="${i == products.number}" th:text="${i + 1}">1</span>
+            <a th:if="${i != products.number}"
+               th:href="@{/products(q=${q},category=${selectedCategory},brand=${selectedBrand},minPrice=${minPrice},maxPrice=${maxPrice},condition=${condition},rating=${rating},verified=${verified},inStock=${inStock},sort=${sort},page=${i})}"
+               th:text="${i + 1}">1</a>
+          </th:block>
+          <a th:if="${products.number < products.totalPages - 1}"
+             th:href="@{/products(q=${q},category=${selectedCategory},brand=${selectedBrand},minPrice=${minPrice},maxPrice=${maxPrice},condition=${condition},rating=${rating},verified=${verified},inStock=${inStock},sort=${sort},page=${products.number + 1})}">Next →</a>
+        </div>
+      </div>
+    </div>
+    <div class="filter-backdrop" id="productsFilterBackdrop" hidden></div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

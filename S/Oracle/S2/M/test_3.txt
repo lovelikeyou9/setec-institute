@@ -1,0 +1,70 @@
+-- Continue from test_2
+-- -- 12. Provide permission on user chouyamata can create table. ** by using SQL in sys@localhost:orcl **
+GRANT CREATE TABLE TO CHOUYAMATA;
+
+-- 13. Provide storage to user chouyamata to store data(5M)
+ALTER USER CHOUYAMATA DEFAULT
+TABLESPACE USERS QUOTA 10M ON USERS;
+-- or
+ALTER USER CHOUYAMATA QUOTA 5M ON USERS;
+
+-- 14. Check Tablespace on user chouyamata
+SELECT * FROM DBA_TS_QUOTAS
+WHERE UPPER(USERNAME)=UPPER('CHOUYAMATA');
+
+-- 15. Create user mengly password 123 with tablespace 10M
+CREATE USER "MengLy" IDENTIFIED BY "123"
+DEFAULT TABLESPACE USERS QUOTA 10M ON USERS;
+-- or
+CREATE USER MengLy IDENTIFIED BY "123"
+DEFAULT TABLESPACE USERS QUOTA 10M ON USERS;
+
+SELECT * FROM DBA_USERS
+WHERE UPPER(USERNAME)=UPPER('MengLy');
+
+SELECT * FROM DBA_TS_QUOTAS
+WHERE UPPER(USERNAME)=UPPER('MengLy');
+
+-- 16. Provide permission login & create table on MengLy
+GRANT CREATE SESSION, CREATE TABLE TO "MengLy";
+-- or
+GRANT CREATE SESSION, CREATE TABLE TO MengLy;
+
+SELECT * FROM DBA_SYS_PRIVS
+WHERE UPPER(GRANTEE)=UPPER('MengLy');
+
+-- 17. Remove permission login & create table from MengLy
+REVOKE CREATE SESSION, CREATE TABLE FROM "MengLy";
+
+SELECT * FROM DBA_SYS_PRIVS
+WHERE UPPER(GRANTEE)=UPPER('MengLy');
+
+
+click New Connection
+
+General
+Connection Type > choose TNS
+User: "MengLy"
+Password: 123
+
+click Test Connection
+
+right on
+
+-- on MengLy@localhost:orcl
+-- create table tblbooks
+CREATE TABLE tblbooks(
+  book_id NUMBER PRIMARY KEY,
+  book_name VARCHAR2(20) NOT NULL UNIQUE,
+  price NUMBER(10,2) NOT NULL CHECK(PRICE > 0),
+  description VARCHAR2(50)
+);
+
+SELECT * FROM TBLBOOKS;
+
+-- add one record into tblbooks
+INSERT INTO TBLBOOKS
+VALUES(1,'Oracle Database II',2.90,'For student');
+
+INSERT INTO TBLBOOKS
+VALUES(2,'PHP Programming',3.98,'For student');

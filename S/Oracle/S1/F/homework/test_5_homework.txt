@@ -1,0 +1,50 @@
+-- 1
+SELECT 
+    salary
+    ,salary/3
+    ,ROUND(salary/3, 2)
+    ,TRUNC(salary/3, 2)
+    ,ROUND(salary/3)
+FROM employees;
+
+-- 2
+SELECT last_name, salary
+    ,TRUNC(salary/3000, 0)
+    ,MOD(salary, 3000)
+FROM employees;
+
+-- 3
+SELECT 
+    salary
+    ,MOD(salary, 3)
+    ,MOD(salary, 10)
+FROM employees;
+
+-- 4
+SELECT *
+FROM (
+    SELECT employee_id, last_name, salary, job_id
+    FROM employees
+    WHERE MOD(employee_id, 2) = 1
+    ORDER BY salary DESC
+)
+WHERE ROWNUM <= 5;
+
+-- 5
+SELECT *
+FROM (
+    SELECT employee_id, last_name, salary, job_id
+    FROM employees
+    WHERE MOD(employee_id, 2) = 0
+    ORDER BY salary ASC
+)
+WHERE ROWNUM <= 5;
+
+
+-- 6
+SELECT 
+    last_name,
+    TO_CHAR(ROUND(salary/7, 0), '$99,999,999.00') AS ROUND_SAL,
+    TO_CHAR(TRUNC(salary/7, 0), '99,999,999.00') AS TRUNC_SAL,
+    TO_CHAR(ROUND(MOD(salary,7), 0), '$99,999,999.00') AS MOD_SAL
+FROM employees;

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hospital Master Control Panel</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+  <!-- Top Navigation Bar -->
+  <div class="menu_bar">
+    <h1 class="logo">
+      <img src="image/14.jpg" alt="Logo" style="height: 70px;">
+      Hospital <span>Care</span>
+    </h1>
+
+    <ul>
+      <li><a href="#">Home</a></li>
+
+      <li class="hover-menu">
+        <a href="#">Doctors</a>
+        <div class="dropdown">
+          <a href="#">test_1</a>
+          <a href="#">test_2</a>
+          <a href="#">test_3</a>
+          <a href="#">test_4</a>
+        </div>
+      </li>
+
+      <li class="hover-menu">
+        <a href="#">Patients</a>
+        <div class="dropdown">
+          <a href="#">test_1</a>
+          <a href="#">test_2</a>
+          <a href="#">test_3</a>
+          <a href="#">test_4</a>
+        </div>
+      </li>
+
+      <li><a href="#">Blog</a></li>
+
+      <li class="hover-menu">
+        <a href="#">Other</a>
+        <div class="dropdown">
+          <a href="#">test_1</a>
+          <a href="#">test_2</a>
+          <a href="#">test_3</a>
+          <a href="#">test_4</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Dashboard Panel -->
+  <div class="main-container">
+    <header class="header">
+      <img src="image/a4fb11aa-af91-4f70-824f-96f8d17aa4b7.png" alt="SETEC Logo" class="logo">
+    </header>
+
+    <section class="panel">
+      <h2>Hospital Master Control Panel</h2>
+      <div class="datetime-box">
+        <p>Current Date & Time</p>
+        <p id="datetime"></p>
+      </div>
+
+      <div class="button-container">
+
+        <a href="appointments.html">
+          <button type="button">Insert Appointments</button>
+        </a>
+
+
+        <button>Insert Billing</button>
+        <button>Insert Departments</button>
+        <button>Insert Doctors</button>
+        <button>Insert Medical Records</button>
+        <button>Insert Patients</button>
+        <button>Insert Prescriptions</button>
+        <button>Insert Staff</button>
+      </div>
+
+      <div id="output" class="output-box"></div>
+    </section>
+
+    <footer>
+      © 2025 | Chou Yamata’s Hospital Management System
+    </footer>
+  </div>
+
+</body>
+
+</html>

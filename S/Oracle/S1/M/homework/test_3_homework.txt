@@ -1,0 +1,51 @@
+--  1
+SELECT last_name, salary,
+       NVL(commission_pct, 0.1) AS commission_pct,
+       100 * NVL(commission_pct, 0.1) + salary AS "Salary and Commission"
+FROM employees;
+
+--  2
+SELECT employee_id,
+       last_name,
+       salary,
+       NVL(commission_pct, 2) AS commission_pct,
+       salary * NVL(commission_pct, 2) - salary AS "Total Salary"
+FROM employees;
+
+--  3
+SELECT department_id AS "DEPT #",
+       department_name AS "DeptName",
+       manager_id AS "Din"
+FROM departments;
+
+--  4
+SELECT last_name,
+       job_id,
+       last_name || ' ' || salary AS "Name and Salary"
+FROM employees;
+
+--  5
+SELECT employee_id || ' ' || first_name || ' ' || last_name || ' ' || email || ' ' ||
+       hire_date || ' ' || job_id || ' ' ||
+       salary || ' ' || commission_pct || ' ' || manager_id || ' ' || department_id AS "AllEmployee"
+FROM employees;
+
+--  6
+SELECT employee_id,
+       last_name || ' is a ' || job_id AS "Name and Job"
+FROM employees;
+
+--  7
+SELECT employee_id,
+       last_name || ' has salary: ' || salary || ' in department ID: ' || department_id AS "Name of salary and Department"
+FROM employees;
+
+--  8
+SELECT first_name || last_name || '168@gmail.com' AS "Email"
+FROM employees;
+
+--  9
+SELECT last_name,
+       salary,
+       last_name || ' has total salary: ' || (salary * NVL(commission_pct, 0) + salary) AS "Total Bonus"
+FROM employees;

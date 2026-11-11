@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isEdit} ? 'Edit User' : 'Add User'">User Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .box {
+            width: min(480px, 92vw);
+            background: #1e293b;
+            border: 1px solid rgba(148,163,184,0.25);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+        label { display: block; margin: 0.8rem 0 0.35rem; color: #94a3b8; }
+        input, select {
+            width: 100%;
+            padding: 0.7rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid rgba(148,163,184,0.35);
+            background: #0b1220;
+            color: #e2e8f0;
+            box-sizing: border-box;
+        }
+        .actions { margin-top: 1.2rem; display: flex; gap: 0.6rem; }
+        button, a {
+            border: 0;
+            border-radius: 8px;
+            padding: 0.65rem 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        button { background: #38bdf8; color: #082f49; }
+        a { background: #334155; color: #e2e8f0; }
+        .hint { font-size: 0.85rem; color: #94a3b8; margin-top: 0.35rem; }
+        .msg { margin-bottom: 1rem; padding: 0.7rem; border-radius: 8px; background: rgba(248,113,113,0.15); color: #f87171; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1 th:text="${isEdit} ? 'Edit User' : 'Add User'">User</h1>
+    <div th:if="${error}" class="msg" th:text="${error}"></div>
+
+    <form th:action="@{/users/save}" method="post">
+        <input type="hidden" name="id" th:value="${user.id}">
+
+        <label for="userName">UserName</label>
+        <input id="userName" name="userName" type="text" th:value="${user.userName}" required>
+        <div class="hint">Username must be unique</div>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password"
+               th:placeholder="${isEdit} ? 'Leave blank to keep current password' : ''"
+               th:required="${!isEdit}">
+        <div class="hint">Password is encrypted with BCrypt before saving</div>
+
+        <label for="role">Role</label>
+        <select id="role" name="role" required>
+            <option value="admin" th:selected="${user.role == 'admin'}">admin</option>
+            <option value="user" th:selected="${user.role == 'user'}">user</option>
+        </select>
+
+        <div class="actions">
+            <button type="submit">Save</button>
+            <a th:href="@{/users}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+<div class="auth-card">
+    <a class="logo" th:href="@{/}" style="margin-bottom:16px"><span class="logo-icon">🛍</span> eCommax</a>
+    <h1>Sign in</h1>
+    <p class="hint">Admin, Stock, or User access</p>
+
+    <div class="alert alert-error" th:if="${error}" th:text="${error}"></div>
+    <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="userName" required placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" required placeholder="Enter password">
+        </div>
+        <button class="btn-primary" type="submit">Login</button>
+    </form>
+
+    <p class="auth-switch">
+        New customer?
+        <a th:href="@{/register}">Create an account</a>
+    </p>
+
+    <div class="demo-accounts">
+        <strong>Demo accounts</strong><br>
+        Admin: <code>admin / admin</code><br>
+        Stock: <code>stock / stock</code><br>
+        User: <code>user / user</code>
+    </div>
+</div>
+</body>
+</html>

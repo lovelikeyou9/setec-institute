@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase History | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="dash-body">
+<div class="dash-shell">
+    <div th:replace="~{fragments/dash :: sidebar('history', ${staff})}"></div>
+    <div class="dash-main">
+        <div th:replace="~{fragments/dash :: top(${staff}, ${allUsers} ? 'All Purchase History' : 'My Purchase History')}"></div>
+        <div class="dash-content">
+            <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+            <div class="dash-panel">
+                <div class="dash-panel-pad">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th th:if="${allUsers}">Buyer</th>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p : ${purchases}">
+                                <td th:text="${p.id}"></td>
+                                <td th:if="${allUsers}" th:text="${p.staffUserName}"></td>
+                                <td th:text="${p.productName}"></td>
+                                <td th:text="${p.qty}"></td>
+                                <td th:text="'$' + ${#numbers.formatDecimal(p.price, 1, 2)}"></td>
+                                <td th:text="'$' + ${#numbers.formatDecimal(p.total, 1, 2)}"></td>
+                                <td th:text="${p.purchaseDate}"></td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(purchases)}">
+                                <td th:colspan="${allUsers} ? 7 : 6">No purchases yet.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

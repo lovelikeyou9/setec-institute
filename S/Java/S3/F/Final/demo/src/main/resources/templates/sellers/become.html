@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Become a Seller — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+<div th:if="${error}" class="container" style="padding-top:1rem"><div class="alert alert-error" th:text="${error}"></div></div>
+
+<main class="main-content">
+  <div class="container" style="padding-top:1.5rem;max-width:720px">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <span>Become a Seller</span>
+    </nav>
+
+    <h1 class="section-title" style="margin-bottom:.35rem">Start Selling on MME</h1>
+    <p class="section-sub" style="margin-bottom:1.5rem">Reach tech buyers across Cambodia — computers, networking, gaming, cameras, DIY &amp; more.</p>
+
+    <div class="alert alert-info" style="margin-bottom:1.25rem" th:if="${currentUser != null and existingSeller == null}">
+      Applying as <strong th:text="${currentUser.fullName}">Customer</strong>
+      (<span th:text="${currentUser.email}">email</span>).
+      You must have a registered customer account first — then submit your store application below.
+    </div>
+
+    <!-- Status when application exists -->
+    <div th:if="${existingSeller != null}" class="form-card">
+      <h3>Application Status</h3>
+      <p style="margin-bottom:1rem">
+        Store: <strong th:text="${existingSeller.storeName}">Store</strong>
+      </p>
+
+      <div th:if="${existingSeller.status.name() == 'PENDING'}" class="alert alert-info">
+        Your application is <strong>PENDING</strong> admin review. We'll notify you once a decision is made.
+      </div>
+      <div th:if="${existingSeller.status.name() == 'APPROVED'}" class="alert alert-success">
+        Congratulations! Your store is <strong>APPROVED</strong>.
+        <a th:href="@{/seller-dashboard}" class="btn btn-primary btn-sm" style="margin-left:.75rem">Go to Seller Center</a>
+      </div>
+      <div th:if="${existingSeller.status.name() == 'REJECTED'}" class="alert alert-error">
+        Your application was <strong>REJECTED</strong>.
+        <span th:if="${existingSeller.rejectionReason != null}" th:text="${' Reason: ' + existingSeller.rejectionReason}"></span>
+        Contact support if you believe this was a mistake.
+      </div>
+      <div th:if="${existingSeller.status.name() == 'SUSPENDED'}" class="alert alert-error">
+        Your seller account is currently <strong>SUSPENDED</strong>. Please contact MME support.
+      </div>
+    </div>
+
+    <!-- Application form -->
+    <div th:if="${existingSeller == null}" class="form-card">
+      <h3>Seller Application</h3>
+      <form th:action="@{/become-seller}" method="post">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="storeName">Store Name *</label>
+            <input type="text" id="storeName" name="storeName" required placeholder="e.g. TechZone PP"/>
+          </div>
+          <div class="form-group">
+            <label for="ownerName">Owner Name *</label>
+            <input type="text" id="ownerName" name="ownerName" required placeholder="Full legal name"/>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="012 345 678"/>
+          </div>
+          <div class="form-group">
+            <label for="country">Country *</label>
+            <select id="country" name="country" required>
+              <option value="">Select country</option>
+              <option th:each="c : ${countryOptions}" th:value="${c}" th:text="${c}"></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="location">City / Location *</label>
+            <input type="text" id="location" name="location" required placeholder="Phnom Penh"/>
+          </div>
+          <div class="form-group full">
+            <label for="address">Business Address *</label>
+            <input type="text" id="address" name="address" required placeholder="Street, district, city"/>
+          </div>
+          <div class="form-group full">
+            <label for="businessInfo">Business Info</label>
+            <textarea id="businessInfo" name="businessInfo" rows="2" placeholder="Business registration number, tax ID, etc."></textarea>
+          </div>
+          <div class="form-group full">
+            <label for="description">Store Description</label>
+            <textarea id="description" name="description" rows="3" placeholder="What do you sell? Computers, routers, drones, consoles, DIY kits..."></textarea>
+          </div>
+          <div class="form-group full">
+            <label for="idDocument">ID Document Reference</label>
+            <input type="text" id="idDocument" name="idDocument" placeholder="National ID or passport number"/>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-accent btn-lg" style="margin-top:.5rem">Submit Application</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+-- 1
+CREATE USER Sovann IDENTIFIED BY abc123;
+
+-- 2
+SELECT * FROM DBA_USERS WHERE USERNAME = 'SOPHEAK';
+-- or
+SELECT * FROM ALL_USERS WHERE USERNAME = 'SOPHEAK';
+
+-- 3
+GRANT CREATE SESSION TO Sopheak;
+
+-- 4
+click New Connection
+
+General
+Connection Type > choose Direct
+Host: localhost
+Port: 1521 -- is the default
+click SID
+SID: orcl
+User: Sopheak
+
+-- 5
+GRANT CREATE TABLE TO Sopheak;
+
+-- 6
+SELECT * FROM DBA_SYS_PRIVS WHERE UPPER(GRANTEE)=UPPER('SOPHEAK');
+-- or
+SELECT * FROM DBA_SYS_PRIVS WHERE GRANTEE = 'SOPHEAK';
+
+-- 7
+CONNECT Sopheap/password;
+
+CREATE TABLE tblproducts (
+  productid NUMBER(10) PRIMARY KEY,
+  productname VARCHAR2(25) NOT NULL,
+  description VARCHAR2(30),
+  created_date DATE DEFAULT SYSDATE
+);
+
+SELECT * FROM tblproducts;

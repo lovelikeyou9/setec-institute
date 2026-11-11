@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Chou Yamata</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1f1c;
+            --muted: #5c6b63;
+            --paper: #f3f0e8;
+            --panel: #ffffff;
+            --accent: #0d6e5f;
+            --accent-soft: #d8ebe6;
+            --line: #d9d4c8;
+            --shadow: 0 18px 50px rgba(26, 31, 28, 0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            font-family: "DM Sans", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(13, 110, 95, 0.12), transparent 32%),
+                linear-gradient(180deg, #efece3 0%, var(--paper) 45%, #e7ebe8 100%);
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 24px 0;
+        }
+
+        .brand {
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 24px 72px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: "Instrument Serif", Georgia, serif;
+            font-size: clamp(3rem, 7vw, 5.2rem);
+            line-height: 0.95;
+            font-weight: 400;
+            margin-bottom: 18px;
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .lead {
+            max-width: 34rem;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 36px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover { background: #0a584c; }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--ink);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 28px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .meta strong {
+            display: block;
+            color: var(--ink);
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+
+        .portrait-card {
+            position: relative;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .portrait-card::before {
+            content: "";
+            position: absolute;
+            inset: auto -20% -30% auto;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(13, 110, 95, 0.12);
+        }
+
+        .portrait {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 20px;
+            display: block;
+        }
+
+        .portrait-caption {
+            position: relative;
+            margin-top: 16px;
+            padding: 4px 6px 8px;
+        }
+
+        .portrait-caption h2 {
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+        }
+
+        .portrait-caption p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .sections {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: 24px;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .panel span {
+            display: inline-block;
+            margin-bottom: 14px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .panel h3 {
+            font-family: "Instrument Serif", Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .panel a {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .hero,
+            .sections {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 36px;
+                min-height: auto;
+            }
+
+            .portrait-card {
+                max-width: 420px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .site-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="brand">Chou Yamata</div>
+        <div class="nav-links">
+            <a href="/">CV</a>
+            <a href="/user">Home</a>
+            <a href="/myUser">My User</a>
+            <a href="/myAdmin">Admin</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <section>
+            <span class="eyebrow">Programmer &amp; Automation Engineer</span>
+            <h1>Build systems that <em>think</em> and move.</h1>
+            <p class="lead">
+                Welcome to my workspace. I work across software, automation, and robotics —
+                connecting code with machines to create practical, reliable solutions.
+            </p>
+            <div class="actions">
+                <a class="btn btn-primary" href="/">View my CV</a>
+                <a class="btn btn-secondary" href="/myUser">Open profile</a>
+            </div>
+            <div class="meta">
+                <div>
+                    <strong>Phnom Penh</strong>
+                    Based in Cambodia
+                </div>
+                <div>
+                    <strong>SETEC Institute</strong>
+                    B.Sc. IT · MIS
+                </div>
+                <div>
+                    <strong>Focus</strong>
+                    Software · Robotics · Security
+                </div>
+            </div>
+        </section>
+
+        <aside class="portrait-card">
+            <img class="portrait" src="/images/cv/profile.jpg" alt="Chou Yamata">
+            <div class="portrait-caption">
+                <h2>Chou Yamata</h2>
+                <p>Programmer &amp; Mechatronics / Robotics Engineer</p>
+            </div>
+        </aside>
+    </main>
+
+    <section class="sections">
+        <article class="panel">
+            <span>Resume</span>
+            <h3>Full CV</h3>
+            <p>Experience, skills, certifications, and references in one place.</p>
+            <a href="/">Open CV →</a>
+        </article>
+        <article class="panel">
+            <span>Profile</span>
+            <h3>My User</h3>
+            <p>A quick look at account-style profile details and role information.</p>
+            <a href="/myUser">View user →</a>
+        </article>
+        <article class="panel">
+            <span>Dashboard</span>
+            <h3>Admin Board</h3>
+            <p>Charts and summary metrics for the admin overview page.</p>
+            <a href="/myAdmin">Open dashboard →</a>
+        </article>
+    </section>
+</body>
+</html>

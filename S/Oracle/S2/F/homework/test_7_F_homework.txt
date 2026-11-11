@@ -1,0 +1,19 @@
+
+-- test_7_F_homework
+-- 1
+CREATE OR REPLACE VIEW VIEW_EMP_DEPT_MOD AS
+SELECT 
+    e.employee_id,
+    e.last_name,
+    e.salary,
+    e.manager_id,
+    d.department_name,
+    d.location_id
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id
+WHERE d.location_id <> 1700
+AND MOD(e.employee_id, 2) = 1
+ORDER BY e.salary DESC;
+
+SELECT * FROM VIEW_EMP_DEPT_MOD;

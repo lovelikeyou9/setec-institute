@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="layout(content)">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle} ?: 'MME'">MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css(v=dropdown2)}"/>
+  <link rel="icon" type="image/png" th:href="@{/images/mme-icon.png}" href="/images/mme-icon.png"/>
+</head>
+<body>
+<header class="site-header" th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem">
+  <div class="alert alert-success" th:text="${message}"></div>
+</div>
+<div th:if="${error}" class="container" style="padding-top:1rem">
+  <div class="alert alert-error" th:text="${error}"></div>
+</div>
+
+<main class="main-content" th:insert="${content}"></main>
+
+<footer class="site-footer" th:replace="~{fragments/footer :: footer}"></footer>
+
+<nav class="mobile-nav" th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Register — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <img th:src="@{/images/mme-icon.png}" src="/images/mme-icon.png" alt="" width="44" height="44"/>
+        <div>
+          <strong>MME</strong>
+          <span>Modern Multiple Technology</span>
+        </div>
+      </div>
+      <h1>Create account</h1>
+      <p class="subtitle">Register as a customer first. After you log in, you can apply to Become a Seller.</p>
+
+      <div th:if="${message}" class="alert alert-success" data-keep-alert th:text="${message}"></div>
+      <div th:if="${error}" class="alert alert-error" data-keep-alert th:text="${error}"></div>
+
+      <form th:action="@{/register}" method="post" class="auth-form">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required placeholder="Sokha Chea"/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="you@email.com"/>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" required placeholder="012 345 678"/>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required minlength="6" placeholder="At least 6 characters"/>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6" placeholder="Repeat password"/>
+        </div>
+        <button type="submit" class="btn btn-accent btn-block auth-submit">Register</button>
+      </form>
+
+      <p class="auth-switch">
+        Already have an account?
+        <a th:href="@{/login}">Login</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

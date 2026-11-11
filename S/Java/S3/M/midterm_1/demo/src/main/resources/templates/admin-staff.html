@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Staff CRUD | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="dash-body">
+<div class="dash-shell">
+    <div th:replace="~{fragments/dash :: sidebar(${activeMenu}, ${staff})}"></div>
+    <div class="dash-main">
+        <div th:replace="~{fragments/dash :: top(${staff}, ${pageTitle})}"></div>
+        <div class="dash-content">
+            <div class="dash-grid-2">
+                <div class="dash-panel">
+                    <div class="dash-panel-pad">
+                        <h3 th:text="${formStaff.SId != null} ? (${usersOnly} ? 'Edit User' : 'Edit Staff') : (${usersOnly} ? 'Add User' : 'Add Staff')">Add Staff</h3>
+                        <form th:action="@{${saveUrl}}" method="post" th:object="${formStaff}">
+                            <input type="hidden" th:field="*{SId}">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" th:field="*{userName}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="text" th:field="*{password}" required>
+                            </div>
+                            <div class="form-group" th:if="${!usersOnly}">
+                                <label>Role</label>
+                                <select th:field="*{role}" required>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Stock">Stock</option>
+                                    <option value="User">User</option>
+                                </select>
+                            </div>
+                            <input type="hidden" th:if="${usersOnly}" th:field="*{role}">
+                            <button class="btn-primary" type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="dash-panel">
+                    <div class="dash-panel-pad">
+                        <h3 th:text="${listTitle}">Staff list</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>SID</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Role</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="s : ${staffList}">
+                                    <td th:text="${s.SId}"></td>
+                                    <td th:text="${s.userName}"></td>
+                                    <td th:text="${s.password}"></td>
+                                    <td th:text="${s.role}"></td>
+                                    <td class="actions">
+                                        <a class="btn-edit" th:href="@{${editBase} + ${s.SId}}">Edit</a>
+                                        <a class="btn-del" th:href="@{${deleteBase} + ${s.SId}}"
+                                           th:onclick="return confirm(${usersOnly} ? 'Delete this user?' : 'Delete this staff?')">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

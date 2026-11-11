@@ -1,0 +1,68 @@
+-- 1
+SELECT last_name, manager_id, job_id, salary
+FROM (
+    SELECT last_name, manager_id, job_id, salary
+    FROM employees
+    ORDER BY salary DESC
+)
+WHERE ROWNUM <= 4;
+
+-- 2
+SELECT CONCAT(
+         CONCAT(INITCAP(first_name), ' '),
+         INITCAP(last_name)
+       ) AS "Full Name"
+FROM employees;
+
+-- 3
+SELECT last_name,
+       salary,
+       INSTR(last_name, 'r') AS position_r
+FROM employees
+WHERE INSTR(last_name, 'r') >= 5;
+
+-- 4
+SELECT last_name,
+       SUBSTR(last_name, -2) AS last_2_chars
+FROM employees
+WHERE SUBSTR(last_name, -2) IN ('as', 'ng', 'ey', 'ns');
+
+-- 5
+SELECT last_name,
+       salary,
+       LPAD(salary, 10, '$') AS "LPAD_SALARY",
+       RPAD(salary, 5, '*')  AS "RPAD_SALARY"
+FROM employees;
+
+-- 6
+SELECT employee_id, last_name, salary, job_id
+FROM (
+    SELECT employee_id, last_name, salary, job_id
+    FROM employees
+    WHERE MOD(employee_id, 2) = 1
+    ORDER BY salary DESC
+)
+WHERE ROWNUM <= 5;
+
+-- 7
+SELECT last_name,
+       TO_CHAR(hire_date, 'dy dd-month-year') AS hire_date
+FROM employees;
+
+-- 8
+SELECT last_name,
+       hire_date,
+       hire_date + 14 + 5 AS new_date
+FROM employees;
+
+-- 9
+SELECT last_name,
+       hire_date,
+       hire_date + (20/1440) AS new_time
+FROM employees;
+
+-- 10
+SELECT sysdate,
+       ADD_MONTHS(sysdate, 2)  AS plus_2_months,
+       ADD_MONTHS(sysdate, 24) AS plus_2_years
+FROM dual;

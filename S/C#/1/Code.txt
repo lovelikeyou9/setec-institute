@@ -1,0 +1,923 @@
+POS_SQLServer has
+DBConnection.cs is class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+using POS_System_Product;
+
+namespace POS_SQLServer
+{
+    class DBConnection
+    {
+        public static SqlConnection DataCon { get; set; }
+
+
+        public static List<Product> Products
+        { get {
+            List<Product> products = new List<Product>();
+
+                string sql = "select * from tblProduct";
+                SqlCommand cmd = new SqlCommand(sql, DataCon);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    long id = reader.GetInt64(0);
+                    string pName = reader.GetString(1);
+                    double price = reader.GetSqlMoney(2).ToDouble();
+                    int qty = reader.GetInt32(3);
+                    byte[] photo = (byte[])reader[4];
+                    long cId = reader.GetInt64(5);
+                    Product product = new Product(id, pName, price, qty, photo, cId);
+                    products.Add(product);
+                }
+
+                reader.Close();
+                cmd.Dispose();
+                return products;
+
+            } } 
+
+
+        // Windows Authentication
+        public static void ConnectionString(string server, string dbName)
+        {
+            DataCon = new SqlConnection($"Server={server};Database={dbName};Trusted_Connection=True;TrustServerCertificate=True;");
+            DataCon.Open();
+        }
+
+        // SQL Server Authentication
+        public static void ConnectionString(string server, string dbName, string user, string pass)
+        {
+            DataCon = new SqlConnection($"Server={server};Database={dbName};User Id={user};Password={pass};TrustServerCertificate=True;");
+            DataCon.Open();
+        }
+    }
+}
+
+and has
+Form1.cs is Windows Form
+using POS_System_Product;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace POS_SQLServer
+{
+    public partial class Form1: Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            new LogInForm().ShowDialog(this);
+        }
+
+        private void btnOrderProducts_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MyData.Products = DBConnection.Products;
+
+                new POS_System_Product.Form1().ShowDialog(this);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
+and has
+LogInForm.cs
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace POS_SQLServer
+{
+    public partial class LogInForm: Form
+    {
+        public LogInForm()
+        {
+            InitializeComponent();
+        }
+
+        private void LogInForm_Load(object sender, EventArgs e)
+        {
+            comboAuthentication.SelectedIndex = 0;
+        }
+
+        private void comboAuthentication_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = comboAuthentication.SelectedIndex;
+            if(index == 0)
+            {
+                txtUserName.Enabled = false;
+                txtPassword.Enabled = false;
+            }
+            else
+            {
+                txtUserName.Enabled = true;
+                txtPassword.Enabled = true;
+            }
+        }
+
+        private void btnLogIn_Click(object sender, EventArgs e)
+        {
+            string server = txtIP.Text.Trim();
+            string dbName = "dbSV2";
+            string user = txtUserName.Text.Trim();
+            string pass = txtPassword.Text;
+            int index = comboAuthentication.SelectedIndex;
+            try
+            {
+                if(index == 0)
+                {
+                    DBConnection.ConnectionString(server, dbName);
+                }
+                else
+                {
+                    DBConnection.ConnectionString(server, dbName, user, pass);
+                }
+                this.DialogResult = DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LogInForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(DialogResult != DialogResult.OK)
+            {
+                Application.Exit();
+            }
+        }
+    }
+}
+
+and has
+Program.cs is class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace POS_SQLServer
+{
+    static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
+    }
+}
+wait ai
+
+
+
+POS_System_Product has
+Form1.cs is Windows Form
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+using System.Resources;
+
+namespace POS_System_Product
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            
+            MyData.LoadProduct(tableLayoutPanelFood, 1);
+            MyData.LoadProduct(tableLayoutPanelDrink, 2);
+            MyData.LoadProduct(tableLayoutPanelBeer, 3);
+            MyData.LoadProduct(tableLayoutPanel_Item, 4);
+
+            MyData.MShowOrderDetail = mShowOrderDetail;
+            MyData.MPayment = mPayment;
+
+        }
+
+        private void exToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MyData.Orders.Count > 0)//if there is an order
+            {
+                DialogResult result = MessageBox.Show("Do you really want to Exit?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    MyData.Orders.Clear();
+                    this.Close();
+                }
+            }
+            else//if there is no order
+            {
+                this.Close();
+            }
+        }
+
+        private void mShowOrderDetail_Click(object sender, EventArgs e)
+        {
+            new ShowOrderDetail().ShowDialog(this);
+        }
+
+        private PaymentForm payment;
+        private void mPayment_Click(object sender, EventArgs e)
+        {
+            payment = new PaymentForm();
+            if (payment.ShowDialog(this) == DialogResult.OK)
+            {
+                if (payment.PrintPreview)
+                    printPreviewDialog.ShowDialog(this);
+                else if (payment.Print)
+                    printDocument.Print();
+                else if (payment.PrintDialog)
+                {
+                    var result = printDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        printDialog.Document.Print();
+                    }
+                }
+
+                MyData.Orders.Clear();
+
+                this.Close();
+                new Form1().ShowDialog(this);
+            }
+
+        }
+
+        private void mReload_Click(object sender, EventArgs e)
+        {
+            if (MyData.Orders.Count > 0)//if there is an order
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to reload?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if(result == DialogResult.Yes)
+                {
+                    MyData.Orders.Clear();
+                    this.Close();
+                    new Form1().ShowDialog(this);
+                }
+            }
+            else//if there is no order
+            {
+                this.Close();
+                new Form1().ShowDialog(this);
+            }
+
+        }
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            MyData.PrintDocument(payment, e);
+        }
+
+        private void tableLayoutPanelFood_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanelDrink_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanelBeer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel_Item_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+    }
+}
+
+and has
+MyData.cs is class
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace POS_System_Product
+{
+    public class MyData
+    {
+        internal static void LoadProduct(TableLayoutPanel tableLayoutPanel, int cid)
+        {
+            List<Product> products = Products
+                .Where(p => p.CId == cid)
+                .ToList();
+
+            // string[] files = Directory.GetFiles("C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\2_F\\POS_System_Product\\Image");
+
+            int c = 1, r = 0;
+            // Random rnd = new Random();
+            // int id = 1;
+            foreach (var pro in products)
+            {
+                // if (file.ToLower().EndsWith(".jpg"))
+                {
+                    Image picture = Image.FromStream(new MemoryStream(pro.Photo));
+                    string pname = pro.PName;
+                    double price = pro.Price;
+
+                    ProductControl p = new ProductControl()
+                    {
+                        Id = (int)pro.Id,
+                        Picture = picture,
+                        PName = pname,
+                        Price = price,
+                    };
+                    tableLayoutPanel.Controls.Add(p, c, r);
+                    c++;
+                    if (c > 4)
+                    {
+                        c = 1;
+                        r++;
+                    }
+                }
+            }
+        }
+
+
+        internal static void ShowOrderDetail(DataGridView dataGridView, TextBox txtTotalAmount)
+        {
+            foreach(var p in Orders)
+            {
+                dataGridView.Rows.Add(p.Row);
+            }
+
+            txtTotalAmount.Text = $"{TotalAmount:c2}";
+        }
+
+        internal static void PrintDocument(PaymentForm payment, PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(Properties.Resources.sven, 2, 2, 55, 55);
+            e.Graphics.DrawImage(Properties.Resources.svenlogo, 85, 2, 100, 25);
+
+            Font font = new Font("Arial", 8, FontStyle.Bold);
+            string address = "# 203, SengSo, Phnom Penh \nTel:012 332 551";
+            e.Graphics.DrawString(address, font, Brushes.Black, 64, 25);
+            e.Graphics.DrawLine(new Pen(Brushes.Black,1), 0, 64, 300, 64);
+
+            string seller = $"Seller: Chou Yamata          {DateTime.Now:dd-MM-yyyy HH:mm:ss tt}";
+            font = new Font("Arial", 8, FontStyle.Regular);
+            e.Graphics.DrawString(seller, font, Brushes.Black, 0, 66);
+
+            e.Graphics.DrawLine(new Pen(Brushes.Black, 10), 0, 91, 300, 91);
+            font = new Font("Consolas", 7, FontStyle.Bold);
+            string header = "No".PadRight(3) +
+                "Product Name".PadRight(20) + "Price".PadRight(10) +
+                "Qty".PadRight(5) + "Amont";
+            e.Graphics.DrawString(header, font, Brushes.White, 0, 86);
+
+            font = new Font("Consolas", 7, FontStyle.Regular);
+            int x = 0, y = 100;
+            int no = 1;
+            foreach (var p in Orders)
+            {
+                string pname = p.PName;
+                if (pname.Length >= 20)
+                {
+                    pname = pname.Substring(0, 17);
+                    pname += "...";
+                }
+
+                string row = $"{no++:00}".PadRight(3) +
+                    $"{pname}".PadRight(20) +
+                    $"{p.Price:c2}".PadRight(10) +
+                    $"{p.Qty}".PadRight(5) +
+                    $"{p.Amount:c2}";
+                e.Graphics.DrawString(row, font, Brushes.Black, x, y);
+                e.Graphics.DrawLine(new Pen(Brushes.Black, 0.2f), 0, y + 13, 300, y + 13);
+                y += 15;
+            }
+            e.Graphics.DrawLine(new Pen(Brushes.Black, 2), 0, y-2, 300, y-2);
+
+            
+            string text = $"Total Amount: ".PadLeft(38)+$"{payment.TotalAmount:c2}";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            text = $"Discount: ".PadLeft(38) + $"{payment.Discount}%";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            text = $"Discount Price: ".PadLeft(38) + $"{payment.DiscountPrice:c2}";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            e.Graphics.DrawLine(new Pen(Brushes.LightGray, 10), 128, y+6, 300, y+6);
+            font = new Font("Consolas", 7, FontStyle.Bold);
+            text = $"Payment: ".PadLeft(38) + $"{payment.Payment:c2}";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            font = new Font("Consolas", 7, FontStyle.Regular);
+            text = $"Cash Recevied: ".PadLeft(38) + $"{payment.CashReceived:c2}";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            font = new Font("Consolas", 7, FontStyle.Bold);
+            text = $"Cash Returned: ".PadLeft(38) + $"{payment.CashReturned:c2}";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            y += 15;
+            font = new Font("Kh Content", 6, FontStyle.Regular);
+            text = "      សូមអរគុណចំពោះការទិញទំនិញនៅហាងរបស់យើងខ្ញុំ សូមអញ្ជើញមកម្តងទៀត";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            text = "                     Thank you for shopping with us, please come again!";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            text = "                                 ទំនិញដែលទិញហើយមិនអាចដូរបានទេ";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+            y += 15;
+
+            text = "                                    Goods sold are not returnable";
+            e.Graphics.DrawString(text, font, Brushes.Black, 0, y);
+
+        }
+
+        public static HashSet<ProductControl> Orders { get; set; } = new HashSet<ProductControl>();
+
+        public static double TotalAmount
+        {
+            get
+            {
+                double totalAmount = 0;
+                foreach (var p in Orders)
+                {
+                    totalAmount += p.Amount;
+                }
+                return totalAmount;
+
+            }
+        }
+
+        public static ToolStripMenuItem MShowOrderDetail { get; internal set; }
+        public static ToolStripMenuItem MPayment { get; internal set; }
+        public static List<Product> Products { get; set; }
+    }
+}
+
+and has
+PaymentForm.cs is Windows Form
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace POS_System_Product
+{
+    public partial class PaymentForm: Form
+    {
+        public PaymentForm()
+        {
+            InitializeComponent();
+            comboDiscount.SelectedIndex = 1;
+            txtTotalAmount.Text = $"{TotalAmount:c2}";
+        }
+
+        public double TotalAmount { get; set; } = MyData.TotalAmount;
+        public double Discount { get; set; }
+        public double DiscountPrice { get; set; }
+        public double Payment { get; set; }
+        public double CashReceived { get; set; }
+        public double CashReturned { get; set; }
+
+        public bool Print { get; set; } = true;
+        public bool PrintPreview { get; set; } = false;
+        public bool PrintDialog { get; set; } = false;
+
+        private double[] discount = { 0, 5, 10, 15, 20 };
+
+        private void comboDiscount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = comboDiscount.SelectedIndex;
+            Discount = discount[index];
+            DiscountPrice = TotalAmount * Discount / 100;
+            Payment = TotalAmount - DiscountPrice;
+
+            txtDiscountPrice.Text = DiscountPrice.ToString("c2");
+            txtPayment.Text = Payment.ToString("c2");
+
+            if (CashReceived > 0)
+            {
+                txtCashReceived_KeyUp(sender, null);
+            }
+        }
+
+        private void txtCashReceived_KeyUp(object sender, KeyEventArgs e)
+        {
+            string text = txtCashReceived.Text;
+            if(text != "")
+            {
+                CashReceived = double.Parse(text);
+                CashReturned = CashReceived - Payment;
+                txtCashReturned.Text = CashReturned.ToString("$#,##0.00"); //txtCashReturned.Text = CashReturned.ToString("c2");
+
+                if (CashReceived >= Payment)
+                {
+                    txtCashReturned.BackColor = Color.Green;
+                    btnPayment.Enabled = true;
+
+                    if (e != null)
+                    {
+                        if(e.KeyCode == Keys.Enter)
+                        {
+                            btnPayment_Click(sender, e);
+                        }
+                    }
+
+                }
+                else
+                {
+                    txtCashReturned.BackColor = Color.Red;
+                    btnPayment.Enabled = false;
+                }
+
+            }
+            else
+            {
+                CashReceived = 0;
+                CashReturned = 0;
+                txtCashReturned.Text = "";
+                txtCashReturned.BackColor = Color.White;
+                btnPayment.Enabled = false;
+            }
+        }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void cPrint_CheckedChanged(object sender, EventArgs e)
+        {
+            Print = cPrint.Checked;
+            if (Print)
+            {
+                cPrintPreView.Checked = false;
+                cPrintDialog.Checked = false;
+            }
+        }
+
+        private void cPrintPreView_CheckedChanged(object sender, EventArgs e)
+        {
+            PrintPreview = cPrintPreView.Checked;
+            if (PrintPreview)
+            {
+                cPrint.Checked = false;
+                cPrintDialog.Checked = false;
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            PrintDialog = cPrintDialog.Checked;
+            if (PrintDialog)
+            {
+                cPrint.Checked = false;
+                cPrintPreView.Checked = false;
+            }
+        }
+
+        private void PaymentForm_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
+and has
+Product.cs is class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using POS_DataAccess;
+
+namespace POS_System_Product
+{
+    public class Product
+    {
+        public long Id { get; set; }
+        public string PName { get; set; }
+        public double Price { get; set; }
+        public int Qty { get; set; }
+        public byte[] Photo { get; set; }
+        public long CId { get; set; }
+
+        public Product() { }
+
+        public Product(long id, string pName, double price, int qty, byte[] photo, long cId)
+        {
+            Id = id;
+            PName = pName;
+            Price = price;
+            Qty = qty;
+            Photo = photo;
+            CId = cId;
+        }
+    }
+
+}
+
+and has
+ProductControl.cs is Windows Form
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace POS_System_Product
+{
+    public partial class ProductControl : UserControl
+    {
+        public ProductControl()
+        {
+            InitializeComponent();
+        }
+
+        private void ProductControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        public int Id { get; set; }
+        public string PName { 
+            get => txtProductName.Text;
+            set => txtProductName.Text = value; }
+
+        private double price = 0;
+        public double Price {
+            get => price;
+            set {
+                price = value;
+                txtPrice.Text = price.ToString("$#,##0.00");
+            }
+        }
+        public int Qty { get; set; }
+        public double Amount { get => Price * Qty; } //{ get => Price * Qty; }
+        public Image Picture {
+            get => picture.Image;
+            set => picture.Image = value;
+        }
+        public object[] Row { get => new object[] { 
+            $"{Id:000}",
+            PName ,
+            $"{Price:c2}",
+            Qty,
+            $"{Amount:c2}",
+
+        }; }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Qty++;
+            btnBuy.Text = $"Buy({Qty})";
+            btnCancel.Visible = true;
+
+            MyData.Orders.Add(this);
+
+            MyData.MShowOrderDetail.Enabled = true;
+            MyData.MPayment.Enabled = true;
+
+        }
+
+        private void Picture_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Qty--;
+            if (Qty == 0)
+            {
+                btnBuy.Text = "Buy";
+                btnCancel.Visible = false;
+                MyData.Orders.Remove(this);
+
+                if(MyData.Orders.Count == 0)
+                {
+                    MyData.MShowOrderDetail.Enabled = false;
+                    MyData.MPayment.Enabled = false;
+                }
+
+            }
+            else
+            {
+                btnBuy.Text = $"Buy({Qty})";
+            }
+        }
+    }
+}
+
+and has
+Program.cs is class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace POS_System_Product
+{
+    internal static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
+    }
+}
+
+and has
+ShowOrderDetail.cs is Windows Form
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace POS_System_Product
+{
+    public partial class ShowOrderDetail : Form
+    {
+        public ShowOrderDetail()
+        {
+            InitializeComponent();
+
+            MyData.ShowOrderDetail(dataGridView, txtTotalAmount);
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void ShowOrderDetail_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+wait ai
+
+
+
+i use Navicat Premium 16 and SQL Server - New Connection and Connction Name (SQLServer) have DataBase name dbSV2. dbSV2 have dbo. dbo table tblCategory and tblCategory: Name have id and categoryName, Type have bigint and varchar, Size categoryName have 255, Not null both tick, Key id have Key 1  
+dbo table tblProduct: Name id have id pname price QtyInStock photo cid, Type have bigint varchar money int image bigint, Size have pname is 255, Not null tick all, id is Key 1. 
+tblProduct cid is connect to id tblCategory 
+
+
+
+
+POS_SQLServer is already Right-Click POS_SQLServer > Add > Existing Project > Click POS_System_Product.csproj then Click Add
+POS_SQLServer is already Right-Click POS_SQLServer > Add > Reference > Click POS_System_Product.csproj then Click Add
+
+wait ai
+
+
+
+POS_System_Product is already Right-Click on POS_System_Product > Properties > Output type: Windows Application to Output type: Class Library
+
+wait ai
+
+
+
+rule i give you it (don't create any new file or new POS. we use only POS_SQLServer and POS_System_Product is too good but you can create new class or form only in POS_SQLServer and POS_System_Product)
+first we need to create UI. create one for Edit after we click btnAddNew_Click and create one for Edit after we click btnEdit_Click.
+before we add code or update code.
+do not change any reference because POS_SQLServer is already Right-Click POS_SQLServer > Add > Existing Project > Click POS_System_Product.csproj then Click Add
+
+wait ai
+
+
+
+In POS_SQLServer have Form1.cs and Form1.cs have btnAddNew_Click and btnEdit_Click.
+i want btnAddNew_Click can add new product and btnEdit_Click can edit product.
+but first thing i want to do it create ui for btnEdit_Click and btnAddNew_Click.
+
+wait ai
+
+
+
+create UI
+new one for edit (btnEdit_Click)
+and create UI new one for add (btnAddNew_Click)
+
+
+
+********
+i use SQL Server Management Studio 20
+ServerName/IP Address: DESKTOP-BB6PQGM\MSSQLSERVER_01
+

@@ -1,0 +1,111 @@
+<!--<div class="col-md-3 mt-4">
+        <div class="card product-card position-relative">
+            <div class="product-image">
+                <span class="badge-category">Basketball Sandals</span>
+                <img src="https://i5.walmartimages.com/seo/Optimum-Nutrition-Gold-Standard-100-Whey-Protein-Powder-Extreme-Milk-Chocolate-24g-Protein-5-LB_79ce1791-f1a7-422a-971f-549145c37a37.089f5ae2ab359b04ecfdfe5c3b70986d.jpeg"
+                    class="img-fluid" alt="Basketball Sandals">
+                <div class="vertical-text">361° Sport / New in</div>
+            </div>
+            <div class="card-body">
+                <p class="mb-1">
+                    <span class="text-danger fw-bold">US $23.51</span>
+                    <span class="text-muted text-decoration-line-through">US $33.59</span>
+                </p>
+                <h6 class="card-title mb-2">Basketball Sandals</h6>
+                <div class="color-options">
+                    <span class="color-yellow"></span>
+                    <span class="color-black"></span>
+                    <span class="color-gray"></span>
+                    <span class="color-dark"></span>
+                    <span class="color-plus">+</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
+
+<!-- 1.1
+<div class="card product-card position-relative">
+    <div class="product-image shodow" style="width: 100%">
+
+        <span class="badge-category">Basketball Sandals</span>
+        <img src="https://i5.walmartimages.com/seo/Optimum-Nutrition-Gold-Standard-100-Whey-Protein-Powder-Extreme-Milk-Chocolate-24g-Protein-5-LB_79ce1791-f1a7-422a-971f-549145c37a37.089f5ae2ab359b04ecfdfe5c3b70986d.jpeg"
+            class="product-image img-fluid" alt="Basketball Sandals">
+        <div class="vertical-text">361° Sport / New in</div>
+    </div>
+    <span class="badge badge-danger product-discount">-30%</span>
+
+    <div class="card-body">
+        <p class="mb-1">
+            <span class="text-danger fw-bold">US $23.51</span>
+            <span class="text-muted text-decoration-line-through">US $33.59</span>
+        </p>
+        <h6 class="card-title mb-2">Basketball Sandals</h6>
+        <div class="color-options">
+            <span class="color-yellow"></span>
+            <span class="color-black"></span>
+            <span class="color-gray"></span>
+            <span class="color-dark"></span>
+            <span class="color-plus">+</span>
+        </div>
+    </div>
+</div>
+-->
+
+
+
+<div class="card product-card position-relative" >
+    <!-- {{ product | json }} -->
+    <span class="badge-category">Stock: {{ product.qty }}</span>
+    <div class="product-image shodow" style="width: 100%">
+        <!--  -->
+
+        <div style="border: 1px solid black; cursor: pointer;" [routerLink]="['/product-detail']"
+            [queryParams]="{ product_id: product.id }">
+
+
+
+
+
+            <img [src]="product.imageUrl" class="product-image img-fluid" alt="Basketball Sandals"
+                onerror="this.src='./slider/No-Image-Placeholder.png';"
+                style="height: 200px; width: 100%; object-fit: contain;">
+
+            <div class="vertical-text product-title">
+                <h5>{{ product.name }}</h5>
+            </div>
+
+        </div>
+
+        <div class="vertical-text product-description">{{ product.description }}</div>
+
+
+
+    </div>
+
+    <span class="badge badge-danger product-discount">Stock: {{ product.qty }}</span>
+
+    <div class="card-body">
+        <div class="product-description">
+            <h6>{{ product.name }}</h6>
+        </div>
+        <p class="mb-1">
+            <span class="text-danger fw-bold">{{ product.price | currency }}</span>
+            <span class="text-muted text-decoration-line-through">{{ ' - ' + (product.price | khmerCurrency:"in")
+                }}</span>
+        </p>
+
+        <h6 class="card-title mb-2">{{ product.category }}</h6>
+        <div class="color-options">
+            <span class="color-yellow"></span>
+            <span class="color-black"></span>
+            <span class="color-gray"></span>
+            <span class="color-dark"></span>
+            <span class="color-plus">+</span>
+            <input type="button" class="btn btn-outline-success btn-block mt-3" value="Add to Cart"
+                (click)="onAddToCart(product)">
+        </div>
+
+    </div>
+</div>

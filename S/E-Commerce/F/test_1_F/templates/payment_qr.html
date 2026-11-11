@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Scan to pay · Order #{{ order.id }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-6">
+    <div class="summary-card text-center qr-pay-card">
+      <p class="text-uppercase small text-muted mb-1">{{ provider }} · QR Code</p>
+      <h1 class="section-title h3 mb-2">Scan to pay</h1>
+      <p class="text-muted mb-4">
+        Order <strong>#{{ order.id }}</strong> ·
+        Total <strong>${{ '%.2f'|format(order.total_amount) }}</strong>
+      </p>
+
+      <div class="qr-frame mx-auto mb-3">
+        <img src="{{ qr_data_uri }}" alt="{{ provider }} payment QR Code" width="260" height="260">
+      </div>
+
+      <p class="small text-muted mb-3">
+        {% if provider == 'Visa' %}
+        Scan to open the Visa pay page, then enter card details.
+        {% else %}
+        Scan with your phone camera to open Stripe Checkout.
+        {% endif %}
+        Or open it on this device:
+      </p>
+
+      <a class="btn btn-brand" href="{{ checkout_url }}" {% if provider != 'Visa' %}target="_blank" rel="noopener"{% endif %}>
+        <i class="bi bi-box-arrow-up-right"></i> {{ open_label }}
+      </a>
+      <a class="btn btn-outline-secondary" href="{{ url_for('checkout.payment_cancel', order_id=order.id) }}">
+        Cancel
+      </a>
+
+      <p class="small mt-4 mb-0" id="qr-status-text">
+        Waiting for payment… keep this page open after you pay.
+      </p>
+      {% if provider == 'Visa' %}
+      <p class="small text-muted mt-2 mb-0">
+        Phone scan only works if this PC is reachable on your network (not plain localhost from another device).
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  const statusUrl = {{ url_for('checkout.payment_qr_status', order_id=order.id)|tojson }};
+  const successUrl = {{ url_for('checkout.payment_success', order_id=order.id)|tojson }};
+  const el = document.getElementById("qr-status-text");
+
+  async function poll() {
+    try {
+      const res = await fetch(statusUrl, { headers: { "Accept": "application/json" } });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.paid) {
+        el.textContent = "Payment received. Redirecting…";
+        window.location.href = successUrl;
+      }
+    } catch (e) {
+      /* ignore transient network errors while polling */
+    }
+  }
+
+  poll();
+  setInterval(poll, 3000);
+})();
+</script>
+{% endblock %}

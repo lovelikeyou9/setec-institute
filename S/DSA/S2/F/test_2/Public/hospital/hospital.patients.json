@@ -1,0 +1,959 @@
+[{
+  "_id": {
+    "$oid": "68394f29611906215cb5f899"
+  },
+  "patient_id": "P1001",
+  "first_name": "John",
+  "last_name": "Smith",
+  "date_of_birth": {
+    "$date": "1980-05-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zip": "10001"
+  },
+  "phone": "212-555-1234",
+  "email": "john.smith@example.com",
+  "blood_type": "A+",
+  "allergies": [
+    "Penicillin",
+    "Peanuts"
+  ],
+  "emergency_contact": {
+    "name": "Jane Smith",
+    "relationship": "Spouse",
+    "phone": "212-555-5678"
+  },
+  "registration_date": {
+    "$date": "2023-01-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f89a"
+  },
+  "patient_id": "P1002",
+  "first_name": "Emily",
+  "last_name": "Johnson",
+  "date_of_birth": {
+    "$date": "1992-08-22T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "456 Oak Ave",
+    "city": "Boston",
+    "state": "MA",
+    "zip": "02108"
+  },
+  "phone": "617-555-2345",
+  "email": "emily.j@example.com",
+  "blood_type": "O-",
+  "allergies": [],
+  "emergency_contact": {
+    "name": "Michael Johnson",
+    "relationship": "Brother",
+    "phone": "617-555-3456"
+  },
+  "registration_date": {
+    "$date": "2023-01-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f89b"
+  },
+  "patient_id": "P1003",
+  "first_name": "Robert",
+  "last_name": "Williams",
+  "date_of_birth": {
+    "$date": "1975-11-30T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "789 Pine Rd",
+    "city": "Chicago",
+    "state": "IL",
+    "zip": "60601"
+  },
+  "phone": "312-555-4567",
+  "email": "robert.w@example.com",
+  "blood_type": "B+",
+  "allergies": [
+    "Shellfish"
+  ],
+  "emergency_contact": {
+    "name": "Sarah Williams",
+    "relationship": "Wife",
+    "phone": "312-555-5678"
+  },
+  "registration_date": {
+    "$date": "2023-01-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f89c"
+  },
+  "patient_id": "P1004",
+  "first_name": "Maria",
+  "last_name": "Garcia",
+  "date_of_birth": {
+    "$date": "1988-03-17T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "321 Elm St",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zip": "90012"
+  },
+  "phone": "213-555-6789",
+  "email": "maria.g@example.com",
+  "blood_type": "AB+",
+  "allergies": [
+    "Latex"
+  ],
+  "emergency_contact": {
+    "name": "Carlos Garcia",
+    "relationship": "Husband",
+    "phone": "213-555-7890"
+  },
+  "registration_date": {
+    "$date": "2023-01-18T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f89d"
+  },
+  "patient_id": "P1005",
+  "first_name": "David",
+  "last_name": "Brown",
+  "date_of_birth": {
+    "$date": "1995-07-08T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "654 Maple Dr",
+    "city": "Houston",
+    "state": "TX",
+    "zip": "77002"
+  },
+  "phone": "713-555-8901",
+  "email": "david.b@example.com",
+  "blood_type": "A-",
+  "allergies": [
+    "Aspirin"
+  ],
+  "emergency_contact": {
+    "name": "Lisa Brown",
+    "relationship": "Mother",
+    "phone": "713-555-9012"
+  },
+  "registration_date": {
+    "$date": "2023-01-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f89e"
+  },
+  "patient_id": "P1006",
+  "first_name": "Sarah",
+  "last_name": "Miller",
+  "date_of_birth": {
+    "$date": "1983-09-25T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "987 Cedar Ln",
+    "city": "Philadelphia",
+    "state": "PA",
+    "zip": "19107"
+  },
+  "phone": "215-555-0123",
+  "email": "sarah.m@example.com",
+  "blood_type": "O+",
+  "allergies": [
+    "Dust mites"
+  ],
+  "emergency_contact": {
+    "name": "James Miller",
+    "relationship": "Father",
+    "phone": "215-555-1234"
+  },
+  "registration_date": {
+    "$date": "2023-01-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f89f"
+  },
+  "patient_id": "P1007",
+  "first_name": "Michael",
+  "last_name": "Davis",
+  "date_of_birth": {
+    "$date": "1970-12-05T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "135 Walnut St",
+    "city": "Phoenix",
+    "state": "AZ",
+    "zip": "85004"
+  },
+  "phone": "602-555-2345",
+  "email": "michael.d@example.com",
+  "blood_type": "B-",
+  "allergies": [
+    "Bee stings"
+  ],
+  "emergency_contact": {
+    "name": "Jennifer Davis",
+    "relationship": "Daughter",
+    "phone": "602-555-3456"
+  },
+  "registration_date": {
+    "$date": "2023-01-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a0"
+  },
+  "patient_id": "P1008",
+  "first_name": "Jessica",
+  "last_name": "Rodriguez",
+  "date_of_birth": {
+    "$date": "1991-04-18T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "246 Birch Blvd",
+    "city": "San Antonio",
+    "state": "TX",
+    "zip": "78205"
+  },
+  "phone": "210-555-4567",
+  "email": "jessica.r@example.com",
+  "blood_type": "A+",
+  "allergies": [
+    "Sulfa drugs"
+  ],
+  "emergency_contact": {
+    "name": "Daniel Rodriguez",
+    "relationship": "Brother",
+    "phone": "210-555-5678"
+  },
+  "registration_date": {
+    "$date": "2023-01-28T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a1"
+  },
+  "patient_id": "P1009",
+  "first_name": "James",
+  "last_name": "Martinez",
+  "date_of_birth": {
+    "$date": "1987-06-12T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "369 Spruce Ave",
+    "city": "San Diego",
+    "state": "CA",
+    "zip": "92101"
+  },
+  "phone": "619-555-6789",
+  "email": "james.m@example.com",
+  "blood_type": "O-",
+  "allergies": [
+    "Eggs"
+  ],
+  "emergency_contact": {
+    "name": "Amy Martinez",
+    "relationship": "Wife",
+    "phone": "619-555-7890"
+  },
+  "registration_date": {
+    "$date": "2023-01-30T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a2"
+  },
+  "patient_id": "P1010",
+  "first_name": "Jennifer",
+  "last_name": "Wilson",
+  "date_of_birth": {
+    "$date": "1994-02-28T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "482 Pineapple St",
+    "city": "Dallas",
+    "state": "TX",
+    "zip": "75201"
+  },
+  "phone": "214-555-8901",
+  "email": "jennifer.w@example.com",
+  "blood_type": "AB-",
+  "allergies": [
+    "Pollen"
+  ],
+  "emergency_contact": {
+    "name": "Thomas Wilson",
+    "relationship": "Husband",
+    "phone": "214-555-9012"
+  },
+  "registration_date": {
+    "$date": "2023-02-02T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a3"
+  },
+  "patient_id": "P1011",
+  "first_name": "Daniel",
+  "last_name": "Anderson",
+  "date_of_birth": {
+    "$date": "1982-10-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "753 Orange Dr",
+    "city": "San Jose",
+    "state": "CA",
+    "zip": "95113"
+  },
+  "phone": "408-555-0123",
+  "email": "daniel.a@example.com",
+  "blood_type": "A+",
+  "allergies": [
+    "Cat dander"
+  ],
+  "emergency_contact": {
+    "name": "Michelle Anderson",
+    "relationship": "Sister",
+    "phone": "408-555-1234"
+  },
+  "registration_date": {
+    "$date": "2023-02-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a4"
+  },
+  "patient_id": "P1012",
+  "first_name": "Lisa",
+  "last_name": "Taylor",
+  "date_of_birth": {
+    "$date": "1978-07-20T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "159 Peach Ln",
+    "city": "Austin",
+    "state": "TX",
+    "zip": "78701"
+  },
+  "phone": "512-555-2345",
+  "email": "lisa.t@example.com",
+  "blood_type": "B+",
+  "allergies": [],
+  "emergency_contact": {
+    "name": "Richard Taylor",
+    "relationship": "Husband",
+    "phone": "512-555-3456"
+  },
+  "registration_date": {
+    "$date": "2023-02-08T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a5"
+  },
+  "patient_id": "P1013",
+  "first_name": "Matthew",
+  "last_name": "Thomas",
+  "date_of_birth": {
+    "$date": {
+      "$numberLong": "-155260800000"
+    }
+  },
+  "gender": "Male",
+  "address": {
+    "street": "864 Apple Rd",
+    "city": "Jacksonville",
+    "state": "FL",
+    "zip": "32202"
+  },
+  "phone": "904-555-4567",
+  "email": "matthew.t@example.com",
+  "blood_type": "O+",
+  "allergies": [
+    "Mold"
+  ],
+  "emergency_contact": {
+    "name": "Patricia Thomas",
+    "relationship": "Wife",
+    "phone": "904-555-5678"
+  },
+  "registration_date": {
+    "$date": "2023-02-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a6"
+  },
+  "patient_id": "P1014",
+  "first_name": "Amanda",
+  "last_name": "Hernandez",
+  "date_of_birth": {
+    "$date": "1990-12-12T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "357 Banana Blvd",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94102"
+  },
+  "phone": "415-555-6789",
+  "email": "amanda.h@example.com",
+  "blood_type": "A-",
+  "allergies": [
+    "Soy"
+  ],
+  "emergency_contact": {
+    "name": "Christopher Hernandez",
+    "relationship": "Brother",
+    "phone": "415-555-7890"
+  },
+  "registration_date": {
+    "$date": "2023-02-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a7"
+  },
+  "patient_id": "P1015",
+  "first_name": "Christopher",
+  "last_name": "Moore",
+  "date_of_birth": {
+    "$date": "1984-04-05T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "642 Grape St",
+    "city": "Columbus",
+    "state": "OH",
+    "zip": "43215"
+  },
+  "phone": "614-555-8901",
+  "email": "christopher.m@example.com",
+  "blood_type": "AB+",
+  "allergies": [
+    "Penicillin"
+  ],
+  "emergency_contact": {
+    "name": "Rebecca Moore",
+    "relationship": "Wife",
+    "phone": "614-555-9012"
+  },
+  "registration_date": {
+    "$date": "2023-02-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a8"
+  },
+  "patient_id": "P1016",
+  "first_name": "Ashley",
+  "last_name": "Martin",
+  "date_of_birth": {
+    "$date": "1993-08-22T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "951 Cherry Ave",
+    "city": "Charlotte",
+    "state": "NC",
+    "zip": "28202"
+  },
+  "phone": "704-555-0123",
+  "email": "ashley.m@example.com",
+  "blood_type": "B-",
+  "allergies": [
+    "Peanuts"
+  ],
+  "emergency_contact": {
+    "name": "Andrew Martin",
+    "relationship": "Husband",
+    "phone": "704-555-1234"
+  },
+  "registration_date": {
+    "$date": "2023-02-18T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8a9"
+  },
+  "patient_id": "P1017",
+  "first_name": "Joshua",
+  "last_name": "Jackson",
+  "date_of_birth": {
+    "$date": "1979-05-17T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "753 Lemon Dr",
+    "city": "Indianapolis",
+    "state": "IN",
+    "zip": "46204"
+  },
+  "phone": "317-555-2345",
+  "email": "joshua.j@example.com",
+  "blood_type": "O-",
+  "allergies": [
+    "Shellfish"
+  ],
+  "emergency_contact": {
+    "name": "Melissa Jackson",
+    "relationship": "Wife",
+    "phone": "317-555-3456"
+  },
+  "registration_date": {
+    "$date": "2023-02-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8aa"
+  },
+  "patient_id": "P1018",
+  "first_name": "Stephanie",
+  "last_name": "Thompson",
+  "date_of_birth": {
+    "$date": "1986-11-08T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "159 Mango Ln",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98101"
+  },
+  "phone": "206-555-4567",
+  "email": "stephanie.t@example.com",
+  "blood_type": "A+",
+  "allergies": [
+    "Dust"
+  ],
+  "emergency_contact": {
+    "name": "Kevin Thompson",
+    "relationship": "Husband",
+    "phone": "206-555-5678"
+  },
+  "registration_date": {
+    "$date": "2023-02-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8ab"
+  },
+  "patient_id": "P1019",
+  "first_name": "Andrew",
+  "last_name": "White",
+  "date_of_birth": {
+    "$date": "1973-03-25T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "357 Pear St",
+    "city": "Denver",
+    "state": "CO",
+    "zip": "80202"
+  },
+  "phone": "303-555-6789",
+  "email": "andrew.w@example.com",
+  "blood_type": "B+",
+  "allergies": [
+    "Latex"
+  ],
+  "emergency_contact": {
+    "name": "Nicole White",
+    "relationship": "Wife",
+    "phone": "303-555-7890"
+  },
+  "registration_date": {
+    "$date": "2023-02-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8ac"
+  },
+  "patient_id": "P1020",
+  "first_name": "Nicole",
+  "last_name": "Lopez",
+  "date_of_birth": {
+    "$date": "1996-09-14T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "642 Kiwi Blvd",
+    "city": "Washington",
+    "state": "DC",
+    "zip": "20001"
+  },
+  "phone": "202-555-8901",
+  "email": "nicole.l@example.com",
+  "blood_type": "AB-",
+  "allergies": [
+    "Aspirin"
+  ],
+  "emergency_contact": {
+    "name": "Brian Lopez",
+    "relationship": "Husband",
+    "phone": "202-555-9012"
+  },
+  "registration_date": {
+    "$date": "2023-02-28T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8ad"
+  },
+  "patient_id": "P1021",
+  "first_name": "Kevin",
+  "last_name": "Lee",
+  "date_of_birth": {
+    "$date": "1981-07-03T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "951 Plum Ave",
+    "city": "Boston",
+    "state": "MA",
+    "zip": "02108"
+  },
+  "phone": "617-555-0123",
+  "email": "kevin.l@example.com",
+  "blood_type": "O+",
+  "allergies": [
+    "Bee stings"
+  ],
+  "emergency_contact": {
+    "name": "Rachel Lee",
+    "relationship": "Wife",
+    "phone": "617-555-1234"
+  },
+  "registration_date": {
+    "$date": "2023-03-02T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8ae"
+  },
+  "patient_id": "P1022",
+  "first_name": "Rachel",
+  "last_name": "Gonzalez",
+  "date_of_birth": {
+    "$date": "1989-12-19T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "753 Berry Dr",
+    "city": "El Paso",
+    "state": "TX",
+    "zip": "79901"
+  },
+  "phone": "915-555-2345",
+  "email": "rachel.g@example.com",
+  "blood_type": "A-",
+  "allergies": [
+    "Penicillin"
+  ],
+  "emergency_contact": {
+    "name": "Jason Gonzalez",
+    "relationship": "Husband",
+    "phone": "915-555-3456"
+  },
+  "registration_date": {
+    "$date": "2023-03-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8af"
+  },
+  "patient_id": "P1023",
+  "first_name": "Brian",
+  "last_name": "Harris",
+  "date_of_birth": {
+    "$date": "1976-02-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "159 Melon Ln",
+    "city": "Nashville",
+    "state": "TN",
+    "zip": "37201"
+  },
+  "phone": "615-555-4567",
+  "email": "brian.h@example.com",
+  "blood_type": "B-",
+  "allergies": [
+    "Peanuts"
+  ],
+  "emergency_contact": {
+    "name": "Kimberly Harris",
+    "relationship": "Wife",
+    "phone": "615-555-5678"
+  },
+  "registration_date": {
+    "$date": "2023-03-08T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8b0"
+  },
+  "patient_id": "P1024",
+  "first_name": "Kimberly",
+  "last_name": "Clark",
+  "date_of_birth": {
+    "$date": "1997-05-28T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "357 Papaya St",
+    "city": "Baltimore",
+    "state": "MD",
+    "zip": "21201"
+  },
+  "phone": "410-555-6789",
+  "email": "kimberly.c@example.com",
+  "blood_type": "AB+",
+  "allergies": [
+    "Shellfish"
+  ],
+  "emergency_contact": {
+    "name": "Justin Clark",
+    "relationship": "Husband",
+    "phone": "410-555-7890"
+  },
+  "registration_date": {
+    "$date": "2023-03-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8b1"
+  },
+  "patient_id": "P1025",
+  "first_name": "Justin",
+  "last_name": "Lewis",
+  "date_of_birth": {
+    "$date": "1985-10-07T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "642 Fig Blvd",
+    "city": "Louisville",
+    "state": "KY",
+    "zip": "40202"
+  },
+  "phone": "502-555-8901",
+  "email": "justin.l@example.com",
+  "blood_type": "O-",
+  "allergies": [
+    "Eggs"
+  ],
+  "emergency_contact": {
+    "name": "Christina Lewis",
+    "relationship": "Wife",
+    "phone": "502-555-9012"
+  },
+  "registration_date": {
+    "$date": "2023-03-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8b2"
+  },
+  "patient_id": "P1026",
+  "first_name": "Christina",
+  "last_name": "Robinson",
+  "date_of_birth": {
+    "$date": "1992-03-15T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "951 Guava Ave",
+    "city": "Milwaukee",
+    "state": "WI",
+    "zip": "53202"
+  },
+  "phone": "414-555-0123",
+  "email": "christina.r@example.com",
+  "blood_type": "A+",
+  "allergies": [
+    "Pollen"
+  ],
+  "emergency_contact": {
+    "name": "Brandon Robinson",
+    "relationship": "Husband",
+    "phone": "414-555-1234"
+  },
+  "registration_date": {
+    "$date": "2023-03-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8b3"
+  },
+  "patient_id": "P1027",
+  "first_name": "Brandon",
+  "last_name": "Walker",
+  "date_of_birth": {
+    "$date": "1974-08-20T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": {
+    "street": "753 Lychee Dr",
+    "city": "Portland",
+    "state": "OR",
+    "zip": "97201"
+  },
+  "phone": "503-555-2345",
+  "email": "brandon.w@example.com",
+  "blood_type": "B+",
+  "allergies": [
+    "Cat dander"
+  ],
+  "emergency_contact": {
+    "name": "Heather Walker",
+    "relationship": "Wife",
+    "phone": "503-555-3456"
+  },
+  "registration_date": {
+    "$date": "2023-03-18T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8b4"
+  },
+  "patient_id": "P1028",
+  "first_name": "Heather",
+  "last_name": "Perez",
+  "date_of_birth": {
+    "$date": "1988-01-09T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "159 Coconut Ln",
+    "city": "Oklahoma City",
+    "state": "OK",
+    "zip": "73102"
+  },
+  "phone": "405-555-4567",
+  "email": "heather.p@example.com",
+  "blood_type": "O+",
+  "allergies": [],
+  "emergency_contact": {
+    "name": "Eric Perez",
+    "relationship": "Husband",
+    "phone": "405-555-5678"
+  },
+  "registration_date": {
+    "$date": "2023-03-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8b5"
+  },
+  "patient_id": "P1029",
+  "first_name": "Eric",
+  "last_name": "Hall",
+  "date_of_birth": {
+    "$date": {
+      "$numberLong": "-16502400000"
+    }
+  },
+  "gender": "Male",
+  "address": {
+    "street": "357 Durian St",
+    "city": "Las Vegas",
+    "state": "NV",
+    "zip": "89101"
+  },
+  "phone": "702-555-6789",
+  "email": "eric.h@example.com",
+  "blood_type": "A-",
+  "allergies": [
+    "Mold"
+  ],
+  "emergency_contact": {
+    "name": "Samantha Hall",
+    "relationship": "Wife",
+    "phone": "702-555-7890"
+  },
+  "registration_date": {
+    "$date": "2023-03-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68394f29611906215cb5f8b6"
+  },
+  "patient_id": "P1030",
+  "first_name": "Samantha",
+  "last_name": "Young",
+  "date_of_birth": {
+    "$date": "1998-04-30T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": {
+    "street": "642 Rambutan Blvd",
+    "city": "Albuquerque",
+    "state": "NM",
+    "zip": "87101"
+  },
+  "phone": "505-555-8901",
+  "email": "samantha.y@example.com",
+  "blood_type": "AB-",
+  "allergies": [
+    "Soy"
+  ],
+  "emergency_contact": {
+    "name": "Patrick Young",
+    "relationship": "Husband",
+    "phone": "505-555-9012"
+  },
+  "registration_date": {
+    "$date": "2023-03-25T00:00:00.000Z"
+  }
+}]

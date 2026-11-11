@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hospital Doctors</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, sans-serif;
+            background: #f5f7fb;
+            color: #1b2230;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+        }
+
+        .lead {
+            margin: 0 0 18px 0;
+            color: #5b6878;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .control-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 160px;
+        }
+
+        .control-item input,
+        .control-item select {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        #search-btn,
+        .btn-add {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            background: #2563eb;
+            transition: .2s;
+        }
+
+        #search-btn:hover,
+        .btn-add:hover {
+            background: #1d4ed8;
+        }
+
+        .doctors {
+            display: grid;
+            gap: 14px;
+        }
+
+        .doctor-card {
+            background: #fff;
+            border: 1px solid #e6eef6;
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+        }
+
+        .doctor-main {
+            flex: 0 0 220px;
+            min-width: 160px;
+        }
+
+        .doctor-id {
+            margin: 0 0 6px 0;
+            font-size: 1.05rem;
+        }
+
+        .meta {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 6px 8px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: #eef2ff;
+        }
+
+        .doctor-info {
+            flex: 1;
+            position: relative;
+        }
+
+        .row {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        dt {
+            font-size: 0.78rem;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+
+        dd {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .card-footer {
+            margin-top: 12px;
+            color: #64748b;
+            font-size: 0.86rem;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            margin-right: 10px;
+            color: white;
+        }
+
+        .btn-edit {
+            background: #10b981;
+        }
+
+        .btn-edit:hover {
+            background: #059669;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+        }
+
+        .btn-delete:hover {
+            background: #b91c1c;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90%;
+            overflow: auto;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #e5e7eb;
+        }
+
+        /* Delete Modal specific */
+        #delete-modal .modal-content {
+            text-align: center;
+        }
+
+        #delete-modal h2 {
+            color: #ef4444;
+            margin-bottom: 12px;
+        }
+
+        #delete-modal p {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        #delete-modal .modal-buttons {
+            justify-content: center;
+        }
+
+        .btn-delete-confirm {
+            background: #ef4444;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-delete-confirm:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <header>
+            <h1>Doctors</h1>
+            <p class="lead">Manage doctors without page reload.</p>
+        </header>
+
+        <section class="controls">
+            <div class="control-item">
+                <label for="search-input">Search</label>
+                <input type="text" id="search-input" placeholder="Search doctors">
+            </div>
+            <a href="#" class="btn-add" id="btn-add" style="text-decoration: none;">Add Doctor</a>
+        </section>
+
+        <section class="doctors" aria-live="polite"></section>
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Add Doctor</h2>
+            <input type="hidden" id="doctor-id-hidden">
+            <label>Doctor ID</label>
+            <input type="text" id="doctor_id">
+            <label>First Name</label>
+            <input type="text" id="first_name">
+            <label>Last Name</label>
+            <input type="text" id="last_name">
+            <label>Specialization</label>
+            <input type="text" id="specialization">
+            <label>Department</label>
+            <input type="text" id="department">
+            <label>Phone</label>
+            <input type="text" id="phone">
+            <label>Email</label>
+            <input type="text" id="email">
+            <label>License Number</label>
+            <input type="text" id="license_number">
+            <label>Years of Experience</label>
+            <input type="number" id="years_of_experience">
+
+            <div class="modal-buttons">
+                <button class="btn-cancel" id="btn-cancel">Cancel</button>
+                <button class="btn-save" id="btn-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <h2>Delete Doctor</h2>
+            <p>Are you sure you want to delete this doctor?</p>
+            <div class="modal-buttons">
+                <button class="btn-cancel" id="delete-cancel">Cancel</button>
+                <button class="btn-delete-confirm" id="delete-confirm">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const btnAdd = document.getElementById('btn-add');
+        const btnCancel = document.getElementById('btn-cancel');
+        const btnSave = document.getElementById('btn-save');
+        const modalTitle = document.getElementById('modal-title');
+
+        const deleteModal = document.getElementById('delete-modal');
+        const deleteCancel = document.getElementById('delete-cancel');
+        const deleteConfirm = document.getElementById('delete-confirm');
+        let deleteId = null;
+
+        let editingId = null;
+        let allDoctors = [];
+
+        btnAdd.addEventListener('click', e => {
+            e.preventDefault();
+            modalTitle.textContent = 'Add Doctor';
+            editingId = null;
+            modal.classList.add('active');
+            document.querySelectorAll('#modal input').forEach(i => i.value = '');
+        });
+
+        btnCancel.addEventListener('click', () => modal.classList.remove('active'));
+        deleteCancel.addEventListener('click', () => deleteModal.classList.remove('active'));
+
+        async function loadDoctors() {
+            const res = await fetch('/api/doctors');
+            allDoctors = await res.json();
+            renderDoctors();
+        }
+
+        function renderDoctors() {
+            const container = document.querySelector('.doctors');
+            container.innerHTML = '';
+            const searchText = document.getElementById('search-input').value.toLowerCase();
+
+            const filtered = allDoctors.filter(d => {
+                return !searchText || d.first_name.toLowerCase().includes(searchText) || d.last_name.toLowerCase().includes(searchText);
+            });
+
+            filtered.forEach(doc => {
+                const card = document.createElement('article');
+                card.className = 'doctor-card';
+                card.innerHTML = `
+      <div class="doctor-main">
+        <h2 class="doctor-id">Doctor ID: ${doc.doctor_id}</h2>
+        <div class="meta">
+          <span class="badge">${doc.department || ''}</span>
+        </div>
+        <p>${doc.specialization || ''}</p>
+      </div>
+      <div class="doctor-info">
+        <div class="row">
+          <dl><dt>Name</dt><dd>${doc.first_name} ${doc.last_name}</dd></dl>
+          <dl><dt>Email</dt><dd>${doc.email}</dd></dl>
+          <dl><dt>Phone</dt><dd>${doc.phone}</dd></dl>
+        </div>
+        <footer class="card-footer">
+          <small>Created at: ${new Date(doc.created_at).toLocaleString()}</small>
+        </footer>
+        <button class="btn-edit" onclick="openEdit('${doc._id}')">Edit</button>
+        <button class="btn-delete" onclick="openDelete('${doc._id}')">Delete</button>
+      </div>
+    `;
+                container.appendChild(card);
+            });
+        }
+
+        document.getElementById('search-input').addEventListener('input', renderDoctors);
+
+        async function openEdit(id) {
+            const res = await fetch('/api/doctors/' + id);
+            const doc = await res.json();
+            editingId = id;
+            modalTitle.textContent = 'Edit Doctor';
+            document.getElementById('doctor_id').value = doc.doctor_id;
+            document.getElementById('first_name').value = doc.first_name;
+            document.getElementById('last_name').value = doc.last_name;
+            document.getElementById('specialization').value = doc.specialization;
+            document.getElementById('department').value = doc.department;
+            document.getElementById('phone').value = doc.phone;
+            document.getElementById('email').value = doc.email;
+            document.getElementById('license_number').value = doc.license_number;
+            document.getElementById('years_of_experience').value = doc.years_of_experience;
+            modal.classList.add('active');
+        }
+
+        btnSave.addEventListener('click', async () => {
+            const data = {
+                doctor_id: document.getElementById('doctor_id').value,
+                first_name: document.getElementById('first_name').value,
+                last_name: document.getElementById('last_name').value,
+                specialization: document.getElementById('specialization').value,
+                department: document.getElementById('department').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                license_number: document.getElementById('license_number').value,
+                years_of_experience: document.getElementById('years_of_experience').value
+            };
+            if (editingId) {
+                await fetch('/api/doctors/' + editingId, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+            } else {
+                await fetch('/api/doctors', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+            }
+            modal.classList.remove('active');
+            loadDoctors();
+        });
+
+        function openDelete(id) {
+            deleteId = id;
+            deleteModal.classList.add('active');
+        }
+
+        deleteConfirm.addEventListener('click', async () => {
+            if (deleteId) {
+                await fetch('/api/doctors/' + deleteId, { method: 'DELETE' });
+                deleteModal.classList.remove('active');
+                loadDoctors();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', loadDoctors);
+    </script>
+</body>
+
+</html>

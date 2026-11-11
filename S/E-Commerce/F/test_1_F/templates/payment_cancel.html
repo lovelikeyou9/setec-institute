@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Payment Cancelled{% endblock %}
+{% block content %}
+<div class="summary-card text-center mt-5 py-5">
+  <i class="bi bi-x-circle text-warning" style="font-size:3rem"></i>
+  <h1 class="section-title mt-3">Payment Cancelled</h1>
+  <p class="text-muted">No charge was completed. You can return to your cart and try again.</p>
+  <a class="btn btn-brand" href="{{ url_for('cart.view_cart') }}">Back to Cart</a>
+</div>
+{% endblock %}

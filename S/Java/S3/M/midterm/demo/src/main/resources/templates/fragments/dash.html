@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<aside class="dash-side" th:fragment="sidebar(active, staff)">
+    <a class="dash-logo" href="/" th:href="@{/}">
+        <span class="logo-icon">🛍</span> eCommax
+    </a>
+    <div class="dash-role" th:text="${staff.role}">Admin</div>
+
+    <nav class="dash-menu">
+        <a th:if="${staff.role == 'Admin'}"
+           th:href="@{/dashboard}" th:classappend="${active == 'dashboard'} ? ' active'">
+            <span>▣</span> Dashboard
+        </a>
+        <a th:if="${staff.role == 'Admin' or staff.role == 'Stock'}"
+           th:href="@{/products}" th:classappend="${active == 'products'} ? ' active'">
+            <span>☰</span> Products
+        </a>
+
+        <th:block th:if="${staff.role == 'Admin'}">
+            <a th:href="@{/stock/products}" th:classappend="${active == 'stock-products'} ? ' active'">
+                <span>✎</span> CRUD Product
+            </a>
+            <a th:href="@{/stock/categories}" th:classappend="${active == 'stock-categories'} ? ' active'">
+                <span>▦</span> CRUD Category
+            </a>
+            <a th:href="@{/admin/staff}" th:classappend="${active == 'staff'} ? ' active'">
+                <span>👤</span> CRUD Staff
+            </a>
+            <a th:href="@{/admin/expired}" th:classappend="${active == 'expired'} ? ' active'">
+                <span>⚠</span> Expired
+            </a>
+            <a th:href="@{/admin/top-sale}" th:classappend="${active == 'top-sale'} ? ' active'">
+                <span>★</span> Top Sale
+            </a>
+            <a th:href="@{/history}" th:classappend="${active == 'history'} ? ' active'">
+                <span>✓</span> Purchase History
+            </a>
+        </th:block>
+
+        <th:block th:if="${staff.role == 'Stock'}">
+            <a th:href="@{/stock/products}" th:classappend="${active == 'stock-products'} ? ' active'">
+                <span>✎</span> CRUD Product
+            </a>
+            <a th:href="@{/stock/categories}" th:classappend="${active == 'stock-categories'} ? ' active'">
+                <span>▦</span> CRUD Category
+            </a>
+            <a th:href="@{/admin/expired}" th:classappend="${active == 'expired'} ? ' active'">
+                <span>⚠</span> Expired
+            </a>
+        </th:block>
+
+        <th:block th:if="${staff.role == 'User'}">
+            <a th:href="@{/cart}" th:classappend="${active == 'cart'} ? ' active'">
+                <span>🛒</span> Cart
+            </a>
+            <a th:href="@{/checkout}" th:classappend="${active == 'checkout'} ? ' active'">
+                <span>$</span> Checkout
+            </a>
+            <a th:href="@{/history}" th:classappend="${active == 'history'} ? ' active'">
+                <span>✓</span> Purchase History
+            </a>
+        </th:block>
+
+        <a th:href="@{/logout}"><span>⏻</span> Logout</a>
+    </nav>
+</aside>
+
+<header class="dash-top" th:fragment="top(staff, title)">
+    <div class="dash-top-left">
+        <button class="dash-burger" type="button" aria-label="Menu">☰</button>
+        <strong class="dash-page-title" th:text="${title}">Page</strong>
+    </div>
+    <div class="dash-top-right">
+        <span class="dash-icon" title="Search">🔍</span>
+        <span class="dash-icon" title="Help">?</span>
+        <a class="dash-icon bell" th:href="@{/admin/expired}" th:if="${staff.role == 'Admin' or staff.role == 'Stock'}" title="Expired products">
+            🔔<i th:text="${expiredCount != null ? expiredCount : 0}">0</i>
+        </a>
+        <div class="dash-profile">
+            <div class="dash-avatar"
+                 th:text="${staff.userName != null and !#strings.isEmpty(staff.userName)} ? ${#strings.substring(staff.userName,0,1).toUpperCase()} : 'U'">U</div>
+            <strong th:text="${staff.userName}">user</strong>
+        </div>
+    </div>
+</header>
+</body>
+</html>

@@ -1,0 +1,18 @@
+-- Using Length() Functuib => count charactor
+SELECT 'WelcometoSETECSV2.6',
+       LENGTH('WelcometoSETECSV2.6')
+FROM DUAL;
+
+SELECT FIRST_NAME || ' ' || LAST_NAME AS "FullName",
+      LENGTH(FIRST_NAME || ' ' || LAST_NAME) AS "Count_Name"
+FROM EMPLOYEES
+WHERE LENGTH(FIRST_NAME || ' ' || LAST_NAME) >= 15;
+
+SELECT FIRST_NAME, LAST_NAME, LENGTH(FIRST_NAME), LENGTH(LAST_NAME),
+      NULLIF(LENGTH(FIRST_NAME), LENGTH(LAST_NAME)) AS "Compare",
+      NVL2(NULLIF(LENGTH(FIRST_NAME), LENGTH(LAST_NAME)), 'Different', 'The Same') AS "The Result"
+FROM EMPLOYEES;
+
+-- Using INTSTR()-> Find lct of String
+SELECT 'HappyNewYear2026', INSTR('HappyNewYear2026','e',-1)
+FROM DUAL;

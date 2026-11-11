@@ -1,0 +1,220 @@
+[{
+  "_id": {
+    "$oid": "6839600c611906215cb5f943"
+  },
+  "staff_id": "S1001",
+  "name": "Alice Johnson",
+  "role": "Doctor",
+  "department": "Cardiology",
+  "email": "alice.johnson@hospital.org",
+  "phone": "555-1001"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f944"
+  },
+  "staff_id": "S1002",
+  "name": "Bob Smith",
+  "role": "Nurse",
+  "department": "Emergency",
+  "email": "bob.smith@hospital.org",
+  "phone": "555-1002"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f945"
+  },
+  "staff_id": "S1003",
+  "name": "Catherine Lee",
+  "role": "Pharmacist",
+  "department": "Pharmacy",
+  "email": "catherine.lee@hospital.org",
+  "phone": "555-1003"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f946"
+  },
+  "staff_id": "S1004",
+  "name": "Daniel Kim",
+  "role": "Doctor",
+  "department": "Oncology",
+  "email": "daniel.kim@hospital.org",
+  "phone": "555-1004"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f947"
+  },
+  "staff_id": "S1005",
+  "name": "Emily Davis",
+  "role": "Receptionist",
+  "department": "Front Desk",
+  "email": "emily.davis@hospital.org",
+  "phone": "555-1005"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f948"
+  },
+  "staff_id": "S1006",
+  "name": "Frank Miller",
+  "role": "Doctor",
+  "department": "Neurology",
+  "email": "frank.miller@hospital.org",
+  "phone": "555-1006"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f949"
+  },
+  "staff_id": "S1007",
+  "name": "Grace Brown",
+  "role": "Nurse",
+  "department": "Pediatrics",
+  "email": "grace.brown@hospital.org",
+  "phone": "555-1007"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f94a"
+  },
+  "staff_id": "S1008",
+  "name": "Henry Wilson",
+  "role": "Technician",
+  "department": "Radiology",
+  "email": "henry.wilson@hospital.org",
+  "phone": "555-1008"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f94b"
+  },
+  "staff_id": "S1009",
+  "name": "Isla Moore",
+  "role": "Nurse",
+  "department": "Surgery",
+  "email": "isla.moore@hospital.org",
+  "phone": "555-1009"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f94c"
+  },
+  "staff_id": "S1010",
+  "name": "Jack Taylor",
+  "role": "Doctor",
+  "department": "Dermatology",
+  "email": "jack.taylor@hospital.org",
+  "phone": "555-1010"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f94d"
+  },
+  "staff_id": "S1011",
+  "name": "Karen White",
+  "role": "Administrator",
+  "department": "Management",
+  "email": "karen.white@hospital.org",
+  "phone": "555-1011"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f94e"
+  },
+  "staff_id": "S1012",
+  "name": "Liam Harris",
+  "role": "Security",
+  "department": "Security",
+  "email": "liam.harris@hospital.org",
+  "phone": "555-1012"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f94f"
+  },
+  "staff_id": "S1013",
+  "name": "Mia Clark",
+  "role": "Nurse",
+  "department": "Maternity",
+  "email": "mia.clark@hospital.org",
+  "phone": "555-1013"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f950"
+  },
+  "staff_id": "S1014",
+  "name": "Noah Lewis",
+  "role": "Doctor",
+  "department": "Orthopedics",
+  "email": "noah.lewis@hospital.org",
+  "phone": "555-1014"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f951"
+  },
+  "staff_id": "S1015",
+  "name": "Olivia Young",
+  "role": "Pharmacist",
+  "department": "Pharmacy",
+  "email": "olivia.young@hospital.org",
+  "phone": "555-1015"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f952"
+  },
+  "staff_id": "S1016",
+  "name": "Paul Hall",
+  "role": "Janitor",
+  "department": "Maintenance",
+  "email": "paul.hall@hospital.org",
+  "phone": "555-1016"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f953"
+  },
+  "staff_id": "S1017",
+  "name": "Quinn Allen",
+  "role": "Nurse",
+  "department": "ICU",
+  "email": "quinn.allen@hospital.org",
+  "phone": "555-1017"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f954"
+  },
+  "staff_id": "S1018",
+  "name": "Rachel Scott",
+  "role": "Doctor",
+  "department": "Psychiatry",
+  "email": "rachel.scott@hospital.org",
+  "phone": "555-1018"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f955"
+  },
+  "staff_id": "S1019",
+  "name": "Samuel Adams",
+  "role": "Technician",
+  "department": "Lab",
+  "email": "samuel.adams@hospital.org",
+  "phone": "555-1019"
+},
+{
+  "_id": {
+    "$oid": "6839600c611906215cb5f956"
+  },
+  "staff_id": "S1020",
+  "name": "Tina Brooks",
+  "role": "Receptionist",
+  "department": "Front Desk",
+  "email": "tina.brooks@hospital.org",
+  "phone": "555-1020"
+}]

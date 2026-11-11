@@ -1,0 +1,29 @@
+name: flutter_final
+description: MMT — Modern Multiple Technology mobile store.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.2.2
+  provider: ^6.1.2
+  shared_preferences: ^2.3.3
+  google_fonts: ^6.2.1
+  intl: ^0.20.1
+  cached_network_image: ^3.4.1
+  image_picker: ^1.1.2
+  http_parser: ^4.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student MVC Demo</title>
+</head>
+<body>
+
+<h1>Spring Boot MVC Example</h1>
+<h2>Student Information</h2>
+<p>ID: <span th:text="${student.id}"></span></p>
+<p>ID: <span th:text="${student.name}"></span></p>
+<p>ID: <span th:text="${student.major}"></span></p>
+<hr>
+<h3>MVC Flow</h3>
+<p>
+Browser -> StudentController -> Student(Model Object)
+-> Thymeleaf View -> Browser
+</p>
+
+</body>
+</html>

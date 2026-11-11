@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expired Products | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="dash-body">
+<div class="dash-shell">
+    <div th:replace="~{fragments/dash :: sidebar('expired', ${staff})}"></div>
+    <div class="dash-main">
+        <div th:replace="~{fragments/dash :: top(${staff}, 'Expired Products')}"></div>
+        <div class="dash-content">
+            <div class="dash-panel">
+                <div class="dash-panel-pad">
+                    <h3>Products past expire date</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                            <tr><th>PID</th><th>Name</th><th>Qty</th><th>Price</th><th>Expired Date</th><th>Category</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${#lists.isEmpty(products)}">
+                                <td colspan="6">No expired products.</td>
+                            </tr>
+                            <tr th:each="p : ${products}">
+                                <td th:text="${p.PId}"></td>
+                                <td th:text="${p.PName}"></td>
+                                <td th:text="${p.SQty}"></td>
+                                <td th:text="'$' + ${#numbers.formatDecimal(p.price, 1, 2)}"></td>
+                                <td th:text="${p.expiredDate}"></td>
+                                <td th:text="${catNames[p.catID]}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

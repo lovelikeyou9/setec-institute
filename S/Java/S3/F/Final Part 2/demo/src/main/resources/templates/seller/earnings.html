@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Earnings — Seller</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    <aside th:replace="~{fragments/seller-sidebar :: sellerSidebar}"></aside>
+    <div class="dash-main">
+      <div class="exec-head" style="margin-bottom:1rem">
+        <div>
+          <h1 style="font-size:1.4rem;margin:0">Earnings</h1>
+          <p style="margin:.35rem 0 0;color:var(--text-muted);font-size:.9rem">
+            MME holds customer payments until admin confirms delivery, then pays you sale − <strong th:text="${commissionRate}">3%</strong>.
+          </p>
+        </div>
+        <div class="exec-head-actions">
+          <a th:href="@{/seller-dashboard/orders}" class="btn btn-outline btn-sm">Orders</a>
+        </div>
+      </div>
+
+      <div class="exec-kpi-grid" style="margin-bottom:1.25rem">
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Paid to you (net)</span><span class="exec-ico gold">$</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(totalEarnings != null ? totalEarnings : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="up">After admin payout</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Still in escrow</span><span class="exec-ico teal">◷</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(heldEarnings != null ? heldEarnings : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="warn">Not paid yet</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>MME fees paid</span><span class="exec-ico green">%</span></div>
+          <strong th:text="${'$' + #numbers.formatDecimal(feesPaid != null ? feesPaid : 0, 1, 'COMMA', 2, 'POINT')}">$0</strong>
+          <em class="purple" th:text="${'$' + #numbers.formatDecimal(feesPending != null ? feesPending : 0, 1, 'COMMA', 2, 'POINT') + ' pending'}">$0 pending</em>
+        </article>
+        <article class="exec-kpi">
+          <div class="exec-kpi-top"><span>Store level</span><span class="exec-ico purple">★</span></div>
+          <strong th:text="${seller.level.name()}">VERIFIED</strong>
+          <em class="up" th:text="${'Fee rate ' + commissionRate}">3%</em>
+        </article>
+      </div>
+
+      <div th:if="${#lists.isEmpty(commissions)}" class="empty-state">
+        <h3>No earnings yet</h3>
+        <p>Escrow records appear when customers pay for your products.</p>
+      </div>
+
+      <div class="data-table-wrap" th:if="${!#lists.isEmpty(commissions)}">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Sale</th>
+              <th>Fee %</th>
+              <th>MME fee</th>
+              <th>Your net</th>
+              <th>Payout</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="c : ${commissions}">
+              <td>
+                <a th:href="@{/orders/{n}(n=${c.order.orderNumber})}" th:text="${c.order.orderNumber}">CH-001</a>
+              </td>
+              <td th:text="${'$' + #numbers.formatDecimal(c.saleAmount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+              <td th:text="${c.commissionPercent + '%'}">3%</td>
+              <td th:text="${'$' + #numbers.formatDecimal(c.commissionAmount, 1, 'COMMA', 2, 'POINT')}">$0</td>
+              <td th:text="${'$' + #numbers.formatDecimal(c.sellerEarnings, 1, 'COMMA', 2, 'POINT')}">$0</td>
+              <td>
+                <span th:replace="~{fragments/status :: payoutPill(${c.payoutStatus})}"></span>
+              </td>
+              <td th:text="${c.createdAt != null ? #temporals.format(c.createdAt, 'dd MMM yyyy') : '—'}">01 Jan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

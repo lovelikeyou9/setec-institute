@@ -1,0 +1,570 @@
+[{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8d5"
+  },
+  "appointment_id": "APT1001",
+  "patient_id": "P1001",
+  "doctor_id": "D2001",
+  "department": "Cardiology",
+  "appointment_date": {
+    "$date": "2023-04-10T02:00:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Chest pain evaluation",
+  "notes": "Patient reported intermittent chest discomfort",
+  "created_at": {
+    "$date": "2023-03-25T07:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8d6"
+  },
+  "appointment_id": "APT1002",
+  "patient_id": "P1002",
+  "doctor_id": "D2002",
+  "department": "Pediatrics",
+  "appointment_date": {
+    "$date": "2023-04-11T03:30:00.000Z"
+  },
+  "duration": 15,
+  "status": "Completed",
+  "reason": "Annual checkup",
+  "notes": "Patient is up-to-date with vaccinations",
+  "created_at": {
+    "$date": "2023-03-26T03:15:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8d7"
+  },
+  "appointment_id": "APT1003",
+  "patient_id": "P1003",
+  "doctor_id": "D2003",
+  "department": "Neurology",
+  "appointment_date": {
+    "$date": "2023-04-12T04:00:00.000Z"
+  },
+  "duration": 45,
+  "status": "Completed",
+  "reason": "Migraine follow-up",
+  "notes": "Prescribed new medication",
+  "created_at": {
+    "$date": "2023-03-27T02:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8d8"
+  },
+  "appointment_id": "APT1004",
+  "patient_id": "P1004",
+  "doctor_id": "D2004",
+  "department": "Oncology",
+  "appointment_date": {
+    "$date": "2023-04-13T06:30:00.000Z"
+  },
+  "duration": 60,
+  "status": "Completed",
+  "reason": "Chemotherapy consultation",
+  "notes": "Discussed treatment options",
+  "created_at": {
+    "$date": "2023-03-28T09:20:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8d9"
+  },
+  "appointment_id": "APT1005",
+  "patient_id": "P1005",
+  "doctor_id": "D2005",
+  "department": "Orthopedics",
+  "appointment_date": {
+    "$date": "2023-04-14T07:00:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Knee pain evaluation",
+  "notes": "Recommended physical therapy",
+  "created_at": {
+    "$date": "2023-03-29T04:10:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8da"
+  },
+  "appointment_id": "APT1006",
+  "patient_id": "P1006",
+  "doctor_id": "D2006",
+  "department": "Dermatology",
+  "appointment_date": {
+    "$date": "2023-04-17T08:30:00.000Z"
+  },
+  "duration": 20,
+  "status": "Completed",
+  "reason": "Skin rash",
+  "notes": "Prescribed topical cream",
+  "created_at": {
+    "$date": "2023-03-30T07:25:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8db"
+  },
+  "appointment_id": "APT1007",
+  "patient_id": "P1007",
+  "doctor_id": "D2001",
+  "department": "Cardiology",
+  "appointment_date": {
+    "$date": "2023-04-18T01:45:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Blood pressure check",
+  "notes": "BP slightly elevated",
+  "created_at": {
+    "$date": "2023-04-01T03:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8dc"
+  },
+  "appointment_id": "APT1008",
+  "patient_id": "P1008",
+  "doctor_id": "D2002",
+  "department": "Pediatrics",
+  "appointment_date": {
+    "$date": "2023-04-19T02:15:00.000Z"
+  },
+  "duration": 15,
+  "status": "Completed",
+  "reason": "Vaccination",
+  "notes": "Administered flu shot",
+  "created_at": {
+    "$date": "2023-04-02T05:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8dd"
+  },
+  "appointment_id": "APT1009",
+  "patient_id": "P1009",
+  "doctor_id": "D2003",
+  "department": "Neurology",
+  "appointment_date": {
+    "$date": "2023-04-20T03:00:00.000Z"
+  },
+  "duration": 45,
+  "status": "Completed",
+  "reason": "Tremor evaluation",
+  "notes": "Scheduled follow-up tests",
+  "created_at": {
+    "$date": "2023-04-03T02:15:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8de"
+  },
+  "appointment_id": "APT1010",
+  "patient_id": "P1010",
+  "doctor_id": "D2004",
+  "department": "Oncology",
+  "appointment_date": {
+    "$date": "2023-04-21T04:30:00.000Z"
+  },
+  "duration": 60,
+  "status": "Completed",
+  "reason": "Post-treatment checkup",
+  "notes": "Patient responding well",
+  "created_at": {
+    "$date": "2023-04-04T08:20:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8df"
+  },
+  "appointment_id": "APT1011",
+  "patient_id": "P1011",
+  "doctor_id": "D2005",
+  "department": "Orthopedics",
+  "appointment_date": {
+    "$date": "2023-04-24T06:00:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Fracture follow-up",
+  "notes": "Healing progressing normally",
+  "created_at": {
+    "$date": "2023-04-05T04:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e0"
+  },
+  "appointment_id": "APT1012",
+  "patient_id": "P1012",
+  "doctor_id": "D2006",
+  "department": "Dermatology",
+  "appointment_date": {
+    "$date": "2023-04-25T07:30:00.000Z"
+  },
+  "duration": 20,
+  "status": "Completed",
+  "reason": "Mole examination",
+  "notes": "Biopsy scheduled",
+  "created_at": {
+    "$date": "2023-04-06T09:10:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e1"
+  },
+  "appointment_id": "APT1013",
+  "patient_id": "P1013",
+  "doctor_id": "D2007",
+  "department": "Cardiology",
+  "appointment_date": {
+    "$date": "2023-04-26T02:45:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "EKG results review",
+  "notes": "Normal sinus rhythm",
+  "created_at": {
+    "$date": "2023-04-07T03:25:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e2"
+  },
+  "appointment_id": "APT1014",
+  "patient_id": "P1014",
+  "doctor_id": "D2008",
+  "department": "Pediatrics",
+  "appointment_date": {
+    "$date": "2023-04-27T03:15:00.000Z"
+  },
+  "duration": 15,
+  "status": "Completed",
+  "reason": "Newborn checkup",
+  "notes": "Healthy development",
+  "created_at": {
+    "$date": "2023-04-08T05:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e3"
+  },
+  "appointment_id": "APT1015",
+  "patient_id": "P1015",
+  "doctor_id": "D2009",
+  "department": "Neurology",
+  "appointment_date": {
+    "$date": "2023-04-28T04:00:00.000Z"
+  },
+  "duration": 45,
+  "status": "Completed",
+  "reason": "Memory concerns",
+  "notes": "Ordered cognitive tests",
+  "created_at": {
+    "$date": "2023-04-09T02:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e4"
+  },
+  "appointment_id": "APT1016",
+  "patient_id": "P1016",
+  "doctor_id": "D2010",
+  "department": "Oncology",
+  "appointment_date": {
+    "$date": "2023-05-01T06:30:00.000Z"
+  },
+  "duration": 60,
+  "status": "Completed",
+  "reason": "Treatment planning",
+  "notes": "Started new regimen",
+  "created_at": {
+    "$date": "2023-04-10T08:15:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e5"
+  },
+  "appointment_id": "APT1017",
+  "patient_id": "P1017",
+  "doctor_id": "D2011",
+  "department": "Orthopedics",
+  "appointment_date": {
+    "$date": "2023-05-02T07:00:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Back pain evaluation",
+  "notes": "Recommended MRI",
+  "created_at": {
+    "$date": "2023-04-11T04:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e6"
+  },
+  "appointment_id": "APT1018",
+  "patient_id": "P1018",
+  "doctor_id": "D2012",
+  "department": "Dermatology",
+  "appointment_date": {
+    "$date": "2023-05-03T08:30:00.000Z"
+  },
+  "duration": 20,
+  "status": "Completed",
+  "reason": "Acne treatment",
+  "notes": "Prescribed medication",
+  "created_at": {
+    "$date": "2023-04-12T09:20:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e7"
+  },
+  "appointment_id": "APT1019",
+  "patient_id": "P1019",
+  "doctor_id": "D2013",
+  "department": "Cardiology",
+  "appointment_date": {
+    "$date": "2023-05-04T01:45:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Stress test results",
+  "notes": "Normal exercise tolerance",
+  "created_at": {
+    "$date": "2023-04-13T03:10:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e8"
+  },
+  "appointment_id": "APT1020",
+  "patient_id": "P1020",
+  "doctor_id": "D2014",
+  "department": "Pediatrics",
+  "appointment_date": {
+    "$date": "2023-05-05T02:15:00.000Z"
+  },
+  "duration": 15,
+  "status": "Completed",
+  "reason": "Ear infection",
+  "notes": "Prescribed antibiotics",
+  "created_at": {
+    "$date": "2023-04-14T05:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8e9"
+  },
+  "appointment_id": "APT1021",
+  "patient_id": "P1021",
+  "doctor_id": "D2015",
+  "department": "Neurology",
+  "appointment_date": {
+    "$date": "2023-05-08T03:00:00.000Z"
+  },
+  "duration": 45,
+  "status": "Completed",
+  "reason": "Seizure follow-up",
+  "notes": "Adjusted medication",
+  "created_at": {
+    "$date": "2023-04-15T02:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8ea"
+  },
+  "appointment_id": "APT1022",
+  "patient_id": "P1022",
+  "doctor_id": "D2016",
+  "department": "Oncology",
+  "appointment_date": {
+    "$date": "2023-05-09T04:30:00.000Z"
+  },
+  "duration": 60,
+  "status": "Completed",
+  "reason": "Blood work review",
+  "notes": "Counts improving",
+  "created_at": {
+    "$date": "2023-04-16T08:25:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8eb"
+  },
+  "appointment_id": "APT1023",
+  "patient_id": "P1023",
+  "doctor_id": "D2017",
+  "department": "Orthopedics",
+  "appointment_date": {
+    "$date": "2023-05-10T06:00:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Post-surgery check",
+  "notes": "Incision healing well",
+  "created_at": {
+    "$date": "2023-04-17T04:50:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8ec"
+  },
+  "appointment_id": "APT1024",
+  "patient_id": "P1024",
+  "doctor_id": "D2018",
+  "department": "Dermatology",
+  "appointment_date": {
+    "$date": "2023-05-11T07:30:00.000Z"
+  },
+  "duration": 20,
+  "status": "Completed",
+  "reason": "Psoriasis follow-up",
+  "notes": "Condition improving",
+  "created_at": {
+    "$date": "2023-04-18T09:15:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8ed"
+  },
+  "appointment_id": "APT1025",
+  "patient_id": "P1025",
+  "doctor_id": "D2019",
+  "department": "Cardiology",
+  "appointment_date": {
+    "$date": "2023-05-12T02:45:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Holter monitor results",
+  "notes": "Occasional PVCs noted",
+  "created_at": {
+    "$date": "2023-04-19T03:20:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8ee"
+  },
+  "appointment_id": "APT1026",
+  "patient_id": "P1026",
+  "doctor_id": "D2020",
+  "department": "Pediatrics",
+  "appointment_date": {
+    "$date": "2023-05-15T03:15:00.000Z"
+  },
+  "duration": 15,
+  "status": "Completed",
+  "reason": "Sports physical",
+  "notes": "Cleared for participation",
+  "created_at": {
+    "$date": "2023-04-20T05:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8ef"
+  },
+  "appointment_id": "APT1027",
+  "patient_id": "P1027",
+  "doctor_id": "D2021",
+  "department": "Neurology",
+  "appointment_date": {
+    "$date": "2023-05-16T04:00:00.000Z"
+  },
+  "duration": 45,
+  "status": "Completed",
+  "reason": "Nerve conduction study",
+  "notes": "Mild carpal tunnel",
+  "created_at": {
+    "$date": "2023-04-21T02:40:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8f0"
+  },
+  "appointment_id": "APT1028",
+  "patient_id": "P1028",
+  "doctor_id": "D2022",
+  "department": "Oncology",
+  "appointment_date": {
+    "$date": "2023-05-17T06:30:00.000Z"
+  },
+  "duration": 60,
+  "status": "Completed",
+  "reason": "Radiation planning",
+  "notes": "Simulation completed",
+  "created_at": {
+    "$date": "2023-04-22T08:10:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8f1"
+  },
+  "appointment_id": "APT1029",
+  "patient_id": "P1029",
+  "doctor_id": "D2023",
+  "department": "Orthopedics",
+  "appointment_date": {
+    "$date": "2023-05-18T07:00:00.000Z"
+  },
+  "duration": 30,
+  "status": "Completed",
+  "reason": "Shoulder pain",
+  "notes": "Recommended PT",
+  "created_at": {
+    "$date": "2023-04-23T04:35:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68395a09611906215cb5f8f2"
+  },
+  "appointment_id": "APT1030",
+  "patient_id": "P1030",
+  "doctor_id": "D2024",
+  "department": "Dermatology",
+  "appointment_date": {
+    "$date": "2023-05-19T08:30:00.000Z"
+  },
+  "duration": 20,
+  "status": "Completed",
+  "reason": "Annual skin check",
+  "notes": "No concerning lesions",
+  "created_at": {
+    "$date": "2023-04-24T09:05:00.000Z"
+  }
+}]

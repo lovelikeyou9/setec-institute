@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body { background: #1a1a2e; color: #eee; }
+        .nav-links { background: #16213e; padding: 10px 0; margin-bottom: 0; }
+        .nav-links a { color: #a8b2d1; margin: 0 15px; text-decoration: none; }
+        .nav-links a:hover { color: #e94560; }
+        .dashboard { padding: 30px; }
+        .dashboard h1 { margin-bottom: 30px; color: #fff; }
+        .stat-card { background: #16213e; border-radius: 12px; padding: 24px; margin-bottom: 20px; border-left: 4px solid #e94560; }
+        .stat-card .value { font-size: 2em; font-weight: 700; color: #fff; }
+        .stat-card .label { color: #a8b2d1; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-card.users { border-left-color: #3498db; }
+        .stat-card.sessions { border-left-color: #2ecc71; }
+        .stat-card.revenue { border-left-color: #f39c12; }
+        .stat-card.orders { border-left-color: #e94560; }
+        .chart-card { background: #16213e; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .chart-card h3 { color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <nav class="nav-links text-center">
+        <a href="/">CV</a>
+        <a href="/user">Home</a>
+        <a href="/myUser">My User</a>
+        <a href="/myAdmin">Admin Dashboard</a>
+    </nav>
+
+    <div class="dashboard container-fluid">
+        <h1><i class="fa fa-dashboard"></i> Admin Dashboard</h1>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card users">
+                    <div class="label">Total Users</div>
+                    <div class="value" th:text="${totalUsers}">0</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card sessions">
+                    <div class="label">Active Sessions</div>
+                    <div class="value" th:text="${activeSessions}">0</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card revenue">
+                    <div class="label">Revenue ($)</div>
+                    <div class="value" th:text="${revenue}">0</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card orders">
+                    <div class="label">Orders</div>
+                    <div class="value" th:text="${orders}">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-card">
+                    <h3><i class="fa fa-bar-chart"></i> Monthly Sales</h3>
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-card">
+                    <h3><i class="fa fa-pie-chart"></i> Traffic Sources</h3>
+                    <canvas id="trafficChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-card">
+                    <h3><i class="fa fa-line-chart"></i> User Growth</h3>
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        const chartDefaults = {
+            color: '#a8b2d1',
+            borderColor: 'rgba(255,255,255,0.1)'
+        };
+        Chart.defaults.color = chartDefaults.color;
+        Chart.defaults.borderColor = chartDefaults.borderColor;
+
+        new Chart(document.getElementById('salesChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales ($)',
+                    data: [12000, 19000, 15000, 22000, 28000, 35000],
+                    backgroundColor: 'rgba(233, 69, 96, 0.7)',
+                    borderColor: '#e94560',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: '#fff' } } },
+                scales: {
+                    y: { ticks: { color: '#a8b2d1' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                    x: { ticks: { color: '#a8b2d1' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('trafficChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Direct', 'Social', 'Referral', 'Organic'],
+                datasets: [{
+                    data: [35, 25, 20, 20],
+                    backgroundColor: ['#e94560', '#3498db', '#2ecc71', '#f39c12']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: '#fff' } } }
+            }
+        });
+
+        new Chart(document.getElementById('growthChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'New Users',
+                    data: [120, 190, 280, 350, 420, 510, 620],
+                    borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: '#fff' } } },
+                scales: {
+                    y: { ticks: { color: '#a8b2d1' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                    x: { ticks: { color: '#a8b2d1' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

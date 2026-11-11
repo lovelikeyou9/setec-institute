@@ -1,0 +1,9 @@
+-- Minutes
+SELECT SYSDATE, SYSDATE+10/60/24 AS "+10 Minutes",
+                SYSDATE-5/60/24 AS "-5 Minutes"
+FROM DUAL;
+
+-- Seconds
+SELECT SYSDATE, SYSDATE+20/60/60/24 AS "+20 Seconds",
+                SYSDATE-5/60/60/24 AS "-5 Seconds"
+FROM DUAL;

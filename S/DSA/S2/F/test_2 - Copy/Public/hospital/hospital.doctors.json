@@ -1,0 +1,780 @@
+[{
+  "_id": {
+    "$oid": "68395148611906215cb5f8b7"
+  },
+  "doctor_id": "D2001",
+  "first_name": "Michael",
+  "last_name": "Chen",
+  "specialization": "Cardiology",
+  "department": "Cardiology",
+  "phone": "212-555-1111",
+  "email": "michael.chen@hospital.com",
+  "license_number": "MD123456",
+  "years_of_experience": 15,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Harvard Medical School",
+      "year": 2008
+    },
+    {
+      "degree": "Residency in Cardiology",
+      "hospital": "Massachusetts General Hospital",
+      "year": 2012
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8b8"
+  },
+  "doctor_id": "D2002",
+  "first_name": "Sarah",
+  "last_name": "Johnson",
+  "specialization": "Pediatrics",
+  "department": "Pediatrics",
+  "phone": "212-555-1112",
+  "email": "sarah.johnson@hospital.com",
+  "license_number": "MD123457",
+  "years_of_experience": 12,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Johns Hopkins University",
+      "year": 2010
+    },
+    {
+      "degree": "Residency in Pediatrics",
+      "hospital": "Boston Children's Hospital",
+      "year": 2014
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8b9"
+  },
+  "doctor_id": "D2003",
+  "first_name": "Robert",
+  "last_name": "Williams",
+  "specialization": "Neurology",
+  "department": "Neurology",
+  "phone": "212-555-1113",
+  "email": "robert.williams@hospital.com",
+  "license_number": "MD123458",
+  "years_of_experience": 18,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Stanford University",
+      "year": 2005
+    },
+    {
+      "degree": "Residency in Neurology",
+      "hospital": "Mayo Clinic",
+      "year": 2009
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8ba"
+  },
+  "doctor_id": "D2004",
+  "first_name": "Jennifer",
+  "last_name": "Brown",
+  "specialization": "Oncology",
+  "department": "Oncology",
+  "phone": "212-555-1114",
+  "email": "jennifer.brown@hospital.com",
+  "license_number": "MD123459",
+  "years_of_experience": 10,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Yale University",
+      "year": 2012
+    },
+    {
+      "degree": "Residency in Oncology",
+      "hospital": "Memorial Sloan Kettering",
+      "year": 2016
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8bb"
+  },
+  "doctor_id": "D2005",
+  "first_name": "David",
+  "last_name": "Miller",
+  "specialization": "Orthopedics",
+  "department": "Orthopedics",
+  "phone": "212-555-1115",
+  "email": "david.miller@hospital.com",
+  "license_number": "MD123460",
+  "years_of_experience": 20,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Columbia University",
+      "year": 2003
+    },
+    {
+      "degree": "Residency in Orthopedics",
+      "hospital": "Hospital for Special Surgery",
+      "year": 2007
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8bc"
+  },
+  "doctor_id": "D2006",
+  "first_name": "Lisa",
+  "last_name": "Davis",
+  "specialization": "Dermatology",
+  "department": "Dermatology",
+  "phone": "212-555-1116",
+  "email": "lisa.davis@hospital.com",
+  "license_number": "MD123461",
+  "years_of_experience": 8,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Pennsylvania",
+      "year": 2014
+    },
+    {
+      "degree": "Residency in Dermatology",
+      "hospital": "NYU Langone",
+      "year": 2018
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8bd"
+  },
+  "doctor_id": "D2007",
+  "first_name": "James",
+  "last_name": "Garcia",
+  "specialization": "Cardiology",
+  "department": "Cardiology",
+  "phone": "212-555-1117",
+  "email": "james.garcia@hospital.com",
+  "license_number": "MD123462",
+  "years_of_experience": 14,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Duke University",
+      "year": 2008
+    },
+    {
+      "degree": "Residency in Cardiology",
+      "hospital": "Cleveland Clinic",
+      "year": 2012
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8be"
+  },
+  "doctor_id": "D2008",
+  "first_name": "Patricia",
+  "last_name": "Rodriguez",
+  "specialization": "Pediatrics",
+  "department": "Pediatrics",
+  "phone": "212-555-1118",
+  "email": "patricia.rodriguez@hospital.com",
+  "license_number": "MD123463",
+  "years_of_experience": 11,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Chicago",
+      "year": 2011
+    },
+    {
+      "degree": "Residency in Pediatrics",
+      "hospital": "Children's Hospital of Philadelphia",
+      "year": 2015
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8bf"
+  },
+  "doctor_id": "D2009",
+  "first_name": "John",
+  "last_name": "Wilson",
+  "specialization": "Neurology",
+  "department": "Neurology",
+  "phone": "212-555-1119",
+  "email": "john.wilson@hospital.com",
+  "license_number": "MD123464",
+  "years_of_experience": 16,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Michigan",
+      "year": 2006
+    },
+    {
+      "degree": "Residency in Neurology",
+      "hospital": "Massachusetts General Hospital",
+      "year": 2010
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c0"
+  },
+  "doctor_id": "D2010",
+  "first_name": "Mary",
+  "last_name": "Martinez",
+  "specialization": "Oncology",
+  "department": "Oncology",
+  "phone": "212-555-1120",
+  "email": "mary.martinez@hospital.com",
+  "license_number": "MD123465",
+  "years_of_experience": 9,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Northwestern University",
+      "year": 2013
+    },
+    {
+      "degree": "Residency in Oncology",
+      "hospital": "Dana-Farber Cancer Institute",
+      "year": 2017
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c1"
+  },
+  "doctor_id": "D2011",
+  "first_name": "William",
+  "last_name": "Anderson",
+  "specialization": "Orthopedics",
+  "department": "Orthopedics",
+  "phone": "212-555-1121",
+  "email": "william.anderson@hospital.com",
+  "license_number": "MD123466",
+  "years_of_experience": 19,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Cornell University",
+      "year": 2004
+    },
+    {
+      "degree": "Residency in Orthopedics",
+      "hospital": "Hospital for Special Surgery",
+      "year": 2008
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c2"
+  },
+  "doctor_id": "D2012",
+  "first_name": "Elizabeth",
+  "last_name": "Taylor",
+  "specialization": "Dermatology",
+  "department": "Dermatology",
+  "phone": "212-555-1122",
+  "email": "elizabeth.taylor@hospital.com",
+  "license_number": "MD123467",
+  "years_of_experience": 7,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of California, San Francisco",
+      "year": 2015
+    },
+    {
+      "degree": "Residency in Dermatology",
+      "hospital": "Brigham and Women's Hospital",
+      "year": 2019
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c3"
+  },
+  "doctor_id": "D2013",
+  "first_name": "Richard",
+  "last_name": "Thomas",
+  "specialization": "Cardiology",
+  "department": "Cardiology",
+  "phone": "212-555-1123",
+  "email": "richard.thomas@hospital.com",
+  "license_number": "MD123468",
+  "years_of_experience": 13,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Washington University",
+      "year": 2009
+    },
+    {
+      "degree": "Residency in Cardiology",
+      "hospital": "Johns Hopkins Hospital",
+      "year": 2013
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c4"
+  },
+  "doctor_id": "D2014",
+  "first_name": "Susan",
+  "last_name": "Hernandez",
+  "specialization": "Pediatrics",
+  "department": "Pediatrics",
+  "phone": "212-555-1124",
+  "email": "susan.hernandez@hospital.com",
+  "license_number": "MD123469",
+  "years_of_experience": 10,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Vanderbilt University",
+      "year": 2012
+    },
+    {
+      "degree": "Residency in Pediatrics",
+      "hospital": "Boston Children's Hospital",
+      "year": 2016
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c5"
+  },
+  "doctor_id": "D2015",
+  "first_name": "Charles",
+  "last_name": "Moore",
+  "specialization": "Neurology",
+  "department": "Neurology",
+  "phone": "212-555-1125",
+  "email": "charles.moore@hospital.com",
+  "license_number": "MD123470",
+  "years_of_experience": 17,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Pittsburgh",
+      "year": 2006
+    },
+    {
+      "degree": "Residency in Neurology",
+      "hospital": "Mayo Clinic",
+      "year": 2010
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c6"
+  },
+  "doctor_id": "D2016",
+  "first_name": "Jessica",
+  "last_name": "Martin",
+  "specialization": "Oncology",
+  "department": "Oncology",
+  "phone": "212-555-1126",
+  "email": "jessica.martin@hospital.com",
+  "license_number": "MD123471",
+  "years_of_experience": 8,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "Emory University",
+      "year": 2014
+    },
+    {
+      "degree": "Residency in Oncology",
+      "hospital": "Memorial Sloan Kettering",
+      "year": 2018
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c7"
+  },
+  "doctor_id": "D2017",
+  "first_name": "Thomas",
+  "last_name": "Jackson",
+  "specialization": "Orthopedics",
+  "department": "Orthopedics",
+  "phone": "212-555-1127",
+  "email": "thomas.jackson@hospital.com",
+  "license_number": "MD123472",
+  "years_of_experience": 21,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Virginia",
+      "year": 2002
+    },
+    {
+      "degree": "Residency in Orthopedics",
+      "hospital": "Hospital for Special Surgery",
+      "year": 2006
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c8"
+  },
+  "doctor_id": "D2018",
+  "first_name": "Karen",
+  "last_name": "Thompson",
+  "specialization": "Dermatology",
+  "department": "Dermatology",
+  "phone": "212-555-1128",
+  "email": "karen.thompson@hospital.com",
+  "license_number": "MD123473",
+  "years_of_experience": 6,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of North Carolina",
+      "year": 2016
+    },
+    {
+      "degree": "Residency in Dermatology",
+      "hospital": "NYU Langone",
+      "year": 2020
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8c9"
+  },
+  "doctor_id": "D2019",
+  "first_name": "Daniel",
+  "last_name": "White",
+  "specialization": "Cardiology",
+  "department": "Cardiology",
+  "phone": "212-555-1129",
+  "email": "daniel.white@hospital.com",
+  "license_number": "MD123474",
+  "years_of_experience": 15,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Wisconsin",
+      "year": 2007
+    },
+    {
+      "degree": "Residency in Cardiology",
+      "hospital": "Cleveland Clinic",
+      "year": 2011
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8ca"
+  },
+  "doctor_id": "D2020",
+  "first_name": "Nancy",
+  "last_name": "Lopez",
+  "specialization": "Pediatrics",
+  "department": "Pediatrics",
+  "phone": "212-555-1130",
+  "email": "nancy.lopez@hospital.com",
+  "license_number": "MD123475",
+  "years_of_experience": 12,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Texas",
+      "year": 2010
+    },
+    {
+      "degree": "Residency in Pediatrics",
+      "hospital": "Children's Hospital of Philadelphia",
+      "year": 2014
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8cb"
+  },
+  "doctor_id": "D2021",
+  "first_name": "Matthew",
+  "last_name": "Lee",
+  "specialization": "Neurology",
+  "department": "Neurology",
+  "phone": "212-555-1131",
+  "email": "matthew.lee@hospital.com",
+  "license_number": "MD123476",
+  "years_of_experience": 18,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Florida",
+      "year": 2005
+    },
+    {
+      "degree": "Residency in Neurology",
+      "hospital": "Massachusetts General Hospital",
+      "year": 2009
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8cc"
+  },
+  "doctor_id": "D2022",
+  "first_name": "Betty",
+  "last_name": "Harris",
+  "specialization": "Oncology",
+  "department": "Oncology",
+  "phone": "212-555-1132",
+  "email": "betty.harris@hospital.com",
+  "license_number": "MD123477",
+  "years_of_experience": 9,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Maryland",
+      "year": 2013
+    },
+    {
+      "degree": "Residency in Oncology",
+      "hospital": "Dana-Farber Cancer Institute",
+      "year": 2017
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8cd"
+  },
+  "doctor_id": "D2023",
+  "first_name": "Anthony",
+  "last_name": "Clark",
+  "specialization": "Orthopedics",
+  "department": "Orthopedics",
+  "phone": "212-555-1133",
+  "email": "anthony.clark@hospital.com",
+  "license_number": "MD123478",
+  "years_of_experience": 20,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Colorado",
+      "year": 2003
+    },
+    {
+      "degree": "Residency in Orthopedics",
+      "hospital": "Hospital for Special Surgery",
+      "year": 2007
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8ce"
+  },
+  "doctor_id": "D2024",
+  "first_name": "Margaret",
+  "last_name": "Lewis",
+  "specialization": "Dermatology",
+  "department": "Dermatology",
+  "phone": "212-555-1134",
+  "email": "margaret.lewis@hospital.com",
+  "license_number": "MD123479",
+  "years_of_experience": 7,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Washington",
+      "year": 2015
+    },
+    {
+      "degree": "Residency in Dermatology",
+      "hospital": "Brigham and Women's Hospital",
+      "year": 2019
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8cf"
+  },
+  "doctor_id": "D2025",
+  "first_name": "Donald",
+  "last_name": "Robinson",
+  "specialization": "Cardiology",
+  "department": "Cardiology",
+  "phone": "212-555-1135",
+  "email": "donald.robinson@hospital.com",
+  "license_number": "MD123480",
+  "years_of_experience": 14,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Minnesota",
+      "year": 2008
+    },
+    {
+      "degree": "Residency in Cardiology",
+      "hospital": "Johns Hopkins Hospital",
+      "year": 2012
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8d0"
+  },
+  "doctor_id": "D2026",
+  "first_name": "Dorothy",
+  "last_name": "Walker",
+  "specialization": "Pediatrics",
+  "department": "Pediatrics",
+  "phone": "212-555-1136",
+  "email": "dorothy.walker@hospital.com",
+  "license_number": "MD123481",
+  "years_of_experience": 11,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Iowa",
+      "year": 2011
+    },
+    {
+      "degree": "Residency in Pediatrics",
+      "hospital": "Boston Children's Hospital",
+      "year": 2015
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8d1"
+  },
+  "doctor_id": "D2027",
+  "first_name": "Paul",
+  "last_name": "Perez",
+  "specialization": "Neurology",
+  "department": "Neurology",
+  "phone": "212-555-1137",
+  "email": "paul.perez@hospital.com",
+  "license_number": "MD123482",
+  "years_of_experience": 16,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Alabama",
+      "year": 2006
+    },
+    {
+      "degree": "Residency in Neurology",
+      "hospital": "Mayo Clinic",
+      "year": 2010
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8d2"
+  },
+  "doctor_id": "D2028",
+  "first_name": "Sandra",
+  "last_name": "Hall",
+  "specialization": "Oncology",
+  "department": "Oncology",
+  "phone": "212-555-1138",
+  "email": "sandra.hall@hospital.com",
+  "license_number": "MD123483",
+  "years_of_experience": 8,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Utah",
+      "year": 2014
+    },
+    {
+      "degree": "Residency in Oncology",
+      "hospital": "Memorial Sloan Kettering",
+      "year": 2018
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8d3"
+  },
+  "doctor_id": "D2029",
+  "first_name": "Mark",
+  "last_name": "Young",
+  "specialization": "Orthopedics",
+  "department": "Orthopedics",
+  "phone": "212-555-1139",
+  "email": "mark.young@hospital.com",
+  "license_number": "MD123484",
+  "years_of_experience": 22,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Arizona",
+      "year": 2001
+    },
+    {
+      "degree": "Residency in Orthopedics",
+      "hospital": "Hospital for Special Surgery",
+      "year": 2005
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68395148611906215cb5f8d4"
+  },
+  "doctor_id": "D2030",
+  "first_name": "Donna",
+  "last_name": "Allen",
+  "specialization": "Dermatology",
+  "department": "Dermatology",
+  "phone": "212-555-1140",
+  "email": "donna.allen@hospital.com",
+  "license_number": "MD123485",
+  "years_of_experience": 5,
+  "education": [
+    {
+      "degree": "MD",
+      "university": "University of Kansas",
+      "year": 2017
+    },
+    {
+      "degree": "Residency in Dermatology",
+      "hospital": "NYU Langone",
+      "year": 2021
+    }
+  ]
+}]

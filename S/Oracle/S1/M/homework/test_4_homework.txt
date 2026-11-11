@@ -1,0 +1,59 @@
+--  1
+SELECT last_name,
+       salary,
+       last_name || '''s total salary: ' || (salary * 15) AS "Name and Salary"
+FROM employees;
+
+SELECT last_name,
+       salary,
+       last_name || q'['s total salary: ]' || (salary * 15) AS "Name and Salary"
+FROM employees;
+
+--  2
+SELECT department_name,
+       manager_id,
+       department_name || q'[ Department's Manager Id: ]' || manager_id AS "Department and Manager"
+FROM departments;
+
+--  3
+SELECT DISTINCT department_id
+FROM employees;
+
+SELECT UNIQUE department_id
+FROM employees;
+
+--  4
+SELECT department_name,
+       location_id,
+       department_name || ' have location_id: ' || location_id AS "Department and Location"
+FROM departments;
+
+--  5
+SELECT last_name,
+       job_id,
+       last_name || q'['s position: ]' || job_id AS "Name and Job"
+FROM employees;
+
+--  6
+SELECT DISTINCT job_id
+FROM employees;
+
+SELECT UNIQUE job_id
+FROM employees;
+
+--  7
+DESC employees;
+DESC departments;
+
+DESCRIBE employees;
+DESCRIBE departments;
+
+--  8
+SELECT first_name || ' ' || last_name ||
+       q'['s total salary: ]' ||
+       (NVL(commission_pct, 0) * salary + salary - 1200) AS "FullName and Salary"
+FROM employees;
+
+--  9
+SELECT q'[I've started working on date: ]' || start_date || ' to ' || end_date AS "DateTime"
+FROM job_history;

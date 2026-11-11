@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CRUD Operation</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body onload="readAll()">
+  <div class="container">
+    <div class="form_container">
+      <div class="add_div">
+        <button onclick="add()">Add +</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody class="data_table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="custom-modal" id="customModal">
+    <div class="modal-content">
+      <h2 id="modalTitle">Add Record</h2>
+      <input type="text" id="modalName" placeholder="Name" />
+      <select id="modalGender">
+        <option value="">-- Select Gender --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <input type="number" id="modalAge" placeholder="Age" />
+      <input type="text" id="modalAddress" placeholder="Address" />
+      <button onclick="saveModal()">Save</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

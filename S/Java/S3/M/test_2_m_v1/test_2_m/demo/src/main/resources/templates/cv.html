@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV | Chou Yamata</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #e8e8e8;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            color: #000;
+            line-height: 1.5;
+        }
+
+        .nav-links {
+            background: #333;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 10pt;
+        }
+        .nav-links a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .nav-links a:hover { text-decoration: underline; }
+
+        .cv-page {
+            max-width: 8.5in;
+            margin: 30px auto;
+            background: #fff;
+            padding: 0.75in 0.8in;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
+
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .cv-header-info { flex: 1; }
+
+        .cv-photo {
+            width: 120px;
+            height: 150px;
+            object-fit: cover;
+            object-position: center top;
+            border: 1px solid #ccc;
+            flex-shrink: 0;
+        }
+
+        .cv-name {
+            font-size: 22pt;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .cv-contact {
+            font-size: 10pt;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        p { margin-bottom: 8px; text-align: justify; }
+
+        .skill-group { margin-bottom: 8px; }
+        .skill-group strong { font-weight: bold; }
+
+        .edu-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 4px;
+        }
+        .edu-date { white-space: nowrap; min-width: 110px; }
+
+        .job { margin-bottom: 16px; }
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .job-title { font-weight: bold; }
+        .job-company { font-style: italic; }
+        .job-date { white-space: nowrap; }
+
+        ul {
+            margin: 6px 0 0 20px;
+            padding: 0;
+        }
+        ul li { margin-bottom: 4px; }
+
+        .cert-list { list-style-type: disc; }
+        .cert-list li { margin-bottom: 3px; }
+
+        .ref-block { margin-bottom: 10px; }
+        .ref-line { margin-bottom: 2px; }
+
+        @media print {
+            body { background: #fff; }
+            .nav-links { display: none; }
+            .cv-page { margin: 0; box-shadow: none; padding: 0.5in; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-links">
+        <a href="/">CV</a>
+        <a href="/user">Home</a>
+        <a href="/myUser">My User</a>
+        <a href="/myAdmin">Admin Dashboard</a>
+    </nav>
+
+    <div class="cv-page">
+        <div class="cv-header">
+            <div class="cv-header-info">
+                <div class="cv-name">CHOU YAMATA</div>
+                <div class="cv-contact">
+                    #129E1 Street 217, Village 15, Sangkat Boeng Salang<br>
+                    Khan Tuol Kork, Phnom Penh Cambodia<br>
+                    E-mail: lovelikeyou9@gmail.com<br>
+                    Telephone: 010411311
+                </div>
+            </div>
+            <img class="cv-photo" src="/images/cv/profile.jpg" alt="Chou Yamata">
+        </div>
+
+        <div class="section-title">Career Objective</div>
+        <p>
+            Motivated and detail-oriented professional seeking a challenging role that integrates
+            programming and mechatronics/robotics engineering. I aim to leverage my skills in
+            software development, automation, and mechanical design to develop innovative
+            robotic systems, intelligent machines, and automated solutions. Passionate about
+            bridging hardware and software, I am committed to contributing to cutting-edge projects
+            that enhance efficiency, precision, and technological advancement.
+        </p>
+
+        <div class="section-title">Key Skills</div>
+        <div class="skill-group">
+            <strong>Programming &amp; Development:</strong>
+            C++, C#, Java, JavaScript, TypeScript, Python, Assembly Language, Node.js, Angular,
+            HTML, CSS, Full-stack Web Development, Reverse Engineering, Cyber Security,
+            Ethical Hacking, SQL, IIS, Windows Server, Linux, Kali Linux, MongoDB, MySQL,
+            Oracle, SQL Server Management Studio, Docker, GitHub, Vercel, Navicat, Visual
+            Studio, Visual Studio Code
+        </div>
+        <div class="skill-group">
+            <strong>Design &amp; Multimedia:</strong>
+            Adobe Photoshop, Illustrator, Animate, After Effects, XD, Premiere Pro, DaVinci
+            Resolve, Figma, 2D &amp; 3D Game Creation, Studio Photography
+        </div>
+        <div class="skill-group">
+            <strong>Engineering &amp; Technical Tools:</strong>
+            AutoCAD, SketchUp, QuickBooks, Microsoft Word, Excel, PowerPoint
+        </div>
+        <div class="skill-group">
+            <strong>Networking &amp; Security:</strong>
+            Wireshark, Kali Linux, Network Configuration, Cloudflare, Namecheap
+        </div>
+        <div class="skill-group">
+            <strong>Other Skills:</strong>
+            Mathematical Modeling, Logical Thinking, Problem Solving, Team Collaboration, Project
+            Planning, System Analysis, Design Thinking
+        </div>
+
+        <div class="section-title">Education</div>
+        <div class="edu-row">
+            <span class="edu-date">2023 – Present</span>
+            <span>
+                Pursuing a Bachelor of Science in Information Technology<br>
+                Management Information System (MIS)<br>
+                SETEC INSTITUTE, Phnom Penh Cambodia
+            </span>
+        </div>
+
+        <div class="section-title">Work Experience</div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-title">Programmer &amp; Automation Engineer</span><br>
+                    <span class="job-company">Boeing Company – Phnom Penh, Cambodia</span>
+                </div>
+                <span class="job-date">2024 – Present</span>
+            </div>
+            <ul>
+                <li>Developed and optimized automation programs for mechanical components and industrial machinery.</li>
+                <li>Programmed embedded systems, robotic controls, and software tools using C#, Python, and SQL.</li>
+                <li>Tested, debugged, and simulated robotic systems and automated processes to ensure reliability and efficiency.</li>
+                <li>Assisted in documenting system designs, software architecture, and integration procedures.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-title">Freelance Programmer &amp; Mechatronics/Robotics Engineer</span><br>
+                    <span class="job-company">Self-Employed / Project-Based – Phnom Penh, Cambodia</span>
+                </div>
+                <span class="job-date">2023 – Present</span>
+            </div>
+            <ul>
+                <li>Designed and developed mechanical components, robotic systems, and automated machines using AutoCAD, SketchUp, and other engineering tools.</li>
+                <li>Programmed embedded systems, robotic controls, and automation software using C++, C#, Python, Node.js, and Arduino/PLC platforms.</li>
+                <li>Integrated AI and machine learning algorithms to enhance robot perception, decision-making, and automation efficiency.</li>
+                <li>Built and tested prototypes including robotic arms, smart machines, and IoT-enabled devices.</li>
+                <li>Collaborated with multidisciplinary teams to ensure seamless integration of hardware and software systems.</li>
+            </ul>
+        </div>
+
+        <div class="section-title">Certifications</div>
+        <ul class="cert-list">
+            <li>The Complete Cyber Security Course: End Point Protection / Network Security / Hackers Exposed / Anonymous Browsing</li>
+            <li>Learn Network Hacking From Scratch (WiFi &amp; Wired)</li>
+            <li>The Ultimate Dark Web, Anonymity, Privacy &amp; Security Course</li>
+            <li>The Ultimate MySQL Bootcamp: Go from SQL Beginner to Expert</li>
+            <li>Learn Ethical Hacking From Scratch / Using The Cloud From Scratch</li>
+            <li>Learn Bug Bounty Hunting &amp; Web Security Testing From Scratch</li>
+            <li>ARP spoofing &amp; Man In The Middle Attacks Execution &amp; Detection</li>
+            <li>Website Hacking / Penetration Testing</li>
+            <li>Nmap for Ethical Hackers - The Ultimate Hands-On Course</li>
+            <li>Learn Python &amp; Ethical Hacking From Scratch</li>
+            <li>Learn Wi-Fi Password Penetration Testing (WEP/ WPA/ WPA2)</li>
+            <li>Network Hacking Continued - Intermediate to Advanced</li>
+            <li>Learn C++ for Game Development</li>
+            <li>C++ Fundamentals: Game Programming For Beginners</li>
+            <li>Math For Video Games: The Fastest Way To Get Smarter At Math</li>
+            <li>Beginner C++ Programming - From Beginner to Beyond</li>
+            <li>The Complete Web Development Bootcamp</li>
+            <li>Reverse Engineering 1: x64dbg Debugger for Beginners</li>
+            <li>Reverse Engineering 2: Windows GUI Programs</li>
+            <li>Reverse Engineering 3: x64dbg Graphical Static Analysis</li>
+            <li>Reverse Engineering 4: Software Protection</li>
+            <li>Reverse Engineering 5: Reversing Visual Basic</li>
+            <li>Reverse Engineering 6: Reversing .NET with dnSpy</li>
+            <li>Assembly Language Programming for Reverse Engineering</li>
+            <li>Reverse Engineering and Malware Analysis Fundamentals</li>
+            <li>Kali Linux Tutorial For Beginners</li>
+            <li>Complete Linux Training Course to Get Your Dream IT Job</li>
+        </ul>
+
+        <div class="section-title">Languages</div>
+        <ul>
+            <li>English - Intermediate (ACE - Level 7)</li>
+            <li>Khmer - Mother Tongue</li>
+        </ul>
+
+        <div class="section-title">Reference</div>
+        <div class="ref-block">
+            <div class="ref-line"><strong>Mr. Sum Chanthou</strong> : Lecturer at SETEC INSTITUTE</div>
+            <div class="ref-line">Tel : 01111126547</div>
+            <div class="ref-line">Email : sunchanthou@gmail.com</div>
+        </div>
+        <div class="ref-block">
+            <div class="ref-line"><strong>Mr. Chhay Sameourn</strong> : Lecturer at SETEC INSTITUTE</div>
+            <div class="ref-line">Tel : 099303030</div>
+            <div class="ref-line">Email : gmail@u2022.com</div>
+        </div>
+    </div>
+</body>
+</html>

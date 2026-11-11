@@ -1,0 +1,73 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\5\\WebAPINoDB\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B667E83B-D05D-4B46-9E78-6D295B892E26}|WebAPINoDB\\WebAPINoDB.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\5\\webapinodb\\webapinodb\\data\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B667E83B-D05D-4B46-9E78-6D295B892E26}|WebAPINoDB\\WebAPINoDB.csproj|solutionrelative:webapinodb\\data\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B667E83B-D05D-4B46-9E78-6D295B892E26}|WebAPINoDB\\WebAPINoDB.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\5\\webapinodb\\webapinodb\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B667E83B-D05D-4B46-9E78-6D295B892E26}|WebAPINoDB\\WebAPINoDB.csproj|solutionrelative:webapinodb\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B667E83B-D05D-4B46-9E78-6D295B892E26}|WebAPINoDB\\WebAPINoDB.csproj|c:\\users\\admin\\onedrive\\desktop\\s\\c#\\1\\5\\webapinodb\\webapinodb\\data\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B667E83B-D05D-4B46-9E78-6D295B892E26}|WebAPINoDB\\WebAPINoDB.csproj|solutionrelative:webapinodb\\data\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DB.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\5\\WebAPINoDB\\WebAPINoDB\\Data\\DB.cs",
+              "RelativeDocumentMoniker": "WebAPINoDB\\Data\\DB.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\5\\WebAPINoDB\\WebAPINoDB\\Data\\DB.cs",
+              "RelativeToolTip": "WebAPINoDB\\Data\\DB.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T06:51:41.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\5\\WebAPINoDB\\WebAPINoDB\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "WebAPINoDB\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\5\\WebAPINoDB\\WebAPINoDB\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "WebAPINoDB\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T06:47:52.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\5\\WebAPINoDB\\WebAPINoDB\\Data\\Product.cs",
+              "RelativeDocumentMoniker": "WebAPINoDB\\Data\\Product.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\S\\C#\\1\\5\\WebAPINoDB\\WebAPINoDB\\Data\\Product.cs",
+              "RelativeToolTip": "WebAPINoDB\\Data\\Product.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T06:40:52.414Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

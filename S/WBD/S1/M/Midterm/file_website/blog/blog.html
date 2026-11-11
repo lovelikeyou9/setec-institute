@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog - Engineer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            
+            <a href="../beginPage.html" style="text-decoration:none;"><div  class="logo">CoolTECH</div></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav" id="nav">
+                <div class="nav-left">
+                    <a></a><a></a>
+                    <a href="../beginPage.html">Home</a>
+                    <a href="index.html#projects">Projects</a>
+                    <a href="index.html#skills">Skills</a>
+                    <a href="index.html#experience">Experience</a>
+                    <a href="./blog.html" class="active">Blog</a>
+                    <a href="../about/about.html">About</a>
+                </div>
+                <div class="nav-right">
+                    <a href="index.html#contact" class="btn">Contact Me</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <h1>Tech <span class="accent">Insights & Tutorials</span></h1>
+            <p>
+                Explore my thoughts on programming, robotics, AI, and the future of technology.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="blog-container">
+            <!-- Featured Post -->
+            <div class="featured-post">
+                <div class="blog-header">
+                    <h2>Featured Post</h2>
+                </div>
+                <div class="featured-post-card">
+                    <div class="featured-post-image">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Robotics and AI">
+                    </div>
+                    <div class="featured-post-content">
+                        <span class="featured-post-category">AI & Robotics</span>
+                        <h3 class="featured-post-title">The Future of Human-Robot Collaboration</h3>
+                        <p class="featured-post-excerpt">Exploring how AI technology is revolutionizing the way humans
+                            and robots interact in industrial and domestic environments. This comprehensive guide covers
+                            the latest developments in collaborative robotics and their practical applications.</p>
+                        <div class="featured-post-meta">
+                            <span class="featured-post-date"><i class="far fa-calendar"></i> Oct 22, 2025</span>
+                            <a href="#" class="featured-post-read-more">Read Full Article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Categories -->
+            <div class="blog-categories">
+                <div class="categories-list">
+                    <a href="#" class="category-btn active">All Posts</a>
+                    <a href="#" class="category-btn">AI & Robotics</a>
+                    <a href="#" class="category-btn">Programming</a>
+                    <a href="#" class="category-btn">Embedded Systems</a>
+                    <a href="#" class="category-btn">Mechatronics</a>
+                    <a href="#" class="category-btn">Tutorials</a>
+                </div>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blog-header">
+                <h2>Latest Articles</h2>
+                <p>Insights, tutorials, and thoughts on programming, robotics, and AI</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Machine Learning">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Machine Learning</span>
+                        <h3 class="blog-card-title">Implementing ML Algorithms in Autonomous Systems</h3>
+                        <p class="blog-card-excerpt">A deep dive into the practical implementation of ML algorithms for
+                            robotics applications and autonomous decision-making.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Oct 15, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Embedded Systems">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Embedded Systems</span>
+                        <h3 class="blog-card-title">Optimizing Embedded Systems for Real-Time Robotics</h3>
+                        <p class="blog-card-excerpt">Techniques and best practices for developing efficient embedded
+                            systems that meet the demanding requirements of robotics.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Oct 8, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="IoT">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">IoT</span>
+                        <h3 class="blog-card-title">Building Smart Home Systems with IoT</h3>
+                        <p class="blog-card-excerpt">How to create integrated smart home systems with automated
+                            lighting,
+                            security, and climate control using modern IoT technologies.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Oct 1, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="C++ Programming">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Programming</span>
+                        <h3 class="blog-card-title">Advanced C++ Techniques for Robotics</h3>
+                        <p class="blog-card-excerpt">Exploring advanced C++ features and patterns that are particularly
+                            useful in robotics and embedded systems development.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Sep 24, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Computer Vision">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Computer Vision</span>
+                        <h3 class="blog-card-title">Computer Vision for Autonomous Navigation</h3>
+                        <p class="blog-card-excerpt">Implementing computer vision algorithms to enable autonomous
+                            navigation and obstacle avoidance in robotic systems.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Sep 17, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="ROS">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Robotics</span>
+                        <h3 class="blog-card-title">Getting Started with ROS 2</h3>
+                        <p class="blog-card-excerpt">A beginner's guide to the Robot Operating System (ROS 2) for
+                            building complex robotic applications with modular components.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> Sep 10, 2025</span>
+                            <a href="#" class="blog-card-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="footer-section" id="resources">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>PRODUCTS</h3>
+                    <ul>
+                        <li><a href="#">Scale Data Engine</a></li>
+                        <li><a href="#">Scale GenAI Platform</a></li>
+                        <li><a href="#">Scale Donovan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>GOVERNMENT</h3>
+                    <ul>
+                        <li><a href="#">Public Sector</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>COMPANY</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>RESOURCES</h3>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Customers</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">AI Readiness Report 2024</a></li>
+                        <li><a href="#">Research</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>GUIDES</h3>
+                    <ul>
+                        <li><a href="#">Data Labeling</a></li>
+                        <li><a href="#">ML Model Training</a></li>
+                        <li><a href="#">Diffusion Models</a></li>
+                        <li><a href="#">Guide to AI for eCommerce</a></li>
+                        <li><a href="#">Computer Vision Applications</a></li>
+                        <li><a href="#">Large Language Models</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>FOLLOW US</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 CoolTECH — Portfolio Website</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function () {
+            document.getElementById('nav').classList.toggle('active');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    document.getElementById('nav').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Visa Pay · Order #{{ order.id }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-6">
+    <div class="summary-card">
+      <p class="text-uppercase small text-muted mb-1">Visa · X-Pay Token</p>
+      <h1 class="section-title h4 mb-2">Enter card details</h1>
+      <p class="text-muted mb-4">
+        Order <strong>#{{ order.id }}</strong> ·
+        Total <strong>${{ '%.2f'|format(order.total_amount) }}</strong>
+      </p>
+
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">{{ form.card_number.label.text }}</label>
+            {{ form.card_number(class="form-control", placeholder="4111 1111 1111 1111", autocomplete="cc-number") }}
+            {% for err in form.card_number.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">{{ form.card_exp_month.label.text }}</label>
+            {{ form.card_exp_month(class="form-control", placeholder="12", autocomplete="cc-exp-month") }}
+            {% for err in form.card_exp_month.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">{{ form.card_exp_year.label.text }}</label>
+            {{ form.card_exp_year(class="form-control", placeholder="2030", autocomplete="cc-exp-year") }}
+            {% for err in form.card_exp_year.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">{{ form.card_cvc.label.text }}</label>
+            {{ form.card_cvc(class="form-control", placeholder="123", autocomplete="cc-csc") }}
+            {% for err in form.card_cvc.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+          </div>
+        </div>
+        <button class="btn btn-brand mt-4" type="submit">
+          <i class="bi bi-credit-card"></i> {{ form.submit.label.text }}
+        </button>
+        <a class="btn btn-outline-secondary mt-4" href="{{ url_for('checkout.payment_cancel', order_id=order.id) }}">Cancel</a>
+      </form>
+      <p class="small text-muted mt-3 mb-0">Test card: 4111111111111111 · any future expiry · any CVC</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

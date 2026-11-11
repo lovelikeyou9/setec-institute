@@ -1,0 +1,124 @@
+<!-- logo can click
+
+<h1 class="logo">
+  <a routerLink="/" title="Go to Home" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+    <img src="/logo/14.jpg" alt="Logo" style="height: 70px;">
+    Hospital <span>Care</span>
+  </a>
+</h1>
+
+-->
+
+
+<div class="container">
+
+
+
+
+
+  <!-- Top Menu -->
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand" routerLink="/">
+        <img src="/logo/pixel-art-glasses-isolated-on-white-background-free-vector.jpg" alt="Logo" />
+        Cool Pro
+      </a>
+
+      <!-- Hamburger button for mobile -->
+      <button class="navbar-toggler collapsed" type="button" aria-label="Toggle navigation" aria-expanded="false"
+        aria-controls="navbarNav">
+        <span></span>
+      </button>
+
+      <!-- Search form -->
+      <form class="d-flex mx-auto" role="search" onsubmit="return false;">
+        <input class="form-control" type="search" placeholder="Search..." aria-label="Search" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+
+      <!-- Menu & Cart -->
+      <ul class="navbar-nav mb-2 mb-lg-0 align-items-center" id="navbarNav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" routerLink="/product" >Product Cool</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">test_1</a></li>
+            <li><a class="dropdown-item" href="#">test_2</a></li>
+            <li><a class="dropdown-item" href="#">test_3</a></li>
+            <li><a class="dropdown-item" href="#">test_4</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">Group</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">test_1</a></li>
+            <li><a class="dropdown-item" href="#">test_2</a></li>
+            <li><a class="dropdown-item" href="#">test_3</a></li>
+            <li><a class="dropdown-item" href="#">test_4</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/blog">Blog</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">Join Cool</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">test_1</a></li>
+            <li><a class="dropdown-item" href="#">test_2</a></li>
+            <li><a class="dropdown-item" href="#">test_3</a></li>
+            <li><a class="dropdown-item" href="#">test_4</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <button class="btn btn-cart" routerLink="/cart">Cart({{ cartService.getItem().length }})</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+
+
+
+  <div>
+
+    <router-outlet></router-outlet>
+
+  </div>
+
+
+
+
+
+  <!-- middle web -->
+  <app-middle-web></app-middle-web>
+
+
+
+
+  <!-- end page -->
+  <app-end-page></app-end-page>
+
+
+
+
+
+</div>
+
+
+
+
+

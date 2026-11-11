@@ -1,0 +1,13 @@
+//This is QuickBooks configuration File. It exists while users are connected
+// to a company file. Do not delete this file yourself. QuickBooks may not
+// operate correctly IF you manually delete this file.
+[ODBC]
+DRIVER=QB SQL Anywhere
+Compress=NO
+DisableMultiRowFetch=NO
+Debug=NO
+Integrated=NO
+AutoStop=NO
+ServerName=QB_data_engine_34
+DatabaseName=393c60f6dfe14d5b97efbec94a55b5db
+

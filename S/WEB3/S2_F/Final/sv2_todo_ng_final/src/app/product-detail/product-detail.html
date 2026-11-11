@@ -1,0 +1,100 @@
+<!--
+<div class="product-detail">
+    <div class="row g-4">
+         Image 
+        <div class="col-md-6">
+            <img src="https://media.tenor.com/cq0iKxK7CvkAAAAM/draco-malfoy-harry-potter.gif" alt="Cool Sunglasses" class="product-img" />
+        </div>
+
+         Details 
+        <div class="col-md-6 d-flex flex-column">
+            <h1 class="product-title">Cool Sunglasses</h1>
+            <div class="product-price">$49.99</div>
+            <p class="product-desc">
+                Stylish and lightweight sunglasses that protect your eyes from harmful UV rays.
+                Perfect for summer and outdoor activities.
+            </p>
+
+            <label for="quantity" class="quantity-label">Quantity</label>
+            <input type="number" id="quantity" class="quantity-input" min="1" value="1" />
+
+            <div class="mt-4 d-flex">
+                <button class="btn-action btn-add">Add to Cart</button>
+                <button class="btn-action btn-buy">Buy Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+
+
+
+<div class="product-detail">
+    @if(product != null){
+
+    <div class="row g-4">
+        <!-- Image -->
+
+        <div class="col-md-6">
+            <img src="{{ product.imageUrl }}"  alt="{{ product.imageUrl }}" class="product-img" onerror="this.src='/image/No-Image-Placeholder.png';"/>
+        </div>
+
+        <!-- Details -->
+        <div class="col-md-6 d-flex flex-column">
+            <h1 class="product-title">{{ product.name }}</h1>
+            <div class="product-price">{{ product.price | currency }}</div>
+            <p class="product-desc">
+                Stylish and lightweight sunglasses that protect your eyes from harmful UV rays.
+                Perfect for summer and outdoor activities.
+            </p>
+
+            <label for="quantity" class="quantity-label">Quantity</label>
+            <input type="number" id="quantity" class="quantity-input" min="1" value="1" />
+
+            <div class="mt-4 d-flex">
+                <button class="btn-action btn-add" (click)="addToCart()">Add to Cart</button>
+
+                <button class="btn-action btn-buy">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    }
+
+    @if(product==null){
+    <div class="row g-4" style="
+    position: relative;
+    height: 300px; /* adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+">
+        <!-- GIF background -->
+        <img src="https://media.tenor.com/BDzA_Rh5EVMAAAAM/blue-archive-kurosaki-koyuki.gif" alt="Background gif" style="
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; 
+      object-fit: contain;
+      filter: brightness(0.85); /* darken for text contrast */
+      z-index: 0;
+    " />
+
+        <!-- Text overlay -->
+        <div style="
+      position: relative;
+      z-index: 1;
+      color: #ccc;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+  ">
+            Cool Product not found
+        </div>
+    </div>
+    }
+
+</div>

@@ -1,0 +1,43 @@
+-- 1
+SELECT last_name, salary, hire_date FROM employees
+WHERE hire_date = TO_DATE('07-06-1994','DD-MM-YYYY');
+
+-- 2
+SELECT TO_CHAR(SYSDATE,'DAY DD-MM-RR HH:MI:SS AM') FROM dual;
+
+-- 3
+SELECT last_name
+      ,TO_CHAR(hire_date,'DD-MM-YYYY HH:MI:SS AM') AS hire_date
+FROM employees;
+
+-- 4
+SELECT last_name
+      ,TO_CHAR(hire_date,'DY-MONTH-YEAR') AS hire_date
+FROM employees;
+-- or
+SELECT last_name
+      ,TO_CHAR(hire_date,'FMDY-MONTH-YEAR') AS hire_date
+FROM employees;
+
+-- 5
+SELECT TO_CHAR(TO_DATE('12-01-2026','DD-MM-YYYY'),'DD-MON-RR') FROM dual;
+
+-- 6
+SELECT TO_CHAR(SYSDATE,'DY DD-MM-YYYY') FROM dual;
+
+-- 7
+SELECT TO_CHAR(SYSDATE,'DAY-MON-YYYY HH24:MI:SS PM') FROM dual;
+
+-- 8
+SELECT employee_id,
+       first_name || ' ' || last_name AS full_name,
+       TO_CHAR(hire_date,'DD/MM/YYYY') AS hire_date
+FROM employees
+ORDER BY hire_date ASC;
+
+-- 9
+SELECT TO_CHAR(
+         SYSDATE,
+         'FMDAY DD-MM-YYYY FMYYYYSP'
+       )
+FROM dual;

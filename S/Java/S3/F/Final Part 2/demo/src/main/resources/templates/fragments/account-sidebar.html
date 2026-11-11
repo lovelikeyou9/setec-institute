@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<aside class="dash-sidebar" th:fragment="accountSidebar">
+  <div class="brand-block">
+    <strong>My Account</strong>
+    <span th:text="${currentUser != null ? currentUser.fullName : 'Customer'}">Customer</span>
+  </div>
+  <nav class="dash-nav">
+    <a th:href="@{/account}" th:classappend="${activeNav == 'overview'} ? 'active'">Overview</a>
+    <a th:href="@{/account/orders}" th:classappend="${activeNav == 'my-orders'} ? 'active'">Orders</a>
+    <a th:href="@{/account/wishlist}" th:classappend="${activeNav == 'wishlist'} ? 'active'">Wishlist</a>
+    <a th:href="@{/account/cart}" th:classappend="${activeNav == 'cart'} ? 'active'">Cart</a>
+    <a th:href="@{/notifications}" th:classappend="${activeNav == 'notifications'} ? 'active'">Notifications</a>
+    <a th:href="@{/account/addresses}" th:classappend="${activeNav == 'addresses'} ? 'active'">Addresses</a>
+    <a th:href="@{/account/settings}" th:classappend="${activeNav == 'account-settings'} ? 'active'">Settings</a>
+
+    <span class="dash-nav-label">Shop</span>
+    <div class="dash-nav-group"
+         th:classappend="${activeNav == 'shop-products' or activeNav == 'shop-categories' or activeNav == 'shop-brands'} ? ' open'">
+      <button type="button" class="dash-nav-toggle"
+              th:classappend="${activeNav == 'shop-products' or activeNav == 'shop-categories' or activeNav == 'shop-brands'} ? ' active'"
+              aria-expanded="false"
+              th:attr="aria-expanded=${activeNav == 'shop-products' or activeNav == 'shop-categories' or activeNav == 'shop-brands'}">
+        <span>Browse</span>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="dash-nav-sub">
+        <a th:href="@{/products}" th:classappend="${activeNav == 'shop-products'} ? 'active'">Products List</a>
+        <a th:href="@{/categories}" th:classappend="${activeNav == 'shop-categories'} ? 'active'">Category</a>
+        <a th:href="@{/brands}" th:classappend="${activeNav == 'shop-brands'} ? 'active'">Brand</a>
+      </div>
+    </div>
+  </nav>
+</aside>
+</body>
+</html>

@@ -1,0 +1,157 @@
+!HDR	PROD	VER	REL	IIFVER	DATE	TIME	ACCNTNT	ACCNTNTSPLITTIME
+HDR	QuickBooks Enterprise Solutions	Version 34.0D	Release R1P	1	2025-01-21	1737448213	N	0
+!ACCNT	NAME	REFNUM	TIMESTAMP	ACCNTTYPE	OBAMOUNT	DESC	ACCNUM	SCD	BANKNUM	EXTRA	HIDDEN	DELCOUNT	USEID
+ACCNT	Cash	15	1736671448	BANK	"7,600.00"		1011	0			N	0	N
+ACCNT	ACLEDA’s Bank	16	1736671512	BANK	"2,200.00"		1021	0			N	0	N
+ACCNT	ABA’s Bank	17	1736671539	BANK	"95,150.00"		1022	0			N	0	N
+ACCNT	Accounts Receivable	8	1736651231	AR	"9,200.00"	Unpaid or unapplied customer invoices and credits	1100	0			N	0	N
+ACCNT	Inventory Asset	10	1736660739	OCASSET	"29,491.28"	Costs of inventory purchased for resale	1200	0		INVENTORYASSET	N	0	N
+ACCNT	Undeposited Funds	9	1736652818	OCASSET	0.00	"Funds received, but not yet deposited to a bank account"	12000	0		UNDEPOSIT	N	0	N
+ACCNT	Office Supplies	20	1736671720	OCASSET	50.00		1300	0			N	0	N
+ACCNT	Prepaid Rent	21	1736671739	OCASSET	0.00		1311	0			N	0	N
+ACCNT	VAT Input	18	1736671675	OCASSET	0.00		1340	0			N	0	N
+ACCNT	VAT Credit Carry Forward	19	1736671708	OCASSET	0.00		1350	0			N	0	N
+ACCNT	Acc. Dep of Other Dere. Propert	70	1736695676	FIXASSET	0.00		001	0			Y	0	N
+ACCNT	Truck _ net	22	1736671765	FIXASSET	0.00		1400	0			N	0	N
+ACCNT	Truck _ net:Truck	23	1736671808	FIXASSET	"10,000.00"		1401	0			N	0	N
+ACCNT	Truck _ net:Acc. Dep of Truck	24	1736671834	FIXASSET	-95.24		1402	0			N	0	N
+ACCNT	Office Equipment _ net	25	1736671925	FIXASSET	0.00		1500	0			N	0	N
+ACCNT	Office Equipment _ net:Office Equipment	26	1736671968	FIXASSET	"4,300.00"		1501	0			N	0	N
+ACCNT	Office Equipment _ net:Acc. Dep of Office Equipment	27	1736671989	FIXASSET	-333.34		1502	0			N	0	N
+ACCNT	Furniture & Fixture _ net	28	1736672024	FIXASSET	0.00		1600	0			N	0	N
+ACCNT	Furniture & Fixture _ net:Furniture & Fixture	29	1736672049	FIXASSET	"2,000.00"		1601	0			N	0	N
+ACCNT	Furniture & Fixture _ net:Acc. Dep of Furniture & Fixture	30	1736672064	FIXASSET	-66.66		1602	0			N	0	N
+ACCNT	Machine _ net	31	1736672090	FIXASSET	0.00		1700	0			N	0	N
+ACCNT	Machine _ net:Machine	32	1736672111	FIXASSET	0.00		1701	0			N	0	N
+ACCNT	Machine _ net:Acc. Dep of Machine	33	1736672140	FIXASSET	0.00		1702	0			N	0	N
+ACCNT	Land	34	1736672162	FIXASSET	0.00		1800	0			N	0	N
+ACCNT	Other Depreciable Property	35	1736672184	FIXASSET	"4,000.00"		1900	0			N	0	N
+ACCNT	Other Depreciable Property:Other Depre Property	36	1736672201	FIXASSET	0.00		1901	0			N	0	N
+ACCNT	Other Depreciable Property:Acc. Dep of Other Dere. Propert	37	1736672224	FIXASSET	-133.34		1902	0			N	0	N
+ACCNT	Accounts Payable	12	1736661975	AP	"-8,800.00"	Unpaid or unapplied vendor bills or credits	2000	0			N	0	N
+ACCNT	Withholding Tax Payable	38	1736672318	OCLIAB	0.00		2300	0			N	0	N
+ACCNT	VAT Payable	39	1736672349	OCLIAB	0.00		2340	0			N	0	N
+ACCNT	Payroll Liabilities	7	1736597087	OCLIAB	0.00	"Unpaid payroll liabilities. Amounts withheld or accrued, but not yet paid"	2400	0			N	0	N
+ACCNT	Payroll Liabilities:Salaries Payable	40	1736672458	OCLIAB	0.00		2410	0			N	0	N
+ACCNT	Payroll Liabilities:Wage Payable	41	1736672476	OCLIAB	0.00		2420	0			N	0	N
+ACCNT	Payroll Liabilities:Salaries Tax Payable	42	1736672499	OCLIAB	0.00		2430	0			N	0	N
+ACCNT	Other Current  Liabilities	43	1736672564	OCLIAB	0.00		2500	0			N	0	N
+ACCNT	Opening Balance Equity	3	1736596922	EQUITY	0.00	Opening balances during setup post to this account. The balance of this account should be zero after completing your setup	3000	0		OPENBAL	N	0	N
+ACCNT	Capital (Owner’s Equity)	44	1736672722	EQUITY	"-150,000.00"		3001	0			N	0	N
+ACCNT	Owners Draw	4	1736596922	EQUITY	0.00	Monies taken out of the business by the owner	30800	0			N	0	N
+ACCNT	Owners Equity	5	1736596922	EQUITY	0.00	"Monies invested in the business by the owner, and profits kept in company accounts"	32000	0		RETEARNINGS	N	0	N
+ACCNT	Drawing (Owner Draw)	45	1736672797	EQUITY	0.00		3800	0			N	0	N
+ACCNT	Revenue from Sales	46	1736672838	INC	"-181,940.00"		4000	0			N	0	N
+ACCNT	Sales Discount	47	1736672859	INC	0.00		4010	0			N	0	N
+ACCNT	Sales Return & Allowance	48	1736672871	INC	0.00		4020	0			N	0	N
+ACCNT	Revenue from Provided Services	49	1736672884	INC	-640.00		4100	0			N	0	N
+ACCNT	Cost of Goods Sold	11	1736660739	COGS	"163,528.72"	Costs of items purchased and then sold to customers	5000	493		COGS	N	0	N
+ACCNT	Cost of Inventory Lost	50	1736673000	COGS	0.00		5002	0			N	0	N
+ACCNT	Rent Expense	51	1736673021	EXP	"6,000.00"		6000	0			N	0	N
+ACCNT	Gasoline Expense	52	1736673189	EXP	500.00		6010	0			N	0	N
+ACCNT	Bad Debt Expense	53	1736673205	EXP	0.00		6011	0			N	0	N
+ACCNT	Car Washing Expense	54	1736673216	EXP	0.00		6200	0			N	0	N
+ACCNT	"Phone, Fax & E-mail Expense"	55	1736673226	EXP	0.00		6300	0			N	0	N
+ACCNT	Advertising Expense	56	1736673239	EXP	500.00		6400	0			N	0	N
+ACCNT	Utilities Expense	57	1736673262	EXP	0.00		6500	0			N	0	N
+ACCNT	Depreciation Expense	58	1736673273	EXP	628.58		6511	0			N	0	N
+ACCNT	Payroll Expense	59	1736673282	EXP	0.00		6600	0			N	0	N
+ACCNT	Payroll Expense:Salaries Expense	60	1736673351	EXP	"5,100.00"		6610	0			N	0	N
+ACCNT	Payroll Expense:Wage Expense	61	1736673375	EXP	0.00		6620	0			N	0	N
+ACCNT	Payroll Expense:Bonus & Commission Expense	62	1736673393	EXP	0.00		6630	0			N	0	N
+ACCNT	Payroll Expenses	6	1736597087	EXP	0.00	Payroll expenses	66000	297			N	0	N
+ACCNT	Food & Meal Expense	63	1736673408	EXP	300.00		6700	0			N	0	N
+ACCNT	Office Supplies Expense	64	1736673420	EXP	"1,260.00"		6800	0			N	0	N
+ACCNT	Clearances Expense	65	1736673428	EXP	0.00		7000	0			N	0	N
+ACCNT	Travel Expense	66	1736673436	EXP	0.00		7100	0			N	0	N
+ACCNT	Delivery Expense	67	1736673448	EXP	200.00		7200	0			N	0	N
+ACCNT	Interest Earned	68	1736673473	EXINC	0.00		9000	0			N	0	N
+ACCNT	Bank Service Charge	69	1736673485	EXEXP	0.00		9001	0			N	0	N
+ACCNT	Purchase Orders	13	1736662294	NONPOSTING	0.00	Purchase orders specifying items ordered from vendors	90100	0		PURCHORDER	N	0	N
+ACCNT	Sales Orders	14	1736662658	NONPOSTING	0.00	"Orders from customers to be filled, work to be performed, or items to be shipped"	90200	0			N	0	N
+!CUSTITEMDICT	INDEX	LABEL	INUSE
+!ENDCUSTITEMDICT
+CUSTITEMDICT	0		N
+CUSTITEMDICT	1		N
+CUSTITEMDICT	2		N
+CUSTITEMDICT	3		N
+CUSTITEMDICT	4		N
+CUSTITEMDICT	5		N
+CUSTITEMDICT	6		N
+CUSTITEMDICT	7		N
+CUSTITEMDICT	8		N
+CUSTITEMDICT	9		N
+CUSTITEMDICT	10		N
+CUSTITEMDICT	11		N
+CUSTITEMDICT	12		N
+CUSTITEMDICT	13		N
+CUSTITEMDICT	14		N
+ENDCUSTITEMDICT
+!INVITEM	NAME	REFNUM	TIMESTAMP	INVITEMTYPE	DESC	PURCHASEDESC	ACCNT	ASSETACCNT	COGSACCNT	QNTY	VALUE	PRICE	COST	TAXABLE	SALESTAXCODE	PAYMETH	TAXVEND	PREFVEND	REORDERPOINT	EXTRA	CUSTFLD1	CUSTFLD2	CUSTFLD3	CUSTFLD4	CUSTFLD5	DEP_TYPE	ISPASSEDTHRU	HIDDEN	DELCOUNT	USEID	ISNEW	PO_NUM	SERIALNUM	WARRANTY	LOCATION	VENDOR	ASSETDESC	SALEDATE	SALEEXPENSE	NOTES	ASSETNUM	COSTBASIS	ACCUMDEPR	UNRECBASIS	PURCHASEDATE
+INVITEM	Delivery Fees	7	1736674954	SERV	Delivery Fees	Delivery Fees	Revenue from Provided Services					0.00	0.00	N												0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	ABC Beer	6	1736674900	INVENTORY	ABC Beer 330 ml x 24 cans	ABC Beer 330 ml x 24 cans	Revenue from Sales	Inventory Asset	Cost of Goods Sold	0	0.00	0.00	0.00	N												0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	Anchor Beer	4	1736674768	INVENTORY	Anchor Beer 330 ml x 24 cans	Anchor Beer 330 ml x 24 cans	Revenue from Sales	Inventory Asset	Cost of Goods Sold	0	0.00	0.00	0.00	N												0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	Cambodia Beer	5	1736674832	INVENTORY	Cambodia Beer 330 ml x 24 cans	Cambodia Beer 330 ml x 24 cans	Revenue from Sales	Inventory Asset	Cost of Goods Sold	0	0.00	0.00	0.00	N												0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	Ganzberg Beer	3	1736674708	INVENTORY	Ganzberg Beer  330 ml x 24 cans	Ganzberg Beer  330 ml x 24 cans	Revenue from Sales	Inventory Asset	Cost of Goods Sold	0	0.00	0.00	0.00	N												0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	Heineken Beer	2	1736674648	INVENTORY	Heineken Beer  330 ml x 24 cans	Heineken Beer  330 ml x 24 cans	Revenue from Sales	Inventory Asset	Cost of Goods Sold	700	"12,896.37"	0.00	0.00	N												0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	Tiger Beer	1	1736674552	INVENTORY	Tiger Beer 330 ml x 24 cans	Tiger Beer 330 ml x 24 cans	Revenue from Sales	Inventory Asset	Cost of Goods Sold	"1,300"	"16,594.91"	0.00	0.00	N												0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	Subtotal	11	1736675329	SUBT	Subtotal								0.00	N												0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	Sale Discount	12	1736675409	DISC	Sale Discount		Sales Discount					0.00	0.00	Y	Tax											0	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	ABA’s Bank	9	1736675253	PMT	ABA’s Bank		ABA’s Bank						0.00	N		Cash										1	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	ACLEDA’s Bank	10	1736675285	PMT	ACLEDA’s Bank		ACLEDA’s Bank						0.00	N		Cash										1	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+INVITEM	Cash	8	1736675028	PMT	Cash		Cash						0.00	N		Cash										1	N	N	0	N	Y								0.00			0.00	0.00	0.00	
+!CUSTNAMEDICT	INDEX	LABEL	CUSTOMER	VENDOR	EMPLOYEE
+!ENDCUSTNAMEDICT
+CUSTNAMEDICT	0		N	N	N
+CUSTNAMEDICT	1		N	N	N
+CUSTNAMEDICT	2		N	N	N
+CUSTNAMEDICT	3		N	N	N
+CUSTNAMEDICT	4		N	N	N
+CUSTNAMEDICT	5		N	N	N
+CUSTNAMEDICT	6		N	N	N
+CUSTNAMEDICT	7		N	N	N
+CUSTNAMEDICT	8		N	N	N
+CUSTNAMEDICT	9		N	N	N
+CUSTNAMEDICT	10		N	N	N
+CUSTNAMEDICT	11		N	N	N
+CUSTNAMEDICT	12		N	N	N
+CUSTNAMEDICT	13		N	N	N
+CUSTNAMEDICT	14		N	N	N
+CUSTNAMEDICT	15		N	N	N
+CUSTNAMEDICT	16		N	N	N
+CUSTNAMEDICT	17		N	N	N
+CUSTNAMEDICT	18		N	N	N
+CUSTNAMEDICT	19		N	N	N
+CUSTNAMEDICT	20		N	N	N
+CUSTNAMEDICT	21		N	N	N
+CUSTNAMEDICT	22		N	N	N
+CUSTNAMEDICT	23		N	N	N
+CUSTNAMEDICT	24		N	N	N
+CUSTNAMEDICT	25		N	N	N
+CUSTNAMEDICT	26		N	N	N
+CUSTNAMEDICT	27		N	N	N
+CUSTNAMEDICT	28		N	N	N
+CUSTNAMEDICT	29		N	N	N
+ENDCUSTNAMEDICT
+!CUST	NAME	REFNUM	TIMESTAMP	BADDR1	BADDR2	BADDR3	BADDR4	BADDR5	SADDR1	SADDR2	SADDR3	SADDR4	SADDR5	PHONE1	PHONE2	FAXNUM	EMAIL	NOTE	CONT1	CONT2	CTYPE	TERMS	TAXABLE	SALESTAXCODE	LIMIT	RESALENUM	REP	TAXITEM	NOTEPAD	SALUTATION	COMPANYNAME	FIRSTNAME	MIDINIT	LASTNAME	CUSTFLD1	CUSTFLD2	CUSTFLD3	CUSTFLD4	CUSTFLD5	CUSTFLD6	CUSTFLD7	CUSTFLD8	CUSTFLD9	CUSTFLD10	CUSTFLD11	CUSTFLD12	CUSTFLD13	CUSTFLD14	CUSTFLD15	JOBDESC	JOBTYPE	JOBSTATUS	JOBSTART	JOBPROJEND	JOBEND	HIDDEN	DELCOUNT	PRICELEVEL
+CUST	Chea Shop	5	1736674173	Chea Shop	"# 45, St. 112, PP"				Chea Shop	"# 45, St. 112, PP"				012 001 985									N								Chea Shop																					0				N	0	
+CUST	General Customer	11	1736681546	General Customer																			N	Non																												0				N	0	
+CUST	Heng Heng Shop	4	1736674141	Heng Heng Shop	"# 102, St. 112, PP"				Heng Heng Shop	"# 102, St. 112, PP"				012 741 985									N								Heng Heng Shop																					0				N	0	
+CUST	Piseth Shop	9	1736680067	Piseth Shop																			N	Non																												0				N	0	
+CUST	Tann Tann	20	1736755903	Tann Tann																			N	Non																												0				N	0	
+CUST	Van Sochea	10	1736680984	Van Sochea																			N	Non																												0				N	0	
+CUST	Vann Sochea	13	1736684652	Vann Sochea																			N	Non																												0				N	0	
+!VEND	NAME	REFNUM	TIMESTAMP	PRINTAS	ADDR1	ADDR2	ADDR3	ADDR4	ADDR5	VTYPE	CONT1	CONT2	PHONE1	PHONE2	FAXNUM	EMAIL	NOTE	TAXID	LIMIT	TERMS	NOTEPAD	SALUTATION	COMPANYNAME	FIRSTNAME	MIDINIT	LASTNAME	CUSTFLD1	CUSTFLD2	CUSTFLD3	CUSTFLD4	CUSTFLD5	CUSTFLD6	CUSTFLD7	CUSTFLD8	CUSTFLD9	CUSTFLD10	CUSTFLD11	CUSTFLD12	CUSTFLD13	CUSTFLD14	CUSTFLD15	1099	HIDDEN	DELCOUNT
+VEND	Advertising Expense	15	1736687610																																							N	N	0
+VEND	"Chan Dara Co., Ltd"	3	1736674034	"Chan Dara Co., Ltd"	"Chan Dara Co., Ltd"	"# 120, St. 452, PP"																	"Chan Dara Co., Ltd"																			N	N	0
+VEND	"DM Co., Ltd"	7	1736677851		"DM Co., Ltd"																																					N	N	0
+VEND	Electricity	14	1736686840		Electricity																																					N	N	0
+VEND	Gasoline Expense	16	1736688022		Gasoline Expense																																					N	N	0
+VEND	"Heineken Co., Ltd"	2	1736673963	"Heineken Co., Ltd"	"Heineken Co., Ltd"	"# 41, St. 54, PP"																	"Heineken Co., Ltd"																			N	N	0
+VEND	Office Supplies	8	1736679089		Office Supplies																																					N	N	0
+VEND	Phone and Internet	12	1736684298		Phone and Internet																																					N	N	0
+VEND	Rent Expense	18	1736697511		Rent Expense																																					N	N	0
+VEND	Salaries Expense	17	1736688263		Salaries Expense																																					N	N	0
+VEND	Te Techlong	19	1736754695		Te Techlong																																					N	N	0
+VEND	"Tiger Co., Ltd"	1	1736673946	"Tiger Co., Ltd"	"Tiger Co., Ltd"	"# 45, St. 102, PP"																	"Tiger Co., Ltd"																			N	N	0
+VEND	Vann Piseth	6	1736677208		Vann Piseth																																					N	N	0

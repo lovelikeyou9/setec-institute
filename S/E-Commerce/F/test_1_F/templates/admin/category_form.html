@@ -1,0 +1,24 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Edit Category{% endblock %}
+{% block admin_content %}
+<h1 class="section-title">Edit Category</h1>
+<div class="summary-card">
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      {{ form.name(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      {{ form.description(class="form-control", rows=3) }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Icon</label>
+      {{ form.icon(class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-brand") }}
+    <a href="{{ url_for('admin.categories') }}" class="btn btn-outline-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

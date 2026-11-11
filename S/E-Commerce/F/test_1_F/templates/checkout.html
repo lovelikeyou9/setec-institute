@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<h1 class="section-title mt-3">Secure checkout</h1>
+<div class="row g-4">
+  <div class="col-lg-7">
+    <div class="summary-card">
+      <h2 class="h5 fw-bold mb-3">Customer Information</h2>
+      <form method="post" id="checkout-form">
+        {{ form.hidden_tag() }}
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">{{ form.full_name.label.text }}</label>
+            {{ form.full_name(class="form-control") }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">{{ form.email.label.text }}</label>
+            {{ form.email(class="form-control") }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">{{ form.phone.label.text }}</label>
+            {{ form.phone(class="form-control") }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">{{ form.country.label.text }}</label>
+            {{ form.country(class="form-control", placeholder="United States") }}
+          </div>
+          <div class="col-12">
+            <label class="form-label">{{ form.address.label.text }}</label>
+            {{ form.address(class="form-control") }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">{{ form.city.label.text }}</label>
+            {{ form.city(class="form-control") }}
+          </div>
+        </div>
+
+        <h2 class="h5 fw-bold mt-4 mb-3">Payment method</h2>
+        <div class="payment-methods" role="radiogroup" aria-label="Payment method">
+          <label class="payment-option">
+            <input type="radio" name="payment_method" value="stripe" {% if form.payment_method.data not in ['visa', 'stripe_qr', 'visa_qr'] %}checked{% endif %}>
+            <span class="payment-option-body">
+              <span class="payment-option-title">Stripe</span>
+              <span class="payment-option-meta">Redirect to hosted Stripe Checkout</span>
+            </span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment_method" value="stripe_qr" {% if form.payment_method.data == 'stripe_qr' %}checked{% endif %}>
+            <span class="payment-option-body">
+              <span class="payment-option-title">
+                Stripe QR Code
+                <span class="card-brand-row" aria-hidden="true">
+                  <span class="card-brand stripe-qr">QR</span>
+                </span>
+              </span>
+              <span class="payment-option-meta">Show QR to scan Stripe Checkout on your phone</span>
+            </span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment_method" value="visa" {% if form.payment_method.data == 'visa' %}checked{% endif %}>
+            <span class="payment-option-body">
+              <span class="payment-option-title">
+                Credit or debit card
+                <span class="card-brand-row" aria-hidden="true">
+                  <span class="card-brand visa">VISA</span>
+                  <span class="card-brand mc">MC</span>
+                  <span class="card-brand amex">AMEX</span>
+                </span>
+              </span>
+              <span class="payment-option-meta">Visa Developer X-Pay Token</span>
+            </span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment_method" value="visa_qr" {% if form.payment_method.data == 'visa_qr' %}checked{% endif %}>
+            <span class="payment-option-body">
+              <span class="payment-option-title">
+                Visa QR Code
+                <span class="card-brand-row" aria-hidden="true">
+                  <span class="card-brand visa">VISA</span>
+                  <span class="card-brand stripe-qr">QR</span>
+                </span>
+              </span>
+              <span class="payment-option-meta">Show QR → open Visa card pay page</span>
+            </span>
+          </label>
+        </div>
+
+        <div id="visa-card-fields" class="visa-card-panel mt-3 {% if form.payment_method.data != 'visa' %}d-none{% endif %}">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label">{{ form.card_number.label.text }}</label>
+              {{ form.card_number(class="form-control", placeholder="4111 1111 1111 1111", autocomplete="cc-number") }}
+              {% for err in form.card_number.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">{{ form.card_exp_month.label.text }}</label>
+              {{ form.card_exp_month(class="form-control", placeholder="12", autocomplete="cc-exp-month") }}
+              {% for err in form.card_exp_month.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">{{ form.card_exp_year.label.text }}</label>
+              {{ form.card_exp_year(class="form-control", placeholder="2030", autocomplete="cc-exp-year") }}
+              {% for err in form.card_exp_year.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">{{ form.card_cvc.label.text }}</label>
+              {{ form.card_cvc(class="form-control", placeholder="123", autocomplete="cc-csc") }}
+              {% for err in form.card_cvc.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+            </div>
+          </div>
+          <p class="small text-muted mt-2 mb-0">Uses your Visa API Key + Shared Secret (X-Pay Token). Demo mode verifies credentials with Hello World.</p>
+        </div>
+
+        <button class="btn btn-brand mt-4" type="submit" id="checkout-submit">
+          <i class="bi bi-credit-card"></i> <span id="checkout-submit-label">Pay with Stripe</span>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="summary-card">
+      <h2 class="h5 fw-bold">Order Summary</h2>
+      {% for item in cart.items %}
+      <div class="d-flex justify-content-between mt-3">
+        <div>
+          <div class="fw-semibold">{{ item.product.name }}</div>
+          <div class="small text-muted">Qty {{ item.quantity }} × ${{ '%.2f'|format(item.product.effective_price) }}</div>
+        </div>
+        <strong>${{ '%.2f'|format(item.line_total) }}</strong>
+      </div>
+      {% endfor %}
+      <hr>
+      <div class="d-flex justify-content-between"><span>Subtotal</span><strong>${{ '%.2f'|format(subtotal) }}</strong></div>
+      <div class="d-flex justify-content-between mt-2"><span>Shipping</span><strong>${{ '%.2f'|format(shipping) }}</strong></div>
+      <div class="d-flex justify-content-between mt-2 fs-5"><span>Total</span><strong>${{ '%.2f'|format(total) }}</strong></div>
+      <p class="small text-muted mt-3 mb-0" id="checkout-hint">You will be redirected to Stripe Checkout (test mode). Card details never touch this server.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  const stripeHint = "You will be redirected to Stripe Checkout (test mode). Card details never touch this server.";
+  const stripeQrHint = "A QR code will open so you can scan Stripe Checkout on your phone (or open the link here).";
+  const visaHint = "Card details are sent to your Flask server and authenticated to Visa with an X-Pay Token.";
+  const visaQrHint = "A QR code opens the Visa pay page. Enter card details there (4111… works in demo mode).";
+  const panel = document.getElementById("visa-card-fields");
+  const label = document.getElementById("checkout-submit-label");
+  const hint = document.getElementById("checkout-hint");
+  const radios = document.querySelectorAll('input[name="payment_method"]');
+
+  function sync() {
+    const method = document.querySelector('input[name="payment_method"]:checked')?.value || "stripe";
+    const isVisa = method === "visa";
+    panel.classList.toggle("d-none", !isVisa);
+    if (method === "visa") {
+      label.textContent = "Pay with Visa";
+      hint.textContent = visaHint;
+    } else if (method === "visa_qr") {
+      label.textContent = "Show Visa QR";
+      hint.textContent = visaQrHint;
+    } else if (method === "stripe_qr") {
+      label.textContent = "Show Stripe QR";
+      hint.textContent = stripeQrHint;
+    } else {
+      label.textContent = "Pay with Stripe";
+      hint.textContent = stripeHint;
+    }
+  }
+
+  radios.forEach((r) => r.addEventListener("change", sync));
+  sync();
+})();
+</script>
+{% endblock %}

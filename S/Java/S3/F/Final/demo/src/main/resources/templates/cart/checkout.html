@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Checkout — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div th:if="${message}" class="container" style="padding-top:1rem"><div class="alert alert-success" th:text="${message}"></div></div>
+<div th:if="${error}" class="container" style="padding-top:1rem"><div class="alert alert-error" th:text="${error}"></div></div>
+
+<main class="main-content">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <a th:href="@{/cart}">Cart</a>
+      <span class="sep">/</span>
+      <span>Checkout</span>
+    </nav>
+
+    <div class="checkout-steps">
+      <div class="step done">1. Cart</div>
+      <div class="step active">2. Shipping &amp; Payment</div>
+      <div class="step">3. Confirmation</div>
+    </div>
+
+    <form th:action="@{/checkout/place}" method="post">
+      <div class="cart-layout">
+        <div>
+          <div class="form-card">
+            <h3>Shipping Address</h3>
+            <div th:if="${addresses != null and !#lists.isEmpty(addresses)}" style="margin-bottom:1rem">
+              <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:.5rem">Saved addresses</p>
+              <label class="radio-card" th:each="addr, iter : ${addresses}"
+                     th:attr="data-full-name=${addr.fullName},
+                              data-phone=${addr.phone},
+                              data-province=${addr.province},
+                              data-district=${addr.district},
+                              data-commune=${addr.commune},
+                              data-street=${addr.street},
+                              data-country=${addr.country}"
+                     onclick="fillAddress(this)">
+                <input type="radio" name="savedAddress" th:checked="${iter.index == 0}"/>
+                <div>
+                  <strong th:text="${addr.fullName}">Name</strong> ·
+                  <span th:text="${addr.phone}">Phone</span><br/>
+                  <span style="font-size:.85rem;color:var(--text-secondary)" th:text="${addr.fullAddress}">Address</span>
+                </div>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" required
+                       th:value="${addresses != null and !#lists.isEmpty(addresses) ? addresses[0].fullName : (currentUser != null ? currentUser.fullName : '')}"/>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone *</label>
+                <input type="tel" id="phone" name="phone" required
+                       th:value="${addresses != null and !#lists.isEmpty(addresses) ? addresses[0].phone : (currentUser != null ? currentUser.phone : '')}"/>
+              </div>
+              <div class="form-group">
+                <label for="country">Country *</label>
+                <select id="country" name="country" required>
+                  <option value="">Select country</option>
+                  <option th:each="c : ${countryOptions}" th:value="${c}" th:text="${c}"
+                          th:selected="${addresses != null and !#lists.isEmpty(addresses) and addresses[0].country == c}"></option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="province">Province / State *</label>
+                <input type="text" id="province" name="province" required
+                       th:value="${addresses != null and !#lists.isEmpty(addresses) ? addresses[0].province : ''}"
+                       placeholder="e.g. Phnom Penh, California"/>
+              </div>
+              <div class="form-group">
+                <label for="district">District / City *</label>
+                <input type="text" id="district" name="district" required
+                       th:value="${addresses != null and !#lists.isEmpty(addresses) ? addresses[0].district : ''}"/>
+              </div>
+              <div class="form-group">
+                <label for="commune">Commune / Sangkat</label>
+                <input type="text" id="commune" name="commune"
+                       th:value="${addresses != null and !#lists.isEmpty(addresses) ? addresses[0].commune : ''}"/>
+              </div>
+              <div class="form-group">
+                <label for="street">Street Address *</label>
+                <input type="text" id="street" name="street" required
+                       th:value="${addresses != null and !#lists.isEmpty(addresses) ? addresses[0].street : ''}"
+                       placeholder="House number, street name"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>Delivery Option</h3>
+            <label class="radio-card">
+              <input type="radio" name="deliveryType" value="STANDARD" checked/>
+              <div>
+                <strong>Standard Delivery</strong>
+                <div style="font-size:.85rem;color:var(--text-secondary)">2–5 business days · Free over $50</div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="deliveryType" value="EXPRESS"/>
+              <div>
+                <strong>Express Delivery</strong>
+                <div style="font-size:.85rem;color:var(--text-secondary)">1–2 business days · Priority handling</div>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-card">
+            <h3>Payment Method</h3>
+            <label class="radio-card">
+              <input type="radio" name="paymentMethod" value="CREDIT_CARD" checked/>
+              <div><strong>Credit Card</strong><div style="font-size:.85rem;color:var(--text-secondary)">Visa, Mastercard, JCB</div></div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="paymentMethod" value="VISA"/>
+              <div><strong>Visa</strong><div style="font-size:.85rem;color:var(--text-secondary)">Pay with Visa debit/credit</div></div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="paymentMethod" value="STRIPE"/>
+              <div><strong>Stripe</strong><div style="font-size:.85rem;color:var(--text-secondary)">Secure card payment via Stripe</div></div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="paymentMethod" value="QR_PAYMENT"/>
+              <div><strong>QR Payment</strong><div style="font-size:.85rem;color:var(--text-secondary)">ABA, Wing, or KHQR</div></div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="paymentMethod" value="CASH_ON_DELIVERY"/>
+              <div><strong>Cash on Delivery</strong><div style="font-size:.85rem;color:var(--text-secondary)">Pay when you receive the package</div></div>
+            </label>
+          </div>
+        </div>
+
+        <aside class="cart-summary">
+          <h3 style="margin-bottom:1rem">Order Summary</h3>
+          <div th:each="entry : ${groupedCart}" style="margin-bottom:.75rem">
+            <div style="font-weight:700;font-size:.85rem;margin-bottom:.35rem" th:text="${entry.key.storeName}">Seller</div>
+            <div th:each="item : ${entry.value}" class="summary-row">
+              <span th:text="${item.product.name + ' ×' + item.quantity}">Item</span>
+              <span th:text="${'$' + #numbers.formatDecimal(item.product.price * item.quantity, 1, 2)}">$0</span>
+            </div>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span th:text="${'$' + #numbers.formatDecimal(subtotal, 1, 2)}">$0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span th:text="${'$' + #numbers.formatDecimal(subtotal, 1, 2)}">$0.00</span>
+          </div>
+          <button type="submit" class="btn btn-accent btn-block" style="width:100%;margin-top:1rem">Place Order</button>
+          <a th:href="@{/cart}" class="btn btn-outline btn-block" style="width:100%;margin-top:.5rem;text-align:center">Back to Cart</a>
+        </aside>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+<script>
+function fillAddress(el) {
+  document.getElementById('fullName').value = el.dataset.fullName || '';
+  document.getElementById('phone').value = el.dataset.phone || '';
+  document.getElementById('province').value = el.dataset.province || '';
+  document.getElementById('district').value = el.dataset.district || '';
+  document.getElementById('commune').value = el.dataset.commune || '';
+  document.getElementById('street').value = el.dataset.street || '';
+  if (el.dataset.country) document.getElementById('country').value = el.dataset.country;
+}
+</script>
+</body>
+</html>

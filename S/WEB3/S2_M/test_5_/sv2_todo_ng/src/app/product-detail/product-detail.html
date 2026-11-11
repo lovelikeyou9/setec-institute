@@ -1,0 +1,31 @@
+<div class="product-card">
+    <!-- Product Image -->
+    @if(product != null ){
+    <div class="body">
+        <img class="product-image" src="{{ product.imageUrl }}" alt="{{ product.imageUrl }}">
+        <div class="product-info">
+            <h2 class="product-title">{{ product.name }}</h2>
+            <p class="product-desc">It is a long established fact that a reader will be distracted by the readable
+                content
+                of a page when looking at its layout.</p>
+
+            <p class="product-meta price">{{ product.price | currency }}</p>
+            <p class="product-meta qty">Quantity: 12</p>
+            <p class="product-meta">Image URL: <a href="https://via.placeholder.com/350x250" target="_blank">View
+                    Image</a>
+            </p>
+
+            <button class="btn">Add to Cart</button>
+        </div>
+    </div>
+    }
+
+    @if(product == null){
+        <div class="body">
+            <div class="col-md-12">
+                <h2>Product Not Found</h2>
+            </div>
+        </div>
+    }
+
+</div>

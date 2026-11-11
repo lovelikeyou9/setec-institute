@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | eCommax</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="rl-checkout">
+<header class="rl-header">
+    <div class="container rl-header-inner">
+        <a class="logo" th:href="@{/}"><span class="logo-icon">🛍</span> eCommax</a>
+        <div class="rl-secure">🔒 Secure Checkout</div>
+        <a class="rl-back" th:href="@{/cart}">← Return to cart</a>
+    </div>
+</header>
+
+<div class="container" th:if="${error}" style="padding-top:16px">
+    <div class="alert alert-error" th:text="${error}"></div>
+</div>
+
+<form th:action="@{/checkout/place-order}" method="post" class="container rl-grid" id="checkoutForm">
+    <div class="rl-main">
+        <!-- Contact -->
+        <section class="rl-section">
+            <div class="rl-section-head">
+                <h2>Contact</h2>
+                <a th:href="@{/logout}" class="rl-link">Log out</a>
+            </div>
+            <div class="rl-field">
+                <label>Email or phone number</label>
+                <input type="text" name="phone" th:value="${staff.userName} + '@email.com'" required>
+            </div>
+            <label class="rl-check">
+                <input type="checkbox" name="news" value="true" checked>
+                Email me with news and offers
+            </label>
+        </section>
+
+        <!-- Delivery -->
+        <section class="rl-section">
+            <h2>Delivery</h2>
+            <div class="rl-row-2">
+                <div class="rl-field">
+                    <label>Country / Region</label>
+                    <select name="country" required>
+                        <option>Cambodia</option>
+                        <option>United States</option>
+                        <option>Thailand</option>
+                        <option>Vietnam</option>
+                        <option>Singapore</option>
+                    </select>
+                </div>
+            </div>
+            <div class="rl-row-2">
+                <div class="rl-field">
+                    <label>First name</label>
+                    <input type="text" name="firstName" th:value="${staff.userName}" required>
+                </div>
+                <div class="rl-field">
+                    <label>Last name</label>
+                    <input type="text" name="lastName" value="Customer" required>
+                </div>
+            </div>
+            <div class="rl-field">
+                <label>Address</label>
+                <input type="text" name="address" placeholder="Street address, apartment, suite" required>
+            </div>
+            <div class="rl-row-3">
+                <div class="rl-field">
+                    <label>City</label>
+                    <input type="text" name="city" placeholder="Phnom Penh" required>
+                </div>
+                <div class="rl-field">
+                    <label>Province</label>
+                    <input type="text" name="province" placeholder="Phnom Penh" required>
+                </div>
+                <div class="rl-field">
+                    <label>Postal code</label>
+                    <input type="text" name="postal" placeholder="12000">
+                </div>
+            </div>
+            <div class="rl-field">
+                <label>Phone</label>
+                <input type="tel" name="mobile" placeholder="+855 12 345 678" required>
+            </div>
+            <input type="hidden" name="fullName" id="fullNameField" th:value="${staff.userName}">
+        </section>
+
+        <!-- Shipping method -->
+        <section class="rl-section">
+            <h2>Shipping method</h2>
+            <label class="rl-choice">
+                <span class="rl-choice-left">
+                    <input type="radio" name="shippingMethod" value="standard" data-fee="0" checked>
+                    <span>
+                        <strong>Standard Shipping</strong>
+                        <small>2–4 business days</small>
+                    </span>
+                </span>
+                <strong class="free-tag">FREE</strong>
+            </label>
+            <label class="rl-choice">
+                <span class="rl-choice-left">
+                    <input type="radio" name="shippingMethod" value="express" data-fee="4.99">
+                    <span>
+                        <strong>Express Shipping</strong>
+                        <small>1–2 business days</small>
+                    </span>
+                </span>
+                <strong>$4.99</strong>
+            </label>
+        </section>
+
+        <!-- Payment -->
+        <section class="rl-section">
+            <h2>Payment</h2>
+            <p class="rl-hint">All transactions are secure and encrypted.</p>
+
+            <label class="rl-pay selected" id="payCard">
+                <span class="rl-pay-top">
+                    <span><input type="radio" name="paymentMethod" value="Credit Card" checked> Credit card</span>
+                    <span class="card-brands">Visa · Mastercard · Amex</span>
+                </span>
+                <div class="rl-pay-body">
+                    <div class="rl-field">
+                        <label>Card number</label>
+                        <input type="text" name="cardNumber" placeholder="ACCT-000015" maxlength="19">
+                    </div>
+                    <div class="rl-row-2">
+                        <div class="rl-field">
+                            <label>Expiration (MM/YY)</label>
+                            <input type="text" name="expiry" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="rl-field">
+                            <label>Security code</label>
+                            <input type="text" name="cvv" placeholder="CVV" maxlength="4">
+                        </div>
+                    </div>
+                    <div class="rl-field">
+                        <label>Name on card</label>
+                        <input type="text" name="cardName" th:value="${staff.userName}">
+                    </div>
+                    <label class="rl-check">
+                        <input type="checkbox" name="sameBilling" value="true" checked>
+                        Use shipping address as billing address
+                    </label>
+                </div>
+            </label>
+
+            <label class="rl-pay">
+                <span class="rl-pay-top">
+                    <span><input type="radio" name="paymentMethod" value="Cash on Delivery"> Cash on Delivery</span>
+                </span>
+            </label>
+
+            <label class="rl-pay">
+                <span class="rl-pay-top">
+                    <span><input type="radio" name="paymentMethod" value="ABA / Wing"> ABA / Wing / KHQR</span>
+                </span>
+            </label>
+        </section>
+
+        <section class="rl-section">
+            <h2>Order note <span class="optional">(optional)</span></h2>
+            <div class="rl-field">
+                <textarea name="note" rows="3" placeholder="Add a note for the seller (gift wrap, delivery instructions...)"></textarea>
+            </div>
+        </section>
+
+        <button class="rl-pay-btn" type="submit">
+            Pay now · <span id="btnTotal" th:text="'$' + ${#numbers.formatDecimal(cartTotal, 1, 2)}">$0.00</span>
+        </button>
+        <p class="rl-terms">By placing this order, you agree to eCommax Terms of Service and Privacy Policy.</p>
+    </div>
+
+    <aside class="rl-summary">
+        <div class="rl-summary-box">
+            <h3>Order summary</h3>
+
+            <div class="rl-item" th:each="item : ${cart}">
+                <div class="rl-item-img">
+                    <span>📦</span>
+                    <em th:text="${item.qty}">1</em>
+                </div>
+                <div class="rl-item-meta">
+                    <strong th:text="${item.productName}">Product</strong>
+                    <small th:text="'$' + ${#numbers.formatDecimal(item.price, 1, 2)} + ' each'">$0</small>
+                </div>
+                <div class="rl-item-price" th:text="'$' + ${#numbers.formatDecimal(item.lineTotal, 1, 2)}">$0</div>
+            </div>
+
+            <div class="rl-totals">
+                <div class="rl-line">
+                    <span>Subtotal · <th:block th:text="${cartCount}">0</th:block> items</span>
+                    <span id="subtotal" th:text="'$' + ${#numbers.formatDecimal(cartTotal, 1, 2)}">$0</span>
+                </div>
+                <div class="rl-line">
+                    <span>Shipping</span>
+                    <span id="shippingFee" class="free-tag">FREE</span>
+                </div>
+                <div class="rl-line">
+                    <span>Estimated taxes</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="rl-line rl-total">
+                    <span>Total</span>
+                    <strong id="grandTotal" th:attr="data-subtotal=${cartTotal}"
+                            th:text="'$' + ${#numbers.formatDecimal(cartTotal, 1, 2)}">$0.00</strong>
+                </div>
+            </div>
+
+            <div class="rl-trust">
+                <div>🔒 SSL Secure Payment</div>
+                <div>↩ 7-day Easy Returns</div>
+                <div>🚚 Free shipping over $0</div>
+            </div>
+        </div>
+    </aside>
+</form>
+
+<footer class="rl-footer">
+    <div class="container">eCommax Checkout · All rights reserved</div>
+</footer>
+
+<script>
+(function () {
+  const grand = document.getElementById('grandTotal');
+  const feeEl = document.getElementById('shippingFee');
+  const btnTotal = document.getElementById('btnTotal');
+  const fullName = document.getElementById('fullNameField');
+  const first = document.querySelector('[name="firstName"]');
+  const last = document.querySelector('[name="lastName"]');
+  const subtotal = parseFloat(grand.dataset.subtotal || '0');
+
+  function money(n) { return '$' + n.toFixed(2); }
+
+  function updateShip() {
+    const selected = document.querySelector('[name="shippingMethod"]:checked');
+    const fee = selected ? parseFloat(selected.dataset.fee || '0') : 0;
+    feeEl.textContent = fee === 0 ? 'FREE' : money(fee);
+    feeEl.classList.toggle('free-tag', fee === 0);
+    const total = subtotal + fee;
+    grand.textContent = money(total);
+    btnTotal.textContent = money(total);
+  }
+
+  document.querySelectorAll('[name="shippingMethod"]').forEach(r => r.addEventListener('change', updateShip));
+  function syncName() {
+    if (fullName && first && last) fullName.value = (first.value + ' ' + last.value).trim();
+  }
+  if (first) first.addEventListener('input', syncName);
+  if (last) last.addEventListener('input', syncName);
+  updateShip();
+})();
+</script>
+</body>
+</html>

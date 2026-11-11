@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Sellers — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content">
+  <div class="container" style="padding-top:1.5rem">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <span>Sellers</span>
+    </nav>
+    <div class="section-head">
+      <div>
+        <h1 class="section-title">Trusted Sellers</h1>
+        <p class="section-sub">Verified stores for computers, networking, gaming, cameras &amp; every kind of tech</p>
+      </div>
+      <a th:href="@{/become-seller}" class="btn btn-accent">Become a Seller</a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(sellers)}" class="empty-state">
+      <div class="icon">🏪</div>
+      <h3>No sellers yet</h3>
+      <p>Be the first to open a store on MME.</p>
+    </div>
+
+    <div class="seller-grid">
+      <a th:each="s : ${sellers}" th:href="@{/seller/{id}(id=${s.id})}" class="seller-card">
+        <img th:src="${s.logoUrl}" th:alt="${s.storeName}" class="seller-logo"/>
+        <div class="seller-info">
+          <h3>
+            <span th:text="${s.storeName}">Store</span>
+            <span class="badge badge-verified" th:if="${s.verified}">✓ Verified</span>
+            <span class="badge badge-top" th:if="${s.level.name() == 'TOP'}">Top Seller</span>
+          </h3>
+          <div class="rating-row">
+            <span th:replace="~{fragments/stars :: rating(${s.rating})}"></span>
+            <span th:text="${s.rating}">4.9</span>
+          </div>
+          <div class="seller-stats">
+            <span th:text="${s.totalProducts + ' products'}">0 products</span> ·
+            <span th:text="${(s.followers != null ? s.followers : 0) + ' followers'}">0 followers</span> ·
+            <span th:text="${s.location}">Phnom Penh</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!-- 1.1
+<div class="container">
+
+    Top Menu
+    <app-top-menu></app-top-menu>
+
+    Main-Slider
+    <app-main-slider></app-main-slider>
+
+    Product Card 
+    <div class="row">
+        <app-product-card class="col-lg-3 col-md-3 col-sm-6 mt-4"></app-product-card>
+        <app-product-card class="col-lg-3 col-md-3 col-sm-6 mt-4"></app-product-card>
+        <app-product-card class="col-lg-3 col-md-3 col-sm-6 mt-4"></app-product-card>
+        <app-product-card class="col-lg-3 col-md-3 col-sm-6 mt-4"></app-product-card>
+
+    </div>
+
+
+</div>
+-->
+
+
+
+<!-- 1.2
+
+<div class="container">
+
+    !-- Top Menu --
+    <app-top-menu></app-top-menu>
+
+    !-- Main-Slider --
+    <app-main-slider></app-main-slider>
+
+    !-- Product Card --
+    <div class="row">
+        @for (product of products; track product.id) {
+            <app-product-card [product]="product" class="col-lg-3 col-md-3 col-sm-6 mt-4"></app-product-card>
+        }
+
+    </div>
+
+
+</div>
+
+-->
+
+
+
+<div class="container">
+
+    <!-- Top Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" routerLink="/">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/product">Product</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+
+            <!--
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+        </form>
+        -->
+
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button routerLink="/cart" class="btn btn-outline-success my-2 my-sm-0">Cart({{ cartService.getItem().length }})</button>
+
+
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <router-outlet />
+    </div>
+
+    
+
+    <!-- Footer -->
+    <div class="container my-5">
+        <!-- Footer -->
+        <footer class="text-center text-lg-start text-white" style="background-color: #3e4551">
+            <!-- Grid container -->
+            <div class="container p-4 pb-0">
+                <!-- Section: Links -->
+                <section class="">
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Grid column-->
+                        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">FOOTER CONTENT</h5>
+
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Molestiae modi cum ipsam ad, illo possimus laborum ut
+                                reiciendis obcaecati. Ducimus, quas. Corrupti, pariatur eaque?
+                                Reiciendis assumenda iusto sapiente inventore animi?
+                            </p>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">Links</h5>
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">Links</h5>
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">Links</h5>
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">Links</h5>
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </section>
+                <!-- Section: Links -->
+
+                <hr class="mb-4" />
+
+                <!-- Section: CTA -->
+                <section class="">
+                    <p class="d-flex justify-content-center align-items-center">
+                        <span class="me-3">Register for free</span>
+                        <button type="button" class="btn btn-outline-light btn-rounded">
+                            Sign up!
+                        </button>
+                    </p>
+                </section>
+                <!-- Section: CTA -->
+
+                <hr class="mb-4" />
+
+                <!-- Section: Social media -->
+                <section class="mb-4 text-center">
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                            class="fab fa-facebook-f"></i></a>
+
+                    <!-- Twitter -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                            class="fab fa-twitter"></i></a>
+
+                    <!-- Google -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                            class="fab fa-google"></i></a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                            class="fab fa-instagram"></i></a>
+
+                    <!-- Linkedin -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                            class="fab fa-linkedin-in"></i></a>
+
+                    <!-- Github -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                            class="fab fa-github"></i></a>
+                </section>
+                <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
+
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+                © 2025 Chou Yamata:
+                <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+    </div>
+    <!-- End of .container -->
+
+
+
+</div>
+
+
+
+
+
+<!-- 2
+@if (show_image) {
+    @for ( i of [1,2,3,4,5]; track i ) {
+        <img src="/slider/3bdd27.jpg" alt="3bdd27.jpg" [ngStyle]="{
+            'height': height + 'px',
+            'width' : width + 'px',
+            'object-fit': 'contain',
+            'border-radius': '50%'
+            }"
+        >
+    }
+}@else{
+    @for ( image of images; track image ) {
+        <img src="/slider/{{ image }}" alt="{{ image }}" [ngStyle]="{
+            'height': height + 'px',
+            'width' : width + 'px',
+            'object-fit': 'contain',
+            'border-radius': '50%'
+            }"
+        >
+    }
+}
+
+<hr>
+<input [disabled]="is_disable" type="button" value="Change Image" class="btn_" (click)="changeImage()">
+
+<input type="button" value="{{ is_disable == true ? 'Enable' : 'Disable' }}" class="btn_" (click)="changeDisable()">
+
+<input [disabled]="is_disable" type="button" value="Add Size" class="btn_" (click)="addSize()">
+
+<input [disabled]="is_disable" type="button" value="Remove Size" class="btn_" (click)="removeSize()">
+
+<input [disabled]="is_disable" type="button" value="toggleImage" class="btn_" (click)="toggleImage()">
+
+-->
+
+
+<!-- 3.1
+<h1>{{ std_name | uppercase }}</h1>
+<h1>{{ std_name | lowercase }}</h1>
+<h1>{{ std_name | titlecase }}</h1>
+<h1>{{ std_dob | date:'fullDate' }}</h1>
+<h1>{{ std_dob | date:'short' }}</h1>
+<h1>{{ std_dob | date:'EEEE, dd/MM/yyyy' }}</h1>
+-->
+
+<!-- 3.2
+<h1>Salary: {{ salary | number:"1.2-2" }}៛</h1>
+<h1>Salary: {{ salary | currency }}</h1>
+<h1>Salary: {{ salary | currency:"KHR":"៛" }}</h1>
+<h1>Salary: {{ 20/100 | percent  }}</h1>
+<h1>Salary: {{ "hello world" | slice:0:5  }}</h1>
+<h1>Salary: {{ [1,2,3,4,5,6,7] | slice:0:5  }}</h1>
+<h1>Json: {{ json_data | json }}</h1>
+<h1>case_ceil: {{ Math.ceil(18965) }}</h1>
+<h1>case_floor: {{ Math.floor(18965) }}</h1>
+<h1>case_in: {{ '18965' | khmerCurrency:"in" }}</h1>
+<h1>case_in: {{ '18965' | khmerCurrency:"out" }}</h1>
+-->
+
+
+
+
+<!--
+<router-outlet />
+-->

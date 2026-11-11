@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title th:text="${pageTitle}">Customer Profile — MME</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content">
+  <div class="container profile-page" style="padding-top:1.5rem;padding-bottom:2.5rem">
+    <nav class="breadcrumb">
+      <a th:href="@{/}">Home</a>
+      <span class="sep">/</span>
+      <span>Profile</span>
+      <span class="sep">/</span>
+      <span th:text="${displayName}">Customer</span>
+    </nav>
+
+    <div class="profile-cover-stack">
+      <div class="profile-cover store-banner"
+           th:style="|background-image:url('${profileUser.coverUrl != null and !#strings.isEmpty(profileUser.coverUrl) ? #strings.replace(profileUser.coverUrl,' ','%20') : '/uploads/avatars/cover%20photos/photo_2026-10-09_09-47-07.jpg'}');|">
+      </div>
+      <section class="profile-hero profile-hero-cover">
+        <div class="profile-avatar-lg" th:if="${profileUser.avatarUrl == null or #strings.isEmpty(profileUser.avatarUrl)}"
+             th:text="${initial}">U</div>
+        <img class="profile-avatar-lg-img" th:if="${profileUser.avatarUrl != null and !#strings.isEmpty(profileUser.avatarUrl)}"
+             th:src="${profileUser.avatarUrl}" th:alt="${displayName}"/>
+        <div class="profile-hero-copy">
+          <h1 th:text="${displayName}">Customer</h1>
+          <div class="profile-hero-meta">
+            <span class="status-pill blue" th:text="${buyerRank}">Regular Buyer</span>
+            <span th:if="${isSeller}" class="status-pill green">Also a seller</span>
+            <span class="muted"
+                  th:text="${'Member since ' + (memberSince != null ? #temporals.format(memberSince, 'MMM yyyy') : '—')}">Member since</span>
+          </div>
+          <p class="profile-store-desc">
+            Public shopper profile on MME. Personal contact details stay private.
+          </p>
+          <div class="profile-hero-actions">
+            <a class="btn btn-primary btn-sm" th:if="${isSeller and sellerStore != null}"
+               th:href="@{/profile/seller/{id}(id=${sellerStore.id})}">View store</a>
+            <a class="btn btn-outline btn-sm" sec:authorize="hasRole('CUSTOMER')"
+               th:if="${currentUser != null and currentUser.id == profileUser.id}"
+               th:href="@{/account/settings}">Edit profile &amp; cover</a>
+            <a class="btn btn-outline btn-sm" sec:authorize="hasRole('SELLER')"
+               th:if="${currentUser != null and currentUser.id == profileUser.id}"
+               th:href="@{/seller-dashboard/settings}">Edit profile &amp; cover</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="profile-kpi-grid">
+      <article class="profile-kpi">
+        <span class="label">Buyer rank</span>
+        <strong th:text="${buyerRank}">Active Buyer</strong>
+      </article>
+      <article class="profile-kpi">
+        <span class="label">Purchases</span>
+        <strong th:text="${#numbers.formatInteger(deliveredOrders, 1, 'COMMA')}">0</strong>
+      </article>
+      <article class="profile-kpi">
+        <span class="label">Reviews written</span>
+        <strong th:text="${reviewCount}">0</strong>
+      </article>
+      <article class="profile-kpi">
+        <span class="label">Avg rating given</span>
+        <strong th:text="${reviewCount > 0 ? (#numbers.formatDecimal(avgRatingGiven, 1, 1) + ' ★') : '—'}">4.5 ★</strong>
+      </article>
+    </div>
+
+    <section class="form-card profile-section" th:if="${isSeller and sellerStore != null}">
+      <h3 class="profile-section-title">Their store</h3>
+      <div class="profile-store-card">
+        <img th:src="${sellerStore.logoUrl}" th:alt="${sellerStore.storeName}"/>
+        <div>
+          <h4 th:text="${sellerStore.storeName}">Store</h4>
+          <p class="profile-store-desc" th:text="${sellerStore.description}">Description</p>
+          <div class="seller-stats">
+            <span th:text="${sellerStore.rating + ' ★'}">4.9 ★</span> ·
+            <span th:text="${sellerStore.totalProducts + ' products'}">0 products</span> ·
+            <span th:text="${sellerStore.totalSales + ' sales'}">0 sales</span>
+          </div>
+          <a th:href="@{/seller/{id}(id=${sellerStore.id})}" class="btn btn-outline btn-sm" style="margin-top:.75rem">Open seller profile</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-card profile-section">
+      <h3 class="profile-section-title">Reviews by <span th:text="${displayName}">Customer</span></h3>
+      <div th:if="${#lists.isEmpty(reviews)}" class="empty-state" style="padding:1.5rem">
+        <div class="icon">⭐</div>
+        <h3>No public reviews yet</h3>
+        <p>When this shopper reviews products, they will show here.</p>
+      </div>
+      <article class="review-card" th:each="r : ${reviews}">
+        <div class="review-header">
+          <div class="review-avatar" th:text="${initial}">U</div>
+          <div class="review-meta">
+            <div class="rating-row">
+              <span class="stars">
+                <th:block th:each="i : ${#numbers.sequence(1,5)}">
+                  <span th:classappend="${i <= r.rating} ? ' on'" th:text="'★'">★</span>
+                </th:block>
+              </span>
+              <span th:text="${r.rating}">5</span>
+              <span class="muted"
+                    th:text="${r.createdAt != null ? #temporals.format(r.createdAt, 'dd MMM yyyy') : ''}">01 Jan</span>
+            </div>
+            <p class="review-product-line" th:if="${r.product != null}">
+              Reviewed
+              <a th:href="@{/product/{slug}(slug=${r.product.slug})}" th:text="${r.product.name}">Product</a>
+              <span th:if="${r.product.seller != null}">
+                from
+                <a th:href="@{/seller/{id}(id=${r.product.seller.id})}" th:text="${r.product.seller.storeName}">Store</a>
+              </span>
+            </p>
+          </div>
+        </div>
+        <p class="review-body" th:text="${r.comment}">Review comment</p>
+      </article>
+    </section>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<nav th:replace="~{fragments/mobile-nav :: mobileNav}"></nav>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
