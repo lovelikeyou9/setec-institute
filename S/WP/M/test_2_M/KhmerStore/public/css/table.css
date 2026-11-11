@@ -1,0 +1,36 @@
+
+.table .row {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid silver;
+}
+.table .row.rowHeading {
+    padding: 10px 0;
+    background-color: #fcb681;
+    color: brown;
+    font-size: 18px;
+}
+.table .row div[class^=column] {
+    padding: 8px;
+}
+.table .row .column-01 { width: 10%; }
+.table .row .column-02 { width: 20%; }
+.table .row .column-03 { width: 20%; }
+.table .row .column-04 { width: 20%; }
+.table .row .column-05 { width: 10%; }
+.table .row .column-06 { width: 8%; }
+.table .row .column-07 { width: 6%; }
+.table .row .column-08 { width: 6%; }
+.table .row a {
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.table .row a:hover {
+    color: black;
+    font-size: 16px;
+    border-bottom: 1px dashed black;
+}
+.table .row .column-06 a { color: green; }
+.table .row .column-07 a { color: orange; }
+.table .row .column-08 a { color: red; }

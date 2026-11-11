@@ -1,0 +1,73 @@
+.table .row {display: flex; gap: 8px; border-bottom: 1px solid silver;}
+.table .row:last-child {
+    border-bottom: none;
+}
+.table .row.rowHeading {
+    padding: 10px 0;  background-color: #fcb681;
+    color: brown; font-size: 18px;
+}
+.table .row div[class^=column] { padding: 8px; }
+.table .row .column-01 { width: 6%; }
+.table .row .column-02 { width: 14%; }
+.table .row .column-03 { width: 12%; }
+.table .row .column-04 { width: 10%; }
+.table .row .column-05 { width: 8%; }
+.table .row .column-06 { width: 12%; }
+.table .row .column-07 { width: 12%; }
+.table .row .column-08 { width: 8%; }
+.table .row .column-09 { width: 8%; }
+.table .row .column-10 { width: 8%; }
+.table .row a {
+    font-size: 14px; font-width: bold; text-decoration: none;
+}
+.table .row a:hover {
+    color: black; font-size: 16px; border-bottom: 1px dashed black;
+}
+.table .row .column-08 a { color: green }
+.table .row .column-09 a { color: #b47500; }
+.table .row .column-10 a { color: red; }
+
+.pagination-wrap {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.pagination-info {
+    color: #935121;
+    font-size: 14px;
+}
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+.pagination .page-link {
+    display: inline-block;
+    min-width: 34px;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #935121;
+    background-color: #ffdaa9;
+    border: 1px solid #bd6b2e;
+    font-size: 14px;
+}
+.pagination .page-link:hover {
+    background-color: #fcb681;
+    color: brown;
+}
+.pagination .page-link.active {
+    background-color: #bd6b2e;
+    color: #fff;
+    border-color: #935121;
+    font-weight: bold;
+}
+.pagination .page-link.disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+}

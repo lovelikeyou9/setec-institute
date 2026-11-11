@@ -1,0 +1,151 @@
+.form-container {
+    width: 100%;
+}
+
+.form-header {
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 10px;
+}
+.form-header h2 {
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+.product-form {
+display: flex;
+flex-direction: column;
+gap: 18px;
+}
+
+.form-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 18px;
+}
+
+.form-group {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.form-group.full-width {
+grid-column: span 2;
+}
+
+label {
+font-size: 14px;
+font-weight: 600;
+color: #4a5568;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+width: 100%;
+padding: 10px 14px;
+border: 1px solid #cbd5e0;
+font-size: 14px;
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+outline: none;
+background-color: #f8fafc;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+border-color: #3182ce;
+background-color: #fff;
+box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+textarea {
+resize: vertical;
+min-height: 90px;
+}
+
+input[type="file"] {
+padding: 8px;
+background: #f8fafc;
+border: 1px dashed #cbd5e0;
+cursor: pointer;
+}
+
+.checkbox-group {
+display: flex;
+align-items: center;
+gap: 10px;
+background-color: #fff5f5;
+padding: 12px;
+border: 1px solid #feb2b2;
+}
+
+.checkbox-group label {
+color: #c53030;
+cursor: pointer;
+}
+
+input[type="checkbox"] {
+width: 18px;
+height: 18px;
+accent-color: #e53e3e;
+cursor: pointer;
+
+}
+#checkboxWrapper {
+    display: flex !important; justify-content: start !important;
+    gap: 10px;
+}
+
+
+.form-actions {
+display: flex;
+justify-content: flex-end;
+gap: 12px;
+/* margin-top: 10px; */
+}
+
+.btn {
+padding: 10px 20px;
+font-size: 14px;
+font-weight: 600;
+border: none;
+cursor: pointer;
+transition: background-color 0.2s ease;
+}
+
+.btn-submit {
+background-color: #3182ce;
+color: #ffffff;
+}
+
+.btn-submit:hover {
+background-color: #2b6cb0;
+}
+
+.btn-reset {
+background-color: #edf2f7;
+color: #4a5568;
+}
+
+.btn-reset:hover {
+background-color: #e2e8f0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+.form-grid {
+    grid-template-columns: 1fr;
+}
+.form-group.full-width {
+    grid-column: span 1;
+}
+}
+
