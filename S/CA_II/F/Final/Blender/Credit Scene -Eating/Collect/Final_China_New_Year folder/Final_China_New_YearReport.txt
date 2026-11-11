@@ -1,0 +1,111 @@
+Report created: 
+	9/23/2026	4:38:51 PM
+
+Project name: Final_China_New_Year.aep
+
+Source files collected to: 
+	C:\Users\Admin\OneDrive\Desktop\S\CA_II\F\Final\Blender\Credit Scene -Eating\Collect\Final_China_New_Year folder
+
+Source files collected: For all comps
+
+Collected comps:  
+	Comp 1
+	Final_China_New_Year
+	Final_China_New_Year (1)
+	Final_China_New_Year (2)
+	Final_China_New_Year (3)
+	Final_China_New_Year (4)
+	Final_China_New_Year (5)
+	Final_China_New_Year (6)
+	Final_China_New_Year (7)
+	Final_China_New_Year (8)
+	Final_China_New_Year (9)
+	Final_China_New_Year (10)
+	Final_China_New_Year (11)
+	Final_China_New_Year (12)
+	Final_China_New_Year (13)
+	Final_China_New_Year (14)
+	Final_China_New_Year (15)
+	Final_China_New_Year (16)
+	Final_China_New_Year (17)
+	Final_China_New_Year (18)
+	Final_China_New_Year (19)
+	Final_China_New_Year (20)
+	Final_China_New_Year (21)
+	Final_China_New_Year (22)
+	Final_China_New_Year (23)
+	Final_China_New_Year (24)
+	Final_China_New_Year (25)
+	Final_China_New_Year (26)
+	Final_China_New_Year (27)
+	Final_China_New_Year (28)
+	Final_China_New_Year (29)
+	Final_China_New_Year (31)
+	Scene 9
+	Scene 8
+	Scene 7
+	Scene 6
+	Scene 5
+	Group 2
+	Group 1
+	Scene 4
+	basket
+	Scene 3
+	Scene 2 2
+	Lamp 2
+	Lamp 1
+	Scene 1
+	Pre-comp 1
+	Scene 1 Comp 1
+	Scene 2 2 Comp 1
+	Scene 3 Comp 1
+	Pre-comp 2
+	Scene 4 Comp 1
+	Shape Layer 2 Comp 1
+	Comp 2
+	
+Number of collected files:  6
+
+Size of collected files:  136 MB
+
+Collected source files: 
+	C:\Users\Admin\OneDrive\Desktop\S\SM_2\S1\F\Final_China_New_Year\Image\21234988.png
+	C:\Users\Admin\OneDrive\Desktop\S\SM_2\S1\F\Final_China_New_Year\Image\screen iphone 17.png
+	C:\Users\Admin\OneDrive\Desktop\S\SM_2\S1\F\Final_China_New_Year\Photoshop\Final_China_New_Year.psd
+	C:\Users\Admin\OneDrive\Desktop\S\SM_2\S1\F\Final_China_New_Year\Video\Chinese new year 2025 Year Of the Snake - 15 Day's to go - Chinese new year trailer.mp4
+	C:\Users\Admin\OneDrive\Desktop\S\SM_2\S1\F\Final_China_New_Year\Video\Explosion of gold particles on black screen. Golden golden particles exploding through space.mp4
+	C:\Users\Admin\OneDrive\Desktop\S\SM_2\S1\F\Final_China_New_Year\Video\vecteezy_chinese-new-year-background-with-copy-space_5165794.mp4
+	
+Rendering plug-ins:
+	Advanced 3D
+	Classic 3D
+	
+Effects used:  11
+
+Effect:  Brightness & Contrast
+	
+Effect:  Change to Color
+	
+Effect:  Color Balance
+	
+Effect:  Curves
+	
+Effect:  Gaussian Blur
+	
+Effect:  Gaussian Blur (Legacy)
+	
+Effect:  Hue/Saturation
+	
+Effect:  Lens Flare
+	
+Effect:  Saber
+	
+Effect:  Shatter
+	
+Effect:  Turbulent Displace
+	
+
+Layer:  Text Layer
+	External dependencies:  
+		Font family: “AKbalthom Kampuchearath”, Font style: “Regular”
+
