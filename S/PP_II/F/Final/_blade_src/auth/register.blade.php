@@ -1,0 +1,56 @@
+@extends('layouts.store')
+@section('title', 'Register — MMT')
+@section('content')
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <img src="{{ asset('images/mme-icon.png') }}" alt="" width="44" height="44"/>
+      <div>
+        <strong>MMT</strong>
+        <span>Modern Multiple Technology</span>
+      </div>
+    </div>
+    <h1>Create account</h1>
+    <p class="subtitle">Register as a customer first. After you log in, you can apply to Become a Seller.</p>
+
+    @if($errors->any())
+      <div class="alert alert-error" data-keep-alert>
+        @foreach($errors->all() as $e)<div>{{ $e }}</div>@endforeach
+      </div>
+    @endif
+    @if(session('error'))
+      <div class="alert alert-error" data-keep-alert>{{ session('error') }}</div>
+    @endif
+
+    <form action="{{ url('/register') }}" method="post" class="auth-form">
+      @csrf
+      <div class="form-group">
+        <label for="full_name">Full Name</label>
+        <input type="text" id="full_name" name="full_name" required placeholder="Sokha Chea" value="{{ old('full_name') }}"/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="you@email.com" value="{{ old('email') }}"/>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="012 345 678" value="{{ old('phone') }}"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required minlength="6" placeholder="At least 6 characters"/>
+      </div>
+      <div class="form-group">
+        <label for="password_confirmation">Confirm Password</label>
+        <input type="password" id="password_confirmation" name="password_confirmation" required minlength="6" placeholder="Repeat password"/>
+      </div>
+      <button type="submit" class="btn btn-accent btn-block auth-submit">Register</button>
+    </form>
+
+    <p class="auth-switch">
+      Already have an account?
+      <a href="{{ url('/login') }}">Login</a>
+    </p>
+  </div>
+</div>
+@endsection

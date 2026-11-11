@@ -1,0 +1,11 @@
+.header_style {
+  color: red;
+  background-color: yellow;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.img_style {
+  width: 200px;
+  border-radius: 10px;
+}

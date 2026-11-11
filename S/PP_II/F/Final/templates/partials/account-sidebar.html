@@ -1,0 +1,31 @@
+{% set nav = nav_for('account', activeNav|default('')) %}
+<aside class="dash-sidebar">
+  <div class="brand-block">
+    <strong>My Account</strong>
+    <span>{{ current_user.full_name if (current_user.full_name is defined and current_user.full_name is not none) else 'Customer' }}</span>
+  </div>
+  <nav class="dash-nav">
+    <a href="{{ url('/account') }}" class="{{ 'active' if (nav == 'overview') else '' }}">Overview</a>
+    <a href="{{ url('/account/orders') }}" class="{{ 'active' if (nav in ['orders', 'my-orders']) else '' }}">Orders</a>
+    <a href="{{ url('/account/wishlist') }}" class="{{ 'active' if (nav == 'wishlist') else '' }}">Wishlist</a>
+    <a href="{{ url('/account/cart') }}" class="{{ 'active' if (nav == 'cart') else '' }}">Cart</a>
+    <a href="{{ url('/account/notifications') }}" class="{{ 'active' if (nav == 'notifications') else '' }}">Notifications</a>
+    <a href="{{ url('/account/addresses') }}" class="{{ 'active' if (nav == 'addresses') else '' }}">Addresses</a>
+    <a href="{{ url('/account/settings') }}" class="{{ 'active' if (nav in ['settings', 'account-settings']) else '' }}">Settings</a>
+
+    <span class="dash-nav-label">Shop</span>
+    <div class="dash-nav-group">
+      <button type="button" class="dash-nav-toggle" aria-expanded="false">
+        <span>Browse</span>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="dash-nav-sub">
+        <a href="{{ url('/products') }}">Products List</a>
+        <a href="{{ url('/categories') }}">Category</a>
+        <a href="{{ url('/brands') }}">Brand</a>
+      </div>
+    </div>
+  </nav>
+</aside>

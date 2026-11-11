@@ -1,0 +1,79 @@
+
+{% extends "admin/master.html" %}
+
+{% block contect %}
+
+  <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="mb-0">User</h3>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-end">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User</li>
+              </ol>
+            </div>
+          </div>
+          <!--end::Row-->
+        </div>
+        <!--end::Container-->
+      </div>
+
+      <div class="app-content">
+        <div class="container-fluid">
+
+          <div class="row">
+
+            <div class="col-md-12">
+              <h3 class="card-title">
+                <a href="{{ url_for('admin_bp.user') }}" class="btn btn-outline-secondary float-right"><i class="bi bi-arrow-left-circle"></i>Back</a>
+              </h3>
+            </div>
+
+            <div class="card-body">
+              <form action="{{ url_for('admin_bp.delete_user') }}" method="POST">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <h2 style="color: firebrick; background-color: yellow; display: inline-block;">Are you sure you want to delete this user?</h2>
+
+                <center>
+                  {% if user.profile %}
+                  <img
+                    src="{{ url_for('static', filename='images/user/' ~ user.id ~ '_thum_' ~ user.profile) }}"
+                    alt="User Image"
+                    id="image_preview"
+                    style=""
+                    class="img-size-50 rounded-circle"
+                    onerror="this.src='{{ url_for('static', filename='admin/No_Image_Available.jpg') }}'"
+                  >
+                  {% else %}
+                  <img
+                    src="{{ url_for('static', filename='admin/No_Image_Available.jpg') }}"
+                    alt="User Image"
+                    class="img-size-50 rounded-circle"
+                  >
+                  {% endif %}
+                  <ul
+                    style=""
+                  >
+                    <li>Name : {{ user.username }}</li>
+                    <li>Email : {{ user.email }}</li>
+                    <li>Role : {{ user.role }}</li>
+                  </ul>
+                </center>
+
+                <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</button>
+                <a href="{{ url_for('admin_bp.user') }}" class="btn btn-outline-secondary float-right"><i class="bi bi-x-circle"></i>Cancel</a>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+  </main>
+
+{% endblock %}

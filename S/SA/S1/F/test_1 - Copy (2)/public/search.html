@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Computer Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-desktop"></i>
+                <span>ComputerStore</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/products"><i class="fas fa-laptop"></i> Products</a></li>
+                <li><a href="/collections"><i class="fas fa-layer-group"></i> Collections</a></li>
+                <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+            
+            <div class="nav-right">
+                <div class="search-container">
+                    <form id="searchForm">
+                        <input type="text" class="search-input" placeholder="Search products..." id="searchInput" value="gaming">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <a href="/cart" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                
+                <div class="auth-links">
+                    <a href="/login" class="btn btn-outline btn-sm">Login</a>
+                    <a href="/register" class="btn btn-primary btn-sm">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li><i class="fas fa-chevron-right"></i></li>
+                <li>Search Results</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container" style="padding: 2rem 0 4rem;">
+        <h1 style="color: var(--dark); margin-bottom: 0.5rem;">Search Results</h1>
+        <p style="color: var(--gray); margin-bottom: 2rem;">Showing results for "gaming"</p>
+        
+        <!-- Search Filters -->
+        <div class="products-page">
+            <div class="filters-sidebar">
+                <h3>Refine Results</h3>
+                
+                <div class="filter-group">
+                    <h4>Price Range</h4>
+                    <div class="price-range">
+                        <input type="range" min="0" max="5000" value="0" class="slider" id="priceMin">
+                        <input type="range" min="0" max="5000" value="5000" class="slider" id="priceMax">
+                        <div class="price-values">
+                            <span id="minPriceValue">$0</span> - 
+                            <span id="maxPriceValue">$5000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Category</h4>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" checked>
+                            <span>Gaming PCs</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox">
+                            <span>Laptops</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox">
+                            <span>Components</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" checked>
+                            <span>Peripherals</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Sort By</h4>
+                    <select class="form-control">
+                        <option>Relevance</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest</option>
+                        <option>Customer Rating</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-primary btn-block">Apply Filters</button>
+                <button class="btn btn-outline btn-block">Clear All</button>
+            </div>
+            
+            <!-- Search Results -->
+            <div class="products-main">
+                <div class="products-header">
+                    <div>
+                        <h2 style="color: var(--dark);">8 products found</h2>
+                        <p style="color: var(--gray); font-size: 0.9rem;">in 0.24 seconds</p>
+                    </div>
+                    <div class="products-count">Showing 1-8 of 8</div>
+                </div>
+                
+                <div class="products-grid" id="searchResults">
+                    <!-- Results will be loaded by JavaScript -->
+                    <div class="loading-spinner">Loading search results...</div>
+                </div>
+                
+                <!-- Search Tips -->
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: var(--shadow); margin-top: 2rem;">
+                    <h3 style="color: var(--dark); margin-bottom: 1rem;">Search Tips</h3>
+                    <ul style="color: var(--gray); line-height: 1.8;">
+                        <li>Try using more specific keywords like "RTX 4090" or "mechanical keyboard"</li>
+                        <li>Check your spelling or try different variations</li>
+                        <li>Browse by category using the filters on the left</li>
+                        <li>Can't find what you're looking for? <a href="/contact" style="color: var(--primary);">Contact our support team</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ComputerStore</h3>
+                    <p>Find exactly what you're looking for.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Searches</h3>
+                    <ul>
+                        <li><a href="/search?q=gaming">Gaming PCs</a></li>
+                        <li><a href="/search?q=laptop">Laptops</a></li>
+                        <li><a href="/search?q=monitor">Monitors</a></li>
+                        <li><a href="/search?q=keyboard">Keyboards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Need Help Searching?</h3>
+                    <p>Our product experts can help you find the perfect item.</p>
+                    <a href="/contact" class="btn btn-outline btn-sm mt-2">Get Help</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Computer Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Load search results
+        async function loadSearchResults() {
+            try {
+                const response = await fetch('/api/products');
+                const products = await response.json();
+                
+                const searchTerm = 'gaming'; // This would normally come from URL params
+                const filteredProducts = products.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    product.description.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                
+                const container = document.getElementById('searchResults');
+                if (filteredProducts.length === 0) {
+                    container.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem;">
+                            <i class="fas fa-search" style="font-size: 3rem; color: var(--gray-light); margin-bottom: 1rem;"></i>
+                            <h3 style="color: var(--gray); margin-bottom: 1rem;">No results found</h3>
+                            <p style="color: var(--gray);">Try adjusting your search terms or filters</p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = filteredProducts.map(product => `
+                        <div class="card">
+                            ${product.isFeatured ? '<span class="card-badge">Featured</span>' : ''}
+                            <img src="${product.image || 'https://via.placeholder.com/300x200?text=Computer'}" 
+                                 alt="${product.name}" 
+                                 class="card-image">
+                            <div class="card-content">
+                                <h3>${product.name}</h3>
+                                <p>${product.description ? product.description.substring(0, 80) + '...' : ''}</p>
+                                <div class="price">$${product.price.toFixed(2)}</div>
+                                <div class="stock-status">
+                                    ${product.quantity > 0 ? 
+                                        `<span class="in-stock"><i class="fas fa-check-circle"></i> In Stock</span>` : 
+                                        '<span class="out-of-stock"><i class="fas fa-times-circle"></i> Out of Stock</span>'
+                                    }
+                                </div>
+                                <div class="card-actions">
+                                    <button class="btn btn-primary btn-block" onclick="addToCart('${product._id}')">
+                                        <i class="fas fa-cart-plus"></i> Add to Cart
+                                    </button>
+                                    <a href="/product/${product._id}" class="btn btn-outline btn-block">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading search results:', error);
+            }
+        }
+        
+        // Add to cart function
+        async function addToCart(productId) {
+            try {
+                const response = await fetch('/api/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        productId: productId,
+                        quantity: 1
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('Product added to cart!');
+                    updateCartCount();
+                } else {
+                    alert('Failed to add to cart: ' + (data.error || 'Unknown error'));
+                }
+                
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+                alert('Network error. Please try again.');
+            }
+        }
+        
+        // Load cart count
+        async function updateCartCount() {
+            try {
+                const response = await fetch('/api/cart');
+                const data = await response.json();
+                const cartCount = document.getElementById('cartCount');
+                if (cartCount) {
+                    const totalItems = data.totalItems || 0;
+                    cartCount.textContent = totalItems;
+                }
+            } catch (error) {
+                console.error('Error updating cart count:', error);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSearchResults();
+            updateCartCount();
+            
+            // Search form
+            const searchForm = document.getElementById('searchForm');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput && searchInput.value.trim()) {
+                        // In real app, this would redirect to search with query params
+                        alert('Searching for: ' + searchInput.value);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Computer Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .notification {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            z-index: 9999;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(10px);
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-success {
+            background: rgba(16, 185, 129, 0.9);
+            border-left: 5px solid #10b981;
+        }
+
+        .notification-error {
+            background: rgba(239, 68, 68, 0.9);
+            border-left: 5px solid #ef4444;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%) translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%) translateY(-20px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-desktop"></i>
+                <span>ComputerStore</span>
+            </a>
+
+            <ul class="nav-menu">
+                <!-- <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/products"><i class="fas fa-laptop"></i> Products</a></li> -->
+            </ul>
+
+            <div class="nav-right">
+                <a href="/cart" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Welcome Back</h2>
+            <p class="text-center mb-3" style="color: var(--gray);">Sign in to your account</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+
+                <div class="d-flex justify-between align-center mb-3">
+                    <div>
+                        <input type="checkbox" id="remember">
+                        <label for="remember" style="margin-left: 0.5rem;">Remember me</label>
+                    </div>
+                    <a href="/forgot-password" style="color: var(--primary); text-decoration: none;">Forgot
+                        password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+
+                <div class="auth-link">
+                    Don't have an account? <a href="/register">Sign up</a>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0; position: relative;">
+                    <div style="height: 1px; background: var(--gray-light);"></div>
+                    <span
+                        style="background: white; padding: 0 1rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--gray);">Or
+                        continue with</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <button type="button" class="btn btn-outline" style="border-color: #db4437; color: #db4437;"
+                        id="googleBtn">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="btn btn-outline" style="border-color: #1877f2; color: #1877f2;"
+                        id="facebookBtn">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ComputerStore</h3>
+                    <p>Your account security is our priority.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Account</h3>
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/forgot-password">Reset Password</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Security</h3>
+                    <p><i class="fas fa-lock"></i> 256-bit encryption</p>
+                    <p><i class="fas fa-shield-alt"></i> Two-factor authentication available</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Computer Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- In your REAL login.html file, replace the script section with: -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember')?.checked;
+
+            // Simple validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Store user info in localStorage
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    localStorage.setItem('isLoggedIn', 'true');
+
+                    // Show success message
+                    alert('✅ Login successful! Redirecting to home page...');
+
+                    // Redirect to home page
+                    window.location.href = '/';
+
+                } else {
+                    // Show error message
+                    alert('❌ ' + (data.error || 'Login failed'));
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('⚠️ Network error. Please try again.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Social login buttons
+        document.querySelector('button[style*="border-color: #db4437"]')?.addEventListener('click', function () {
+            alert('Google login would be implemented here');
+        });
+
+        document.querySelector('button[style*="border-color: #1877f2"]')?.addEventListener('click', function () {
+            alert('Facebook login would be implemented here');
+        });
+
+        // Load cart count
+        async function updateCartCount() {
+            try {
+                const response = await fetch('/api/cart');
+                const data = await response.json();
+                const cartCount = document.getElementById('cartCount');
+                if (cartCount) {
+                    const totalItems = data.totalItems || 0;
+                    cartCount.textContent = totalItems;
+                    cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+                }
+            } catch (error) {
+                console.error('Error updating cart count:', error);
+            }
+        }
+
+        updateCartCount();
+    </script>
+
+
+</body>
+
+</html>

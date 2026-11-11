@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+
+<body class="ve-home">
+
+{% include 'front/share/navbar.html' %}
+
+<!-- Hero -->
+<section class="ve-hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6">
+        <span class="ve-eyebrow">Next-gen electronics</span>
+        <h1>Upgrade Your<br>Tech Lifestyle</h1>
+        <p class="lead">
+          Discover laptops, phones, audio gear, and accessories from trusted brands — delivered fast across Cambodia.
+        </p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="{{ url_for('products') }}" class="ve-btn-primary">Shop Now</a>
+          <a href="{{ url_for('products') }}" class="ve-btn-ghost">Browse Catalog</a>
+        </div>
+
+        <div class="ve-hero-stats">
+          <div>
+            <strong>{{ products|length }}+</strong>
+            <span>Products</span>
+          </div>
+          <div>
+            <strong>24h</strong>
+            <span>Fast Delivery</span>
+          </div>
+          <div>
+            <strong>100%</strong>
+            <span>Secure Checkout</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="ve-hero-visual">
+          <div class="ve-hero-glow"></div>
+          <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
+               alt="Electronics" class="ve-hero-img img-fluid">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="ve-section">
+  <div class="container">
+    <h2 class="ve-section-title">Shop by Category</h2>
+    <p class="ve-section-sub">Find exactly what you need, from work essentials to entertainment gear.</p>
+
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3">
+        <a href="{{ url_for('products') }}" class="ve-category">
+          <div class="ve-category-icon purple">💻</div>
+          <span>Laptops</span>
+          <strong>Work-ready ultrabooks</strong>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="{{ url_for('products') }}" class="ve-category">
+          <div class="ve-category-icon blue">📱</div>
+          <span>Phones</span>
+          <strong>Flagship mobile picks</strong>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="{{ url_for('products') }}" class="ve-category">
+          <div class="ve-category-icon orange">🎧</div>
+          <span>Audio</span>
+          <strong>Headphones &amp; speakers</strong>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="{{ url_for('products') }}" class="ve-category">
+          <div class="ve-category-icon green">🎮</div>
+          <span>Gaming</span>
+          <strong>Controllers &amp; gear</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="ve-section ve-features">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="ve-feature">
+          <div class="ve-feature-icon">🚚</div>
+          <h5>Fast Delivery</h5>
+          <p>Same-day delivery in Phnom Penh, nationwide within 24 hours.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ve-feature">
+          <div class="ve-feature-icon">🔒</div>
+          <h5>Secure Payment</h5>
+          <p>100% safe checkout with encrypted transactions.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ve-feature">
+          <div class="ve-feature-icon">✨</div>
+          <h5>Quality Products</h5>
+          <p>Only original and verified items from trusted brands.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="ve-section ve-products">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <h2 class="ve-section-title mb-1">Popular Products</h2>
+        <p class="ve-section-sub mb-0">Top picks loved by our customers.</p>
+      </div>
+      <a href="{{ url_for('products') }}" class="ve-link-all">View all &rarr;</a>
+    </div>
+
+    <div class="row g-4">
+      {% for p in products[:6] %}
+      <div class="col-sm-6 col-lg-4">
+        <div class="ve-product-card">
+          <div class="ve-product-img-wrap">
+            <img src="{{ p.image }}" alt="{{ p.title }}">
+          </div>
+          <div class="ve-product-body">
+            <span class="ve-product-cat">{{ p.category }}</span>
+            <h3 class="ve-product-title">{{ p.title }}</h3>
+            <div class="ve-product-price">${{ "%.2f"|format(p.price) }}</div>
+            <a href="{{ url_for('product', product_id=p.id) }}" class="ve-btn-view">View Product</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ve-section pt-0">
+  <div class="container">
+    <div class="ve-cta d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+      <div>
+        <h3>Ready to upgrade?</h3>
+        <p>Join thousands of happy customers across Cambodia.</p>
+      </div>
+      <a href="{{ url_for('products') }}" class="ve-btn-ghost">Start Shopping</a>
+    </div>
+  </div>
+</section>
+
+{% include 'front/share/footer.html' %}
+
+</body>
+</html>

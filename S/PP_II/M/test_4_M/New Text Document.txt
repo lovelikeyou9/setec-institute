@@ -1,0 +1,126 @@
+1. What is database migration in web framework
+2. What is database flask-migration?
+3. What is ORM?
+4. When do we use ORM and RawSQL?
+-----------------------------------------------
+Spts
+deadline: 23/07/2026
+
+https://chatgpt.com/c/6a603f64-9658-83ec-9f6c-c1143983eb7e
+
+
+1. What is Database Migration in a Web Framework?
+
+Database migration is a way to manage changes to your database structure (schema) over time using code instead of manually editing the database.
+
+Examples of database changes:
+- Create a new table
+- Add/remove a column
+- Change column type
+- Add relationships (foreign keys)
+- Rename tables or columns
+
+Instead of manually doing:
+ALTER TABLE users ADD COLUMN phone VARCHAR(20);
+
+You create a migration file:
+def upgrade():
+    op.add_column('users',
+        sa.Column('phone', sa.String(20))
+    )
+
+def downgrade():
+    op.drop_column('users', 'phone')
+
+
+
+2. What is Flask-Migration?
+The correct name is Flask-Migrate.
+
+Flask-Migrate is a Flask extension that provides database migration support using Alembic.
+
+It is commonly used with:
+- Flask
+- SQLAlchemy ORM
+- Alembic
+
+Install:
+pip install flask-migrate
+
+
+Example workflow:
+
+Model.py
+   |
+   ↓
+flask db migrate
+   |
+   ↓
+Migration File
+   |
+   ↓
+flask db upgrade
+   |
+   ↓
+Database Updated
+
+
+
+3. What is ORM?
+ORM (Object-Relational Mapping) is a technique that allows you to interact with a database using programming language objects instead of writing SQL directly.
+
+It converts:
+Object  <------->  Database Table
+
+
+
+4. When do we use ORM and Raw SQL?
+Use ORM when:
+✅ Building normal web applications
+✅ CRUD operations
+✅ Business applications
+✅ Fast development
+✅ Need database portability
+
+Example:
+- E-commerce website
+- Student management system
+- Blog system
+- Inventory system
+
+Advantages:
+- Less code
+- Easier maintenance
+- Safer (helps prevent SQL injection)
+- Works with different databases
+
+
+Use Raw SQL when:
+✅ Complex queries
+✅ Performance optimization
+✅ Database-specific features
+✅ Large data analysis
+✅ Stored procedures
+
+Example:
+SELECT 
+    category,
+    AVG(price)
+FROM products
+GROUP BY category;
+
+ORM version may be complicated:
+db.session.query(
+    Product.category,
+    func.avg(Product.price)
+).group_by(Product.category)
+
+
+ORM vs Raw SQL Comparison
+Feature			ORM		Raw SQL
+Easy to write		⭐⭐⭐⭐⭐	⭐⭐⭐
+Performance		Good		Best
+Complex queries		Medium		Excellent
+Security		Safer		Need care
+Database control	Less		Full
+Development speed	Fast		Slower

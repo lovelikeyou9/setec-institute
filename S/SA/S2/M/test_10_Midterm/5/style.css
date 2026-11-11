@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Product Detail */
+.car-detail {
+    display: flex;
+    gap: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.car-image img {
+    width: 500px;
+    border-radius: 10px;
+}
+
+.car-info {
+    flex: 1;
+}
+
+.price {
+    color: green;
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Search Page */
+.search-box {
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    padding: 10px;
+    width: 300px;
+}
+
+.search-box button {
+    padding: 10px;
+}
+
+.car-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.car-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+}
+
+.car-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.car-card button {
+    margin-top: 10px;
+    padding: 8px;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

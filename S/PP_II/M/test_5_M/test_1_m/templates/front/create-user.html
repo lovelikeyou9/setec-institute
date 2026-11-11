@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+
+<body class="ve-home">
+
+{% include 'front/share/navbar.html' %}
+{% include 'front/share/flash.html' %}
+
+<main class="ve-auth-page">
+  <section class="ve-auth-card">
+    <p class="ve-eyebrow-sm">New customer</p>
+    <h1>Create your account</h1>
+    <p class="text-muted mb-4">Sign up for quicker checkout and order tracking.</p>
+
+    <form method="post" action="{{ url_for('create_user') }}">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="ve-form-label" for="firstName">First name</label>
+          <input class="form-control ve-form-control" id="firstName" name="firstName" type="text" placeholder="Alex" required>
+        </div>
+        <div class="col-md-6">
+          <label class="ve-form-label" for="lastName">Last name</label>
+          <input class="form-control ve-form-control" id="lastName" name="lastName" type="text" placeholder="Morgan" required>
+        </div>
+        <div class="col-12">
+          <label class="ve-form-label" for="createEmail">Email</label>
+          <input class="form-control ve-form-control" id="createEmail" name="email" type="email" placeholder="alex@example.com" required>
+        </div>
+        <div class="col-12">
+          <label class="ve-form-label" for="createPassword">Password</label>
+          <input class="form-control ve-form-control" id="createPassword" name="password" type="password" placeholder="At least 6 characters" required minlength="6">
+        </div>
+        <div class="col-12">
+          <label class="ve-form-label" for="confirmPassword">Confirm password</label>
+          <input class="form-control ve-form-control" id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" required minlength="6">
+        </div>
+      </div>
+      <button type="submit" class="ve-btn-primary w-100 border-0 mt-4">Create account</button>
+    </form>
+
+    <p class="text-center text-muted mt-4 mb-0">Already have an account? <a class="ve-link" href="{{ url_for('login') }}">Login</a></p>
+  </section>
+</main>
+
+{% include 'front/share/footer.html' %}
+
+</body>
+</html>

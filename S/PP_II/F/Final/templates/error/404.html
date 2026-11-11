@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>404 - Not Found</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Source Sans Pro", Arial, sans-serif;
+            background: #f4f6f9;
+            color: #343a40;
+        }
+
+        /* Navbar */
+        .main-header {
+            height: 57px;
+            background: #343a40;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar-right {
+            margin-left: auto;
+            font-size: 14px;
+            color: #c2c7d0;
+        }
+
+        /* Main Content */
+        .content-wrapper {
+            min-height: calc(100vh - 57px);
+            padding: 25px;
+        }
+
+        /* Page Header */
+        .content-header {
+            margin-bottom: 20px;
+        }
+
+        .content-header h1 {
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .breadcrumb {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .breadcrumb span {
+            color: #007bff;
+        }
+
+        /* Error Card */
+        .card {
+            background: #fff;
+            border-radius: 4px;
+            border-top: 3px solid #dc3545;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .card-body {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        /* Error Code */
+        .error-code {
+            font-size: 90px;
+            line-height: 1;
+            font-weight: 700;
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+
+        .error-title {
+            font-size: 30px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .error-message {
+            color: #6c757d;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        /* Info Box */
+        .info-box {
+            display: inline-block;
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 12px 20px;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #0069d9;
+            border-color: #0062cc;
+        }
+
+        /* Footer */
+        .main-footer {
+            margin-top: 25px;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .content-wrapper {
+                padding: 15px;
+            }
+
+            .error-code {
+                font-size: 70px;
+            }
+
+            .error-title {
+                font-size: 24px;
+            }
+
+            .card-body {
+                padding: 40px 15px;
+            }
+
+            .navbar-right {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="main-header">
+
+        <a href="/" class="brand">
+            MMT
+        </a>
+
+        <div class="navbar-right">
+            Modern Multiple Technology
+        </div>
+
+    </header>
+
+
+    <!-- Content -->
+    <main class="content-wrapper">
+
+        <!-- Page Header -->
+        <section class="content-header">
+
+            <h1>
+                404 Error
+            </h1>
+
+            <div class="breadcrumb">
+                Home / <span>404 Error</span>
+            </div>
+
+        </section>
+
+
+        <!-- Error Card -->
+        <section class="card">
+
+            <div class="card-header">
+
+                <h3 class="card-title">
+                    Error
+                </h3>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="error-code">
+                    404
+                </div>
+
+                <h1 class="error-title">
+                    Not Found
+                </h1>
+
+                <p class="error-message">
+                    The page you are looking for could not be found.
+                </p>
+
+                <div class="info-box">
+                    The requested resource may have been moved,
+                    deleted, or does not exist.
+                </div>
+
+                <br>
+
+                <a href="/" class="btn btn-primary">
+                    Back to Home
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <strong>MMT</strong> &copy; 2026 Modern Multiple Technology
+        </footer>
+
+    </main>
+
+</body>
+</html>

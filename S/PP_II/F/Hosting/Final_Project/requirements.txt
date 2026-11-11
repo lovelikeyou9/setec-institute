@@ -1,0 +1,11 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Limiter
+Flask-WTF
+Flask-CORS
+python-dotenv
+requests
+stripe
+Pillow
+Werkzeug

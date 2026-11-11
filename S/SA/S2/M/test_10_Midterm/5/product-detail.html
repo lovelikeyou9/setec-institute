@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Motors | Premium Showroom</title>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Animate.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+:root {
+    --primary: #1d3557;
+    --accent: #e63946;
+    --success: #2a9d8f;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', system-ui, sans-serif; }
+body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+/* HEADER & NAV */
+.header {
+    background: #fff; padding: 1rem 5%; display: flex; justify-content: space-between; 
+    align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+.nav-links a { text-decoration: none; color: var(--text); font-weight: 600; margin-left: 2rem; transition: 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+
+/* LAYOUT */
+.main-wrapper { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; padding: 2rem 5%; max-width: 1600px; margin: 0 auto; }
+
+/* SIDEBAR STYLING */
+.sidebar {
+    background: var(--card-bg); padding: 1.5rem; border-radius: 16px; box-shadow: var(--shadow);
+    height: fit-content; position: sticky; top: 100px;
+}
+.sidebar h3 { font-size: 1.1rem; margin-bottom: 1.5rem; border-left: 4px solid var(--accent); padding-left: 10px; }
+.filter-group { margin-bottom: 1.5rem; }
+.filter-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: #64748b; }
+.sidebar input, .sidebar select {
+    width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f1f5f9;
+}
+
+/* HERO SECTION */
+.hero-card {
+    background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%);
+    border-radius: 20px; color: white; display: grid; grid-template-columns: 1.2fr 1fr;
+    overflow: hidden; margin-bottom: 2rem; animation: fadeInDown 0.8s;
+}
+.hero-img-container { position: relative; overflow: hidden; height: 400px; }
+.hero-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.hero-content { padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+.badge { background: var(--accent); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; width: fit-content; margin-bottom: 1rem; }
+
+/* GRID CARS */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, min-max(280px, 1fr)); gap: 1.5rem; }
+.card {
+    background: white; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow);
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid transparent;
+}
+.card:hover { transform: translateY(-10px); border-color: var(--accent); }
+.card img { width: 100%; height: 200px; object-fit: cover; }
+.card-body { padding: 1.5rem; }
+.card-price { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 0.5rem 0; }
+
+/* MODAL & PRODUCT DETAIL */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000;
+}
+.modal-content {
+    background: white; width: 90%; max-width: 1100px; max-height: 90vh; border-radius: 24px;
+    display: grid; grid-template-columns: 1fr 1fr; overflow: auto; position: relative;
+}
+.modal-gallery { padding: 20px; background: #f8fafc; }
+.main-modal-img { width: 100%; border-radius: 15px; box-shadow: var(--shadow); height: 350px; object-fit: cover; }
+.modal-info { padding: 40px; }
+
+/* BUTTONS */
+.btn { 
+    padding: 12px 24px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer;
+    transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary { background: var(--primary); color: white; }
+.btn-accent { background: var(--accent); color: white; width: 100%; justify-content: center; margin-top: 10px; }
+.btn-outline { background: transparent; border: 2px solid #e2e8f0; color: var(--text); }
+.btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+/* FINANCE CALCULATOR */
+.fin-calc { background: #f1f5f9; padding: 15px; border-radius: 12px; margin-top: 20px; }
+.fin-calc h4 { font-size: 0.9rem; margin-bottom: 10px; }
+.monthly-price { font-size: 1.4rem; font-weight: 800; color: var(--success); }
+
+/* COMPARISON TRAY */
+#compTray {
+    position: fixed; bottom: 20px; right: 20px; background: var(--primary);
+    color: white; padding: 15px 25px; border-radius: 50px; display: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1001; cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">Elite<span style="color:var(--accent)">Motors</span></div>
+    <div class="nav-links">
+        <a href="#"><i class="fa fa-home"></i> Inventory</a>
+        <a href="#"><i class="fa fa-heart"></i> Wishlist</a>
+        <a href="#" id="cartBtn"><i class="fa fa-shopping-cart"></i> Cart (0)</a>
+    </div>
+</div>
+
+<div class="main-wrapper">
+    <!-- Filters -->
+    <div class="sidebar">
+        <h3><i class="fa fa-sliders"></i> Filter Search</h3>
+        <div class="filter-group">
+            <label>Search Keyword</label>
+            <input type="text" id="searchInput" placeholder="Model or name..." oninput="filterCars()">
+        </div>
+        <div class="filter-group">
+            <label>Category</label>
+            <select id="category" onchange="filterCars()">
+                <option value="">All Categories</option>
+                <option>Sedan</option>
+                <option>SUV</option>
+                <option>Truck</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Brand</label>
+            <select id="brand" onchange="filterCars()">
+                <option value="">All Brands</option>
+                <option>Toyota</option>
+                <option>BMW</option>
+                <option>Ford</option>
+                <option>Honda</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Budget Limit ($)</label>
+            <input type="range" id="priceRange" min="10000" max="100000" step="5000" value="100000" oninput="updatePriceLabel(this.value)">
+            <div id="priceLabel" style="text-align:right; font-weight:bold; color:var(--accent)">Up to $100,000</div>
+        </div>
+    </div>
+
+    <!-- Inventory -->
+    <div class="content">
+        <div id="heroArea"></div>
+        <div class="grid" id="carGrid"></div>
+    </div>
+</div>
+
+<div id="compTray" onclick="alert('Comparison feature opening...')">
+    <i class="fa fa-exchange"></i> Compare Cars (<span id="compCount">0</span>)
+</div>
+
+<!-- Modal -->
+<div class="modal" id="carModal">
+    <div class="modal-content animate__animated animate__zoomIn">
+        <span onclick="closeModal()" style="position:absolute; right:25px; top:20px; font-size:30px; cursor:pointer; z-index:10">&times;</span>
+        <div class="modal-gallery" id="modalGallery"></div>
+        <div class="modal-info" id="modalInfo"></div>
+    </div>
+</div>
+
+<script>
+const cars = [
+    {id: 1, name:"Toyota Camry XSE", price:35000, brand:"Toyota", category:"Sedan", year:2024, rating: 4.8, transmission: "Automatic", fuel: "Hybrid", images: ["https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb", "https://images.unsplash.com/photo-1549924231-f129b911e442"]},
+    {id: 2, name:"BMW X5 M-Sport", price:72000, brand:"BMW", category:"SUV", year:2023, rating: 4.9, transmission: "Steptronic", fuel: "Petrol", images: ["https://images.unsplash.com/photo-1555215695-3004980ad54e", "https://images.unsplash.com/photo-1503376780353-7e6692767b70"]},
+    {id: 3, name:"Ford F-150 Raptor", price:82000, brand:"Ford", category:"Truck", year:2023, rating: 5.0, transmission: "10-Speed Auto", fuel: "Diesel", images: ["https://images.unsplash.com/photo-1583121274602-3e2820c69888", "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2"]},
+    {id: 4, name:"Honda Civic Type R", price:45000, brand:"Honda", category:"Sedan", year:2024, rating: 4.7, transmission: "Manual", fuel: "Petrol", images: ["https://images.unsplash.com/photo-1594070319944-7c0c63146c1f", "https://images.unsplash.com/photo-1549399542-7e3f8b79c341"]},
+    {id: 5, name:"BMW 3 Series", price:42000, brand:"BMW", category:"Sedan", year:2023, rating: 4.6, transmission: "Automatic", fuel: "Petrol", images: ["https://images.unsplash.com/photo-1523983388277-336a66bf9bcd", "https://images.unsplash.com/photo-1556189250-72ba954cfc2b"]}
+];
+
+let compareList = [];
+
+function updatePriceLabel(val) {
+    document.getElementById('priceLabel').innerText = `Up to $${parseInt(val).toLocaleString()}`;
+    filterCars();
+}
+
+function filterCars() {
+    const keyword = document.getElementById("searchInput").value.toLowerCase();
+    const brand = document.getElementById("brand").value;
+    const category = document.getElementById("category").value;
+    const price = document.getElementById("priceRange").value;
+
+    const filtered = cars.filter(c => 
+        c.name.toLowerCase().includes(keyword) &&
+        (!brand || c.brand === brand) &&
+        (!category || c.category === category) &&
+        (c.price <= price)
+    );
+
+    renderShowroom(filtered);
+}
+
+function renderShowroom(list) {
+    const heroArea = document.getElementById("heroArea");
+    const grid = document.getElementById("carGrid");
+    
+    grid.innerHTML = "";
+    heroArea.innerHTML = "";
+
+    if(list.length === 0) {
+        grid.innerHTML = "<div style='grid-column: 1/-1; text-align:center; padding: 50px;'><h3>No vehicles match your criteria</h3></div>";
+        return;
+    }
+
+    // Hero Section for the first item
+    const hero = list[0];
+    heroArea.innerHTML = `
+        <div class="hero-card">
+            <div class="hero-content">
+                <span class="badge">Featured Selection</span>
+                <h1 style="font-size: 2.5rem; margin-bottom:10px;">${hero.name}</h1>
+                <p style="opacity: 0.8; margin-bottom: 20px;">The pinnacle of ${hero.brand} engineering. Available for immediate delivery with premium warranty coverage.</p>
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 25px;">$${hero.price.toLocaleString()}</div>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-primary" onclick='openDetail(${hero.id})'>View Configuration</button>
+                    <button class="btn btn-outline" style="color:white; border-color:white" onclick="addToCompare(${hero.id})">Compare</button>
+                </div>
+            </div>
+            <div class="hero-img-container">
+                <img src="${hero.images[0]}" id="heroImg">
+            </div>
+        </div>
+    `;
+
+    // Grid for the rest
+    list.forEach((car, index) => {
+        const card = document.createElement("div");
+        card.className = "card animate__animated animate__fadeInUp";
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.innerHTML = `
+            <img src="${car.images[0]}">
+            <div class="card-body">
+                <div style="display:flex; justify-content:space-between; align-items:center">
+                    <small style="color:var(--accent); font-weight:bold">${car.brand}</small>
+                    <small><i class="fa fa-star" style="color:#f4c150"></i> ${car.rating}</small>
+                </div>
+                <h3 style="margin-top:5px">${car.name}</h3>
+                <div class="card-price">$${car.price.toLocaleString()}</div>
+                <div style="display:flex; gap:8px; margin-top:15px">
+                    <button class="btn btn-primary" style="flex:1" onclick='openDetail(${car.id})'>Details</button>
+                    <button class="btn btn-outline" onclick="addToCompare(${car.id})"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function openDetail(id) {
+    const car = cars.find(c => c.id === id);
+    const modal = document.getElementById("carModal");
+    const gallery = document.getElementById("modalGallery");
+    const info = document.getElementById("modalInfo");
+
+    gallery.innerHTML = `
+        <img src="${car.images[0]}" id="mainModalImg" class="main-modal-img">
+        <div style="display:flex; gap:10px; margin-top:15px">
+            ${car.images.map(img => `<img src="${img}" style="width:70px; height:50px; object-fit:cover; border-radius:5px; cursor:pointer" onclick="document.getElementById('mainModalImg').src='${this.src}'">`).join('')}
+        </div>
+        <div class="fin-calc">
+            <h4><i class="fa fa-calculator"></i> Estimated Financing</h4>
+            <div class="monthly-price" id="monthlyPay">$${Math.round(car.price / 60 * 1.1).toLocaleString()}/mo</div>
+            <small class="text-muted">Based on 60 months, 5% APR</small>
+        </div>
+    `;
+
+    info.innerHTML = `
+        <h1 style="font-size: 2.2rem">${car.name}</h1>
+        <div style="color: var(--accent); font-size: 1.8rem; font-weight: 800; margin: 10px 0">$${car.price.toLocaleString()}</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0">
+            <div class="spec-item"><strong>Year:</strong> ${car.year}</div>
+            <div class="spec-item"><strong>Transmission:</strong> ${car.transmission}</div>
+            <div class="spec-item"><strong>Fuel:</strong> ${car.fuel}</div>
+            <div class="spec-item"><strong>Category:</strong> ${car.category}</div>
+        </div>
+        <p style="color: #64748b; line-height: 1.6; margin-bottom: 25px">
+            This ${car.year} ${car.name} represents the best in its class, offering unmatched performance, comfort, and state-of-the-art safety technology. Experience the drive of your life.
+        </p>
+        <button class="btn btn-accent btn-lg" onclick="alert('Order placed for ${car.name}!')">BUY THIS CAR</button>
+        <button class="btn btn-outline w-100 mt-2" onclick="alert('Added to wishlist')"><i class="fa fa-heart"></i> Add to Wishlist</button>
+    `;
+
+    modal.style.display = "flex";
+}
+
+function addToCompare(id) {
+    if(!compareList.includes(id)) {
+        compareList.push(id);
+        const tray = document.getElementById("compTray");
+        tray.style.display = "block";
+        document.getElementById("compCount").innerText = compareList.length;
+    }
+}
+
+function closeModal() { document.getElementById("carModal").style.display = "none"; }
+
+// Close modal on click outside
+window.onclick = function(event) {
+    const modal = document.getElementById("carModal");
+    if (event.target == modal) closeModal();
+}
+
+// Init
+filterCars();
+</script>
+</body>
+</html>

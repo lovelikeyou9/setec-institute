@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Computer Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-desktop"></i>
+                <span>ComputerStore</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="/" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/products"><i class="fas fa-laptop"></i> Products</a></li>
+                <li><a href="/collections"><i class="fas fa-layer-group"></i> Collections</a></li>
+                <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="search-container">
+                    <form id="searchForm">
+                        <input type="text" class="search-input" placeholder="Search products..." id="searchInput">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+                <a href="/cart" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+
+                <!-- Guest links (shown when not logged in) -->
+                <div class="auth-links" id="guestLinks">
+                    <a href="/login" class="btn btn-outline btn-sm">Login</a>
+                    <a href="/register" class="btn btn-primary btn-sm">Register</a>
+                </div>
+
+                <!-- User links (shown when logged in) -->
+                <div class="user-dropdown" id="userLinks" style="display: none;">
+                    <a href="/profile" id="userName" class="user-link">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/profile"><i class="fas fa-user-circle"></i> Profile</a>
+                        <a href="/orders"><i class="fas fa-box"></i> Orders</a>
+                        <a href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li><i class="fas fa-chevron-right"></i></li>
+                <li>About Us</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>About ComputerStore</h1>
+            <p>Your trusted partner for cutting-edge technology since 2024</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <div class="container about-content">
+        <div class="text-center mb-5">
+            <h2>Our Story</h2>
+            <p>Founded in 2024, ComputerStore began with a simple mission: to make cutting-edge technology accessible to
+                everyone. What started as a small local shop has grown into one of the most trusted online destinations
+                for computer hardware and electronics.</p>
+        </div>
+
+        <div class="mission-cards">
+            <div class="mission-card">
+                <i class="fas fa-bolt"></i>
+                <h3>High Performance</h3>
+                <p>We provide only the best components and systems for gaming, work, and creativity.</p>
+            </div>
+
+            <div class="mission-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Quality Guarantee</h3>
+                <p>Every product is tested and backed by our comprehensive warranty program.</p>
+            </div>
+
+            <div class="mission-card">
+                <i class="fas fa-headset"></i>
+                <h3>Expert Support</h3>
+                <p>Our team of tech experts is available 24/7 to help with any questions.</p>
+            </div>
+        </div>
+
+        <div class="text-center mb-5">
+            <h2>Our Values</h2>
+            <p>We believe in transparency, quality, and customer satisfaction above all else.</p>
+        </div>
+
+        <div class="mission-cards">
+            <div class="mission-card">
+                <i class="fas fa-handshake"></i>
+                <h3>Customer First</h3>
+                <p>Your satisfaction is our top priority. We go above and beyond to ensure you get the best experience.
+                </p>
+            </div>
+
+            <div class="mission-card">
+                <i class="fas fa-award"></i>
+                <h3>Quality Assurance</h3>
+                <p>All products undergo rigorous testing before they reach our customers.</p>
+            </div>
+
+            <div class="mission-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Innovation Driven</h3>
+                <p>We constantly explore new technologies to bring you the latest advancements.</p>
+            </div>
+        </div>
+
+        <div class="text-center mb-5">
+            <h2>Meet Our Leadership Team</h2>
+            <p>Passionate experts dedicated to finding the perfect tech solutions for you.</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
+                    alt="Alex Chen">
+                <h3>Alex Chen</h3>
+                <p class="mb-1">CEO & Founder</p>
+                <p class="text-gray">With over 15 years in tech industry</p>
+            </div>
+
+            <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop"
+                    alt="Maria Rodriguez">
+                <h3>Maria Rodriguez</h3>
+                <p class="mb-1">Head of Technology</p>
+                <p class="text-gray">Former lead engineer at major tech firm</p>
+            </div>
+
+            <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop"
+                    alt="David Kim">
+                <h3>David Kim</h3>
+                <p class="mb-1">Customer Support Lead</p>
+                <p class="text-gray">10+ years in customer service excellence</p>
+            </div>
+
+            <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop"
+                    alt="Sarah Johnson">
+                <h3>Sarah Johnson</h3>
+                <p class="mb-1">Marketing Director</p>
+                <p class="text-gray">Digital marketing specialist</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <h2>Join Our Community</h2>
+            <p>Be part of our growing community of tech enthusiasts.</p>
+            <div class="d-flex justify-center gap-2 mt-3">
+                <a href="/products" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i> Shop Now
+                </a>
+                <a href="/contact" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i> Contact Us
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ComputerStore</h3>
+                    <p>High-quality computers and electronics at affordable prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/products">Products</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, San Francisco, CA</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@computerstore.com</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 ComputerStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

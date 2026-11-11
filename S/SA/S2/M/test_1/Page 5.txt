@@ -1,0 +1,30 @@
+Core Philosophy
+
+DSDM has 8 core principles
+
+
+01
+Focus on Business Need
+
+Always align decisions with project goals; use Timeboxing and MoSCoW prioritization to 
+deliver the right business needs at the right time.
+
+02
+Deliver on Time
+
+Delivering products on time is essential for projects; plan timeboxes in advance and set
+fixed delivery dates while adjusting features based on business priorities.
+
+03
+Cooperate
+
+Teams should work collaboratively, involve subject matter experts, and use facilitated 
+workshops to share knowledge with stakeholders & support better decision-making.
+
+04
+Never Compromise Quality
+
+In DSDM, quality standards are agreed at the start, and work should be “good enough” by 
+building quality through early, continuous testing and regular reviews.
+
+

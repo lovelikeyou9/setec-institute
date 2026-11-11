@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all cubic-bezier(0.67, 1.02, 0.27,-0.5) 500ms;
+}
+body {
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    line-height: 21px;
+    padding: 10px;
+}
+#wrapper {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+#left {
+    width: 25%;
+    min-height: 400px;
+    background-color: #bd6b2e;
+    text-align: center;
+    padding: 20px 5px;
+}
+#left h1 {
+    text-transform: uppercase;
+    color: white;
+    font-size: 23px;
+}
+#left nav {
+    margin-top: 17px;
+}
+#left nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#left nav ul li {
+    list-style-type: none;
+    color: white;
+}
+#left nav ul li a {
+    position: relative;
+    text-decoration: none;
+    color: yellow;
+    font-size: 16px;
+    margin: 0 10px;
+}
+#left nav ul li a::before {
+    transition: all ease-in-out 300ms;
+    content: "";
+    border-bottom: 2px solid white;
+    position: absolute;
+    width: 0%;
+    bottom: 0;
+    left: 0;
+}
+#left nav ul li:hover a::before {
+    width: 100%;
+}
+#left nav ul li a:hover {
+    color: white;
+    font-size: 18px;
+}
+#left .box, #right .box {
+    background-color: #ffdaa9;
+    padding: 5px; margin-top: 20px;
+}
+#left .box h2, #right .box h2 {
+    background-color: #935121;
+    color: yellow; text-align: center;
+    font: bold 15px sans-serif; padding: 8px;
+}
+#left .box ul, #right .box ul {
+    margin-top: 5px;  background-color: #f6a262;
+    padding: 5px;
+}
+#left .box ul li, #right .box ul li {
+    list-style-type: none;
+    border-bottom: 5px solid #f6a262;
+}
+#left .box ul li:last-child,  #right .box ul li:last-child{
+    border-bottom: 0;
+}
+#left .box ul li a, #right .box ul li a {
+    background-color: #ffb74e;
+    text-decoration: none;
+    color: brown;
+    font-size: 16px;
+    display: block;
+    padding: 8px;
+    text-align: left;
+}
+#left .box ul li a:hover, #right .box ul li a:hover {
+    background-color: #ffc571;
+    color: black;
+    padding-left: 30px;
+}
+#right {
+    width: 75%;
+    min-height: 400px;
+    background-color: #eae7e7;
+}
+#right #rightHeader{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-image: linear-gradient(to top, #d4712c, #984a15);
+}
+#right #rightHeader .links {
+    display: flex;
+    padding: 35px 16px 16px 16px;
+    justify-content: space-between;
+    background-color: #d38448;
+
+}
+#right #rightHeader h1 {
+    color: white;
+    font-size: 22px;
+    text-align: center;
+}
+#right #toolbar {
+    background-color: white;
+    min-height: 40px;
+    padding: 8px;
+    border: 1px solid #c9c9c9;
+}
+#right #pagination{
+    background-color: white;
+    padding: 10px;
+    color: black;
+    border: 1px solid #c9c9c9;
+    text-align: center;
+}
+main {
+    padding: 15px;
+}
+
+/* Hamburger Menu */
+#hamburgerMenu {
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    width: 100%;
+}
+#hamburgerMenu #chkHamburgerMenu {
+    display: none;
+}
+#hamburgerMenu #chkHamburgerMenu ~ #wholeLinks {
+    height: 0px;
+    overflow: hidden;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+#hamburgerMenu #chkHamburgerMenu:checked ~ #wholeLinks {
+    height: 400px;
+}
+
+#hamburgerMenu #chkHamburgerMenu + label {
+    cursor: pointer;
+    display: block;
+    width: 40px;
+    height: 30px;
+    border: 1px dashed white;
+    margin-top: 15px;
+    margin-left: 15px;
+    position: relative;
+    z-index: 12;
+}
+#hamburgerMenu #chkHamburgerMenu + label div[class^="line"] {
+    width: 80%;
+    left: 10%;
+    position: absolute;
+    height: 2px;
+    border-radius: 5px;
+    background-color: white;
+}
+#hamburgerMenu #chkHamburgerMenu + label div[class="line-01"] {
+    top: 6px;
+}
+#hamburgerMenu #chkHamburgerMenu + label div[class="line-02"] {
+    top: 14px; height: 1px;
+}
+#hamburgerMenu #chkHamburgerMenu + label div[class="line-03"] {
+    top: 22px;
+}
+
+#hamburgerMenu #chkHamburgerMenu:checked + label div[class="line-01"] {
+    top: 14px;
+    transform: rotate(323deg);
+}
+#hamburgerMenu #chkHamburgerMenu:checked + label div[class="line-02"] {
+    transform: rotate(323deg);
+}
+#hamburgerMenu #chkHamburgerMenu:checked + label div[class="line-03"] {
+    top: 14px;
+    transform: rotate(-323deg);
+}
+
+@media all and (max-width: 900px) {
+    .table .row .column-01 { width: 10%; }
+    .table .row .column-02 { width: 30%; }
+    .table .row .column-03 { width: 30%; }
+    .table .row .column-04 { width: 30%; }
+    .table .row .column-05 { display: none; }
+}
+@media all and (max-width: 650px) {
+    #left { display: none; }
+    #hamburgerMenu {
+        display: block
+    }
+    #right { width: 100%; }
+}

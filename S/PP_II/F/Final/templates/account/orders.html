@@ -1,0 +1,114 @@
+{% extends 'layouts/account.html' %}
+{% block title %}My Orders — MMT{% endblock %}
+{% block content %}
+<h1 style="font-size:1.4rem;margin-bottom:.35rem">My Orders</h1>
+<p style="color:var(--text-secondary);margin-bottom:1.5rem">
+  Each checkout is one payment. Open it to see every seller package (1, 2, 3 or more).
+</p>
+
+{% if justPlaced %}
+  <div class="alert alert-success" data-keep-alert style="margin-bottom:1.25rem">
+    <strong>Checkout placed.</strong>
+    {% if highlightCheckout %}
+      Your payment is highlighted below — open it to see each seller’s package.
+    {% else %}
+      You can track escrow status below.
+    {% endif %}
+  </div>
+{% endif %}
+
+<form method="get" class="dash-search" style="margin-bottom:1rem">
+  <label class="dash-sort">
+    <span>Status</span>
+    <select name="status" onchange="this.form.submit()">
+      <option value="">All statuses</option>
+      {% for s in (['PENDING_PAYMENT', 'PAYMENT_CONFIRMED', 'FUNDS_HELD', 'SELLER_PROCESSING', 'SHIPPED', 'OUT_FOR_DELIVERY', 'DELIVERED', 'COMPLETED', 'DISPUTED', 'CANCELLED', 'REFUNDED']) %}
+        <option value="{{ s }}" {{ 'selected' if ((status if (status is defined and status is not none) else '')) == s }}>{{ str_replace('_', ' ', s) }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label class="dash-sort">
+    <span>Sort</span>
+    <select name="sort" onchange="this.form.submit()">
+      <option value="newest" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'newest' }}>Newest</option>
+      <option value="oldest" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'oldest' }}>Oldest</option>
+      <option value="total_desc" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'total_desc' }}>Total ↓</option>
+      <option value="total_asc" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'total_asc' }}>Total ↑</option>
+    </select>
+  </label>
+</form>
+
+{% if (checkouts if checkouts is defined else [])|length == 0 %}
+  <div class="empty-state">
+    <div class="icon">📦</div>
+    <h3>No orders found</h3>
+    <a href="{{ url('/products') }}" class="btn btn-primary" style="margin-top:1rem">Start Shopping</a>
+  </div>
+{% else %}
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Checkout</th>
+          <th>Sellers</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for checkout in (checkouts) %}
+          {% set multi = checkout['seller_count'] > 1 %}
+          {% set highlight = highlightCheckout and (checkout['placed_at_ts'] == highlightCheckout) %}
+          <tr style="{{ 'outline:2px solid var(--brand);outline-offset:-2px;' if highlight else '' }}">
+            <td>
+              <strong>
+                {% if multi %}
+                  Checkout · {{ checkout['seller_count'] }} sellers
+                {% else %}
+                  Order {{ checkout['primary_order'].order_number }}
+                {% endif %}
+              </strong>
+              {% if checkout['payment'] %}
+                <div style="font-size:.8rem;color:var(--text-muted);margin-top:.2rem">{{ str_replace('_', ' ', checkout['payment']) }}</div>
+              {% endif %}
+            </td>
+            <td>
+              {% if multi %}
+                {{ checkout['seller_count'] }} sellers
+                <div style="font-size:.8rem;color:var(--text-muted);margin-top:.2rem">
+                  {{ implode(', ', checkout['seller_names'][:3]) }}{% if (checkout['seller_names']|length) > 3 %}…{% endif %}
+                </div>
+              {% else %}
+                {% set o = checkout['primary_order'] %}
+                {% if o.seller %}
+                  <a href="{{ url(('/sellers/' ~ o.seller_id)) }}">{{ o.seller.store_name }}</a>
+                {% else %}
+                  —
+                {% endif %}
+              {% endif %}
+            </td>
+            <td>{{ date_fmt(checkout['placed_at'], 'd M Y') or '—' }}</td>
+            <td>
+              {% if (checkout['statuses']|length) == 1 %}
+                {% with status=(checkout['statuses'][0]) %}{% include 'components/status_pill.html' %}{% endwith %}
+              {% else %}
+                <span class="status-pill blue">{{ checkout['status_label'] }}</span>
+              {% endif %}
+            </td>
+            <td><strong>${{ number_format(checkout['total'], 2) }}</strong></td>
+            <td>
+              {% if multi %}
+                <a href="{{ url(('/account/orders/checkout/' ~ checkout['placed_at_ts'])) }}" class="btn btn-outline btn-sm">View</a>
+              {% else %}
+                <a href="{{ url(('/orders/' ~ checkout['primary_order'].order_number)) }}" class="btn btn-outline btn-sm">View</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endif %}
+{% endblock %}

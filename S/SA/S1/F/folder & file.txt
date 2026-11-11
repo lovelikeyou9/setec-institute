@@ -1,0 +1,34 @@
+test_1 folder have folder:
+config folder, controllers folder, middlewares folder, models folder, node_modules folder, public folder, routes folder, scripts folder, services folder, views folder, .env file, .npmrc file, package-lock.json, package.json, README.md, seed.js, server.js
+
+config folder have:
+database.js, db.js
+
+controllers folder:
+orderController.js, productController.js, userControllers.js
+
+middlewares folder have:
+auth.js
+
+models folder have:
+AuditLog.js, BlogPost.js, Cart.js, Category.js, Coupon.js, Employee.js, Inventory.js, Office.js, Order.js, OrderDetail.js, Payment.js, Product.js, ProductLine.js, Review.js, Setting.js, User.js, Wishlist.js
+
+public folder have:
+css folder, images folder, js folder, 404.html, about.html, blog.html, cart.html, check-missing.html, checkout.html, collections.html, index.html, login.html, orders.html, product-detail.html, products.html, profile.html, register.html, search.html, settings.html, test-cart.html, test-login.html, test.html
+
+css folder have:
+style.css
+
+js folder have:
+app.js, auth.js, cart.js, product-detail.js, products.js, profile.js
+
+routes folder have:
+authRoutes.js, cartRoutes.js, category.js, orderRoutes.js, product.js, productRoutes.js, userRoutes.js
+
+scripts folder have:
+seedData.js
+
+services folder have:
+categoryService.js, productService.js
+
+

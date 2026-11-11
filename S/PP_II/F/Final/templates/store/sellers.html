@@ -1,0 +1,52 @@
+{% extends 'layouts/store.html' %}
+{% block title %}Sellers — MMT{% endblock %}
+{% block content %}
+<div class="container" style="padding-top:1.5rem">
+  <nav class="breadcrumb">
+    <a href="{{ url('/') }}">Home</a>
+    <span class="sep">/</span>
+    <span>Sellers</span>
+  </nav>
+  <div class="section-head">
+    <div>
+      <h1 class="section-title">Trusted Sellers</h1>
+      <p class="section-sub">Verified stores for computers, networking, gaming, cameras &amp; every kind of tech</p>
+    </div>
+    <a href="{{ url('/become-seller') }}" class="btn btn-accent">Become a Seller</a>
+  </div>
+
+  {% if sellers|length == 0 %}
+    <div class="empty-state">
+      <div class="icon">🏪</div>
+      <h3>No sellers yet</h3>
+      <p>Be the first to open a store on MMT.</p>
+    </div>
+  {% else %}
+    <div class="seller-grid">
+      {% for s in (sellers) %}
+        {% set verified = (s.level if (s.level is defined and s.level is not none) else '') in ['VERIFIED', 'TRUSTED', 'TOP'] %}
+        <a href="{{ url(('/sellers/' ~ s.id)) }}" class="seller-card">
+          <img src="{{ media_url(s.logo_url, fallback=false) or asset('images/mme-icon.png') }}" alt="{{ s.store_name }}" class="seller-logo"/>
+          <div class="seller-info">
+            <h3>
+              <span>{{ s.store_name }}</span>
+              {% if verified %}<span class="badge badge-verified">✓ Verified</span>{% endif %}
+              {% if ((s.level if (s.level is defined and s.level is not none) else '')) == 'TOP' %}<span class="badge badge-top">Top Seller</span>{% endif %}
+            </h3>
+            <div class="rating-row">
+              {% with rating=(s.rating if (s.rating is defined and s.rating is not none) else 0) %}{% include 'components/stars.html' %}{% endwith %}
+              <span>{{ number_format((s.rating if (s.rating is defined and s.rating is not none) else 0), 1) }}</span>
+            </div>
+            <div class="seller-stats">
+              <span>{{ s.total_products }} products</span> ·
+              <span>{{ s.followers if (s.followers is defined and s.followers is not none) else 0 }} followers</span> ·
+              <span>{{ s.location or ((s.country or 'Cambodia')) }}</span>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    <div class="pagination" style="margin-top:1.5rem">{{ sellers.links()|safe }}</div>
+  {% endif %}
+</div>
+{% endblock %}

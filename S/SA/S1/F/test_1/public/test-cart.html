@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Cart</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        button { margin: 5px; padding: 10px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Cart API Test</h1>
+    
+    <div>
+        <h3>Test Product ID: <code id="productId">695a826985a127465d4fff96</code></h3>
+        <button onclick="addToCart()">Add to Cart</button>
+        <button onclick="getCart()">Get Cart</button>
+        <button onclick="clearCart()">Clear Cart</button>
+    </div>
+    
+    <div id="result" style="margin-top: 20px; padding: 10px; background: #f0f0f0;"></div>
+    
+    <script>
+        const productId = '695a826985a127465d4fff96'; // Alienware
+        
+        async function addToCart() {
+            try {
+                const response = await fetch('/api/cart/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ productId, quantity: 1 })
+                });
+                const data = await response.json();
+                showResult('ADD TO CART:', data);
+            } catch (error) {
+                showResult('ERROR:', error, true);
+            }
+        }
+        
+        async function getCart() {
+            try {
+                const response = await fetch('/api/cart');
+                const data = await response.json();
+                showResult('GET CART:', data);
+            } catch (error) {
+                showResult('ERROR:', error, true);
+            }
+        }
+        
+        async function clearCart() {
+            try {
+                const response = await fetch('/api/cart/clear', { method: 'DELETE' });
+                const data = await response.json();
+                showResult('CLEAR CART:', data);
+            } catch (error) {
+                showResult('ERROR:', error, true);
+            }
+        }
+        
+        function showResult(title, data, isError = false) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h4 class="${isError ? 'error' : 'success'}">${title}</h4>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+        
+        // Test on load
+        getCart();
+    </script>
+</body>
+</html>

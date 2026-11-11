@@ -1,0 +1,70 @@
+{% extends "admin/master.html" %}
+
+{% block page_title %}Users{% endblock %}
+{% block breadcrumb %}Home / Users{% endblock %}
+
+{% block content %}
+
+<div class="adm-card">
+  <div class="adm-card-header">
+    <h3>User Management</h3>
+    <span class="text-muted small">{{ users|length }} registered</span>
+  </div>
+  <div class="adm-card-body p-0">
+    <div class="adm-table-wrap">
+    <table class="adm-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{ u.id }}</td>
+          <td>{{ u.first_name }} {{ u.last_name }}</td>
+          <td>{{ u.email }}</td>
+          <td>
+            {% if u.role == 'admin' %}
+              <span class="adm-badge info">Administrator</span>
+            {% else %}
+              <span class="adm-badge success">Customer</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if u.status == 'active' %}
+              <span class="adm-badge success">Active</span>
+            {% else %}
+              <span class="adm-badge warning">Inactive</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if u.role != 'admin' %}
+            <div class="adm-actions">
+              <form method="post" action="{{ url_for('admin_toggle_user_status', user_id=u.id) }}" style="display:inline">
+                <button type="submit" class="adm-btn-sm {{ 'warning' if u.status == 'active' else 'success' }}">
+                  {{ 'Deactivate' if u.status == 'active' else 'Activate' }}
+                </button>
+              </form>
+              <form method="post" action="{{ url_for('admin_delete_user', user_id=u.id) }}" style="display:inline" onsubmit="return confirm('Delete this user?')">
+                <button type="submit" class="adm-btn-sm danger">Delete</button>
+              </form>
+            </div>
+            {% else %}
+              <span class="text-muted small">—</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'layouts/seller.html' %}
+{% block title %}{{ (('Edit' if (product is defined and product is not none) else 'Add')) ~ ' Product — MMT' }}{% endblock %}
+{% block content %}
+<div class="section-head" style="margin-bottom:1rem">
+  <h1 style="font-size:1.4rem">{{ 'Edit product' if (product is defined and product is not none) else 'Add product' }}</h1>
+  <a href="{{ url('/seller-dashboard/products') }}" class="btn btn-outline btn-sm">Back</a>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="form-card" style="max-width:720px"
+      action="{{ url((('/seller-dashboard/products/' ~ product.id) ~ '/edit')) if (product is defined and product is not none) else url('/seller-dashboard/products/add') }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="form-grid">
+    <div class="form-group full">
+      <label>Name</label>
+      <input name="name" required value="{{ old('name', (product.name if (product.name is defined and product.name is not none) else '')) }}"/>
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <select name="category_id" required>
+        {% for c in (categories) %}
+          <option value="{{ c.id }}" data-slug="{{ c.slug }}" {{ 'selected' if old('category_id', (product.category_id if (product.category_id is defined and product.category_id is not none) else '')) == c.id }}>{{ c.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Brand</label>
+      <select name="brand_id" required>
+        {% for b in (brands) %}
+          <option value="{{ b.id }}" {{ 'selected' if old('brand_id', (product.brand_id if (product.brand_id is defined and product.brand_id is not none) else '')) == b.id }}>{{ b.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group full">
+      <label>Description</label>
+      <textarea name="description" rows="4" required>{{ old('description', (product.description if (product.description is defined and product.description is not none) else '')) }}</textarea>
+    </div>
+    {% with prefix='page', optionGroups=old('optionGroupsJson', (((product.option_groups or json_encode(product.selectableOptionGroups()))) if (product is defined and product is not none) else '[]')), specs=old('specifications', (product.specifications if (product.specifications is defined and product.specifications is not none) else '')) %}{% include 'partials/product-variant-fields.html' %}{% endwith %}
+    <div class="form-group">
+      <label>Price</label>
+      <input type="number" step="0.01" name="price" required value="{{ old('price', (product.price if (product.price is defined and product.price is not none) else '')) }}"/>
+    </div>
+    <div class="form-group">
+      <label>Original price</label>
+      <input type="number" step="0.01" name="original_price" value="{{ old('original_price', (product.original_price if (product.original_price is defined and product.original_price is not none) else '')) }}"/>
+    </div>
+    <div class="form-group">
+      <label>Stock</label>
+      <input type="number" name="stock" required value="{{ old('stock', (product.stock if (product.stock is defined and product.stock is not none) else 0)) }}"/>
+    </div>
+    <div class="form-group">
+      <label>SKU</label>
+      <input name="sku" value="{{ old('sku', (product.sku if (product.sku is defined and product.sku is not none) else '')) }}"/>
+    </div>
+    <div class="form-group full">
+      <label>Warranty</label>
+      <input name="warranty" value="{{ old('warranty', (product.warranty if (product.warranty is defined and product.warranty is not none) else '')) }}"/>
+    </div>
+    <div class="form-group full">
+      <label>Product Images</label>
+      {% if product is defined %}
+        <input type="hidden" name="galleryKeep" value="{{ implode(',', product.galleryList()) }}"/>
+        <div class="multi-image-previews" data-existing-gallery>
+          {% for url in (product.galleryList()) %}
+            <div class="multi-image-thumb" data-gallery-url="{{ url }}">
+              <img src="{{ media_url(url) }}" alt=""/>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <input type="file" name="imageFiles[]" accept="image/*" multiple data-image-multi="page"/>
+      <small style="color:var(--text-muted);font-size:.75rem">
+        Select one or many images. If none on create, “No Image Available” is used.
+      </small>
+      <div class="multi-image-previews" data-image-previews="page"></div>
+    </div>
+    {% if product is defined %}
+      <div class="form-group full">
+        <label><input type="checkbox" name="active" value="1" style="width:auto" {{ 'checked' if product.active }}/> Active</label>
+      </div>
+    {% endif %}
+  </div>
+  <button class="btn btn-primary" type="submit" style="margin-top:1rem">Save</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ asset('js/product-form.js') }}?v=10"></script>
+{% endblock %}

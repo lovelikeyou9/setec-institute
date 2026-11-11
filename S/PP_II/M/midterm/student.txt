@@ -1,0 +1,3 @@
+Name: Chou Yamata
+Group: SV2.6
+Subject: ADV PP

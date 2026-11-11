@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Profile | My Showcase Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Dynamic Navigation Bar -->
+    <header id="main-nav"></header>
+    <main class="container" style="padding-top: 130px; margin-bottom: 80px;">
+        <div class="section-header" style="margin-bottom: 40px;">
+            <div class="section-title">
+                <h2>My Dashboard <span class="gradient-text">Profile</span></h2>
+                <p>Track your premium acquisitions and showroom scheduling appointments.</p>
+            </div>
+        </div>
+        <!-- Double Column List Layout -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items: start;">
+
+            <!-- Left Column: Purchases History -->
+            <section>
+                <h3
+                    style="font-size:20px; font-weight:700; margin-bottom:24px; padding-bottom:10px; border-bottom:1px solid var(--glass-border);">
+                    <i class="ti ti-receipt"></i> Past Purchases</h3>
+                <ul id="profile-orders-list" class="tickets-list"></ul>
+            </section>
+            <!-- Right Column: Visit Appts -->
+            <section>
+                <h3
+                    style="font-size:20px; font-weight:700; margin-bottom:24px; padding-bottom:10px; border-bottom:1px solid var(--glass-border);">
+                    <i class="ti ti-calendar-event"></i> Visited Bookings</h3>
+                <ul id="profile-bookings-list" class="tickets-list"></ul>
+            </section>
+        </div>
+    </main>
+    <!-- Client Footer -->
+    <footer class="client-footer">
+        <div class="container">
+            <h3 style="font-size:22px; font-weight:800; margin-bottom:16px;"><i class="ti ti-car"></i> APEX MOTORS</h3>
+            <p
+                style="border-top: 1px solid var(--glass-border); padding-top:24px; font-size:12px; color:hsl(var(--text-muted));">
+                Copyright &copy; 2026 Apex Motors Showroom. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>

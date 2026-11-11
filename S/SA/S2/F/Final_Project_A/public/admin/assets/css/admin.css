@@ -1,0 +1,346 @@
+/* Premium Glassmorphism Admin Dashboard Theme */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-primary: 224 71% 4%;
+  /* Slate pitch black (#05070f) */
+  --bg-secondary: 222 47% 7%;
+  /* Deep navy grey (#0c0f1d) */
+  --bg-surface: 223 47% 11%;
+  /* Card surface (#0f172a) */
+
+  --color-primary: 188 86% 53%;
+  /* Cyber Cyan (#06b6d4) */
+  --color-secondary: 243 75% 59%;
+  /* Electric Violet (#4f46e5) */
+  --color-accent: 326 100% 60%;
+  /* Neon Rose (#f43f5e) */
+
+  --text-main: 210 40% 98%;
+  /* Near white (#f8fafc) */
+  --text-muted: 215 20% 65%;
+  /* Cool grey (#94a3b8) */
+
+  --glass-bg: rgba(15, 23, 42, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  --font-family: 'Outfit', sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-width: 260px;
+}
+
+body {
+  background-color: hsl(var(--bg-primary)) !important;
+  color: hsl(var(--text-main)) !important;
+  font-family: var(--font-family) !important;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.04) 0%, transparent 40%) !important;
+  background-attachment: fixed !important;
+}
+
+/* -------------------------------------------------------------
+   Layout Structure (Sidebar & Topbar)
+   ------------------------------------------------------------- */
+/* Topbar */
+#topbar {
+  background: rgba(5, 7, 15, 0.75) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border) !important;
+  height: 70px;
+  z-index: 1050;
+}
+
+.topbar .btn-light {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: hsl(var(--text-main)) !important;
+}
+
+.topbar .btn-light:hover {
+  background: hsl(var(--bg-surface)) !important;
+  border-color: hsl(var(--color-primary)) !important;
+}
+
+/* Sidebar */
+#sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  background: hsl(var(--bg-secondary)) !important;
+  border-right: 1px solid var(--glass-border) !important;
+  padding-top: 80px;
+  transition: var(--transition-smooth);
+}
+
+.logo-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: hsl(var(--text-main));
+}
+
+.logo-text i {
+  color: hsl(var(--color-primary));
+}
+
+#sidebar .nav-link {
+  color: hsl(var(--text-muted)) !important;
+  padding: 12px 24px !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: var(--transition-smooth);
+}
+
+#sidebar .nav-link i {
+  font-size: 18px;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+  color: hsl(var(--text-main)) !important;
+  background: rgba(6, 182, 212, 0.08) !important;
+  border-left: 3px solid hsl(var(--color-primary));
+}
+
+#sidebar .nav-text-section {
+  padding: 16px 24px 8px !important;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: hsl(var(--text-muted)) !important;
+  letter-spacing: 1px;
+}
+
+/* Content Area */
+#content {
+  margin-left: var(--sidebar-width);
+  padding: 100px 32px 32px;
+  transition: var(--transition-smooth);
+}
+
+/* -------------------------------------------------------------
+   Bootstrap Card Customization (Glassmorphism)
+   ------------------------------------------------------------- */
+.card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  color: hsl(var(--text-main)) !important;
+  box-shadow: var(--glass-glow) !important;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  border-color: rgba(6, 182, 212, 0.25) !important;
+}
+
+.card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  padding: 16px 24px !important;
+  font-weight: 700;
+}
+
+.card-body {
+  padding: 24px !important;
+}
+
+/* Stat Cards Opacities */
+.bg-primary.bg-opacity-10 {
+  background: rgba(6, 182, 212, 0.08) !important;
+  border-color: rgba(6, 182, 212, 0.2) !important;
+}
+
+.bg-success.bg-opacity-10 {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+.bg-info.bg-opacity-10 {
+  background: rgba(59, 130, 246, 0.08) !important;
+  border-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+.bg-warning.bg-opacity-10 {
+  background: rgba(245, 158, 11, 0.08) !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+.icon-shape {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.icon-shape.bg-primary {
+  background: hsl(var(--color-primary)) !important;
+  color: #000 !important;
+}
+
+.icon-shape.bg-success {
+  background: #10b981 !important;
+}
+
+.icon-shape.bg-info {
+  background: #3b82f6 !important;
+}
+
+.icon-shape.bg-warning {
+  background: #f59e0b !important;
+}
+
+/* -------------------------------------------------------------
+   Tables styling
+   ------------------------------------------------------------- */
+.table {
+  color: hsl(var(--text-main)) !important;
+  margin-bottom: 0 !important;
+}
+
+.table th {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  color: hsl(var(--text-muted)) !important;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px 20px !important;
+}
+
+.table td {
+  background: transparent !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  padding: 16px 20px !important;
+  vertical-align: middle !important;
+  font-size: 14px;
+}
+
+.table tr:hover td {
+  background: rgba(255, 255, 255, 0.01) !important;
+}
+
+/* -------------------------------------------------------------
+   Forms & Controls
+   ------------------------------------------------------------- */
+.form-control,
+.form-select {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: hsl(var(--text-main)) !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: hsl(var(--color-primary)) !important;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.2) !important;
+}
+
+.form-select option {
+  background: #0f172a !important;
+  color: #fff !important;
+}
+
+/* Avatars */
+.avatar {
+  object-fit: cover;
+}
+
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.avatar-md {
+  width: 44px;
+  height: 44px;
+}
+
+/* -------------------------------------------------------------
+   Custom List Groups
+   ------------------------------------------------------------- */
+.list-group-item {
+  background: transparent !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  color: hsl(var(--text-main)) !important;
+  padding: 16px 24px !important;
+}
+
+/* Badges */
+.badge {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Modal customization */
+.modal-content {
+  background: hsl(var(--bg-secondary)) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8) !important;
+  color: hsl(var(--text-main)) !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--glass-border) !important;
+  padding: 20px 24px !important;
+}
+
+.modal-body {
+  padding: 24px !important;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--glass-border) !important;
+  padding: 20px 24px !important;
+}
+
+.btn-close {
+  filter: invert(1) !important;
+}
+
+/* Responsive Overrides */
+@media (max-width: 991.98px) {
+  #sidebar {
+    transform: translateX(-100%);
+  }
+
+  #sidebar.active {
+    transform: translateX(0);
+  }
+
+  #content {
+    margin-left: 0 !important;
+  }
+}

@@ -1,0 +1,39 @@
+{% set nav = nav_for('seller', activeNav|default('')) %}
+<aside class="dash-sidebar">
+  <div class="brand-block">
+    <strong>Seller Center</strong>
+    <span>{{ ((seller.store_name if (seller.store_name is defined and seller.store_name is not none) else none)) or ((current_user.seller.store_name if (current_user.seller.store_name is defined and current_user.seller.store_name is not none) else 'Store')) }}</span>
+  </div>
+  <nav class="dash-nav">
+    <span class="dash-nav-label">Seller</span>
+    <a href="{{ url('/seller-dashboard') }}" class="{{ 'active' if (nav == 'dashboard') else '' }}">Dashboard</a>
+
+    <div class="dash-nav-group {{ 'open' if (nav in ['products', 'categories', 'brands', 'add-product']) else '' }}">
+      <button type="button" class="dash-nav-toggle {{ 'active' if (nav in ['products', 'categories', 'brands', 'add-product']) else '' }}"
+              aria-expanded="{{ 'true' if (nav in ['products', 'categories', 'brands', 'add-product']) else 'false' }}">
+        <span>Products</span>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="dash-nav-sub">
+        <a href="{{ url('/seller-dashboard/products') }}" class="{{ 'active' if (nav in ['products', 'add-product']) else '' }}">Products List</a>
+        <a href="{{ url('/seller-dashboard/categories') }}" class="{{ 'active' if (nav == 'categories') else '' }}">Category</a>
+        <a href="{{ url('/seller-dashboard/brands') }}" class="{{ 'active' if (nav == 'brands') else '' }}">Brand</a>
+      </div>
+    </div>
+
+    <a href="{{ url('/seller-dashboard/orders') }}" class="{{ 'active' if (nav == 'orders') else '' }}">Orders</a>
+    <a href="{{ url('/seller-dashboard/reviews') }}" class="{{ 'active' if (nav == 'reviews') else '' }}">Reviews</a>
+    <a href="{{ url('/seller-dashboard/earnings') }}" class="{{ 'active' if (nav == 'earnings') else '' }}">Earnings</a>
+    <a href="{{ url('/seller-dashboard/settings') }}" class="{{ 'active' if (nav == 'settings') else '' }}">Settings</a>
+
+    <span class="dash-nav-label">Account</span>
+    <a href="{{ url('/account/orders') }}" class="{{ 'active' if (nav == 'my-orders') else '' }}">My Orders</a>
+    <a href="{{ url('/account/wishlist') }}" class="{{ 'active' if (nav == 'wishlist') else '' }}">Wishlist</a>
+    <a href="{{ url('/account/cart') }}" class="{{ 'active' if (nav == 'cart') else '' }}">Cart</a>
+    <a href="{{ url('/account/notifications') }}" class="{{ 'active' if (nav == 'notifications') else '' }}">Notifications</a>
+    <a href="{{ url('/account/addresses') }}" class="{{ 'active' if (nav == 'addresses') else '' }}">Addresses</a>
+    <a href="{{ url('/account/settings') }}" class="{{ 'active' if (nav == 'account-settings') else '' }}">Account Settings</a>
+  </nav>
+</aside>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+<body class="bg-soft">
+
+  {% include 'front/share/navbar.html' %}
+
+  <main>
+    <section class="checkout-hero">
+      <div class="container py-5">
+        <div class="row g-4 align-items-end">
+          <div class="col-lg-8">
+            <p class="eyebrow text-gold">Secure checkout</p>
+            <h1 class="display-5 fw-bold text-white mb-3">Complete your order</h1>
+            <p class="lead text-white-50 mb-0">Enter delivery details, choose QR / Stripe / Visa, then confirm.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="cart-progress bg-white rounded-3 p-3">
+              <div>Cart</div>
+              <div class="active">Checkout</div>
+              <div>Payment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-5">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% if not cart_list %}
+        <div class="bg-white border rounded-3 p-5 text-center">
+          <p class="text-muted mb-3">Your cart is empty.</p>
+          <a class="btn btn-teal" href="{{ url_for('front_bp.home') }}">Browse products</a>
+        </div>
+      {% else %}
+      <form method="post" action="{{ url_for('front_bp.do_checkout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div class="checkout-card bg-white border rounded-3 p-4 mb-4">
+              <div class="d-flex align-items-center gap-3 mb-4">
+                <span class="step-number">1</span>
+                <div>
+                  <p class="eyebrow mb-1">Delivery</p>
+                  <h2 class="h4 fw-bold mb-0">Shipping information</h2>
+                </div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-bold" for="firstName">First name</label>
+                  <input name="firstName" class="form-control" id="firstName" type="text" required placeholder="Alex">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold" for="lastName">Last name</label>
+                  <input name="lastName" class="form-control" id="lastName" type="text" required placeholder="Morgan">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold" for="email">Email</label>
+                  <input name="email" class="form-control" id="email" type="email" required placeholder="alex@example.com">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold" for="phone">Phone</label>
+                  <input name="phone" class="form-control" id="phone" type="tel" required placeholder="+855 ...">
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-bold" for="address">Address</label>
+                  <textarea class="form-control" id="address" name="address" rows="3" required placeholder="Street, city, postal code"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout-card bg-white border rounded-3 p-4">
+              <div class="d-flex align-items-center gap-3 mb-4">
+                <span class="step-number">2</span>
+                <div>
+                  <p class="eyebrow mb-1">Payment</p>
+                  <h2 class="h4 fw-bold mb-0">Choose payment method</h2>
+                </div>
+              </div>
+
+              <div class="form-check mb-3 p-3 border rounded-3">
+                <input class="form-check-input" type="radio" name="payment_method" id="payQr" value="QR" checked>
+                <label class="form-check-label w-100" for="payQr">
+                  <strong>QR / Bank transfer</strong>
+                  <span class="d-block text-muted small">Scan QR, then confirm — Telegram notifies admin</span>
+                </label>
+              </div>
+              <div class="form-check mb-3 p-3 border rounded-3">
+                <input class="form-check-input" type="radio" name="payment_method" id="payStripe" value="STRIPE">
+                <label class="form-check-label w-100" for="payStripe">
+                  <strong>Stripe</strong>
+                  <span class="d-block text-muted small">Pay by card (test mode)</span>
+                </label>
+              </div>
+              <div class="form-check mb-4 p-3 border rounded-3">
+                <input class="form-check-input" type="radio" name="payment_method" id="payVisa" value="VISA">
+                <label class="form-check-label w-100" for="payVisa">
+                  <strong>Visa</strong>
+                  <span class="d-block text-muted small">Sandbox / test mode</span>
+                </label>
+              </div>
+
+              <div class="row g-4 align-items-center" id="qrBox">
+                <div class="col-md-5">
+                  <div class="qr-box">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=VoltEdge%20payment%20%24{{ '%.2f'|format(total) }}" alt="QR code payment">
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="payment-detail">
+                    <span>Payment amount</span>
+                    <strong>${{ "%.2f"|format(total) }}</strong>
+                  </div>
+                  <div class="payment-detail">
+                    <span>Reference</span>
+                    <strong>VE-{{ "%.0f"|format(total * 100) }}</strong>
+                  </div>
+                  <p class="text-muted mt-3 mb-0">For QR payments, scan with your banking app, then click confirm below.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="col-lg-5">
+            <div class="order-summary-card bg-white border rounded-3 p-4">
+              <p class="eyebrow">Review</p>
+              <h2 class="h4 fw-bold mb-4">Order summary</h2>
+
+              {% for item in cart_list %}
+              <div class="checkout-item">
+                <img src="{{ item.image }}" alt="{{ item.title }}">
+                <div>
+                  <h3 class="h6 fw-bold mb-1">{{ item.title[:42] }}{% if item.title|length > 42 %}…{% endif %}</h3>
+                  <p class="text-muted mb-0 small">{{ item.brand or item.category }} · qty {{ item.qty }}</p>
+                </div>
+                <strong>${{ "%.2f"|format(item.price * item.qty) }}</strong>
+              </div>
+              {% endfor %}
+
+              <div class="summary-stack mt-3">
+                <div class="summary-line"><span>Subtotal</span><strong>${{ "%.2f"|format(total) }}</strong></div>
+                <div class="summary-line"><span>Shipping</span><strong>Free</strong></div>
+                <div class="summary-line total"><span>Total</span><strong>${{ "%.2f"|format(total) }}</strong></div>
+              </div>
+
+              <button type="submit" class="btn btn-teal btn-lg w-100 mt-4">Confirm order / Pay</button>
+              <a class="btn btn-outline-secondary w-100 mt-2" href="{{ url_for('front_bp.cart') }}">Back to cart</a>
+
+              <div class="secure-note mt-4">
+                <strong>Protected checkout</strong>
+                <span>Stripe & Visa use keys from your Final project. Orders notify Telegram.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </form>
+      {% endif %}
+    </section>
+  </main>
+
+  {% include 'front/share/footer.html' %}
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Missing Pages</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .status { padding: 10px; margin: 5px; border-radius: 5px; }
+        .exists { background: #d4edda; color: #155724; }
+        .missing { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Checking HTML Files</h1>
+    <div id="results"></div>
+    
+    <script>
+        const pages = [
+            'index.html', 'products.html', 'cart.html', 'product-detail.html',
+            'about.html', 'blog.html', 'checkout.html', 'collections.html',
+            'login.html', 'register.html', 'profile.html', 'search.html',
+            'settings.html', '404.html'
+        ];
+        
+        async function checkPage(page) {
+            try {
+                const response = await fetch(page);
+                if (response.status === 200) {
+                    return `<div class="status exists">✅ ${page} - EXISTS</div>`;
+                }
+            } catch (error) {
+                return `<div class="status missing">❌ ${page} - MISSING or ERROR</div>`;
+            }
+        }
+        
+        async function checkAll() {
+            const resultsDiv = document.getElementById('results');
+            for (const page of pages) {
+                const result = await checkPage(page);
+                resultsDiv.innerHTML += result;
+            }
+        }
+        
+        checkAll();
+    </script>
+</body>
+</html>

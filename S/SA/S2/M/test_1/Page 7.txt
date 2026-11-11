@@ -1,0 +1,47 @@
+DSDM Lifecycle
+
+01
+Pre-Project
+
+- Identify a business opportunity. 
+- Recognize a problem or new idea.
+- Decide whether the project is worth considering.
+
+02
+Feasibility
+
+- Check if project is technically and financially possible.
+- Analyze technical feasibility.
+- Estimate cost and time.
+
+03
+Foundations
+
+Define:
+- Build strong project foundation.
+- Requirements Architecture High-level project plan.
+
+04
+Evolutionary Development
+
+- Develop + test features iteratively Build small parts (increments).
+- Get user feedback.
+- Improve continuously.
+
+05
+Deployment
+
+- Release system to users.
+- Deliver product.
+- User training.
+- Go live.
+
+06
+Post-Project
+
+- Maintenance and benefit review Fix bugs.
+- System updates.
+- Continuous improvement.
+
+
+

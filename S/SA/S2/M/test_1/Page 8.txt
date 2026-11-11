@@ -1,0 +1,13 @@
+- Pre-Project
+- Feasibility
+- Foundations
+- Evolutionary Development: Plan -> Build -> Test -> Review -> Repeat
+- Deployment
+- Post-Project
+
+
+In DSDM, Post-Project ends the lifecycle. Any further development 
+is treated as a new project starting again from Pre-Project.
+	So:
+	- Same project  → ❌  cannot go back
+	- New project    → ✅  a new lifecycle starts

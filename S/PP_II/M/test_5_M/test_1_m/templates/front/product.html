@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+
+<body class="ve-home">
+
+{% include 'front/share/navbar.html' %}
+
+<main class="ve-section">
+  <div class="container">
+    <nav class="mb-4" aria-label="Breadcrumb">
+      <a class="ve-link" href="{{ url_for('home') }}">Home</a>
+      <span class="text-muted mx-2">/</span>
+      <a class="ve-link" href="{{ url_for('products') }}">Products</a>
+      <span class="text-muted mx-2">/</span>
+      <span class="text-muted">{{ product.title[:40] }}{% if product.title|length > 40 %}...{% endif %}</span>
+    </nav>
+
+    <div class="ve-card ve-product-detail mb-5">
+      <div class="row g-4 g-xl-5">
+        <div class="col-lg-7">
+          <div class="ve-product-gallery">
+            <span class="ve-badge">Top rated</span>
+            <img src="{{ product.image }}" alt="{{ product.title }}">
+          </div>
+        </div>
+
+        <div class="col-lg-5 d-flex flex-column justify-content-center">
+          <p class="ve-eyebrow-sm">{{ product.category }}</p>
+          <h1 class="fw-bold mb-3" style="font-size:clamp(1.5rem,3vw,2.25rem)">{{ product.title }}</h1>
+
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <span class="ve-rating-pill">{{ product.rating.rate }} / 5</span>
+            <span class="text-muted small">{{ product.rating.count }} reviews</span>
+            <span class="ve-stock-pill">In stock</span>
+          </div>
+
+          <p class="text-muted mb-4">{{ product.description }}</p>
+
+          <div class="mb-4">
+            <span class="ve-product-price" style="font-size:2rem">${{ "%.2f"|format(product.price) }}</span>
+          </div>
+
+          <div class="d-grid gap-2">
+            <a class="ve-btn-primary text-center text-decoration-none" href="{{ url_for('cart', product_id=product.id) }}">Add to Cart</a>
+            <a class="ve-btn-outline text-center" href="{{ url_for('checkout') }}">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+      <div>
+        <p class="ve-eyebrow-sm">Related products</p>
+        <h2 class="fw-bold mb-0">Similar items</h2>
+      </div>
+      <a class="ve-link-all" href="{{ url_for('products') }}">View all &rarr;</a>
+    </div>
+
+    <div class="row g-4">
+      {% for p in related_product %}
+      <div class="col-sm-6 col-lg-4">
+        <div class="ve-product-card">
+          <div class="ve-product-img-wrap">
+            <img src="{{ p.image }}" alt="{{ p.title }}">
+          </div>
+          <div class="ve-product-body">
+            <span class="ve-product-cat">{{ p.category }}</span>
+            <h3 class="ve-product-title">{{ p.title }}</h3>
+            <div class="ve-product-price">${{ "%.2f"|format(p.price) }}</div>
+            <a href="{{ url_for('product', product_id=p.id) }}" class="ve-btn-view">View Product</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+{% include 'front/share/footer.html' %}
+
+</body>
+</html>

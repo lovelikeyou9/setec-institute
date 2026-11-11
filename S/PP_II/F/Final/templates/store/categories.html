@@ -1,0 +1,56 @@
+{% extends 'layouts/store.html' %}
+{% block title %}Categories — MMT{% endblock %}
+{% block content %}
+<div class="container" style="padding-top:1.5rem">
+  <nav class="breadcrumb">
+    <a href="{{ url('/') }}">Home</a>
+    <span class="sep">/</span>
+    <span>Categories</span>
+  </nav>
+  <div class="section-head">
+    <div>
+      <h1 class="section-title">Shop by Category</h1>
+      <p class="section-sub">Computers, networking, gaming, cameras, power, DIY, and pro IT gear</p>
+    </div>
+    <a href="{{ url('/products') }}">Browse all products →</a>
+  </div>
+
+  {% if (not empty(navMenuGroups)) and (navMenuGroups|length) %}
+    <div class="cat-groups">
+      {% for g in (navMenuGroups) %}
+        <section class="cat-group">
+          <div class="cat-group-head">
+            <span class="cat-group-icon">{{ g['icon'] }}</span>
+            <h2>{{ g['title'] }}</h2>
+          </div>
+          <div class="cat-grid cat-grid-media">
+            {% for item in (g['items']) %}
+              <a href="{{ url(('/products?category=' ~ item['id'])) }}" class="cat-card cat-card-media">
+                {% if not empty(item['image_url']) %}
+                  <div class="cat-thumb"><img src="{{ item['image_url'] }}" alt="{{ item['name'] }}" loading="lazy"/></div>
+                {% else %}
+                  <div class="cat-icon">{{ item['icon'] if (item['icon'] is defined and item['icon'] is not none) else g['icon'] }}</div>
+                {% endif %}
+                <span>{{ item['name'] }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="cat-grid">
+      {% for c in (categories) %}
+        <a href="{{ url(('/products?category=' ~ c.id)) }}" class="cat-card cat-card-media">
+          {% if c.image_url %}
+            <div class="cat-thumb"><img src="{{ c.image_url }}" alt="{{ c.name }}" loading="lazy"/></div>
+          {% else %}
+            <div class="cat-icon">{{ c.icon or '💻' }}</div>
+          {% endif %}
+          <span>{{ c.name }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

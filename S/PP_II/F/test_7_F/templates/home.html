@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+              <img
+                      src="https://www.coca-cola.com/content/dam/onexp/kh/en/brands/coca-cola/coca-cola-original-taste.png"
+                      class="card-img-top"
+                      alt="..."
+              >
+              <div class="card-body">
+                <h5 class="card-title">Coca</h5>
+                <p class="card-text">100៛</p>
+                <form method="post" action="{{ url_for('buy_now') }}">
+                    <input type="hidden" name="price" value="100">
+                    <button type="submit" class="btn btn-primary">Buy now</button>
+                </form>
+
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+{% extends 'layouts/admin.html' %}
+{% block title %}{{ ('Checkout — ' ~ checkout['customer']) ~ ' — Admin' }}{% endblock %}
+{% block content %}
+<div class="exec-head" style="margin-bottom:1rem">
+  <div>
+    <a href="{{ url('/admin/orders') }}" class="btn btn-outline btn-sm" style="margin-bottom:.65rem">← Back to checkouts</a>
+    <h1 style="font-size:1.4rem;margin:0">Customer checkout</h1>
+    <p style="margin:.35rem 0 0;color:var(--text-muted);font-size:.9rem">
+      One checkout can include packages from multiple sellers. Confirm / refund each seller below.
+    </p>
+  </div>
+</div>
+
+<div class="detail-block" style="margin-bottom:1.25rem">
+  <div class="form-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.85rem 1.25rem">
+    <div>
+      <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Customer</div>
+      <strong>{{ checkout['customer'] }}</strong>
+      {% if checkout['email'] %}<div style="font-size:.85rem;color:var(--text-secondary)">{{ checkout['email'] }}</div>{% endif %}
+      {% if checkout['phone'] %}<div style="font-size:.85rem;color:var(--text-secondary)">{{ checkout['phone'] }}</div>{% endif %}
+    </div>
+    <div>
+      <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Placed</div>
+      <strong>{{ date_fmt(checkout['placed_at'], 'd M Y H:i') or '—' }}</strong>
+    </div>
+    <div>
+      <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Payment</div>
+      <strong>{{ str_replace('_', ' ', checkout['payment']) if checkout['payment'] else '—' }}</strong>
+      <div style="font-size:.85rem;color:var(--text-secondary)">{{ str_replace('_', ' ', checkout['delivery']) if checkout['delivery'] else '' }}</div>
+    </div>
+    <div>
+      <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Sellers / Total</div>
+      <strong>{{ checkout['seller_count'] }} seller{{ '' if (checkout['seller_count'] == 1) else 's' }}</strong>
+      <div style="font-size:1.05rem;font-weight:700;color:var(--brand)">${{ number_format(checkout['total'], 2) }}</div>
+    </div>
+  </div>
+  {% if checkout['address'] %}
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
+      <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.25rem">Ship to</div>
+      <div style="color:var(--text-secondary);line-height:1.5">{{ checkout['address'] }}</div>
+    </div>
+  {% endif %}
+</div>
+
+<div class="data-table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Order #</th>
+        <th>Seller</th>
+        <th>Items</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in (orders) %}
+        {% set s = o.status %}
+        <tr>
+          <td>{{ o.order_number }}</td>
+          <td>{{ o.seller.store_name if (o.seller.store_name is defined and o.seller.store_name is not none) else '—' }}</td>
+          <td>
+            {% for item in (o.items) %}
+              <div style="font-size:.82rem">{{ item.quantity }}× {{ item.product_name }}</div>
+            {% endfor %}
+          </td>
+          <td>{% with status=(o.status) %}{% include 'components/status_pill.html' %}{% endwith %}</td>
+          <td>${{ number_format(o.total, 2) }}</td>
+          <td class="table-actions">
+            <a href="{{ url(('/orders/' ~ o.order_number)) }}" class="btn btn-outline btn-sm">View</a>
+
+            {% if s in ['PAYMENT_CONFIRMED', 'PENDING_PAYMENT'] %}
+              <form method="post" action="{{ url((('/admin/orders/' ~ o.id) ~ '/confirm-hold')) }}" style="display:inline"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-primary btn-sm">Confirm &amp; hold</button>
+              </form>
+            {% endif %}
+
+            {% if s in ['OUT_FOR_DELIVERY', 'SHIPPED'] %}
+              <form method="post" action="{{ url((('/admin/orders/' ~ o.id) ~ '/confirm-delivered')) }}" style="display:inline"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-primary btn-sm">Confirm delivered</button>
+              </form>
+            {% endif %}
+
+            {% if s in ['DELIVERED', 'DISPUTED'] %}
+              <form method="post" action="{{ url((('/admin/orders/' ~ o.id) ~ '/release-payout')) }}" style="display:inline"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-primary btn-sm">Deduct 3% &amp; pay</button>
+              </form>
+            {% endif %}
+
+            {% if not (s in ['REFUNDED', 'COMPLETED', 'CANCELLED']) %}
+              <form method="post" action="{{ url((('/admin/orders/' ~ o.id) ~ '/refund')) }}" style="display:inline"
+                    onsubmit="return confirm('Refund held funds to customer for this seller package?');"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-danger btn-sm">Refund</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

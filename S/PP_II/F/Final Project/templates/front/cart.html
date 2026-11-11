@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+<body class="bg-soft">
+
+  {% include 'front/share/navbar.html' %}
+
+  <main>
+    <section class="cart-hero">
+      <div class="container py-5">
+        <div class="row g-4 align-items-end">
+          <div class="col-lg-8">
+            <p class="eyebrow text-gold">Shopping cart</p>
+            <h1 class="display-5 fw-bold text-white mb-3">Review your items before checkout</h1>
+            <p class="lead text-white-50 mb-0">Update quantities, then proceed to secure payment.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="cart-progress bg-white rounded-3 p-3">
+              <div class="active">Cart</div>
+              <div>Checkout</div>
+              <div>Payment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-5">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="bg-white border rounded-3 p-3 p-md-4 mb-4 cart-list-card">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+              <div>
+                <p class="eyebrow mb-1">Items</p>
+                <h2 class="h4 fw-bold mb-0">
+                  {{ cart_list|length }} product{{ 's' if cart_list|length != 1 else '' }} in cart
+                </h2>
+              </div>
+              <a class="btn btn-outline-secondary" href="{{ url_for('front_bp.home') }}">Continue shopping</a>
+            </div>
+
+            {% if not cart_list %}
+            <div class="py-4 text-center">
+              <p class="text-muted mb-3">Your cart is empty.</p>
+              <a class="btn btn-teal" href="{{ url_for('front_bp.home') }}">Browse products</a>
+            </div>
+            {% endif %}
+
+            {% for item in cart_list %}
+            <article class="cart-item-card">
+              <img src="{{ item.image }}" alt="{{ item.title }}">
+              <div class="cart-item-body">
+                <p class="product-meta mb-1">{{ item.brand or item.category }}</p>
+                <h3 class="h5 fw-bold mb-2">{{ item.title }}</h3>
+                <p class="text-muted small mb-3">${{ "%.2f"|format(item.price) }} each</p>
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                  <div class="static-qty">
+                    <button type="button" onclick="changeQty({{ item.id }}, 'decrease')" aria-label="Decrease">−</button>
+                    <strong id="qty-{{ item.id }}">{{ item.qty }}</strong>
+                    <button type="button" onclick="changeQty({{ item.id }}, 'increase')" aria-label="Increase">+</button>
+                  </div>
+                  <button type="button" class="link-danger fw-bold" onclick="removeItem({{ item.id }})">Remove</button>
+                </div>
+              </div>
+              <div class="cart-item-price">
+                <span>Line total</span>
+                <strong>${{ "%.2f"|format(item.price * item.qty) }}</strong>
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+
+          {% if cart_list %}
+          <div class="bg-white border rounded-3 p-4">
+            <p class="eyebrow mb-1">Delivery</p>
+            <h2 class="h5 fw-bold">Free standard shipping</h2>
+            <p class="text-muted mb-0">All storefront orders ship free within Cambodia.</p>
+          </div>
+          {% endif %}
+        </div>
+
+        <aside class="col-lg-4">
+          <div class="order-summary-card bg-white border rounded-3 p-4">
+            <p class="eyebrow">Summary</p>
+            <h2 class="h4 fw-bold mb-4">Order total</h2>
+            <div class="summary-line"><span>Subtotal</span><strong>${{ "%.2f"|format(total) }}</strong></div>
+            <div class="summary-line"><span>Shipping</span><strong>Free</strong></div>
+            <div class="summary-line total"><span>Total</span><strong>${{ "%.2f"|format(total) }}</strong></div>
+
+            {% if cart_list %}
+            <a class="btn btn-teal btn-lg w-100 mt-4" href="{{ url_for('front_bp.checkout') }}">Proceed to checkout</a>
+            {% else %}
+            <button class="btn btn-teal btn-lg w-100 mt-4" type="button" disabled>Proceed to checkout</button>
+            {% endif %}
+            <a class="btn btn-outline-secondary w-100 mt-2" href="{{ url_for('front_bp.home') }}">Add more products</a>
+
+            <div class="secure-note mt-4">
+              <strong>Secure checkout</strong>
+              <span>QR, Stripe, or Visa on the next step. Order alerts go to Telegram.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  {% include 'front/share/footer.html' %}
+
+  <script>
+  const CSRF = "{{ csrf_token() }}";
+
+  async function changeQty(id, action) {
+    const res = await fetch("/update_qty", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": CSRF
+      },
+      body: `id=${id}&action=${action}&csrf_token=${encodeURIComponent(CSRF)}`
+    });
+    if (!res.ok) return;
+    location.reload();
+  }
+
+  async function removeItem(id) {
+    const res = await fetch("/remove_item", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": CSRF
+      },
+      body: `id=${id}&csrf_token=${encodeURIComponent(CSRF)}`
+    });
+    const data = await res.json();
+    if (data.success) location.reload();
+  }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+Roles
+
+roles are clearly defined so everyone in the
+project knows who is responsible for what.
+
+
+Business Roles
+
+These roles represent the business side (users and stakeholders). 
+They ensure the system delivers real business value.
+
+
+01
+Business Sponsor
+
+- The most senior person responsible for the project.
+- Provides funding and resources.
+- Makes final business decisions.
+- Ensures the project supports business goals.
+
+
+02
+Business Visionary
+
+- Defines the overall vision of the system.
+- Ensures the project solves the real business problem.
+- Guides the team about what the system should achieve.
+
+
+03
+Business Ambassador
+
+- Represents the daily needs of users.
+- Works closely with the development team.
+
+Think of this role like a bridge between users and developers.
+
+
+04
+Business Advisor
+
+- Provides specialized knowledge.
+- Helps the team understand specific business processes.
+
+Example:
+- Accountant
+- Sales expert
+
+
+

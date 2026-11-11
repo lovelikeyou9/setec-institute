@@ -1,0 +1,24 @@
+Roles
+
+Management Roles:
+These roles ensure the project is well organized and controlled.
+
+
+09
+Project Manager
+- Manages the whole project.
+- Responsible for time, budget, and resources.
+
+Main responsibilities:
+- Plan the project
+- Track progress
+
+
+10
+Workshop Facilitator
+- Runs workshops and meetings.
+- Ensures discussions are productive and efficient.
+
+Main responsibilities:
+- Guide workshops
+- Resolve communication issues

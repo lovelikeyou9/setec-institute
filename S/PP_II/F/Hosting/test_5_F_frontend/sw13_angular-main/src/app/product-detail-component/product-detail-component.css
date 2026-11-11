@@ -1,0 +1,56 @@
+
+body{
+  background:#f8f9fa;
+}
+
+.product-card{
+  background:#fff;
+  border-radius:15px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  margin-top:40px;
+}
+
+.product-image{
+  width:100%;
+  height:450px;
+  object-fit:contain;
+}
+
+.price{
+  font-size:36px;
+  font-weight:bold;
+  color:#dc3545;
+}
+
+.old-price{
+  text-decoration:line-through;
+  color:#999;
+}
+
+.rating{
+  color:#ffc107;
+  font-size:18px;
+}
+
+.quantity-box{
+  width:70px;
+  text-align:center;
+}
+
+.category-badge{
+  font-size:14px;
+}
+
+.description{
+  line-height:1.8;
+  color:#666;
+}
+
+.btn-buy{
+  width:180px;
+}
+
+.btn-cart{
+  width:180px;
+}

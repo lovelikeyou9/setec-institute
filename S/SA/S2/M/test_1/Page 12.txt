@@ -1,0 +1,51 @@
+Roles
+
+These roles represent the business side (users and stakeholders). They ensure the system 
+delivers real business value.
+
+
+Solution Development Team Roles
+
+These roles are the technical team that builds the system.
+
+
+05
+Technical Coordinator
+- Responsible for technical architecture.
+- Ensures the system is make technically correct.
+
+Main responsibilities:
+- Define system architecture
+
+
+06
+Team Leader
+- Leads the development team.
+- Manages daily technical work.
+
+Main responsibilities:
+- Coordinate developers
+- Ensure tasks are completed
+
+
+07
+Solution Developer
+- The programmers or engineers.
+- They design, code, and build the system.
+
+Examples:
+- Software developers
+- Database developers
+
+
+08
+Solution Tester
+
+Responsible for testing the system.
+
+Main responsibilities:
+- Check for bugs
+- Validate requirements
+- Ensure quality
+
+

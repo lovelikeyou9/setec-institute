@@ -1,0 +1,229 @@
+{% extends 'layouts/admin.html' %}
+{% block title %}Products — Admin{% endblock %}
+{% block content %}
+<div class="section-head" style="margin-bottom:1rem">
+  <h1 style="font-size:1.4rem">All Products</h1>
+</div>
+
+{% set selectedCategoryId = selectedCategoryId if selectedCategoryId is defined else req_int('category') %}
+{% set selectedBrandId = selectedBrandId if selectedBrandId is defined else req_int('brand') %}
+<form class="dash-search" action="{{ url('/admin/products') }}" method="get">
+  <input type="search" name="q" value="{{ req_input('q') }}" placeholder="Search products, brand, category, seller..."/>
+  <label class="dash-sort">
+    <span>Category</span>
+    <select name="category" onchange="this.form.submit()">
+      <option value="">All</option>
+      {% for c in (categories) %}
+        <option value="{{ c.id }}" {{ 'selected' if selectedCategoryId == c.id }}>{{ c.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label class="dash-sort">
+    <span>Brand</span>
+    <select name="brand" onchange="this.form.submit()">
+      <option value="">All</option>
+      {% for b in (brands) %}
+        <option value="{{ b.id }}" {{ 'selected' if selectedBrandId == b.id }}>{{ b.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button type="submit" class="btn btn-primary btn-sm">Search</button>
+  {% if req_input('q') or selectedCategoryId or selectedBrandId %}
+    <a href="{{ url('/admin/products') }}" class="btn btn-outline btn-sm">Clear</a>
+  {% endif %}
+</form>
+
+<div class="data-table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr><th>Image</th><th>ID</th><th>Name</th><th>Seller</th><th>Category</th><th>Brand</th><th>Price</th><th>Stock</th><th>Active</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for p in (products) %}
+        <tr class="product-row-click"
+            data-view-product
+            data-id="{{ p.id }}"
+            data-name="{{ p.name }}"
+            data-slug="{{ p.slug }}"
+            data-seller="{{ p.seller.store_name if (p.seller.store_name is defined and p.seller.store_name is not none) else '—' }}"
+            data-category="{{ p.category.name if (p.category.name is defined and p.category.name is not none) else '—' }}"
+            data-brand="{{ p.brand.name if (p.brand.name is defined and p.brand.name is not none) else '—' }}"
+            data-price="{{ number_format(p.price, 2, '.', '') }}"
+            data-original="{{ number_format(p.original_price, 2, '.', '') if p.original_price else '' }}"
+            data-stock="{{ p.stock }}"
+            data-sku="{{ p.sku }}"
+            data-warranty="{{ p.warranty }}"
+            data-image="{{ media_url(p.primaryImageUrl()) }}"
+            data-gallery="{{ implode(',', p.galleryList()) }}"
+            data-description="{{ p.description }}"
+            data-specs="{{ p.specifications }}"
+            data-color="{{ p.color_options }}"
+            data-storage="{{ p.storage_options }}"
+            data-ram="{{ p.ram_options }}"
+            data-option-groups="{{ p.option_groups }}"
+            data-active="{{ 'true' if p.active else 'false' }}"
+            data-edit-action="{{ url((('/admin/products/' ~ p.id) ~ '/edit')) }}"
+            data-field-name="{{ p.name }}"
+            data-field-categoryId="{{ p.category_id }}"
+            data-field-brandId="{{ p.brand_id }}"
+            data-field-price="{{ p.price }}"
+            data-field-originalPrice="{{ p.original_price }}"
+            data-field-stock="{{ p.stock }}"
+            data-field-sku="{{ p.sku }}"
+            data-field-warranty="{{ p.warranty }}"
+            data-field-imageUrl="{{ p.primaryImageUrl() }}"
+            data-field-galleryKeep="{{ implode(',', p.galleryList()) }}"
+            data-field-description="{{ p.description }}"
+            data-field-specifications="{{ p.specifications }}"
+            data-field-colorOptions="{{ p.color_options }}"
+            data-field-storageOptions="{{ p.storage_options }}"
+            data-field-ramOptions="{{ p.ram_options }}"
+            data-field-optionGroupsJson="{{ p.option_groups }}"
+            data-field-active="{{ 'true' if p.active else 'false' }}">
+          <td>
+            <button type="button" class="table-thumb-btn" data-view-product tabindex="-1">
+              <img class="table-thumb" src="{{ media_url(p.primaryImageUrl()) }}" alt="{{ p.name }}"/>
+            </button>
+          </td>
+          <td>{{ p.id }}</td>
+          <td><button type="button" class="table-link-btn" data-view-product>{{ p.name }}</button></td>
+          <td>{{ p.seller.store_name if (p.seller.store_name is defined and p.seller.store_name is not none) else '—' }}</td>
+          <td>{{ p.category.name if (p.category.name is defined and p.category.name is not none) else '—' }}</td>
+          <td>{{ p.brand.name if (p.brand.name is defined and p.brand.name is not none) else '—' }}</td>
+          <td>${{ number_format(p.price, 2) }}</td>
+          <td>{{ p.stock }}</td>
+          <td>
+            <span class="status-pill {{ 'green' if p.active else 'gray' }}">{{ 'Yes' if p.active else 'No' }}</span>
+          </td>
+          <td class="table-actions" onclick="event.stopPropagation()">
+            <button type="button" class="btn btn-outline btn-sm"
+                    data-edit="editProductForm"
+                    data-modal-open="modalEditProduct"
+                    data-action="{{ url((('/admin/products/' ~ p.id) ~ '/edit')) }}"
+                    data-field-name="{{ p.name }}"
+                    data-field-categoryId="{{ p.category_id }}"
+                    data-field-brandId="{{ p.brand_id }}"
+                    data-field-price="{{ p.price }}"
+                    data-field-originalPrice="{{ p.original_price }}"
+                    data-field-stock="{{ p.stock }}"
+                    data-field-sku="{{ p.sku }}"
+                    data-field-warranty="{{ p.warranty }}"
+                    data-field-imageUrl="{{ p.primaryImageUrl() }}"
+                    data-field-galleryKeep="{{ implode(',', p.galleryList()) }}"
+                    data-field-description="{{ p.description }}"
+                    data-field-specifications="{{ p.specifications }}"
+                    data-field-colorOptions="{{ p.color_options }}"
+                    data-field-storageOptions="{{ p.storage_options }}"
+                    data-field-ramOptions="{{ p.ram_options }}"
+                    data-field-optionGroupsJson="{{ p.option_groups }}"
+                    data-field-active="{{ 'true' if p.active else 'false' }}">Edit</button>
+            <button type="button" class="btn btn-danger btn-sm"
+                    data-delete="{{ url((('/admin/products/' ~ p.id) ~ '/delete')) }}"
+                    data-label="product {{ p.name }}">Delete</button>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{{ products.links()|safe }}
+{% endblock %}
+
+{% block modals %}
+<div class="modal-backdrop" id="modalViewProduct">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Product Details</h3><button type="button" class="modal-close" data-modal-close>&times;</button></div>
+    <div class="modal-body">
+      {% with showSeller=true %}{% include 'partials/product-view-body.html' %}{% endwith %}
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" data-modal-close>Close</button>
+      <a id="viewProductStorefront" href="#" class="btn btn-outline" target="_blank" rel="noopener">Open storefront</a>
+      <button type="button" class="btn btn-primary" id="viewProductEditBtn">Edit</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalEditProduct">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Edit Product</h3><button type="button" class="modal-close" data-modal-close>&times;</button></div>
+    <form id="editProductForm" method="post" action="#" enctype="multipart/form-data">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group full"><label>Product Name *</label><input type="text" name="name" required/></div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select name="categoryId" required>
+              {% for c in (categories) %}
+                <option value="{{ c.id }}" data-slug="{{ c.slug }}">{{ c.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Brand *</label>
+            <select name="brandId" required>
+              {% for b in (brands) %}
+                <option value="{{ b.id }}">{{ b.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group"><label>Price *</label><input type="number" name="price" required min="0" step="0.01"/></div>
+          <div class="form-group"><label>Original Price</label><input type="number" name="originalPrice" min="0" step="0.01"/></div>
+          <div class="form-group"><label>Stock *</label><input type="number" name="stock" required min="0"/></div>
+          <div class="form-group"><label>SKU</label><input type="text" name="sku"/></div>
+          <div class="form-group"><label>Warranty</label><input type="text" name="warranty"/></div>
+          <div class="form-group full">
+            <label>Product Images</label>
+            <input type="hidden" name="galleryKeep" id="editGalleryKeep" value=""/>
+            <div class="multi-image-previews" id="editGalleryList" data-existing-gallery></div>
+            <input type="file" name="imageFiles[]" accept="image/*" multiple data-image-multi="edit"/>
+            <small style="color:var(--text-muted);font-size:.75rem;display:block;margin-top:.35rem">
+              Add more images (max 12). Remove current ones with ×. Empty → default No Image.
+            </small>
+            <div class="multi-image-previews" data-image-previews="edit"></div>
+          </div>
+          <div class="form-group full"><label>Description *</label><textarea name="description" rows="3" required></textarea></div>
+          {% with prefix='edit' %}{% include 'partials/product-variant-fields.html' %}{% endwith %}
+          <div class="form-group"><label><input type="checkbox" name="active" value="true"/> Active</label></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalDelete">
+  <div class="modal">
+    <div class="modal-header"><h3>Confirm Delete</h3><button type="button" class="modal-close" data-modal-close>&times;</button></div>
+    <form id="deleteForm" method="post" action="#">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="modal-body"><p>Are you sure you want to delete <strong id="deleteLabel">this item</strong>?</p></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ asset('js/product-form.js') }}?v=10"></script>
+<script>
+(function () {
+  const input = document.getElementById('editProductImageFile');
+  const preview = document.getElementById('editProductImagePreview');
+  if (!input || !preview) return;
+  input.addEventListener('change', () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = 'block';
+  });
+})();
+</script>
+{% endblock %}

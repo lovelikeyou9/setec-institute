@@ -1,0 +1,49 @@
+DSDM & Waterfall
+
+Important differences between them
+
+
+01
+Iterative Development
+
+- Development is done in repeated cycles and improvements.
+
+02
+Flexible Requirements
+
+- Changes can be made during development.
+
+03
+High User Involvement
+
+- Users participate and give feedback regularly.
+
+04
+Early Delivery
+
+- Working software is delivered in small parts quickly.
+
+
+
+01
+Sequential Development
+
+- Each phase is completed step by step.
+
+02
+Fixed Requirements
+
+- Changes are difficult after the project begins.
+
+03
+Low User Involvement
+
+- Users are mostly involved at the beginning.
+
+04
+Late Delivery
+
+- The full system is delivered at the end of the project.
+
+
+

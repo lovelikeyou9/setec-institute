@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Details | Vehicle Specifications</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Dynamic Navigation Header -->
+    <header id="main-nav"></header>
+    <main class="container">
+        <!-- Grid specifications filled dynamically by app.js -->
+        <div id="product-detail-container" class="detail-grid"></div>
+    </main>
+    <!-- Interactive Calendar Scheduling Modal overlay -->
+    <div id="booking-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div onclick="closeBookingModal()" class="modal-close"><i class="ti ti-x"></i></div>
+            <h3 id="booking-type-title" style="font-size:22px; font-weight:800; margin-bottom:20px;">Book Appt</h3>
+
+            <form id="booking-form">
+                <div class="form-group">
+                    <label for="booking-date-input">Appointment Date & Time</label>
+                    <input type="datetime-local" id="booking-date-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-notes-input">Special Instructions / Requests</label>
+                    <textarea id="booking-notes-input"
+                        placeholder="Enter special pick up guidelines, license references, or driver notes..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;"><i class="ti ti-calendar-plus"></i>
+                    Submit Scheduling</button>
+            </form>
+        </div>
+    </div>
+    <!-- Client Footer -->
+    <footer class="client-footer">
+        <div class="container">
+            <h3 style="font-size:22px; font-weight:800; margin-bottom:16px;"><i class="ti ti-car"></i> APEX MOTORS</h3>
+            <p
+                style="border-top: 1px solid var(--glass-border); padding-top:24px; font-size:12px; color:hsl(var(--text-muted));">
+                Copyright &copy; 2026 Apex Motors Showroom. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>

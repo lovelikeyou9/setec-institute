@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "name": "dara",
+    "email": "dara@example.com",
+    "password": "scrypt:32768:8:1$02FNdsosKZx5RBYO$b6e2e1afa8d9521f18c27437e04bf4c3d8ed6def1957e63f6712553b9672d2045c1a35e43615d367d0bcbeef714dd13529f259faf7324d79654098ba090a0d0c",
+    "role": "user",
+    "status": "active",
+    "profile": "admin/avatar.png"
+  }
+]

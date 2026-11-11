@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Portal | User Administration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+
+<body>
+    <!-- TOPBAR HEADER -->
+    <nav id="topbar" class="navbar fixed-top px-3 d-flex justify-content-end align-items-center">
+    </nav>
+    <!-- SIDEBAR NAVIGATION MENU -->
+    <aside id="sidebar" class="sidebar">
+        <div class="logo-area">
+            <div class="logo-text"><i class="ti ti-car"></i> APEX <span>PORTAL</span></div>
+        </div>
+        <div class="d-flex align-items-center gap-3 p-4 border-bottom border-secondary border-opacity-25">
+            <div id="admin-avatar-text" class="seller-avatar bg-primary text-dark"
+                style="width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700;">
+                A</div>
+            <div>
+                <h4 id="admin-profile-name" class="mb-0 fs-6 fw-bold">Admin User</h4>
+                <small id="admin-profile-role" class="text-muted text-uppercase" style="font-size:10px;">Role</small>
+            </div>
+        </div>
+        <ul id="admin-sidebar-nav" class="nav flex-column gap-1 p-3"></ul>
+    </aside>
+    <!-- USER MANAGEMENT WORKSPACE -->
+    <main id="content">
+        <div class="container-fluid">
+
+            <div class="row mb-4">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="fs-3 mb-1 fw-bold">User Administration</h1>
+                        <p class="text-muted mb-0">Create new staff/support roles and manage account classifications.
+                        </p>
+                    </div>
+                    <button onclick="handleAddUserModalOpen()" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#addUserModal"><i class="ti ti-plus"></i> Add Account</button>
+                </div>
+            </div>
+            <!-- Users Grid -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Account ID</th>
+                                        <th>Full Name</th>
+                                        <th>Email Address</th>
+                                        <th>Assigned Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-users-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- ADD / EDIT USER BOOTSTRAP MODAL -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="userModalLabel">Register System Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="admin-user-editor-form">
+                    <div class="modal-body">
+                        <div class="d-flex flex-column gap-3">
+                            <div class="form-group">
+                                <label for="user-name"
+                                    class="form-label small fw-bold text-muted text-uppercase mb-1">Full Name</label>
+                                <input type="text" class="form-control" id="user-name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-email"
+                                    class="form-label small fw-bold text-muted text-uppercase mb-1">Email
+                                    Address</label>
+                                <input type="email" class="form-control" id="user-email" placeholder="name@dealer.com"
+                                    required>
+                            </div>
+                            <div class="form-group" id="user-password-row">
+                                <label for="user-password"
+                                    class="form-label small fw-bold text-muted text-uppercase mb-1">Choose
+                                    Password</label>
+                                <input type="password" class="form-control" id="user-password" placeholder="••••••••">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-role"
+                                    class="form-label small fw-bold text-muted text-uppercase mb-1">Assigned
+                                    Role</label>
+                                <select class="form-select" id="user-role" required>
+                                    <option value="buyer">Customer / Buyer</option>
+                                    <option value="seller">Showroom Seller</option>
+                                    <option value="support">Help Support</option>
+                                    <option value="staff">Showroom Staff</option>
+                                    <option value="admin">System Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary"><i class="ti ti-device-floppy"></i> Save
+                            Account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+
+</html>

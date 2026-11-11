@@ -1,0 +1,15 @@
+{% if flash_msg('message') %}
+    <div class="container" style="padding-top:1rem"><div class="alert alert-ok">{{ flash_msg('message') }}</div></div>
+{% endif %}
+{% if flash_msg('error') %}
+    <div class="container" style="padding-top:1rem"><div class="alert alert-err">{{ flash_msg('error') }}</div></div>
+{% endif %}
+{% if errors.any() %}
+    <div class="container" style="padding-top:1rem">
+        <div class="alert alert-err">
+            <ul style="margin:0;padding-left:1.1rem">
+                {% for e in (errors.all()) %}<li>{{ e }}</li>{% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

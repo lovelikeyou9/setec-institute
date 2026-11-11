@@ -1,0 +1,268 @@
+{% extends 'layouts/account.html' %}
+{% block title %}{{ ('Order ' ~ order.order_number) ~ ' — MMT' }}{% endblock %}
+{% set s = order.status %}{% set cancelled = s in ['CANCELLED', 'REFUNDED'] %}{% set disputed = (s == 'DISPUTED') %}{% set idx = order_step_index(s) %}{% set commission = order.commission %}
+{% block content %}
+<nav class="breadcrumb">
+  <a href="{{ url('/') }}">Home</a>
+  <span class="sep">/</span>
+  <a href="{{ url('/account/orders') }}">Orders</a>
+  <span class="sep">/</span>
+  <span>{{ order.order_number }}</span>
+</nav>
+
+<div class="section-head">
+  <div>
+    <h1 class="section-title">Order {{ order.order_number }}</h1>
+    <p class="section-sub">
+      Placed {{ date_fmt(order.placed_at, 'd M Y H:i') or '—' }}
+      · Seller:
+      {% if order.seller %}
+        <a href="{{ url(('/sellers/' ~ order.seller_id)) }}">{{ order.seller.store_name }}</a>
+      {% else %}
+        —
+      {% endif %}
+    </p>
+  </div>
+  {% with status=(order.status) %}{% include 'components/status_pill.html' %}{% endwith %}
+</div>
+
+{% set checkoutOrders = checkoutOrders if checkoutOrders is defined else [] %}
+{% set checkoutTs = checkoutTs if checkoutTs is defined else 0 %}
+{% if (checkoutOrders|length) > 1 %}
+  <div class="alert alert-info" data-keep-alert style="margin-bottom:1.25rem">
+    <strong>Part of a multi-seller checkout.</strong>
+    This payment included <strong>{{ checkoutOrders|length }} sellers</strong>
+    (you are viewing one seller package):
+    <ul style="margin:.5rem 0 0;padding-left:1.1rem">
+      {% for o in (checkoutOrders) %}
+        <li style="margin:.2rem 0">
+          {% if o.order_number == order.order_number %}
+            <strong>{{ o.seller.store_name if o.seller else 'Seller' }}</strong>
+            — {{ o.order_number }} (this package) · ${{ number_format(o.total, 2) }}
+          {% else %}
+            <a href="{{ url(('/orders/' ~ o.order_number)) }}">{{ o.seller.store_name if o.seller else 'Seller' }}</a>
+            — {{ o.order_number }} · ${{ number_format(o.total, 2) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    {% if checkoutTs %}
+      <a href="{{ url(('/account/orders/checkout/' ~ checkoutTs)) }}" class="btn btn-outline btn-sm" style="margin-top:.65rem">View full checkout (all sellers)</a>
+    {% endif %}
+  </div>
+{% elif justPlaced %}
+  <div class="alert alert-success" data-keep-alert style="margin-bottom:1.25rem">
+    Order placed successfully. MMT will hold payment until delivery is confirmed.
+  </div>
+{% endif %}
+
+{% if commission %}
+  <div class="form-card">
+    <h3>Payment escrow</h3>
+    <p style="font-size:.92rem;color:var(--text-secondary);margin-bottom:.75rem">
+      After you pay, MMT holds your money. Seller confirms stock and ships.
+      Admin confirms delivery, then deducts
+      <strong>{{ commission.commission_percent }}%</strong> and pays the seller.
+    </p>
+    <div class="summary-row">
+      <span>Escrow status</span>
+      <strong>{% with status=(commission.payout_status), type='payout' %}{% include 'components/status_pill.html' %}{% endwith %}</strong>
+    </div>
+    <div class="summary-row">
+      <span>MMT fee</span>
+      <span>${{ number_format(commission.commission_amount, 2) }} ({{ commission.commission_percent }}%)</span>
+    </div>
+    <div class="summary-row">
+      <span>Seller receives</span>
+      <span>${{ number_format(commission.seller_earnings, 2) }}</span>
+    </div>
+    {% if order.admin_held_at %}
+      <div class="summary-row"><span>Admin held at</span><span>{{ fmt_dt(order.admin_held_at) }}</span></div>
+    {% endif %}
+    {% if order.seller_confirmed_at %}
+      <div class="summary-row"><span>Seller confirmed stock</span><span>{{ fmt_dt(order.seller_confirmed_at) }}</span></div>
+    {% endif %}
+    {% if order.protection_ends_at %}
+      <div class="summary-row"><span>Buyer protection ends</span><span>{{ fmt_dt(order.protection_ends_at) }}</span></div>
+    {% endif %}
+    {% if order.payout_released_at %}
+      <div class="summary-row"><span>Seller paid at</span><span>{{ fmt_dt(order.payout_released_at) }}</span></div>
+    {% endif %}
+  </div>
+{% endif %}
+
+<div class="form-card">
+  <h3>Order Progress</h3>
+  <div class="timeline">
+    {% if cancelled %}
+      <div class="timeline-item active">
+        <h4>{{ s }}</h4>
+        {% if ((order.cancel_reason if (order.cancel_reason is defined and order.cancel_reason is not none) else '')) == 'OUT_OF_STOCK' %}
+          <p>Seller declined — product out of stock. Payment refunded.</p>
+        {% elif s == 'CANCELLED' %}
+          <p>This order was cancelled.</p>
+        {% elif s == 'REFUNDED' %}
+          <p>Held funds were returned to you.</p>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="timeline-item {{ 'done' if (idx > 0) else (('active' if (idx == 0) else '')) }}">
+        <h4>1. Customer pays</h4>
+        <p>{{ fmt_dt(order.paid_at) or 'Waiting for payment' }}</p>
+      </div>
+      <div class="timeline-item {{ 'done' if (idx > 1) else (('active' if (idx == 1) else '')) }}">
+        <h4>2. Admin confirms &amp; holds money</h4>
+        <p>{{ (fmt_dt(order.admin_held_at) ~ ' — funds held by MMT') if order.admin_held_at else 'Waiting for admin confirmation' }}</p>
+      </div>
+      <div class="timeline-item {{ 'done' if (idx > 2) else (('active' if (idx == 2) else '')) }}">
+        <h4>3. Seller confirms stock</h4>
+        <p>{{ (fmt_dt(order.seller_confirmed_at) ~ ' — seller accepted') if order.seller_confirmed_at else 'Seller checks stock (can decline if out of stock)' }}</p>
+      </div>
+      <div class="timeline-item {{ 'done' if (idx > 3) else (('active' if (idx == 3) else '')) }}">
+        <h4>4. Seller processing</h4>
+        <p>Seller is preparing your package</p>
+      </div>
+      <div class="timeline-item {{ 'done' if (idx > 4) else (('active' if (idx == 4) else '')) }}">
+        <h4>5. Seller shipped</h4>
+        <p>{{ fmt_dt(order.shipped_at) or 'Awaiting shipment' }}</p>
+      </div>
+      <div class="timeline-item {{ 'done' if (idx > 5) else (('active' if (idx == 5) else '')) }}">
+        <h4>6. Out for delivery</h4>
+        <p>{{ (fmt_dt(order.out_for_delivery_at) ~ ' — courier delivering') if order.out_for_delivery_at else 'Courier delivering to your address' }}</p>
+      </div>
+      <div class="timeline-item {{ 'done' if (idx > 6) else (('active' if (idx == 6) else '')) }}">
+        <h4>7. Admin confirms delivered</h4>
+        {% if order.delivered_at %}
+          <p>{{ fmt_dt(order.delivered_at) }} · buyer protection: report missing / damaged / incorrect within {{ protectionDays }} day(s)</p>
+        {% else %}
+          <p>Admin confirms you received the product</p>
+        {% endif %}
+        {% if disputed %}
+          <p style="color:#c62828;margin-top:.35rem">
+            Dispute open: <strong>{{ order.dispute_reason if (order.dispute_reason is defined and order.dispute_reason is not none) else 'ISSUE' }}</strong>
+            {% if order.dispute_note %} — {{ order.dispute_note }}{% endif %}
+          </p>
+        {% endif %}
+      </div>
+      <div class="timeline-item {{ 'done' if (idx >= 7) else '' }}">
+        <h4>8. Admin pays seller</h4>
+        {% if order.payout_released_at %}
+          <p>{{ fmt_dt(order.payout_released_at) }} — 3% commission deducted, seller paid</p>
+        {% else %}
+          <p>Admin deducts commission and pays the seller</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if order.tracking_number %}
+    <p style="margin-top:.5rem">Tracking number: <strong>{{ order.tracking_number }}</strong></p>
+  {% endif %}
+  {% if order.estimated_delivery %}
+    <p style="font-size:.9rem;color:var(--text-muted)">
+      Estimated delivery: {{ date_fmt(order.estimated_delivery, 'd M Y') }}
+    </p>
+  {% endif %}
+</div>
+
+{% if canOpenDispute %}
+  <div class="form-card">
+    <h3>Buyer protection</h3>
+    <p style="font-size:.9rem;color:var(--text-secondary);margin-bottom:.5rem">
+      Admin confirmed delivery. Report missing, damaged, or incorrect items during buyer protection.
+      Payment stays held until this is resolved.
+    </p>
+    <form method="post" action="{{ url((('/orders/' ~ order.order_number) ~ '/dispute')) }}" class="form-grid">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-group">
+        <label>Issue type *</label>
+        <select name="reason" required>
+          {% for r in (disputeReasons) %}
+            <option value="{{ r }}">
+              {{ 'Missing item' if (r == 'MISSING') else (('Damaged item' if (r == 'DAMAGED') else (('Incorrect item' if (r == 'INCORRECT') else 'Other')))) }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label>Details</label>
+        <textarea name="note" rows="3" placeholder="Describe what went wrong..."></textarea>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-danger">Report issue</button>
+      </div>
+    </form>
+  </div>
+{% endif %}
+
+{% set ownsAsSeller = ownsAsSeller if ownsAsSeller is defined else false %}
+{% set canRefuseItems = ownsAsSeller and s == 'FUNDS_HELD' %}
+{% if canRefuseItems %}
+  <div class="form-card" style="margin-bottom:1rem">
+    <h3>Seller actions</h3>
+    <p style="font-size:.9rem;color:var(--text-secondary);margin:0 0 .75rem">
+      Confirm stock for remaining items, refuse individual products below, or refuse the whole order.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+      <form method="post" action="{{ url(('/seller-dashboard/orders/' ~ order.id ~ '/accept')) }}" style="display:inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-primary btn-sm">Confirm stock (remaining)</button>
+      </form>
+      <form method="post" action="{{ url(('/seller-dashboard/orders/' ~ order.id ~ '/decline-stock')) }}" style="display:inline"
+            onsubmit="return confirm('Refuse ALL items on this order? Customer will be fully refunded.');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-danger btn-sm">Refuse all (out of stock)</button>
+      </form>
+      <a href="{{ url('/seller-dashboard/orders') }}" class="btn btn-outline btn-sm">Back to seller orders</a>
+    </div>
+  </div>
+{% endif %}
+
+<div class="form-card">
+  <h3>Order Items</h3>
+  {% for item in (order.items) %}
+    {% set refused = (item.line_status or 'ACTIVE') == 'REFUSED' %}
+    <div class="cart-item" style="grid-template-columns:80px 1fr auto;{% if refused %}opacity:.6{% endif %}">
+      <img src="{{ item.product_image }}" alt="{{ item.product_name }}"/>
+      <div>
+        <strong>{{ item.product_name }}</strong>
+        <div style="font-size:.85rem;color:var(--text-secondary);margin-top:.25rem">
+          Qty: {{ item.quantity }} × ${{ number_format(item.unit_price, 2) }}
+        </div>
+        {% if refused %}
+          <div style="font-size:.82rem;color:#b45309;margin-top:.35rem">Refused — out of stock (line refunded)</div>
+        {% elif canRefuseItems %}
+          <form method="post" action="{{ url(('/seller-dashboard/orders/' ~ order.id ~ '/items/' ~ item.id ~ '/decline')) }}"
+                style="margin-top:.45rem"
+                onsubmit="return confirm('Refuse this item only? Customer is refunded for this product; other items stay on the order.');">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-outline btn-sm" style="color:#b91c1c;border-color:#fca5a5">Refuse this item</button>
+          </form>
+        {% endif %}
+      </div>
+      <div style="font-weight:700;{% if refused %}text-decoration:line-through{% endif %}">${{ number_format(item.line_total, 2) }}</div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="form-card">
+  <h3>Payment &amp; Shipping</h3>
+  <div class="summary-row"><span>Subtotal</span><span>${{ number_format(order.subtotal, 2) }}</span></div>
+  <div class="summary-row"><span>Shipping</span><span>${{ number_format(order.shipping_fee, 2) }}</span></div>
+  {% if ((order.discount if (order.discount is defined and order.discount is not none) else 0)) > 0 %}
+    <div class="summary-row"><span>Discount</span><span>-${{ number_format(order.discount, 2) }}</span></div>
+  {% endif %}
+  <div class="summary-row total"><span>Total paid</span><span>${{ number_format(order.total, 2) }}</span></div>
+  <p style="margin-top:1rem;font-size:.9rem;color:var(--text-secondary)">
+    Payment: <strong>{{ order.payment_method or '—' }}</strong> ·
+    Delivery: <strong>{{ order.delivery_type or 'STANDARD' }}</strong>
+  </p>
+  <p style="margin-top:.5rem;font-size:.9rem;color:var(--text-secondary)">
+    Ship to: <strong>{{ order.recipient_name }}</strong>,
+    <span>{{ order.recipient_phone }}</span><br/>
+    <span>{{ order.shipping_address }}</span>
+  </p>
+</div>
+
+<a href="{{ url('/account/orders') }}" class="btn btn-outline">&larr; Back to Orders</a>
+{% endblock %}

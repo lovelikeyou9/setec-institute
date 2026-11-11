@@ -1,0 +1,1414 @@
+// asynchronous
+const fs = require('fs'); 
+// នឯក រ 'example.txt' 
+fs.readFile('example.txt', 'utf8', (err, data) => { 
+if (err) { 
+console.error(' នប កង រ នឯក រ:', err); 
+return; 
+} 
+console.log('ខឹម រឯក រ:', data); 
+});
+
+
+// synchronous
+const fs = require('fs'); 
+try { 
+const data = fs.readFileSync('example.txt', 'utf8'); 
+console.log('ខឹម រឯក រ:', data); 
+} catch (err) { 
+console.error(' នប កង រ នឯក រ:', err); 
+} 
+
+
+// asynchronous
+const fs = require('fs'); 
+const content = 'េនះ ខឹម រថីស ប់ឯក រ'; 
+fs.writeFile('output.txt', content, (err) => { 
+if (err) { 
+console.error(' នប កង រសរេសរឯក រ:', err); 
+return; 
+    } 
+    console.log('ឯក រតវ នសរេសរេ យេ គជ័យ'); 
+});
+
+
+// synchronous
+const fs = require('fs'); 
+ 
+const content = 'េនះ ខឹម រថីស ប់ឯក រ'; 
+ 
+try { 
+    fs.writeFileSync('output.txt', content); 
+    console.log('ឯក រតវ នសរេសរេ យេ គជ័យ'); 
+} catch (err) { 
+    console.error(' នប កង រសរេសរឯក រ:', err); 
+} 
+
+//
+const fs = require('fs'); 
+ 
+fs.open('example.txt', 'r', (err, fd) => { 
+    if (err) { 
+console.error(' នប កង រេបកឯក រ:', err); 
+return; 
+} 
+console.log('ឯក រតវ នេបកេ យេ គជ័យ េលខសល់ឯក រ:', fd); 
+}); 
+
+
+
+//
+const fs = require('fs'); 
+fs.unlink('example.txt', (err) => { 
+if (err) { 
+console.error(' នប កង រលុបឯក រ:', err); 
+return; 
+} 
+console.log('ឯក រតវ នលុបេ យេ គជ័យ'); 
+});
+
+//
+const fs = require('fs'); 
+ 
+fs.open('output.txt', 'w', (err, fd) => { 
+    if (err) { 
+        console.error(' នប កង រេបកឯក រ:', err); 
+        return; 
+    } 
+ 
+    const content = 'េនះ ទិនន័យស ប់សរេសរ'; 
+    fs.write(fd, content, (err, written, string) => { 
+        if (err) { 
+            console.error(' នប កង រសរេសរ:', err); 
+            return; 
+        } 
+        console.log(`សរេសរេ យេ គជ័យ ${written} ៃប`); 
+        fs.close(fd, (err) => { 
+            if (err) console.error(' នប កង របិទឯក រ:', err); 
+        }); 
+    }); 
+});
+
+
+
+//
+const fs = require('fs'); 
+const path = require('path'); 
+ 
+const filename = 'output.txt'; 
+const filePath = path.join(__dirname, filename); // Creates a path in the current directory 
+ 
+// 1. Data to be written, including data before and after the part we want to write 
+const dataToWrite = '---HEADER---Data to be written---FOOTER---'; 
+ 
+// 2. Create the Buffer from the string data 
+// The full buffer will contain the binary representation of the entire string 
+const buffer = Buffer.from(dataToWrite, 'utf8'); 
+ 
+// Parameters for fs.write (fd, buffer, offset, length, position, callback) 
+const bufferOffset = 12; // Start reading from the 13th byte (index 12) of the buffer ("D" 
+of "Data...") 
+const length = 18;       // Write 18 bytes from the buffer (covers "Data to be written") 
+const filePosition = 0;  // Start writing at the beginning of the file (0) 
+ 
+// 3. Open the file for writing (flag 'w') 
+fs.open(filePath, 'w', (err, fd) => { 
+    if (err) { 
+        console.error('Error opening file:', err); 
+        return; 
+    } 
+ 
+    // 4. Use fs.write to write the part of the buffer 
+    fs.write(fd, buffer, bufferOffset, length, filePosition, (err, writtenBytes, buffer) => 
+{ 
+        if (err) { 
+            console.error('Error writing to file:', err); 
+        } else { 
+            console.log(`Successfully wrote ${writtenBytes} bytes to ${filename}.`); 
+            console.log(`Content written: "${buffer.toString('utf8', bufferOffset, 
+bufferOffset + writtenBytes)}"`); 
+        } 
+ 
+        // 5. Close the file descriptor (important!) 
+        fs.close(fd, (err) => { 
+            if (err) { 
+                console.error('Error closing file:', err); 
+            } else { 
+                console.log('File closed successfully.'); 
+            } 
+        }); 
+    }); 
+});
+
+
+// I/O
+const fs = require('fs'); 
+ 
+const additionalContent = '\nទិនន័យបែនម'; 
+ 
+fs.appendFile('output.txt', additionalContent, (err) => { 
+if (err) { 
+console.error(' នប កង របែនម:', err); 
+return; 
+} 
+console.log('ទិនន័យតវ នបែនមេ យេ គជ័យ'); 
+}); 
+
+
+// Check File Existence
+const fs = require('fs').promises; // េបកំែណ Promise របស់ fs 
+ 
+async function checkFileExistence(filePath) { 
+    try { 
+        // fs.constants.F_OK ន់ែតពិនិតេមល ឯក រ នឬអត់ 
+        await fs.access(filePath, fs.constants.F_OK); 
+        console.log(`✅ ឯក រ "${filePath}" ន។`); 
+        return true; 
+    } catch (error) { 
+        // បសិនេប នកំហុស នន័យ ឯក រមិន ន ឬមិន ចចូលេប ន។ 
+        if (error.code === 'ENOENT') { 
+            console.log(`❌ ឯក រ "${filePath}" មិន នេទ។`); 
+        } else { 
+            console.log(`⚠ កំហុសកង រចូលេបឯក រ៖ ${error.message}`); 
+        } 
+        return false; 
+    } 
+} 
+ 
+// ឧ ហរណ៍ៃន រេប ស់ 
+checkFileExistence('./my-file.txt'); 
+checkFileExistence('./non-existent-file.txt'); 
+
+
+// 
+const fs = require('fs'); 
+const { F_OK } = fs.constants; // េប F_OK ស ប់ពិនិតវត នឯក រ 
+ 
+function checkFileExistenceCallback(filePath) { 
+     
+    // fs.access គឺ រេបប Asynchronous ែដលេប Callback 
+    fs.access(filePath, F_OK, (error) => { 
+        // មុខ រេនះ (error => { ... }) គឺ Callback 
+         
+        if (error) { 
+            // កូដេនះដំេណរ រែតេ េពល នកំហុស 
+            if (error.code === 'ENOENT') { 
+                console.log(`❌ ឯក រ "${filePath}" មិន នេទ។ (ENOENT)`); 
+            } else { 
+                console.log(`⚠ កំហុសកង រចូលេប៖ ${error.message}`); 
+            } 
+            return; // េចញពី Callback 
+        } 
+ 
+        // កូដេនះដំេណរ រែតេ េពលេ គជ័យ 
+        console.log(`✅ ឯក រ "${filePath}" ន។`); 
+    }); 
+console.log("
+👉
+កូដេនះនឹងដំេណរ រមុនលទផលពិនិតឯក រ!"); 
+} 
+// ឧ ហរណ៍ៃន រេប ស់ 
+checkFileExistenceCallback('./config.json'); 
+checkFileExistenceCallback('./non-existent.txt'); 
+
+
+
+//
+const fs = require('fs'); 
+const filePath = './config.json'; 
+if (fs.existsSync(filePath)) { 
+console.log(`
+✅
+ឯក
+រ 
+"${filePath}" ន។`); 
+// ចបនបតិបតិ រដូច fs.readFileSync(filePath) 
+} else { 
+console.log(`
+❌
+ឯក
+រ 
+"${filePath}" មិន នេទ។`); 
+} 
+
+
+//
+const fs = require('fs').promises; 
+const { R_OK } = fs.constants; 
+ 
+async function checkReadAccess(filePath) { 
+    try { 
+        // ពិនិតវត ន និងសិទិ ន 
+        await fs.access(filePath, R_OK); // fs.constants.R_OK 
+        console.log(`✅ ${filePath} នសិទិ ន។`); 
+    } catch (error) { 
+        // កំហុស ច 'ENOENT' (មិន ន) ឬ 'EACCES' (មិន នសិទិ) 
+        console.log(`❌ ${filePath} មិន នសិទិ ន ឬមិន នឯក រ។`); 
+    } 
+} 
+
+
+//
+const fs = require('fs').promises; 
+const { W_OK } = fs.constants; 
+ 
+async function checkWriteAccess(filePath) { 
+    try { 
+        // ពិនិតវត ន និងសិទិសរេសរ 
+        await fs.access(filePath, W_OK); 
+        console.log(`✅ ${filePath} នសិទិសរេសរ។`); 
+        // ចបនបតិបតិ រសរេសរ/ែកែបេ យសុវតិ ព 
+    } catch (error) { 
+        // កំហុស ច 'ENOENT' (មិន នឯក រ) ឬ 'EACCES' (មិន នសិទិ)
+        console.log(`❌ ${filePath} មិន នសិទិសរេសរ ឬមិន នឯក រ។`); 
+        // ចបេងតឯក រថីេ ទីេនះ បសិនេប 'ENOENT' 
+    } 
+} 
+ 
+// ឧ ហរណ៍ស ប់ Folder វញ៖ ពិនិត ចបេងតឯក រថីេ កង Folder នឬអត់ 
+checkWriteAccess('./data/some_folder'); 
+
+
+//
+const fs = require('fs').promises; 
+const { X_OK } = fs.constants; 
+ 
+async function checkExecutableAccess(filePath) { 
+    try { 
+        // ពិនិតវត ន និងសិទិបតិបតិ/ចូលេ ន់ 
+        await fs.access(filePath, X_OK); 
+         
+        if ((await fs.stat(filePath)).isDirectory()) { 
+            console.log(`✅ Folder ${filePath} ចចូលេ ន់ ន។`); 
+        } else { 
+            console.log(`✅ ឯក រ ${filePath} ចបតិបតិ ន។`); 
+        } 
+    } catch (error) { 
+        console.log(`❌ មិន នសិទិបតិបតិ ឬចូលេ ន់ ${filePath} េទ។`); 
+    } 
+} 
+ 
+// ឧ ហរណ៍ស ប់ឯក រ Script 
+checkExecutableAccess('./run_script.sh');  
+ 
+// ឧ ហរណ៍ស ប់ Folder 
+checkExecutableAccess('./some_folder'); 
+
+
+//
+const fs = require('fs').promises; 
+const { R_OK, W_OK, X_OK } = fs.constants; 
+async function checkAllAccess(filePath) { 
+try { 
+// ពិនិត R_OK, W_OK, និង X_OK ំងអស់ 
+await fs.access(filePath, R_OK | W_OK | X_OK); 
+console.log(`
+✅
+${filePath} នសិទិចូលេបេពញេលញ។`); 
+} catch (error) { 
+// កំហុសនឹងេកតេឡងបសិនេបលកខណ មួយមិនតវ នបំេពញ 
+console.log(`
+❌
+${filePath} ខះសិទិ មួយកង រ ន សរេសរ ឬបតិបតិ។`); 
+} 
+} 
+
+
+//
+const fs = require('fs/promises'); 
+async function makeFolder() { 
+// Creates 'uploads', then '2023', then 'images' 
+await fs.mkdir('./uploads/2023/images', { recursive: true }); 
+} 
+
+
+
+//
+const fs = require('fs'); 
+fs.mkdirSync('./config/deep/path', { recursive: true }); 
+
+
+//
+const fs = require('fs'); 
+fs.mkdir('newFolder', (err) => { 
+if (err) { 
+console.error(' នប កង របេងតថត:', err); 
+return; 
+} 
+console.log('ថតតវ នបេងតេ យេ គជ័យ'); 
+}); 
+
+
+//
+const fs = require('fs'); 
+fs.rmdir('newFolder', (err) => { 
+if (err) { 
+console.error(' នប កង រលុបថត:', err); 
+return; 
+} 
+console.log('ថតតវ នលុបេ យេ គជ័យ'); 
+}); 
+
+
+//
+function sayHello(name) { 
+console.log('សួសី ' + name); 
+debugger; // ចំណុចឈប់ (breakpoint) 
+console.log('សូម គមន៍មក ន់ Node.js'); 
+} 
+sayHello('ភំេពញ'); 
+
+
+//
+function add(a, b) { 
+return a + b; 
+} 
+function calculateAverage(numbers) { 
+let sum = 0; 
+for (let i = 0; i < numbers.length; i++) { 
+sum = add(sum, numbers[i]); 
+} 
+// កំហុស៖ គួរែតែចកនឹង numbers.length 
+return sum / 2; // បងប់កំហុសេ ទីេនះ 
+} 
+const scores = [80, 90, 100]; 
+const average = calculateAverage(scores); 
+console.log(`The average score is: ${average}`); 
+
+
+//
+// ... កូដេ ងេល 
+function calculateAverage(numbers) { 
+// ... កូដេ ក ល 
+return sum / numbers.length; // ែកតមវ 
+} 
+// ... កូដេ ងេ ម
+
+
+//
+const EventEmitter = require('events'); 
+// បេងតវត EventEmitter 
+const myEmitter = new EventEmitter(); 
+// ប់អនុគមន៍េ នឹងពឹតិ រណ៍ 'greet' 
+myEmitter.on('greet', (name) => { 
+console.log(`សួសី ${name}!`); 
+}); 
+// ប នពឹតិ រណ៍ 'greet' 
+myEmitter.emit('greet', 'ភំេពញ'); 
+
+
+//
+ 
+const EventEmitter = require('events'); 
+const myEmitter = new EventEmitter(); 
+ 
+myEmitter.once('greet', (name) => { 
+    console.log(`សួសី ${name}! េនះនឹងប ញែតមង`); 
+}); 
+ 
+myEmitter.emit('greet', 'ភំេពញ'); // ប ញ រ 
+myEmitter.emit('greet', 'េសមប'); // មិនប ញអីេទ 
+
+
+//
+ 
+const EventEmitter = require('events'); 
+const util = require('util'); 
+ 
+// បេងត ក់ ល់ខន 
+function MyClass() { 
+    EventEmitter.call(this); // េ constructor របស់ EventEmitter 
+} 
+ 
+// ទទួលមរតកពី EventEmitter 
+util.inherits(MyClass, EventEmitter); 
+ 
+// បេងតវត 
+const myObject = new MyClass(); 
+ 
+// ប់ពឹតិ រណ៍ 
+myObject.on('event', (data) => { 
+    console.log('ពឹតិ រណ៍េកតេឡង:', data); 
+}); 
+// ប នពឹតិ រណ៍ 
+myObject.emit('event', 'ទិនន័យ កលង'); 
+
+
+
+//
+const EventEmitter = require('events'); 
+class MyClass extends EventEmitter { 
+constructor() { 
+super(); // េ constructor របស់ EventEmitter 
+} 
+} 
+const myObject = new MyClass(); 
+myObject.on('event', (data) => { 
+console.log('ពឹតិ រណ៍េកតេឡង:', data); 
+}); 
+myObject.emit('event', 'ទិនន័យ កលង');
+
+
+//
+const EventEmitter = require('events'); 
+ 
+// បេងតម៉ូឌុលែដល return EventEmitter 
+function createCounter() { 
+    const emitter = new EventEmitter(); 
+    let count = 0; 
+ 
+    setInterval(() => { 
+        count++; 
+        emitter.emit('count', count); // ប នពឹតិ រណ៍ 'count' 
+    }, 1000); 
+ 
+    return emitter; 
+} 
+ 
+// េបម៉ូឌុល 
+const counter = createCounter(); 
+counter.on('count', (value) => { 
+    console.log(`ចំនួនបចបន: ${value}`); 
+});
+
+
+
+//
+ 
+const EventEmitter = require('events'); 
+ 
+class Logger extends EventEmitter { 
+    log(message) { 
+        console.log(` រ: ${message}`); 
+        this.emit('log', message); 
+    } 
+} 
+ 
+module.exports = Logger; 
+
+
+//
+const Logger = require('./logger'); 
+const logger = new Logger(); 
+logger.on('log', (message) => { 
+console.log(`ទទួល ន រ: ${message}`); 
+}); 
+logger.log('សួសី Node.js!'); 
+
+
+//
+myEmitter.on('error', (err) => { 
+console.error('កំហុស:', err.message); 
+});
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+app.get('/', (req, res) => { 
+res.send('សួសីពី ExpressJS!'); 
+}); 
+app.listen(port, () => { 
+console.log(`កមវធីកំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+// Route ស ប់ទំព័រេដម 
+app.get('/', (req, res) => { 
+res.send('សូម គមន៍មក ន់ទំព័រេដម'); 
+}); 
+// Route ស ប់ទំព័រ "អំពី" 
+app.get('/about', (req, res) => { 
+    res.send('េនះ ទំព័រអំពី'); 
+}); 
+ 
+// Route ស ប់ POST request 
+app.post('/submit', (req, res) => { 
+    res.send('ទទួល នទិនន័យរួចល់'); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+// Dynamic route មួយ parameter 
+app.get('/user/:id', (req, res) => { 
+    const userId = req.params.id; 
+    res.send(`អកេប ស់េលខសល់: ${userId}`); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+app.get('/search', (req, res) => { 
+    const query = req.query.q || ' នសំណួ រ'; 
+    res.send(`លទផលែសងរក: ${query}`); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+// Middleware ស ប់ពិនិតសំេណ 
+const logRequest = (req, res, next) => { 
+    console.log(`សំេណេ ន់ ${req.method} ${req.url} េ ${new 
+Date().toLocaleTimeString()}`); 
+    next(); // បនេ route handler 
+}; 
+ 
+app.use(logRequest); 
+ 
+app.get('/', (req, res) => { 
+    res.send('សួសីពីទំព័រេដម'); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+ 
+<!-- public/index.html --> 
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Express Static</title> 
+</head> 
+<body> 
+    <h1>សូម គមន៍មក ន់ Express</h1> 
+</body> 
+</html> 
+
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+// បេមឯក រ static ពីថត 'public' 
+app.use(express.static('public')); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+// Middleware ស ប់ parsing form data 
+app.use(express.urlencoded({ extended: true })); 
+ 
+app.get('/', (req, res) => { 
+    res.send(` 
+        <form method="POST" action="/submit"> 
+            <input type="text" name="username" placeholder="ប លេ ះ"> 
+            <button type="submit">ប ន</button> 
+        </form> 
+    `); 
+}); 
+ 
+app.post('/submit', (req, res) => { 
+    const username = req.body.username; 
+    res.send(`សួសី ${username}! ទិនន័យតវ នប នេ គជ័យ`); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+app.get('/', (req, res) => { 
+    res.send('សួសីពី Express'); 
+}); 
+ 
+app.get('/error', (req, res, next) => { 
+    const err = new Error(' នប េកតេឡង'); 
+    next(err); // ប នកំហុសេ error handler 
+}); 
+ 
+// Error handling middleware 
+app.use((err, req, res, next) => { 
+    console.error(err.message); 
+    res.status(500).send(' នកំហុសេ េល server'); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+});
+
+
+
+//  
+routes/users.js
+const express = require('express'); 
+const router = express.Router(); 
+ 
+router.get('/', (req, res) => { 
+    res.send('ប ីអកេប ស់'); 
+}); 
+ 
+router.get('/:id', (req, res) => { 
+    res.send(`អកេប ស់េលខសល់: ${req.params.id}`); 
+}); 
+module.exports = router; 
+
+app.js
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+const userRoutes = require('./routes/users'); 
+// េប router ស ប់ផវ '/users' 
+app.use('/users', userRoutes); 
+app.listen(port, () => { 
+console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+require('dotenv').config(); 
+const port = process.env.PORT || 3000; 
+
+
+//
+const helmet = require('helmet'); 
+app.use(helmet());
+
+
+
+
+//
+<!-- public/index.html --> 
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>កមវធី static</title> 
+    <link rel="stylesheet" href="/styles.css"> 
+</head> 
+<body> 
+    <h1>សូម គមន៍មក ន់ ExpressJS</h1> 
+    <img src="/image.jpg" alt="រូប ព កលង"> 
+</body> 
+</html>
+
+/* public/styles.css */ 
+body { 
+    background-color: #f0f0f0; 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+} 
+h1 { 
+    color: #2c3e50; 
+} 
+
+
+
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+// បេមឯក រ static ពីថត 'public' 
+app.use(express.static('public')); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+// បេមឯក រ static ពីថត 'public' 
+app.use(express.static('public')); 
+// បេមឯក រ static ពីថត 'assets' 
+app.use('/assets', express.static('assets')); 
+app.listen(port, () => { 
+console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+function middleware(req, res, next) { 
+// ដំេណរ រសំេណ 
+next(); // ប នេ ប ប់ 
+} 
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+// Middleware ស ប់ logging 
+const logRequest = (req, res, next) => { 
+console.log(`[${new Date().toLocaleString()}] ${req.method} 
+${req.url}`); 
+next(); // ប នេ route handler ឬ middleware ប ប់ 
+}; 
+ 
+// េប middleware ស ប់គប់សំេណ 
+app.use(logRequest); 
+ 
+// បេមឯក រ static 
+app.use(express.static('public')); 
+ 
+// Route ស ប់ទំព័រេផង 
+app.get('/api', (req, res) => { 
+    res.json({ message: 'សួសីពី API!' }); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+ 
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+// Middleware ស ប់ រពិនិតសំេណ 
+const checkAuth = (req, res, next) => { 
+    const authHeader = req.headers['authorization']; 
+    if (authHeader === 'secret-token') { 
+        next(); // អនុ តឱបន 
+    } else { 
+        res.status(403).send(' នសិទិចូលេប'); 
+    } 
+}; 
+ 
+// បេមឯក រ static 
+app.use(express.static('public')); 
+ 
+// Route ែដលតមវឱ ន authentication 
+app.get('/protected', checkAuth, (req, res) => { 
+    res.send('េនះ ទំព័រែដលតវ រសិទិ'); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+// បេមឯក រ static 
+app.use(express.static('public')); 
+ 
+// Route ែដលបងកំហុស 
+app.get('/error', (req, res, next) => { 
+    const err = new Error(' នប េកតេឡង'); 
+    next(err); 
+}); 
+ 
+// Error-handling middleware 
+app.use((err, req, res, next) => { 
+    console.error(`កំហុស: ${err.message}`); 
+    res.status(500).send(' នកំហុសេ េល server'); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+//
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
+ 
+// Middleware ស ប់ logging 
+const logRequest = (req, res, next) => { 
+    console.log(`[${new Date().toLocaleString()}] ${req.method} 
+${req.url}`); 
+    next(); 
+}; 
+ 
+// Middleware ស ប់ រពិនិតសំេណ 
+const restrictAccess = (req, res, next) => { 
+    if (req.query.apiKey === '12345') { 
+        next(); 
+    } else { 
+        res.status(403).send('តមវឱ ន API key'); 
+    } 
+}; 
+ 
+// េប middleware 
+app.use(logRequest); 
+ 
+// បេមឯក រ static 
+app.use(express.static('public')); 
+ 
+// Route ែដលតមវឱ ន API key 
+app.get('/protected', restrictAccess, (req, res) => { 
+    res.send('េនះ ទំព័រែដលតវ រសិទិ'); 
+}); 
+ 
+// Error-handling middleware 
+app.use((err, req, res, next) => { 
+    console.error(`កំហុស: ${err.message}`); 
+    res.status(500).send(' នកំហុសេ េល server'); 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+});
+
+
+
+
+//
+const compression = require('compression'); 
+app.use(compression()); 
+
+
+//
+app.use((req, res) => { 
+res.status(404).send('រកឯក រមិនេឃញ'); 
+}); 
+
+
+
+//
+const cors = require('cors'); 
+app.use(cors()); 
+
+
+
+//
+require('dotenv').config(); 
+const port = process.env.PORT || 3000; 
+app.use(express.static(process.env.STATIC_PATH || 'public')); 
+
+
+//
+const mongoose = require('mongoose'); 
+require('dotenv').config(); 
+const connectDB = async () => { 
+try { 
+await mongoose.connect(process.env.MONGODB_URI, { 
+                 useNewUrlParser: true, 
+                 useUnifiedTopology: true 
+             }); 
+             console.log(' ប់េ MongoDB េ គជ័យ'); 
+         } catch (error) { 
+             console.error('កំហុសកង រ ប់ MongoDB:', error.message); 
+             process.exit(1); 
+         } 
+     }; 
+ 
+     module.exports = connectDB; 
+
+
+//
+const mongoose = require('mongoose'); 
+ 
+     const userSchema = new mongoose.Schema({ 
+         name: { type: String, required: true }, 
+         email: { type: String, required: true, unique: true }, 
+         age: { type: Number, default: 0 } 
+     }); 
+ 
+     module.exports = mongoose.model('User', userSchema); 
+
+
+
+//
+const express = require('express'); 
+     const connectDB = require('./db'); 
+     require('dotenv').config(); 
+ 
+     const app = express(); 
+     const port = process.env.PORT || 3000; 
+ 
+     // ប់េ MongoDB 
+     connectDB(); 
+ 
+     // Middleware ស ប់ parsing JSON 
+     app.use(express.json()); 
+ 
+     app.get('/', (req, res) => { 
+         res.send('សួសីពី ExpressJS!'); 
+     }); 
+     app.listen(port, () => { 
+         console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+     }); 
+
+
+//
+const express = require('express'); 
+const connectDB = require('./db'); 
+const User = require('./models/User'); 
+require('dotenv').config(); 
+ 
+const app = express(); 
+const port = process.env.PORT || 3000; 
+ 
+connectDB(); 
+app.use(express.json()); 
+ 
+// Route ស ប់បេងត user ថី 
+app.post('/users', async (req, res) => { 
+    try { 
+        const user = new User(req.body); 
+        await user.save(); 
+        res.status(201).send(user); 
+    } catch (error) { 
+        res.status(400).send(error.message); 
+    } 
+}); 
+ 
+// Route ស ប់ ប់េដត user 
+app.put('/users/:id', async (req, res) => { 
+    try { 
+        const user = await User.findByIdAndUpdate( 
+            req.params.id, 
+            req.body, 
+            { new: true, runValidators: true } 
+        ); 
+        if (!user) { 
+            return res.status(404).send('រក user មិនេឃញ'); 
+        } 
+        res.send(user); 
+    } catch (error) { 
+        res.status(400).send(error.message); 
+    } 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+//
+ 
+POST http://localhost:3000/users 
+Content-Type: application/json 
+Body: { "name": "សុ ", "email": "sokha@example.com", "age": 25 } 
+
+
+
+//
+PUT http://localhost:3000/users/<user_id> 
+Content-Type: application/json 
+Body: { "name": "សុ ថី", "age": 30 } 
+
+
+
+//
+const express = require('express'); 
+const connectDB = require('./db'); 
+const User = require('./models/User'); 
+require('dotenv').config(); 
+ 
+const app = express(); 
+const port = process.env.PORT || 3000; 
+ 
+connectDB(); 
+app.use(express.json()); 
+ 
+// Route ស ប់បេងត user ថី 
+app.post('/users', async (req, res) => { 
+    try { 
+        const user = new User(req.body); 
+        await user.save(); 
+        res.status(201).send(user); 
+    } catch (error) { 
+        res.status(400).send(error.message); 
+    } 
+}); 
+ 
+// Route ស ប់ ញយក users ំងអស់ 
+app.get('/users', async (req, res) => { 
+    try { 
+        const users = await User.find(); 
+        res.send(users); 
+    } catch (error) { 
+        res.status(500).send(error.message); 
+    } 
+});
+
+
+
+
+//
+// Route ស ប់ ញយក user ម ID 
+app.get('/users/:id', async (req, res) => { 
+    try { 
+        const user = await User.findById(req.params.id); 
+        if (!user) { 
+            return res.status(404).send('រក user មិនេឃញ'); 
+        } 
+        res.send(user); 
+    } catch (error) { 
+        res.status(500).send(error.message); 
+    } 
+}); 
+ 
+// Route ស ប់ ប់េដត user 
+app.put('/users/:id', async (req, res) => { 
+    try { 
+        const user = await User.findByIdAndUpdate( 
+            req.params.id, 
+            req.body, 
+            { new: true, runValidators: true } 
+        ); 
+        if (!user) { 
+            return res.status(404).send('រក user មិនេឃញ'); 
+        } 
+        res.send(user); 
+    } catch (error) { 
+        res.status(400).send(error.message); 
+    } 
+}); 
+ 
+app.listen(port, () => { 
+    console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+ 
+
+
+
+//
+// Route ស ប់ ញ user ែដល ន យុេលសពី 20 
+app.get('/users/age/:minAge', async (req, res) => { 
+    try { 
+        const users = await User.find({ age: { $gt: 
+parseInt(req.params.minAge) } }); 
+        res.send(users); 
+    } catch (error) { 
+        res.status(500).send(error.message); 
+    } 
+}); 
+
+
+
+//
+const express = require('express'); 
+const connectDB = require('./db'); 
+const User = require('./models/User'); 
+require('dotenv').config(); 
+ 
+const app = express(); 
+const port = process.env.PORT || 3000; 
+ 
+connectDB(); 
+app.use(express.json()); 
+ 
+// Route ស ប់បេងត user ថី 
+app.post('/users', async (req, res) => { 
+    try { 
+        const user = new User(req.body); 
+        await user.save(); 
+        res.status(201).send(user); 
+    } catch (error) { 
+        res.status(400).send(error.message); 
+    } 
+}); 
+ 
+// Route ស ប់ ញយក users ំងអស់ 
+app.get('/users', async (req, res) => { 
+    try { 
+        const users = await User.find(); 
+        res.send(users); 
+    } catch (error) { 
+        res.status(500).send(error.message); 
+    } 
+}); 
+ 
+// Route ស ប់ ញយក user ម ID 
+app.get('/users/:id', async (req, res) => { 
+    try { 
+        const user = await User.findById(req.params.id); 
+        if (!user) { 
+            return res.status(404).send('រក user មិនេឃញ'); 
+        } 
+        res.send(user); 
+    } catch (error) { 
+        res.status(500).send(error.message); 
+    } 
+}); 
+ 
+// Route ស ប់ ប់េដត user 
+app.put('/users/:id', async (req, res) => { 
+    try { 
+        const user = await User.findByIdAndUpdate( 
+            req.params.id, 
+            req.body, 
+            { new: true, runValidators: true } 
+        ); 
+        if (!user) { 
+            return res.status(404).send('រក user មិនេឃញ'); 
+        } 
+        res.send(user); 
+    } catch (error) { 
+        res.status(400).send(error.message); 
+    } 
+}); 
+ 
+// Route ស ប់លុប user 
+app.delete('/users/:id', async (req, res) => { 
+    try { 
+        const user = await User.findByIdAndDelete(req.params.id); 
+        if (!user) { 
+            return res.status(404).send('រក user មិនេឃញ'); 
+
+
+} 
+res.send({ message: 'លុប user េ គជ័យ', user }); 
+} catch (error) { 
+res.status(500).send(error.message); 
+} 
+}); 
+app.listen(port, () => { 
+console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+}); 
+
+
+
+
+//
+const userSchema = new mongoose.Schema({ 
+name: { type: String, required: true }, 
+email: { type: String, required: true, unique: true, index: true }, 
+age: { type: Number, default: 0 } 
+}); 
+
+
+
+//
+mongoose.connect(process.env.MONGODB_URI, { 
+useNewUrlParser: true, 
+useUnifiedTopology: true, 
+maxPoolSize: 10 
+}); 
+
+
+
+//
+// Middleware ស ប់ authentication 
+const restrictAccess = (req, res, next) => { 
+    const apiKey = req.query.apiKey; 
+    if (apiKey === '12345') { 
+        next(); 
+    } else { 
+        res.status(403).send('តមវឱ ន API key'); 
+    } 
+}; 
+ 
+// េប middleware ស ប់ route /users 
+app.use('/users', restrictAccess); 
+
+
+
+
+//
+app.get('/users/paginated', async (req, res) => { 
+    try { 
+        const page = parseInt(req.query.page) || 1; 
+        const limit = parseInt(req.query.limit) || 10; 
+        const skip = (page - 1) * limit; 
+ 
+        const users = await User.find().skip(skip).limit(limit); 
+        res.send(users); 
+    } catch (error) { 
+        res.status(500).send(error.message); 
+    } 
+}); 
+
+
+
+//
+html 
+head 
+title ទំព័រ គមន៍ 
+body 
+h1 សួសី, #{name}! 
+if age > 18 
+p អក មនុសេពញវយ 
+else 
+p អកេ េកង 
+
+
+//
+<html> 
+<head> 
+<title>ទំព័រ គមន៍</title> 
+</head> 
+<body> 
+<h1>សួសី, @model.name!</h1> 
+@if (model.age > 18) { 
+<p>អក មនុសេពញវយ</p> 
+} else { 
+<p>អកេ េកង</p> 
+} 
+</body> 
+</html> 
+
+
+
+//
+ 
+html 
+  head 
+    title ទំព័រអកេប 
+    link(rel='stylesheet', href='/styles.css') 
+  body 
+    h1 សួសី, #{user.name}! 
+    p យុ: #{user.age} 
+    h2 ប ីអកេប 
+    ul 
+      each u in users 
+        li #{u.name} (យុ: #{u.age}) 
+
+
+//
+ 
+<html> 
+  <head> 
+    <title>ទំព័រអកេប</title> 
+    <link rel="stylesheet" href="/styles.css"> 
+  </head> 
+  <body> 
+    <h1>សួសី, @model.user.name!</h1> 
+    <p>យុ: @model.user.age</p> 
+    <h2>ប ីអកេប</h2> 
+    <ul> 
+      @model.users.forEach(function(u) { 
+        <li>@u.name (យុ: @u.age)</li> 
+      }); 
+    </ul> 
+  </body> 
+</html> 
+
+
+//
+/* public/styles.css */ 
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 20px; 
+} 
+h1 { 
+    color: #2c3e50; 
+} 
+ul { 
+    list-style-type: none; 
+    padding: 0; 
+} 
+li { 
+    margin: 5px 0; 
+} 
+
+
+
+//
+const express = require('express'); 
+     const app = express(); 
+     const port = 3000; 
+ 
+     // កំណត់ Pug  template engine 
+     app.set('view engine', 'pug'); 
+     app.set('views', './views'); 
+ 
+     // ទិនន័យស ប់ កលង 
+     const user = { name: 'សុ ', age: 25 }; 
+     const users = [ 
+         { name: 'សុ ', age: 25 }, 
+         { name: 'សុ ', age: 30 }, 
+         { name: ' ', age: 20 } 
+     ]; 
+ 
+     // Route ស ប់ Pug 
+     app.get('/pug', (req, res) => { 
+         res.render('index', { user, users }); 
+     }); 
+ 
+     // កំណត់ Vash  template engine ស ប់ route េផង 
+     const vash = require('vash'); 
+     app.set('view engine', 'vash'); 
+     app.engine('vash', vash.renderFile); 
+ 
+     // Route ស ប់ Vash 
+     app.get('/vash', (req, res) => { 
+         res.render('index', { user, users }); 
+     }); 
+ 
+     // បេមឯក រ static 
+     app.use(express.static('public'));
+app.listen(port, () => { 
+console.log(`Server កំពុងដំេណរ រេ http://localhost:${port}`); 
+});
+
+
+
+//
+// views/layout.pug 
+html 
+  head 
+    title ទំព័រលំ ំេដម 
+  body 
+    block content 
+// views/index.pug 
+extends layout 
+block content 
+h1 សួសី, #{name}! 
+
+
+//
+app.use((err, req, res, next) => { 
+console.error(err.message); 
+res.status(500).send(' នកំហុសេ េល server'); 
+}); 
+
+

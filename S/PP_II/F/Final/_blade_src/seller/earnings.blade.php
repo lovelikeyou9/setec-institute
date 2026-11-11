@@ -1,0 +1,78 @@
+@extends('layouts.seller')
+@section('title', 'Earnings — MMT')
+@section('content')
+<div class="exec-head" style="margin-bottom:1rem">
+  <div>
+    <h1 style="font-size:1.4rem;margin:0">Earnings</h1>
+    <p style="margin:.35rem 0 0;color:var(--text-muted);font-size:.9rem">
+      MMT holds customer payments until admin confirms delivery, then pays you sale − <strong>3%</strong>.
+    </p>
+  </div>
+  <div class="exec-head-actions">
+    <a href="{{ url('/seller-dashboard/orders') }}" class="btn btn-outline btn-sm">Orders</a>
+  </div>
+</div>
+
+<div class="exec-kpi-grid" style="margin-bottom:1.25rem">
+  <article class="exec-kpi">
+    <div class="exec-kpi-top"><span>Paid to you (net)</span><span class="exec-ico gold">$</span></div>
+    <strong>${{ number_format($totalEarnings, 2) }}</strong>
+    <em class="up">After admin payout</em>
+  </article>
+  <article class="exec-kpi">
+    <div class="exec-kpi-top"><span>Still in escrow</span><span class="exec-ico teal">◷</span></div>
+    <strong>${{ number_format($heldEarnings, 2) }}</strong>
+    <em class="warn">Not paid yet</em>
+  </article>
+  <article class="exec-kpi">
+    <div class="exec-kpi-top"><span>MMT fee (admin gets)</span><span class="exec-ico green">%</span></div>
+    <strong>${{ number_format($feesPaid + $feesPending, 2) }}</strong>
+    <em class="purple">${{ number_format($feesPaid, 2) }} taken · ${{ number_format($feesPending, 2) }} pending</em>
+  </article>
+  <article class="exec-kpi">
+    <div class="exec-kpi-top"><span>Fee rate</span><span class="exec-ico purple">%</span></div>
+    <strong>3%</strong>
+    <em class="up">Deducted when admin pays you</em>
+  </article>
+</div>
+
+@if($commissions->isEmpty())
+  <div class="empty-state">
+    <h3>No earnings yet</h3>
+    <p>Escrow records appear when customers pay for your products.</p>
+  </div>
+@else
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Sale</th>
+          <th>Fee %</th>
+          <th>Admin fee (3%)</th>
+          <th>Your net</th>
+          <th>Payout</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($commissions as $c)
+          <tr>
+            <td>
+              <a href="{{ url('/orders/'.($c->order->order_number ?? $c->order_id)) }}">
+                {{ $c->order->order_number ?? $c->order_id }}
+              </a>
+            </td>
+            <td>${{ number_format($c->sale_amount, 2) }}</td>
+            <td>{{ $c->commission_percent }}%</td>
+            <td>${{ number_format($c->commission_amount, 2) }}</td>
+            <td>${{ number_format($c->seller_earnings, 2) }}</td>
+            <td><x-status-pill :status="$c->payout_status" type="payout"/></td>
+            <td>{{ optional($c->created_at)->format('d M Y') ?: '—' }}</td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+@endif
+@endsection

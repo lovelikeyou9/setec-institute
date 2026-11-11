@@ -1,0 +1,31 @@
+<ul
+  class="nav sidebar-menu flex-column"
+  data-lte-toggle="treeview"
+  data-accordion="false"
+  id="navigation"
+>
+
+  <li class="nav-item">
+    <a href="{{ url_for("admin_bp.dashboard") }}" class="nav-link {{ 'active' if module == 'dashboard' }}">
+      <i class="nav-icon bi bi-house-gear"></i>
+
+      <p>Dashboard</p>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a href="{{ url_for("admin_bp.user") }}" class="nav-link {{ 'active' if module == 'user' }}">
+      <i class="nav-icon bi bi-person"></i>
+      <p>User</p>
+    </a>
+  </li>
+
+  <li class="nav-header">LABELS</li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-circle text-danger"></i>
+      <p class="text">Important</p>
+    </a>
+  </li>
+
+</ul>

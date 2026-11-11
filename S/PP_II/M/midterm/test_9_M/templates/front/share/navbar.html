@@ -1,0 +1,57 @@
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+
+    <a class="navbar-brand fw-bold" href="{{ url_for('home') }}">
+      VoltEdge
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('products') }}">Products</a>
+        </li>
+      </ul>
+
+      <div class="d-flex gap-2">
+        <a href="{{ url_for('cart') }}" class="btn btn-light btn-sm">Cart</a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-sm">Login</a>
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<!--  &lt;!&ndash; Header &ndash;&gt;-->
+<!--  <header class="border-bottom bg-white sticky-top">-->
+<!--    <nav class="navbar navbar-expand-lg navbar-dark px-4 py-3">-->
+<!--      &lt;!&ndash;      <a class="navbar-brand fw-bold text-teal" href="/index.html">SV2.6 Shop</a>&ndash;&gt;-->
+<!--&lt;!&ndash;      <a class="navbar-brand fw-bold text-teal" href="/">SV2.6 Shop</a>&ndash;&gt;-->
+<!--      <a class="navbar-brand fw-bold text-info" href="{{ url_for('home') }}">VoltShop</a>-->
+<!--      <input class="nav-toggle" type="checkbox" id="navToggleHome">-->
+<!--      <label class="hamburger-button" for="navToggleHome" aria-label="Toggle navigation">-->
+<!--        <span></span>-->
+<!--        <span></span>-->
+<!--        <span></span>-->
+<!--      </label>-->
+<!--      <div class="ms-auto d-flex gap-3">-->
+<!--        <a class="nav-link text-white" href="{{ url_for('products') }}">Products</a>-->
+<!--        <a class="nav-link text-white" href="{{ url_for('cart') }}">Cart</a>-->
+<!--        <a class="nav-link text-white" href="{{ url_for('login') }}">Login</a>-->
+<!--        <a class="btn btn-primary btn-sm" href="{{ url_for('create_user') }}">Sign Up</a>-->
+<!--      </div>-->
+<!--    </nav>-->
+<!--  </header>-->
+

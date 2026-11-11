@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'admin/share/header.html' %}
+  <title>Admin Login — VoltEdge</title>
+</head>
+
+<body class="adm-body adm-login-page">
+
+<div class="adm-login-wrap">
+  <div class="adm-login-card">
+    <div class="adm-login-brand">
+      <div class="brand-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+      <div>
+        <h1>VoltEdge Admin</h1>
+        <p>Sign in to manage the store</p>
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="adm-alert adm-alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('admin_login', next=request.args.get('next')) }}">
+      <div class="mb-3">
+        <label class="form-label fw-semibold" for="email">Email</label>
+        <input class="form-control" id="email" name="email" type="email" placeholder="admin@voltedge.com" required>
+      </div>
+      <div class="mb-4">
+        <label class="form-label fw-semibold" for="password">Password</label>
+        <input class="form-control" id="password" name="password" type="password" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="adm-login-btn w-100">Sign in</button>
+    </form>
+
+    <p class="adm-login-footer">
+      <a href="{{ url_for('home') }}"><i class="bi bi-arrow-left"></i> Back to store</a>
+    </p>
+  </div>
+</div>
+
+</body>
+</html>

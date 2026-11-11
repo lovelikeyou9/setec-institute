@@ -1,0 +1,136 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "System Admin",
+      "email": "admin@dealer.com",
+      "role": "admin",
+      "password": "$2a$10$5uhVXjKxyIGZ4bLcrBDAUuLunQ/0RJFpsrdzztZ2PSc3jzFllP4qO",
+      "created_at": "2026-05-30T08:14:42.024Z"
+    },
+    {
+      "id": 2,
+      "name": "Showroom Staff",
+      "email": "staff@dealer.com",
+      "role": "staff",
+      "password": "$2a$10$TkwXz9WkJhBh67xriwd2FOXeh7NFvoP.0azZy1O4gbSMxjSFy.wFS",
+      "created_at": "2026-05-30T08:14:42.025Z"
+    },
+    {
+      "id": 3,
+      "name": "Help Support",
+      "email": "support@dealer.com",
+      "role": "support",
+      "password": "$2a$10$NgbCw4jC8eJbqxOPO4Xgcu1JpSSOm9n7K6nJ.RCZij43RqYKyNQB6",
+      "created_at": "2026-05-30T08:14:42.025Z"
+    },
+    {
+      "id": 4,
+      "name": "Elite Seller",
+      "email": "seller@dealer.com",
+      "role": "seller",
+      "password": "$2a$10$GBzug4daIWkHmomp8za2xOGiEFqc6gj8GLZUSIyh8IDzVjT2UuZBG",
+      "created_at": "2026-05-30T08:14:42.025Z"
+    },
+    {
+      "id": 5,
+      "name": "Alex Buyer",
+      "email": "buyer@dealer.com",
+      "role": "buyer",
+      "password": "$2a$10$a0X.VOvsLN4lwA7QYOi1VuIfBUraBEzlXbZWAKnxM8UYbWjLrIZ1W",
+      "created_at": "2026-05-30T08:14:42.025Z"
+    }
+  ],
+  "cars": [
+    {
+      "id": 1,
+      "make": "Tesla",
+      "model": "Model S Plaid",
+      "year": 2024,
+      "price": 89990,
+      "mileage": 1200,
+      "transmission": "Automatic",
+      "fuel_type": "Electric",
+      "body_type": "Sedan",
+      "condition": "New",
+      "description": "Triple motor AWD, 1020 horsepower. Ultimate electric performance sedan. Carbon fiber spoiler, yolk steering, premium audio.",
+      "image_url": "/uploads/tesla_s.svg",
+      "seller_id": 4,
+      "status": "Available",
+      "created_at": "2026-05-30T08:14:42.026Z"
+    },
+    {
+      "id": 2,
+      "make": "Porsche",
+      "model": "911 Carrera S",
+      "year": 2023,
+      "price": 131000,
+      "mileage": 4500,
+      "transmission": "Automatic",
+      "fuel_type": "Petrol",
+      "body_type": "Coupe",
+      "condition": "Used",
+      "description": "Twin-turbo flat-six, 443 hp, beautiful chalk grey finish, Sport Chrono package, active suspension, leather-lined sports seats.",
+      "image_url": "/uploads/porsche_911.svg",
+      "seller_id": 4,
+      "status": "Available",
+      "created_at": "2026-05-30T08:14:42.026Z"
+    },
+    {
+      "id": 3,
+      "make": "Ford",
+      "model": "Mustang Shelby GT500",
+      "year": 2022,
+      "price": 79500,
+      "mileage": 8200,
+      "transmission": "Automatic",
+      "fuel_type": "Petrol",
+      "body_type": "Coupe",
+      "condition": "Used",
+      "description": "Supercharged 5.2L V8 producing 760 hp. Rapid Red metallic, Recaro racing seats, exposed carbon fiber wheels, absolute muscle beast.",
+      "image_url": "/uploads/mustang.svg",
+      "seller_id": 4,
+      "status": "Available",
+      "created_at": "2026-05-30T08:14:42.026Z"
+    },
+    {
+      "id": 4,
+      "make": "Audi",
+      "model": "e-tron GT RS",
+      "year": 2024,
+      "price": 147500,
+      "mileage": 500,
+      "transmission": "Automatic",
+      "fuel_type": "Electric",
+      "body_type": "Sedan",
+      "condition": "New",
+      "description": "Premium electric grand tourer. Kemora Gray paint, Matrix LED headlights, Quattro AWD, Bang & Olufsen high-fidelity acoustic surround.",
+      "image_url": "/uploads/audi_etron.svg",
+      "seller_id": 4,
+      "status": "Available",
+      "created_at": "2026-05-30T08:14:42.026Z"
+    },
+    {
+      "id": 5,
+      "make": "Land Rover",
+      "model": "Range Rover Sport",
+      "year": 2023,
+      "price": 95000,
+      "mileage": 15000,
+      "transmission": "Automatic",
+      "fuel_type": "Hybrid",
+      "body_type": "SUV",
+      "condition": "Used",
+      "description": "Mild-hybrid inline-6. Santorini Black with ebony luxury leather, air suspension, panoramic roof, Meridian 3D sound system.",
+      "image_url": "/uploads/range_rover.svg",
+      "seller_id": 4,
+      "status": "Available",
+      "created_at": "2026-05-30T08:14:42.026Z"
+    }
+  ],
+  "cart": [],
+  "bookings": [],
+  "orders": [],
+  "tickets": [],
+  "ticket_messages": []
+}

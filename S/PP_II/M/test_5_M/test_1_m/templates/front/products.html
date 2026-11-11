@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+
+<body class="ve-home">
+
+{% include 'front/share/navbar.html' %}
+
+<section class="ve-page-hero">
+  <div class="container">
+    <div class="row align-items-end g-4">
+      <div class="col-lg-8">
+        <p class="ve-eyebrow-sm">Product catalog</p>
+        <h1>All Products</h1>
+        <p class="lead">Browse our full collection of electronics and accessories.</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="ve-card ve-card-padded text-center">
+          <strong style="font-size:1.75rem;color:var(--ve-violet)">{{ products|length }}</strong>
+          <span class="text-muted d-block mt-1">Products available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ve-section ve-products">
+  <div class="container">
+    <div class="row g-4">
+      {% for p in products %}
+      <div class="col-sm-6 col-lg-4 col-xl-3">
+        <div class="ve-product-card">
+          <div class="ve-product-img-wrap">
+            <img src="{{ p.image }}" alt="{{ p.title }}">
+          </div>
+          <div class="ve-product-body">
+            <span class="ve-product-cat">{{ p.category }}</span>
+            <h3 class="ve-product-title">{{ p.title }}</h3>
+            <div class="ve-product-price">${{ "%.2f"|format(p.price) }}</div>
+            <a href="{{ url_for('product', product_id=p.id) }}" class="ve-btn-view">View Product</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include 'front/share/footer.html' %}
+
+</body>
+</html>

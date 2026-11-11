@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  {% include 'front/share/header.html' %}
+
+</head>
+<body class="bg-soft">
+
+  {% include 'front/share/navbar.html' %}
+
+  <main class="container py-5">
+    <nav class="mb-4 small text-muted" aria-label="Breadcrumb">
+      <a class="link-teal fw-bold" href="/">Home</a>
+      <span class="mx-2">/</span>
+      <span>{{ product.title }}</span>
+    </nav>
+
+    <section class="product-showcase bg-white border rounded-3 p-3 p-lg-4 mb-5">
+      <div class="row g-4 g-xl-5">
+        <div class="col-lg-7">
+          <div class="product-gallery">
+            <div class="product-badge">Best seller</div>
+            <img class="product-hero-image" src="{{ product.image }}" alt="{{ product.title }}" style="object-fit: contain">
+          </div>
+
+
+
+        </div>
+
+        <div class="col-lg-5">
+          <div class="purchase-panel h-100">
+            <p class="eyebrow">{{ product.category }}</p>
+            <h1 class="display-5 fw-bold mb-3">{{ product.title }}</h1>
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+              <span class="rating-pill">4.8 / 5</span>
+              <span class="text-muted">128 reviews</span>
+              <span class="stock-pill">In stock</span>
+            </div>
+            <p class="text-muted">{{ product.description }}</p>
+            <div class="d-flex align-items-end gap-3 my-4">
+              <p class="price fs-1 mb-0">${{ product.price }}</p>
+              <p class="text-muted text-decoration-line-through mb-2">${{ product.price }}</p>
+            </div>
+
+
+            <div class="d-grid gap-2">
+              <a class="btn btn-teal btn-lg" href="{{ url_for('front_bp.cart') }}">Add to cart</a>
+              <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('front_bp.checkout') }}">Buy now</a>
+            </div>
+
+
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+        <div>
+          <p class="eyebrow">Related products</p>
+          <h2 class="fw-bold mb-0">Similar category or brand</h2>
+        </div>
+        <a class="link-teal fw-bold" href="{{ url_for('front_bp.products') }}">All products</a>
+      </div>
+
+      <div class="row g-4">
+
+        {% for product in related_product  %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card product-card h-100">
+            <img src="{{ product.image }}" style="object-fit: contain; padding: 10px;" class="card-img-top" alt="{{ product.title }}">
+            <div class="card-body">
+              <p class="product-meta">{{ product.category }}</p>
+              <h3 class="h5">{{ product.title }}</h3>
+              <p class="price">${{ product.price }}</p>
+              <a class="btn btn-teal w-100" href="{{ url_for('front_bp.product', product_id=product.id) }}">View product</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </section>
+  </main>
+
+  {% include 'front/share/footer.html' %}
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+05
+Build Incrementally
+
+Before major development, teams should understand the business problem and 
+proposed solution clearly, but avoid excessive detail that delays progress.
+
+06
+Develop Iteratively
+
+Iterative delivery is central to DSDM, recognizing that solutions improve over time, so embracing 
+change helps teams refine and deliver more accurate results.
+
+07
+Communicate Continuously
+
+Strong communication drives project success—use daily stand-ups, workshops, and early 
+models or prototypes to share progress, and encourage regular face-to-face interaction to 
+avoid misunderstandings.
+
+08
+Demonstrate Control
+
+Show control of the project by making plans and progress visible, using formal tracking 
+and reporting, and measuring success by delivered products rather than completed tasks.

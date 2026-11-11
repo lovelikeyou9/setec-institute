@@ -1,0 +1,3 @@
+{% set status = status if status is defined else '' %}
+{% set type = type if type is defined else 'order' %}
+<span class="status-pill {{ status_tone(status, type) }}">{{ str_replace('_', ' ', status) }}</span>

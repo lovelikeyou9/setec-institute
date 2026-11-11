@@ -1,0 +1,32 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+  <div class="container">
+
+    <a class="navbar-brand fw-bold text-teal" href="{{ url_for('front_bp.home') }}">
+      VoltEdge
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('front_bp.home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('front_bp.products') }}">Products</a>
+        </li>
+      </ul>
+
+      <div class="d-flex gap-2">
+        <a href="{{ url_for('front_bp.cart') }}" class="btn btn-teal btn-sm">Cart</a>
+        <a href="{{ url_for('front_bp.login') }}" class="btn btn-outline-secondary btn-sm">Login</a>
+      </div>
+
+    </div>
+
+  </div>
+</nav>

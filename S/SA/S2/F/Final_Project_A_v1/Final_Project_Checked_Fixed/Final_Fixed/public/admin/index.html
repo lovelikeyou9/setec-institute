@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Portal | Core Analytics Dashboard</title>
+    <!-- Framework style files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+
+<body>
+    <!-- TOPBAR HEADER -->
+    <nav id="topbar" class="navbar fixed-top px-3 d-flex justify-content-end align-items-center">
+        <div class="topbar-actions">
+            <div class="dropdown notification-wrapper">
+                <button id="notificationBtn" class="btn btn-light btn-sm rounded-circle position-relative p-2"
+                    type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open notifications">
+                    <i class="ti ti-bell" style="font-size:16px;"></i>
+                    <span id="notificationCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        style="font-size:8px; padding:3px 6px; display:none;">0</span>
+                </button>
+                <div id="notificationDropdown" class="dropdown-menu dropdown-menu-end notification-menu p-0">
+                    <div class="notification-header">Notifications</div>
+                    <ul id="notificationList" class="list-unstyled p-0 m-0" style="max-height: 260px; overflow-y: auto;">
+                        <li class="notification-item">
+                            <div class="fw-bold">Loading...</div>
+                            <div class="small text-muted">Syncing notification data.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- SIDEBAR NAVIGATION MENU -->
+    <aside id="sidebar" class="sidebar">
+        <div class="logo-area">
+            <div class="logo-text"><i class="ti ti-car"></i> APEX <span>PORTAL</span></div>
+        </div>
+
+        <!-- User Profile Badges -->
+        <div class="d-flex align-items-center gap-3 p-4 border-bottom border-secondary border-opacity-25">
+            <div id="admin-avatar-text" class="seller-avatar bg-primary text-dark"
+                style="width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700;">
+                A</div>
+            <div>
+                <h4 id="admin-profile-name" class="mb-0 fs-6 fw-bold">Admin User</h4>
+                <small id="admin-profile-role" class="text-muted text-uppercase" style="font-size:10px;">Role</small>
+            </div>
+        </div>
+        <!-- Sidebar Links (Generated dynamically depending on role permissions) -->
+        <ul id="admin-sidebar-nav" class="nav flex-column gap-1 p-3"></ul>
+    </aside>
+    <!-- MAIN DASHBOARD CONTENT AREA -->
+    <main id="content">
+        <div class="container-fluid">
+
+            <!-- Welcome Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h1 class="fs-3 mb-1 fw-bold">Dashboard</h1>
+                    <p class="text-muted mb-0">Platform performance logs, transactions, and dealership specifications.
+                    </p>
+                </div>
+            </div>
+            <!-- Multi-Card Stats Grid (Rendered dynamically based on Role by admin.js) -->
+            <div id="dashboard-metrics-container" class="row g-3 mb-4"></div>
+            <!-- Graphic Column Charts Layouts -->
+            <div class="row g-4 mb-4">
+                <!-- 1. Revenue column bar chart -->
+                <div class="col-lg-8 col-12">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="fs-6 mb-0 fw-bold">Sales Revenue vs Inventory Expense</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="salesPurchaseChart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2. Demographics Circular Donut chart -->
+                <div class="col-lg-4 col-12">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h3 class="fs-6 mb-0 fw-bold">Showroom Category Inquiries</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <div id="customerChart"></div>
+
+                            <div class="row text-center mt-3 pt-3 border-top border-secondary border-opacity-25">
+                                <div class="col-6 border-end border-secondary border-opacity-25">
+                                    <h4 class="fw-bold mb-1 fs-5">85%</h4>
+                                    <small class="text-muted">Satisfaction</small>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="fw-bold mb-1 fs-5">24h</h4>
+                                    <small class="text-muted">Avg Reply</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Framework Javascript Bundles -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="assets/js/admin.js"></script>
+
+<script id="FINAL_NOTIFICATION_CLICK_PATCH">
+document.addEventListener('DOMContentLoaded', function () {
+  const menu = document.getElementById('notificationDropdown') || document.querySelector('.notification-menu');
+  const btn = document.querySelector('.notification-wrapper .dropdown-toggle') || document.querySelector('[aria-label="Open notifications"]');
+  if (menu) menu.classList.remove('show');
+  if (btn && menu) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      menu.classList.toggle('show');
+    });
+    document.addEventListener('click', function (e) {
+      if (!btn.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('show');
+      }
+    });
+  }
+});
+</script>
+
+</body>
+
+</html>

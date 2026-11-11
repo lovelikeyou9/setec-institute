@@ -1,0 +1,57 @@
+{% extends 'layouts/admin.html' %}
+{% block title %}Reviews — Admin{% endblock %}
+{% block content %}
+<h1 style="font-size:1.4rem;margin-bottom:1rem">Reviews</h1>
+
+{% if reviews|length == 0 %}
+  <div class="empty-state">
+    <h3>No reviews</h3>
+    <p>Customer product reviews will be listed here.</p>
+  </div>
+{% else %}
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>User</th>
+          <th>Rating</th>
+          <th>Comment</th>
+          <th>Verified</th>
+          <th>Hidden</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in (reviews) %}
+          <tr>
+            <td>{{ r.product.name if (r.product.name is defined and r.product.name is not none) else 'Product' }}</td>
+            <td>{{ r.user.full_name if (r.user.full_name is defined and r.user.full_name is not none) else '—' }}</td>
+            <td>{{ r.rating }} &#9733;</td>
+            <td style="max-width:280px">{{ str_limit(r.comment, 100) }}</td>
+            <td>
+              <span class="status-pill {{ 'green' if r.verified_purchase else 'gray' }}">
+                {{ 'Yes' if r.verified_purchase else 'No' }}
+              </span>
+            </td>
+            <td>
+              <span class="status-pill {{ 'red' if r.hidden else 'green' }}">
+                {{ 'Hidden' if r.hidden else 'Visible' }}
+              </span>
+            </td>
+            <td>{{ date_fmt(r.created_at, 'd M Y') or '—' }}</td>
+            <td class="table-actions">
+              {% if not (r.hidden) %}
+                <form method="post" action="{{ url((('/admin/reviews/' ~ r.id) ~ '/hide')) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button class="btn btn-outline btn-sm" type="submit">Hide</button>
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endif %}
+{% endblock %}

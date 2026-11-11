@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  {% include 'front/share/header.html' %}
+
+</head>
+<body class="bg-soft">
+
+  {% include 'front/share/navbar.html' %}
+
+  <main>
+    <section class="checkout-hero">
+      <div class="container py-5">
+        <div class="row g-4 align-items-end">
+          <div class="col-lg-8">
+            <p class="eyebrow text-gold">Secure checkout</p>
+            <h1 class="display-4 fw-bold text-white mb-3">Complete your order with QR payment.</h1>
+            <p class="lead text-white-50 mb-0">Add delivery details, review the order, and scan the QR code to pay.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="cart-progress bg-white rounded-3 p-3">
+              <div>Cart</div>
+              <div class="active">Checkout</div>
+              <div>Payment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-5">
+      <form method="post" action="{{ url_for('front_bp.do_checkout') }}">
+        <div class="row g-4">
+
+            <div class="col-lg-7">
+              <div class="checkout-card bg-white border rounded-3 p-4 mb-4">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                  <span class="step-number">1</span>
+                  <div>
+                    <p class="eyebrow mb-1">Delivery</p>
+                    <h2 class="h4 fw-bold mb-0">Shipping information</h2>
+                  </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold" for="firstName">First name</label>
+                      <input name="firstName" class="form-control" id="firstName" type="text" placeholder="Alex">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold" for="lastName">Last name</label>
+                      <input name="lastName" class="form-control" id="lastName" type="text" placeholder="Morgan">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold" for="email">Email</label>
+                      <input name="email" class="form-control" id="email" type="email" placeholder="alex@example.com">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold" for="phone">Phone</label>
+                      <input name="phone" class="form-control" id="phone" type="tel" placeholder="+1 555 012 3456">
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label fw-bold" for="address">Address</label>
+                      <textarea   class="form-control" id="address" name="address" rows="4" placeholder="Street, city, state, postal code"></textarea>
+                    </div>
+                  </div>
+
+              </div>
+
+              <div class="checkout-card bg-white border rounded-3 p-4">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                  <span class="step-number">2</span>
+                  <div>
+                    <p class="eyebrow mb-1">Payment</p>
+                    <h2 class="h4 fw-bold mb-0">QR code payment</h2>
+                  </div>
+                </div>
+
+                <div class="row g-4 align-items-center">
+                  <div class="col-md-5">
+                    <div class="qr-box">
+                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=VoltEdge%20Electronics%20payment%20total%20%241549" alt="QR code payment">
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="payment-detail">
+                      <span>Payment amount</span>
+                      <strong>$1,549</strong>
+                    </div>
+                    <div class="payment-detail">
+                      <span>Payment method</span>
+                      <strong>QR bank transfer</strong>
+                    </div>
+                    <div class="payment-detail">
+                      <span>Reference</span>
+                      <strong>VE-2026-1549</strong>
+                    </div>
+                    <p class="text-muted mt-3 mb-0">Scan the QR code with your banking app, then use the button below as the template confirmation action.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="col-lg-5">
+              <div class="order-summary-card bg-white border rounded-3 p-4">
+                <p class="eyebrow">Review</p>
+                <h2 class="h4 fw-bold mb-4">Order summary</h2>
+
+                {% for item in cart_list %}
+                  <div class="checkout-item">
+                    <img
+                      src="{{ item.image }}" alt="{{ item.title }}">
+                    <div>
+                      <h3 class="h6 fw-bold mb-1">{{ item.title }}</h3>
+                      <p class="text-muted mb-0">{{ item.brand }}</p>
+                    </div>
+                    <strong>${{ "%.2f"|format(item.price * item.qty) }}</strong>
+                  </div>
+                {% endfor %}
+
+
+
+                <div class="summary-stack mt-4">
+                  <div class="summary-line"><span>Subtotal</span><strong>${{ "%.2f"|format(total) }}</strong></div>
+                  <div class="summary-line"><span>Shipping</span><strong>Free</strong></div>
+                  <div class="summary-line total"><span>Total</span><strong>${{ "%.2f"|format(total) }}</strong></div>
+                </div>
+
+                <button type="submit" class="btn btn-teal btn-lg w-100 mt-4" href="{{ url_for('front_bp.do_checkout') }}">Confirm order</button>
+                <a class="btn btn-outline-secondary w-100 mt-2" href="{{ url_for('front_bp.cart') }}">Back to cart</a>
+
+                <div class="secure-note mt-4">
+                  <strong>Protected checkout</strong>
+                  <span>This static template is ready to connect with a live payment provider.</span>
+                </div>
+              </div>
+            </aside>
+
+        </div>
+      </form>
+    </section>
+  </main>
+
+  {% include 'front/share/footer.html' %}
+
+</body>
+</html>

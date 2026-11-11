@@ -1,0 +1,59 @@
+
+
+
+
+<footer class="bg-dark text-light mt-5 pt-5">
+  <div class="container">
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <h3 class="fw-bold text-white">VoltEdge</h3>
+        <p class="text-secondary">
+          Premium electronics store for laptops, accessories, and gadgets.
+          Fast delivery, secure checkout, and trusted service.
+        </p>
+      </div>
+
+      <div class="col-md-2">
+        <h5 class="text-white mb-3">Shop</h5>
+        <ul class="list-unstyled">
+          <li><a class="text-secondary text-decoration-none" href="{{ url_for('front_bp.products') }}">Products</a></li>
+          <li><a class="text-secondary text-decoration-none" href="{{ url_for('front_bp.cart') }}">Cart</a></li>
+          <li><a class="text-secondary text-decoration-none" href="{{ url_for('front_bp.checkout') }}">Checkout</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h5 class="text-white mb-3">Account</h5>
+        <ul class="list-unstyled">
+          <li><a class="text-secondary text-decoration-none" href="{{ url_for('front_bp.login') }}">Login</a></li>
+          <li><a class="text-secondary text-decoration-none" href="{{ url_for('front_bp.create_user') }}">Register</a></li>
+          <li><a class="text-secondary text-decoration-none" href="{{ url_for('front_bp.account') }}">My Account</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h5 class="text-white mb-3">Contact</h5>
+        <p class="text-secondary mb-1">📍 Phnom Penh, Cambodia</p>
+        <p class="text-secondary mb-1">📧 support@voltedge.com</p>
+        <p class="text-secondary">📞 +855 12 345 678</p>
+      </div>
+
+    </div>
+
+    <hr class="border-secondary mt-4">
+
+    <div class="d-flex flex-column flex-md-row justify-content-between py-3">
+      <small class="text-secondary">© 2026 VoltEdge. All rights reserved.</small>
+      <div>
+        <a href="#" class="text-secondary text-decoration-none me-3">Privacy</a>
+        <a href="#" class="text-secondary text-decoration-none me-3">Terms</a>
+        <a href="#" class="text-secondary text-decoration-none">Support</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+

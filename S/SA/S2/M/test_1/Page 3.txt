@@ -1,0 +1,34 @@
+What is DSDM
+DSDM was developed in 1994 by the DSDM Consortium in the United Kingdom.
+
+01
+What is
+
+Dynamic Systems Development Method (DSDM) is an Agile project 
+management and software development framework that focuses on 
+delivering business value quickly and efficiently
+
+02
+Simple Definition
+
+DSDM is an Agile method that delivers working solutions in small 
+stages while keeping strong focus on business needs and deadlines
+
+03
+Main Purpose
+
+- Deliver the most important features first
+- Keep projects on schedule
+- Involve users continuously
+- Maintain high quality
+
+04
+Key Characteristics
+
+- Iterative & incremental development
+- Timeboxing (fixed time periods)
+- MoSCoW prioritization (Must, Should, Could, Won’t)
+- Strong collaboration between team and users
+
+
+

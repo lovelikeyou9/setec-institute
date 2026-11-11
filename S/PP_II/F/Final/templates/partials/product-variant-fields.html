@@ -1,0 +1,30 @@
+{# Custom-named option groups + specs builder #}
+{% set prefix = prefix if prefix is defined else 'add' %}{% set specsVal = specs if specs is defined else '' %}{% set groupsJson = optionGroups if optionGroups is defined else '[]' %}{% set groupsJson = groupsJson|json_encode %}
+
+<div class="variant-field-card">
+  <div class="spec-builder-head">
+    <label style="margin:0;font-weight:700">Configurable Options</label>
+    <button type="button" class="btn btn-outline btn-sm js-group-add">+ Add option group</button>
+  </div>
+  <p class="variant-card-hint">
+    Name each group yourself (Color, GB, TB, Size…). <strong>Price $</strong> / <strong>Was $</strong> are add-ons on top of the product Price (e.g. base 1950 + White +5 + 76GB +600 = 2555). Use 0 for the default choice.
+  </p>
+  <div class="js-option-groups" data-option-groups data-initial-groups="{{ groupsJson }}"></div>
+  <textarea name="optionGroupsJson" class="js-groups-hidden" hidden>{{ groupsJson }}</textarea>
+  {# Kept for older edit fillers; synced from groups in JS #}
+  <input type="hidden" name="colorOptions" class="js-legacy-color" data-variant-field="color" value=""/>
+  <input type="hidden" name="storageOptions" class="js-legacy-storage" data-variant-field="storage" value=""/>
+  <input type="hidden" name="ramOptions" class="js-legacy-ram" data-variant-field="ram" value=""/>
+</div>
+
+<div class="variant-field-card">
+  <div class="spec-builder-head">
+    <label>Specifications</label>
+    <button type="button" class="btn btn-outline btn-sm js-spec-add" data-spec-root="{{ prefix }}Specs">+ Add row</button>
+  </div>
+  <p class="variant-card-hint">
+    Add Key / Value rows (e.g. CPU → Intel Core Ultra 7). Shown as a specs table on the product page.
+  </p>
+  <div class="js-spec-rows" id="{{ prefix }}Specs" data-spec-rows data-initial-specs="{{ specsVal }}"></div>
+  <textarea name="specifications" class="js-spec-hidden" hidden>{{ specsVal }}</textarea>
+</div>

@@ -1,0 +1,41 @@
+Dynamic Systems Development Method
+
+01
+Business Focus
+
+Deliver most important business value early
+ផ្តល់លើចំណុចតម្លៃសំខាន់ business មុនគេ
+
+02
+Timeboxing
+
+Always complete projects on time within schedule
+តែងតែបំពេញគម្រោង projects ទាន់ពេលក្នុងកាលវិភាគ
+
+03
+MoSCoW Prioritization
+MoSCoW​​ ផ្តល់អាទិភាព
+
+Maintain clear and consistent business priorities
+រក្សាអាទិភាពច្បាស់លាស់ និង អាទិភាព ស្របជាមួយ  business
+
+04
+Active User involvement
+Active User ការចូលរួមរបស់អ្នកប្រើប្រាស់សកម្ម 
+
+Promote strong communication and collaboration
+ជំរុញការប្រាស្រ័យទាក់ទង និង កិច្ចសហការដ៏រឹងមាំ
+
+05
+Iterative & Incremental Development
+ដដែលៗ & បង្កើន ការអភិវឌ្ឍន៍
+
+Always continuously improve quality and processes
+តែងតែបន្តធ្វើឱ្យប្រសើរឡើង quality និង ដំណើរការជាបន្តបន្ទាប់
+
+
+Node: DSDM is an Agile project management method used to plan, develop, test, 
+and improve software systems based on business requirements.
+Node: DSDM គឺ Agile project management method បានប្រើ ទៅ plan, develop, test, 
+and improve software systems ផ្អែកលើ business យ៉ាង់តម្រូវការ.​​​​​  
+

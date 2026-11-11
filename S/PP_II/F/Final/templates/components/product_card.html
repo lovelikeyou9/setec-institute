@@ -1,0 +1,62 @@
+{% set wishlisted = wishlisted if wishlisted is defined else none %}
+{% set verified = (product.seller.level if (product.seller.level is defined and product.seller.level is not none) else '') in ['VERIFIED', 'TRUSTED', 'TOP'] %}{% set sold = ((product.sold_count if (product.sold_count is defined and product.sold_count is not none) else 0))|int %}{% set soldLabel = (('Sold ' ~ number_format((sold / 1000), 1)) ~ 'K') if (sold >= 1000) else ('Sold ' ~ sold) %}{% set ids = wishlistProductIds if (wishlistProductIds is defined and wishlistProductIds is not none) else [] %}{% set inWishlist = ((product.id|int) in ids) if (wishlisted is none) else (wishlisted|bool) %}
+<article class="product-card">
+  <div class="product-card-img">
+    <a href="{{ url(('/products/' ~ product.slug)) }}">
+      <img src="{{ media_url(product.primaryImageUrl()) }}" alt="{{ product.name }}" loading="lazy"/>
+    </a>
+    <div class="product-card-badges">
+      {% if ((product.discount_percent if (product.discount_percent is defined and product.discount_percent is not none) else 0)) > 0 %}
+        <span class="badge badge-sale">{{ product.discount_percent }}% OFF</span>
+      {% endif %}
+    </div>
+    {% if current_user.is_authenticated %}
+      <form action="{{ url('/wishlist/toggle') }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="product_id" value="{{ product.id }}"/>
+        <input type="hidden" name="redirect" value="{{ url_full() }}"/>
+        <button type="submit"
+                class="fav-btn {{ 'active' if inWishlist else '' }}"
+                title="{{ 'Remove from wishlist' if inWishlist else 'Add to wishlist' }}"
+                aria-label="{{ 'Remove from wishlist' if inWishlist else 'Add to wishlist' }}"
+                aria-pressed="{{ 'true' if inWishlist else 'false' }}">{{ '♥' if inWishlist else '♡' }}</button>
+      </form>
+    {% else %}
+      <a href="{{ url('/login') }}" class="fav-btn" title="Wishlist" aria-label="Wishlist">♡</a>
+    {% endif %}
+  </div>
+  <div class="product-card-body">
+    <div class="product-card-brand">{{ product.brand.name if (product.brand.name is defined and product.brand.name is not none) else '' }}</div>
+    <a href="{{ url(('/products/' ~ product.slug)) }}" class="product-card-name">{{ product.name }}</a>
+    <div class="rating-row">
+      {% with rating=(product.rating if (product.rating is defined and product.rating is not none) else 0) %}{% include 'components/stars.html' %}{% endwith %}
+      <span>{{ number_format((product.rating if (product.rating is defined and product.rating is not none) else 0), 1) }}</span>
+      <span>({{ product.review_count if (product.review_count is defined and product.review_count is not none) else 0 }})</span>
+    </div>
+    <div class="price-row">
+      <span class="price">${{ number_format(product.price, 2) }}</span>
+      {% if (((product.discount_percent if (product.discount_percent is defined and product.discount_percent is not none) else 0)) > 0) and product.original_price %}
+        <span class="price-old">${{ number_format(product.original_price, 2) }}</span>
+      {% endif %}
+    </div>
+    <div class="product-card-meta">{{ soldLabel }}</div>
+    <div class="product-card-seller">
+      <span>{{ product.seller.store_name if (product.seller.store_name is defined and product.seller.store_name is not none) else 'Seller' }}</span>
+      {% if verified %}<span class="verified-mark" title="Verified Seller">✓</span>{% endif %}
+    </div>
+    <div class="product-card-meta">{{ product.seller.location if (product.seller.location is defined and product.seller.location is not none) else '' }}</div>
+    <div class="product-card-actions">
+      <a href="{{ url(('/products/' ~ product.slug)) }}" class="btn btn-outline btn-sm">View</a>
+      {% if current_user.is_authenticated %}
+        <form action="{{ url('/cart/add') }}" method="post" style="flex:1;min-width:0">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="product_id" value="{{ product.id }}"/>
+          <input type="hidden" name="redirect" value="{{ url_current() }}"/>
+          <button type="submit" class="btn btn-accent btn-sm btn-block">Add to Cart</button>
+        </form>
+      {% else %}
+        <a href="{{ url('/login') }}" class="btn btn-accent btn-sm" style="flex:1;text-align:center">Add to Cart</a>
+      {% endif %}
+    </div>
+  </div>
+</article>

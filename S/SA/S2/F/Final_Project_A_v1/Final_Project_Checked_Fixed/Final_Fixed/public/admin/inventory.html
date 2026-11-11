@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Portal | Showroom Inventory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+
+<body>
+    <!-- TOPBAR HEADER -->
+    <nav id="topbar" class="navbar fixed-top px-3 d-flex justify-content-end align-items-center">
+        <div class="logo-text d-lg-none"><i class="ti ti-car"></i> APEX</div>
+    </nav>
+    <!-- SIDEBAR NAVIGATION MENU -->
+    <aside id="sidebar" class="sidebar">
+        <div class="logo-area">
+            <div class="logo-text"><i class="ti ti-car"></i> APEX <span>PORTAL</span></div>
+        </div>
+        <div class="d-flex align-items-center gap-3 p-4 border-bottom border-secondary border-opacity-25">
+            <div id="admin-avatar-text" class="seller-avatar bg-primary text-dark"
+                style="width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700;">
+                A</div>
+            <div>
+                <h4 id="admin-profile-name" class="mb-0 fs-6 fw-bold">Admin User</h4>
+                <small id="admin-profile-role" class="text-muted text-uppercase" style="font-size:10px;">Role</small>
+            </div>
+        </div>
+        <ul id="admin-sidebar-nav" class="nav flex-column gap-1 p-3"></ul>
+    </aside>
+    <!-- INVENTORY SECTION -->
+    <main id="content">
+        <div class="container-fluid">
+
+            <div class="row mb-4">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="fs-3 mb-1 fw-bold">Showroom Inventory</h1>
+                        <p class="text-muted mb-0">List, edit, or register luxury sports cars in the active marketplace.
+                        </p>
+                    </div>
+                    <button onclick="handleAddCarModalOpen()" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#addCarModal"><i class="ti ti-plus"></i> Add Vehicle</button>
+                </div>
+            </div>
+            <!-- Inventory Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Vehicle Details</th>
+                                        <th>Showroom Price</th>
+                                        <th>Mileage</th>
+                                        <th>Gearbox</th>
+                                        <th>Fuel Type</th>
+                                        <th>Listing Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-inventory-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- ADD / EDIT VEHICLE BOOTSTRAP MODAL -->
+    <div class="modal fade" id="addCarModal" tabindex="-1" aria-labelledby="carModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="carModalLabel">Register Showroom Vehicle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="admin-car-form">
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6 col-12">
+                                <label for="car-make" class="form-label small fw-bold text-muted text-uppercase">Make /
+                                    Brand</label>
+                                <input type="text" class="form-control" id="car-make" placeholder="e.g. Tesla" required>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="car-model" class="form-label small fw-bold text-muted text-uppercase">Model
+                                    Name</label>
+                                <input type="text" class="form-control" id="car-model" placeholder="e.g. Model S Plaid"
+                                    required>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label for="car-year"
+                                    class="form-label small fw-bold text-muted text-uppercase">Year</label>
+                                <input type="number" class="form-control" id="car-year" placeholder="e.g. 2024"
+                                    required>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label for="car-price" class="form-label small fw-bold text-muted text-uppercase">Price
+                                    ($ USD)</label>
+                                <input type="number" class="form-control" id="car-price" placeholder="e.g. 89000"
+                                    min="0" required>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label for="car-mileage"
+                                    class="form-label small fw-bold text-muted text-uppercase">Mileage (mi)</label>
+                                <input type="number" class="form-control" id="car-mileage" placeholder="e.g. 1500"
+                                    min="0" required>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label for="car-transmission"
+                                    class="form-label small fw-bold text-muted text-uppercase">Transmission</label>
+                                <select class="form-select" id="car-transmission" required>
+                                    <option value="Automatic">Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label for="car-fuel" class="form-label small fw-bold text-muted text-uppercase">Fuel
+                                    Type</label>
+                                <select class="form-select" id="car-fuel" required>
+                                    <option value="Petrol">Petrol</option>
+                                    <option value="Electric">Electric</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                    <option value="Diesel">Diesel</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label for="car-body" class="form-label small fw-bold text-muted text-uppercase">Body
+                                    Style</label>
+                                <select class="form-select" id="car-body" required>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="Coupe">Coupe</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="Convertible">Convertible</option>
+                                    <option value="Hatchback">Hatchback</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="car-condition"
+                                    class="form-label small fw-bold text-muted text-uppercase">Condition</label>
+                                <select class="form-select" id="car-condition" required>
+                                    <option value="New">New</option>
+                                    <option value="Used">Used</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="car-image-file"
+                                    class="form-label small fw-bold text-muted text-uppercase">Upload Car Image</label>
+                                <input type="file" class="form-control" id="car-image-file" accept="image/*">
+                                <small class="text-muted">Upload from your computer, or paste an image URL below.</small>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="car-image-url"
+                                    class="form-label small fw-bold text-muted text-uppercase">Image URL</label>
+                                <input type="url" class="form-control" id="car-image-url"
+                                    placeholder="https://example.com/car-image.jpg">
+                                <small class="text-muted">Use this if you want image by link.</small>
+                            </div>
+                            <div class="col-12" id="car-status-row" style="display:none;">
+                                <label for="car-status"
+                                    class="form-label small fw-bold text-muted text-uppercase">Listing Status</label>
+                                <select class="form-select" id="car-status">
+                                    <option value="Available">Available</option>
+                                    <option value="Reserved">Reserved</option>
+                                    <option value="Sold">Sold</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="car-desc" class="form-label small fw-bold text-muted text-uppercase">Vehicle
+                                    Details & Highlights</label>
+                                <textarea class="form-control" id="car-desc"
+                                    placeholder="Enter specifications, highlights, carbon features..."
+                                    rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary"><i class="ti ti-device-floppy"></i> Save
+                            Vehicle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+
+</html>

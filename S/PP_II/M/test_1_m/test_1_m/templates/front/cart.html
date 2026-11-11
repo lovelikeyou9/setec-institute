@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+
+<body class="ve-home">
+
+{% include 'front/share/navbar.html' %}
+
+<section class="ve-page-hero">
+  <div class="container">
+    <div class="row align-items-end g-4">
+      <div class="col-lg-8">
+        <p class="ve-eyebrow-sm">Shopping cart</p>
+        <h1>Review your order</h1>
+        <p class="lead">Confirm quantities and proceed to secure checkout.</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="ve-progress">
+          <div class="active">Cart</div>
+          <div>Checkout</div>
+          <div>Payment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ve-section pt-4">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+        <div class="ve-card ve-card-padded" id="cart-items-card">
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div>
+              <p class="ve-eyebrow-sm mb-1">Items</p>
+              <h2 class="h5 fw-bold mb-0"><span id="cart-item-count">{{ item_count }}</span> product<span id="cart-item-plural">{{ 's' if item_count != 1 else '' }}</span> in cart</h2>
+            </div>
+            <a class="ve-btn-outline" href="{{ url_for('products') }}">Continue shopping</a>
+          </div>
+
+          <div id="cart-items-list">
+          {% if cart_list %}
+            {% for item in cart_list %}
+            <article class="ve-cart-item" id="cart-item-{{ item.id }}" data-id="{{ item.id }}" data-price="{{ item.price }}">
+              <img src="{{ item.image }}" alt="{{ item.title }}">
+              <div>
+                <p class="cat">{{ item.category }}</p>
+                <h3>{{ item.title }}</h3>
+                <p class="desc">{{ item.description }}</p>
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                  <div class="ve-qty">
+                    <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">−</button>
+                    <strong class="item-qty">{{ item.qty }}</strong>
+                    <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
+                  </div>
+                  <button type="button" class="ve-btn-danger-link remove-btn">Remove</button>
+                </div>
+              </div>
+              <div class="ve-cart-price">
+                <span>Line total</span>
+                <strong class="line-total">${{ "%.2f"|format(item.price * item.qty) }}</strong>
+              </div>
+            </article>
+            {% endfor %}
+          {% else %}
+            <div class="ve-empty" id="cart-empty">
+              <div class="ve-empty-icon">🛒</div>
+              <h3>Your cart is empty</h3>
+              <p>Add some products to get started.</p>
+              <a href="{{ url_for('products') }}" class="ve-btn-primary text-decoration-none d-inline-block">Browse Products</a>
+            </div>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <aside class="col-lg-4">
+        <div class="ve-card ve-card-padded ve-summary" id="cart-summary">
+          <p class="ve-eyebrow-sm">Summary</p>
+          <h2 class="h5 fw-bold mb-3">Order total</h2>
+
+          <div class="ve-summary-line"><span>Subtotal</span><strong id="cart-subtotal">${{ "%.2f"|format(total) }}</strong></div>
+          <div class="ve-summary-line"><span>Discount</span><strong>$0.00</strong></div>
+          <div class="ve-summary-line"><span>Shipping</span><strong id="cart-shipping">{% if shipping == 0 %}Free{% else %}${{ "%.2f"|format(shipping) }}{% endif %}</strong></div>
+          <div class="ve-summary-line total"><span>Total</span><strong id="cart-grand-total">${{ "%.2f"|format(grand_total) }}</strong></div>
+
+          <div id="checkout-btn-wrap" {% if not cart_list %}style="display:none"{% endif %}>
+            <a class="ve-btn-primary w-100 text-center text-decoration-none d-block mt-4" href="{{ url_for('checkout') }}">Proceed to checkout</a>
+          </div>
+          <a class="ve-btn-outline w-100 text-center d-block mt-2" href="{{ url_for('products') }}">Add more products</a>
+
+          <div class="ve-secure-note">
+            <strong>Secure checkout</strong>
+            <span>QR payment and order review on the next step.</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+{% include 'front/share/footer.html' %}
+
+<script>
+function updateSummary(data) {
+  document.getElementById('cart-subtotal').textContent = '$' + data.total;
+  document.getElementById('cart-shipping').textContent = data.free_shipping ? 'Free' : '$' + data.shipping;
+  document.getElementById('cart-grand-total').textContent = '$' + data.grand_total;
+  document.getElementById('cart-item-count').textContent = data.item_count;
+  document.getElementById('cart-item-plural').textContent = data.item_count === 1 ? '' : 's';
+}
+
+function showEmptyCart() {
+  document.getElementById('cart-items-list').innerHTML = `
+    <div class="ve-empty" id="cart-empty">
+      <div class="ve-empty-icon">🛒</div>
+      <h3>Your cart is empty</h3>
+      <p>Add some products to get started.</p>
+      <a href="{{ url_for('products') }}" class="ve-btn-primary text-decoration-none d-inline-block">Browse Products</a>
+    </div>`;
+  document.getElementById('checkout-btn-wrap').style.display = 'none';
+}
+
+async function changeQty(id, action, row) {
+  const res = await fetch('/update_qty', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `id=${id}&action=${action}`,
+    credentials: 'same-origin'
+  });
+  const data = await res.json();
+  if (!data.success) return;
+
+  row.querySelector('.item-qty').textContent = data.qty;
+  row.querySelector('.line-total').textContent = '$' + data.line_total;
+  updateSummary(data);
+}
+
+async function removeItem(id, row) {
+  const res = await fetch('/remove_item', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `id=${id}`,
+    credentials: 'same-origin'
+  });
+  const data = await res.json();
+  if (!data.success) return;
+
+  row.remove();
+  updateSummary(data);
+
+  if (data.empty) {
+    showEmptyCart();
+  }
+}
+
+document.getElementById('cart-items-list').addEventListener('click', function (e) {
+  const row = e.target.closest('.ve-cart-item');
+  if (!row) return;
+
+  const id = row.dataset.id;
+
+  if (e.target.classList.contains('qty-btn')) {
+    changeQty(id, e.target.dataset.action, row);
+  } else if (e.target.classList.contains('remove-btn')) {
+    removeItem(id, row);
+  }
+});
+</script>
+
+</body>
+</html>

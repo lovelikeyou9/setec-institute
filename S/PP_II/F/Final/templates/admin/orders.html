@@ -1,0 +1,68 @@
+{% extends 'layouts/admin.html' %}
+{% block title %}Orders — Admin{% endblock %}
+{% block content %}
+<div class="exec-head" style="margin-bottom:1rem">
+  <div>
+    <h1 style="font-size:1.4rem;margin:0">Orders &amp; Escrow</h1>
+    <p style="margin:.35rem 0 0;color:var(--text-muted);font-size:.9rem">
+      Grouped by customer checkout. Open a checkout to Confirm / Refund each seller package.
+      Confirm &amp; hold → seller ships → <strong>Confirm delivered</strong> → <strong>Deduct 3% &amp; pay seller</strong>
+    </p>
+  </div>
+  <div class="exec-head-actions">
+    <a href="{{ url('/admin/commissions') }}" class="btn btn-outline btn-sm">Commissions</a>
+  </div>
+</div>
+
+{% if checkouts|length == 0 %}
+  <div class="empty-state">
+    <h3>No orders yet</h3>
+    <p>Orders appear here when customers check out.</p>
+  </div>
+{% else %}
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Sellers</th>
+          <th>Items</th>
+          <th>Payment</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in (checkouts) %}
+          <tr>
+            <td>
+              <strong>{{ c['customer'] }}</strong>
+              {% if c['email'] %}
+                <div style="font-size:.78rem;color:var(--text-muted)">{{ c['email'] }}</div>
+              {% endif %}
+            </td>
+            <td>{{ c['seller_count'] }} seller{{ '' if (c['seller_count'] == 1) else 's' }}</td>
+            <td>{{ c['item_count'] }}</td>
+            <td>{{ str_replace('_', ' ', c['payment']) if c['payment'] else '—' }}</td>
+            <td>
+              {% if (c['statuses']|length) == 1 %}
+                {% with status=(c['statuses']|first) %}{% include 'components/status_pill.html' %}{% endwith %}
+              {% else %}
+                <span class="status-pill gray">{{ c['status_label'] }}</span>
+              {% endif %}
+            </td>
+            <td>${{ number_format(c['total'], 2) }}</td>
+            <td>{{ date_fmt(c['placed_at'], 'd M Y H:i') or '—' }}</td>
+            <td class="table-actions">
+              <a href="{{ url(((('/admin/orders/checkout/' ~ c['user_id']) ~ '/') ~ c['placed_at_ts'])) }}"
+                 class="btn btn-primary btn-sm">Open checkout</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endif %}
+{% endblock %}

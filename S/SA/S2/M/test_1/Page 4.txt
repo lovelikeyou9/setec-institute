@@ -1,0 +1,46 @@
+Core Philosophy
+
+Build the right system at the right time.
+
+
+
+1
+Focus on Business Need
+
+Always build what gives real business value
+
+2
+Deliver on Time
+
+Finishing projects on schedule is very important
+
+3
+Collaborate
+
+Teamwork between developers and users
+
+4
+Never Compromise Quality
+
+Quality must not be sacrificed
+
+5
+Build Incrementally
+
+Develop step-by-step, not all at once
+
+6
+Develop Iteratively
+
+Improve through repeated cycles
+
+7
+Communicate Continuously
+
+Keep everyone updated
+
+8
+Demonstrate Control
+
+Have strong project management and monitoring
+

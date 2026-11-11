@@ -1,0 +1,81 @@
+
+{% extends "admin/master.html" %}
+
+{% block contect %}
+
+  <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="mb-0">User</h3>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-end">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User</li>
+              </ol>
+            </div>
+          </div>
+          <!--end::Row-->
+        </div>
+        <!--end::Container-->
+      </div>
+
+      <div class="app-content">
+        <!--begin::Container-->
+        <div class="container-fluid">
+
+          <div class="row">
+
+            <div class="col-md-12">
+              <a href="{{ url_for('admin_bp.add_user') }}" class="btn btn-outline-primary float-right"><i class="bi bi-plus-circle"></i>Add User</a>
+            </div>
+
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Profile</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for user in users %}
+                  <tr>
+                    <th>{{ user.id }}</th>
+                    <th>
+
+                      {% if user.profile %}
+                      <img src="{{ url_for('static', filename='images/user/' ~ user.id ~ '_thum_' ~ user.profile) }}" alt="" style="" class="img-size-50 rounded-circle" onerror="this.src='{{ url_for('static', filename='admin/No_Image_Available.jpg') }}'" />
+                      {% else %}
+                      <img src="{{ url_for('static', filename='admin/No_Image_Available.jpg') }}" alt="" class="img-size-50 rounded-circle" />
+                      {% endif %}
+                    </th>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                      <th><span style="text-transform: uppercase">{{ user.role }}</span></th>
+                    <td>
+                      <a href="{{ url_for('admin_bp.edit_user', user_id=user.id) }}" style="margin-right: 5px;"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{{ url_for('admin_bp.confirm_delete', user_id=user.id) }}" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+  </main>
+
+{% endblock %}

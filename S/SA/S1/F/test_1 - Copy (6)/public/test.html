@@ -1,0 +1,118 @@
+<!-- public/test.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Computer Store</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .success { color: green; }
+        .error { color: red; }
+        button { margin: 5px; padding: 10px; }
+        .product { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Computer Store Test Page</h1>
+    
+    <div>
+        <h3>Test Cart Functionality</h3>
+        <button onclick="testAPI()">Test API</button>
+        <button onclick="testProducts()">Test Products</button>
+        <button onclick="testCart()">Test Cart</button>
+        <button onclick="clearCart()">Clear Cart</button>
+    </div>
+    
+    <div id="result" style="margin-top: 20px; padding: 10px; background: #f0f0f0;"></div>
+    
+    <div id="products" style="margin-top: 20px;"></div>
+    
+    <script>
+        // Test basic API
+        async function testAPI() {
+            try {
+                const response = await fetch('/api/test');
+                const data = await response.json();
+                showResult('API TEST:', data);
+            } catch (error) {
+                showResult('ERROR:', error, true);
+            }
+        }
+        
+        // Test products
+        async function testProducts() {
+            try {
+                const response = await fetch('/api/products');
+                const products = await response.json();
+                
+                showResult('PRODUCTS:', `${products.length} products loaded`);
+                
+                // Display products
+                const container = document.getElementById('products');
+                container.innerHTML = '<h3>Available Products:</h3>' + 
+                    products.map(p => `
+                        <div class="product">
+                            <strong>${p.name}</strong><br>
+                            Price: $${p.price.toFixed(2)}<br>
+                            Stock: ${p.quantity}<br>
+                            <button onclick="addToCart('${p._id}')">Add to Cart</button>
+                        </div>
+                    `).join('');
+                
+            } catch (error) {
+                showResult('ERROR:', error, true);
+            }
+        }
+        
+        // Test cart
+        async function testCart() {
+            try {
+                const response = await fetch('/api/cart');
+                const data = await response.json();
+                showResult('CART:', data);
+            } catch (error) {
+                showResult('ERROR:', error, true);
+            }
+        }
+        
+        // Add to cart
+        async function addToCart(productId) {
+            try {
+                const response = await fetch('/api/cart/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ productId, quantity: 1 })
+                });
+                const data = await response.json();
+                showResult('ADD TO CART:', data);
+            } catch (error) {
+                showResult('ERROR:', error, true);
+            }
+        }
+        
+        // Clear cart
+        async function clearCart() {
+            try {
+                const response = await fetch('/api/cart/clear', { method: 'DELETE' });
+                const data = await response.json();
+                showResult('CLEAR CART:', data);
+            } catch (error) {
+                showResult('ERROR:', error, true);
+            }
+        }
+        
+        function showResult(title, data, isError = false) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h4 class="${isError ? 'error' : 'success'}">${title}</h4>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+        
+        // Run tests on load
+        window.onload = function() {
+            testAPI();
+            setTimeout(testProducts, 500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+{% extends 'layouts/store.html' %}
+{% block title %}{{ product.name ~ ' — MMT' }}{% endblock %}
+{% block content %}
+{% set gallery = product.galleryList() %}{% if not gallery %}{% set gallery = [default_product_image()] %}{% endif %}{% set optionGroups = product.selectableOptionGroups() %}{% set verified = ((product.seller.level or '') in ['VERIFIED', 'TRUSTED', 'TOP']) %}{% set specRows = spec_rows(product.specifications) %}
+<div class="container">
+  <nav class="breadcrumb">
+    <a href="{{ url('/') }}">Home</a>
+    <span class="sep">/</span>
+    <a href="{{ url('/products') }}">Products</a>
+    {% if product.category %}
+      <span class="sep">/</span>
+      <a href="{{ url(('/products?category=' ~ product.category_id)) }}">{{ product.category.name }}</a>
+    {% endif %}
+    <span class="sep">/</span>
+    <span>{{ product.name }}</span>
+  </nav>
+
+  <div class="detail-layout">
+    <div class="gallery">
+      <div class="gallery-main">
+        <img src="{{ media_url(gallery[0]) }}" alt="{{ product.name }}" id="mainImage"/>
+      </div>
+      {% if (gallery|length) > 1 %}
+        <div class="gallery-thumbs">
+          {% for i, url in (gallery)|kv %}
+            <button type="button" class="{{ 'active' if (i == 0) else '' }}" data-src="{{ media_url(url) }}">
+              <img src="{{ media_url(url) }}" alt="{{ product.name }}"/>
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="detail-info">
+      <div class="product-card-brand">{{ product.brand.name if (product.brand.name is defined and product.brand.name is not none) else '' }}</div>
+      <h1>{{ product.name }}</h1>
+
+      <div class="detail-stats">
+        <div class="rating-row">
+          {% with rating=(product.rating if (product.rating is defined and product.rating is not none) else 0) %}{% include 'components/stars.html' %}{% endwith %}
+          <span>{{ number_format((product.rating if (product.rating is defined and product.rating is not none) else 0), 1) }}</span>
+          <span>({{ product.review_count if (product.review_count is defined and product.review_count is not none) else 0 }} reviews)</span>
+        </div>
+        <span>Sold {{ product.sold_count if (product.sold_count is defined and product.sold_count is not none) else 0 }}</span>
+        {% if ((product.stock if (product.stock is defined and product.stock is not none) else 0)) > 0 %}
+          <span class="status-pill green">In Stock</span>
+        {% else %}
+          <span class="status-pill red">Out of Stock</span>
+        {% endif %}
+        {% if product.condition_type %}
+          <span class="status-pill blue">{{ product.condition_type }}</span>
+        {% endif %}
+      </div>
+
+      {% set _price = resolve_display_price(product, optionGroups) %}
+      {% set _init_sale = _price[0] %}
+      {% set _init_original = _price[1] %}
+      <div class="price-row" style="margin-bottom:1.25rem" id="detailPriceRow"
+           data-base-price="{{ product.price }}"
+           data-base-original="{{ product.original_price if product.original_price is not none else '' }}">
+        <span class="price price-lg" id="detailSalePrice">${{ number_format(_init_sale, 2) }}</span>
+        <span class="price-old" id="detailOriginalPrice"
+              style="{{ '' if (_init_original and _init_original > _init_sale) else 'display:none' }}">
+          ${{ number_format(_init_original or 0, 2) }}
+        </span>
+        <span class="badge badge-sale" id="detailSaleBadge"
+              style="{{ '' if (_init_original and _init_original > _init_sale) else 'display:none' }}">
+          {% if _init_original and _init_original > _init_sale %}
+            {{ (((_init_original - _init_sale) / _init_original) * 100)|round|int }}% OFF
+          {% endif %}
+        </span>
+      </div>
+
+      {% for group in (optionGroups) %}
+        {% set active_opt = default_option_index(group['choices'], product.name) %}
+        <div class="option-group" data-option-label="{{ group['label'] }}"
+             data-price-role="{{ 'capacity' if is_capacity_group(group['label']) else 'other' }}">
+          <label>{{ group['label'] }}</label>
+          <div class="option-pills">
+            {% for i, opt in (group['choices'])|kv %}
+              <button type="button"
+                      class="{{ 'active' if (i == active_opt) else '' }}"
+                      data-option-value="{{ opt }}"
+                      {% if group.get('prices') and opt in group['prices'] %}
+                        data-price="{{ group['prices'][opt] }}"
+                      {% endif %}
+                      {% if group.get('original_prices') and opt in group['original_prices'] %}
+                        data-original="{{ group['original_prices'][opt] }}"
+                      {% endif %}
+              >{{ opt }}</button>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="option-group">
+        <label>Quantity</label>
+        <div class="qty-selector">
+          <button type="button" data-qty="-">−</button>
+          <input type="number" id="qty" name="quantity" value="1" min="1" max="{{ max(1, (product.stock|int)) }}"/>
+          <button type="button" data-qty="+">+</button>
+        </div>
+        <span style="font-size:.85rem;color:var(--text-muted);margin-left:.75rem">{{ product.stock }} available</span>
+      </div>
+
+      <div class="detail-actions">
+        {% if current_user.is_authenticated %}
+          <form action="{{ url('/cart/add') }}" method="post" id="addCartForm" class="js-variant-cart-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="product_id" value="{{ product.id }}"/>
+            <input type="hidden" name="quantity" id="cartQty" value="1"/>
+            <input type="hidden" name="selected_options" class="js-selected-options" value=""/>
+            <input type="hidden" name="unit_price" class="js-unit-price" value="{{ _init_idx.sale }}"/>
+            <input type="hidden" name="redirect" value="{{ url(('/products/' ~ product.slug)) }}"/>
+            <button type="submit" class="btn btn-accent">Add to Cart</button>
+          </form>
+          <form action="{{ url('/cart/add') }}" method="post" class="js-variant-cart-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="product_id" value="{{ product.id }}"/>
+            <input type="hidden" name="quantity" id="buyQty" value="1"/>
+            <input type="hidden" name="selected_options" class="js-selected-options" value=""/>
+            <input type="hidden" name="unit_price" class="js-unit-price" value="{{ _init_idx.sale }}"/>
+            <input type="hidden" name="redirect" value="{{ url('/checkout') }}"/>
+            <button type="submit" class="btn btn-primary">Buy Now</button>
+          </form>
+          {% set inWishlist = (product.id|int) in (wishlistProductIds if (wishlistProductIds is defined and wishlistProductIds is not none) else []) %}
+          <form action="{{ url('/wishlist/toggle') }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="product_id" value="{{ product.id }}"/>
+            <input type="hidden" name="redirect" value="{{ url(('/products/' ~ product.slug)) }}"/>
+            <button type="submit" class="btn {{ 'btn-wish-active' if inWishlist else 'btn-outline' }}">
+              {{ '♥ In Wishlist' if inWishlist else '♡ Wishlist' }}
+            </button>
+          </form>
+        {% else %}
+          <a href="{{ url('/login') }}" class="btn btn-accent">Login to Buy</a>
+        {% endif %}
+      </div>
+
+      {% if product.seller %}
+        <div class="seller-box">
+          <img src="{{ media_url(product.seller.logo_url, fallback=false) or asset('images/mme-icon.png') }}" alt="{{ product.seller.store_name }}"/>
+          <div>
+            <strong>{{ product.seller.store_name }}</strong>
+            {% if verified %}<span class="badge badge-verified">✓ Verified</span>{% endif %}
+            <div class="rating-row" style="margin-top:.25rem">
+              {% with rating=(product.seller.rating if (product.seller.rating is defined and product.seller.rating is not none) else 0) %}{% include 'components/stars.html' %}{% endwith %}
+              <span>{{ number_format((product.seller.rating if (product.seller.rating is defined and product.seller.rating is not none) else 0), 1) }}</span>
+              <span>· {{ product.seller.location }}</span>
+            </div>
+          </div>
+          <div class="seller-box-actions">
+            <a href="{{ url(('/sellers/' ~ product.seller_id)) }}" class="btn btn-outline btn-sm">View Profile</a>
+            {% if current_user.is_authenticated %}
+              <form action="{{ url((('/sellers/' ~ product.seller_id) ~ '/follow')) }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-ghost btn-sm">{{ 'Unfollow' if following else 'Follow' }}</button>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="product-detail-blocks">
+    <section class="detail-block" id="product-description">
+      <h2 class="detail-block-title">Description</h2>
+      <p class="detail-block-text">{{ product.description or 'No description provided.' }}</p>
+    </section>
+
+    <section class="detail-block" id="product-specifications">
+      <h2 class="detail-block-title">Specifications</h2>
+      {% if specRows|length %}
+        <table class="spec-table">
+          {% for row in (specRows) %}
+            <tr>
+              <td>{{ row['key'] }}</td>
+              <td>{{ row['value'] }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <p class="detail-block-text">No specifications listed.</p>
+      {% endif %}
+    </section>
+  </div>
+
+  <div class="tabs">
+    <div class="tab-nav">
+      <button type="button" class="active" data-tab="tab-reviews">Reviews</button>
+      <button type="button" data-tab="tab-seller">Seller Info</button>
+      <button type="button" data-tab="tab-shipping">Shipping</button>
+      <button type="button" data-tab="tab-warranty">Warranty</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-reviews">
+      {% for r in (reviews) %}
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-avatar">{{ mb_substr((r.user.full_name if (r.user.full_name is defined and r.user.full_name is not none) else 'U'), 0, 1) }}</span>
+            <div>
+              <strong>{{ r.user.full_name if (r.user.full_name is defined and r.user.full_name is not none) else 'Buyer' }}</strong>
+              {% if r.verified_purchase %}<span class="badge badge-verified" style="margin-left:.35rem">Verified Purchase ✓</span>{% endif %}
+              <div class="rating-row">
+                {% with rating=(r.rating) %}{% include 'components/stars.html' %}{% endwith %}
+                <span>{{ r.rating }}</span>
+              </div>
+            </div>
+          </div>
+          <p style="color:var(--text-secondary)">{{ r.comment }}</p>
+          {% if r.seller_response %}
+            <div class="seller-reply">
+              <strong>Seller response:</strong>
+              <p style="margin-top:.35rem">{{ r.seller_response }}</p>
+            </div>
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <div class="icon">⭐</div>
+          <h3>No reviews yet</h3>
+          <p>Be the first to review this product after purchase.</p>
+        </div>
+      {% endfor %}
+
+      {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url((('/products/' ~ product.slug) ~ '/review')) }}" class="form-card" style="margin-top:1rem">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <h3 style="margin-bottom:1rem">Write a review</h3>
+          <div class="form-group">
+            <label>Rating</label>
+            <select name="rating">
+              {% for i in range(5, 0, -1) %}<option value="{{ i }}">{{ i }} stars</option>{% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Comment</label>
+            <textarea name="comment" rows="3"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit review</button>
+        </form>
+      {% endif %}
+    </div>
+
+    <div class="tab-panel" id="tab-seller">
+      {% if product.seller %}
+        <div class="seller-box" style="background:transparent;border:none;padding:0">
+          <img src="{{ media_url(product.seller.logo_url, fallback=false) or asset('images/mme-icon.png') }}" alt="{{ product.seller.store_name }}" style="width:64px;height:64px;border-radius:12px"/>
+          <div>
+            <h3>{{ product.seller.store_name }}</h3>
+            <p style="color:var(--text-secondary);margin:.5rem 0;max-width:520px">{{ product.seller.description }}</p>
+            <div class="seller-stats">
+              <span>Rating {{ number_format((product.seller.rating if (product.seller.rating is defined and product.seller.rating is not none) else 0), 1) }}</span> ·
+              <span>{{ product.seller.total_products }} products</span> ·
+              <span>{{ product.seller.followers if (product.seller.followers is defined and product.seller.followers is not none) else 0 }} followers</span>
+            </div>
+            <a href="{{ url(('/sellers/' ~ product.seller_id)) }}" class="btn btn-primary btn-sm" style="margin-top:.75rem">View Seller Profile</a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="tab-panel" id="tab-shipping">
+      <p style="line-height:1.7;color:var(--text-secondary)">
+        Standard delivery across Cambodia in 2–4 business days ($2.00).<br/>
+        Express delivery available in Phnom Penh and major cities (1 business day, $5.00).<br/>
+        Seller ships from <strong>{{ product.seller.location if (product.seller.location is defined and product.seller.location is not none) else 'Cambodia' }}</strong>.
+      </p>
+    </div>
+
+    <div class="tab-panel" id="tab-warranty">
+      <p style="line-height:1.7;color:var(--text-secondary)">
+        This product includes {{ product.warranty or 'manufacturer' }} warranty covered by {{ product.seller.store_name if (product.seller.store_name is defined and product.seller.store_name is not none) else 'the seller' }}.
+      </p>
+    </div>
+  </div>
+
+  {% if related|length %}
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">Related Products</h2>
+      </div>
+      <div class="product-grid">
+        {% for p in (related) %}
+          {% with product=(p) %}{% include 'components/product_card.html' %}{% endwith %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+Dynamic Systems Development Method
+
+01
+Business Focus
+
+Deliver most important business value early
+
+02
+Timeboxing
+
+Always complete projects on time within schedule
+
+03
+MoSCoW Prioritization
+
+Maintain clear and consistent business priorities
+
+04
+Active User involvement
+
+Promote strong communication and collaboration
+
+05
+Iterative & Incremental Development
+
+Always continuously improve quality and processes
+
+
+Node: DSDM is an Agile project management method used to plan, develop, test, and improve software systems
+ based on business requirements.

@@ -1,0 +1,37 @@
+{% extends 'layouts/seller.html' %}
+{% block title %}Reviews — MMT{% endblock %}
+{% block content %}
+<h1 style="font-size:1.4rem;margin-bottom:1rem">Product Reviews</h1>
+
+{% if reviews|length == 0 %}
+  <div class="empty-state">
+    <div class="icon">⭐</div>
+    <h3>No reviews yet</h3>
+    <p>Customer reviews for your products will appear here.</p>
+  </div>
+{% else %}
+  {% for r in (reviews) %}
+    <div class="form-card">
+      <div class="review-header">
+        <div class="review-avatar">{{ mb_substr((r.user.full_name if (r.user.full_name is defined and r.user.full_name is not none) else 'U'), 0, 1) }}</div>
+        <div>
+          <strong>{{ r.user.full_name if (r.user.full_name is defined and r.user.full_name is not none) else 'Buyer' }}</strong>
+          <span class="stars">{% for i in range(1, 6) %}{{ '&#9733;' if (i <= r.rating) else '&#9734;'|safe }}{% endfor %}</span>
+          <div style="font-size:.8rem;color:var(--text-muted)">
+            {% if r.product %}
+              <a href="{{ url(('/products/' ~ r.product.slug)) }}" style="color:var(--brand);font-weight:600">{{ r.product.name }}</a> ·
+            {% endif %}
+            <span>{{ date_fmt(r.created_at, 'd M Y') }}</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:.5rem">{{ r.comment }}</p>
+      {% if r.seller_response %}
+        <div class="seller-reply">
+          <strong>Your reply:</strong> <span>{{ r.seller_response }}</span>
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endif %}
+{% endblock %}

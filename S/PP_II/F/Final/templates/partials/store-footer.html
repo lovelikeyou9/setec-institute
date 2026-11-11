@@ -1,0 +1,66 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="{{ url('/') }}" class="footer-brand-link" aria-label="MMT - Modern Multiple Technology">
+          <img class="footer-logo-icon" src="{{ asset('images/mme-icon.png') }}" alt="" width="40" height="40"/>
+          <span class="footer-brand-copy">
+            <span class="footer-brand">MMT</span>
+            <span class="footer-tagline">Modern Multiple Technology</span>
+          </span>
+        </a>
+        <p style="font-size:.875rem;line-height:1.6;max-width:260px;margin-top:.75rem">
+          Computers, networking, gaming, cameras, drones, power, DIY electronics, and pro IT - from verified sellers.
+        </p>
+      </div>
+      <div>
+        <h4>Customer Service</h4>
+        <a href="{{ url('/account/orders') }}">Order Tracking</a>
+        <a href="{{ url('/account') }}">My Account</a>
+        <a href="{{ url('/deals') }}">Flash Deals</a>
+      </div>
+      <div>
+        <h4>Marketplace</h4>
+        <a href="{{ url('/become-seller') }}">Become a Seller</a>
+        <a href="{{ url('/seller-dashboard') }}">Seller Center</a>
+        <a href="{{ url('/sellers') }}">All Sellers</a>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="{{ url('/products') }}">Products</a>
+        <a href="{{ url('/categories') }}">Categories</a>
+        <a href="{{ url('/brands') }}">Brands</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; {{ date('Y') }} MMT. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-nav">
+  <a href="{{ url('/') }}" class="{{ 'active' if (request_is('/') or request_is('home')) else '' }}">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Home
+  </a>
+  <a href="{{ url('/categories') }}" class="{{ 'active' if request_is('categories*') else '' }}">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Categories
+  </a>
+  <a href="{{ url('/products') }}" class="{{ 'active' if request_is('products*') else '' }}">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Search
+  </a>
+  <a href="{{ url('/account/cart') }}" class="{{ 'active' if (request_is('account/cart') or request_is('cart')) else '' }}">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Cart
+    {% if ((cartCount if (cartCount is defined and cartCount is not none) else 0)) > 0 %}<span class="badge-count">{{ cartCount }}</span>{% endif %}
+  </a>
+  <a href="{{ url('/account') }}" class="{{ 'active' if request_is('account*') else '' }}">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Account
+  </a>
+</nav>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+<script src="{{ asset('js/storefront.js') }}?v=demo15"></script>

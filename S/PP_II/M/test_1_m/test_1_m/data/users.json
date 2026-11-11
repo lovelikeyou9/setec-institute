@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "first_name": "Admin",
+    "last_name": "User",
+    "email": "admin@voltedge.com",
+    "password_hash": "scrypt:32768:8:1$tzFJhvKS1D2GFPGL$b9d4264bae70a1ac29df1ed4e3898d8432239720730fef657eb8cdf69d2d2eb066e4d26337d4f26e57d36753d209585d40dfdfb705952c0524177c6835f96334",
+    "role": "admin",
+    "status": "active",
+    "created_at": "2026-07-08T08:15:44.853976+00:00"
+  }
+]

@@ -1,0 +1,53 @@
+Advantage
+
+DSDM (Dynamic Systems Development Method) is an Agile project management 
+and software development framework that focuses on fast delivery, user 
+involvement, and iterative development.
+
+
+01
+Fast Delivery
+
+- DSDM uses timeboxing, meaning work must be completed within a fixed time period.
+- This helps deliver software quickly and on schedule.
+
+
+02
+Strong User Involve
+
+- Users are involved throughout the project.
+- Their feedback helps ensure the system meets real business needs.
+
+03
+Improved Quality
+
+- Continuous testing and reviews are done during development.
+- Problems can be detected and fixed early.
+
+04
+Flexible to Changes
+
+- Requirements can change during development.
+- DSDM handles changes using the MoSCoW prioritization technique 
+(Must have, Should have, Could have, Won’t have).
+
+05
+Clear Project Control
+
+- The method defines roles and responsibilities clearly (Project Manager, 
+Developer, Tester, Business User, etc.).
+- This helps manage the project effectively.
+
+06
+Reduced Risk
+
+- Frequent deliveries and reviews help identify risks early.
+- Issues can be solved before they become big problems.
+
+07
+Better Communication
+
+- Team members, stakeholders, and users communicate regularly.
+- This improves understanding and collaboration.
+
+

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Motors | Premium Showroom Marketplace</title>
+  <!-- Google Font & Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Dynamic Navigation Bar (injected by app.js) -->
+  <header id="main-nav"></header>
+  <!-- Hero Banner Showcase Section -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Unleash the <br><span class="gradient-text">Ultimate Performance</span></h1>
+        <p>Step into the future of automotive luxury. Explore a curated showroom of state-of-the-art supercars, electric
+          hypercars, and certified pre-owned masterpieces.</p>
+        <div style="display:flex; gap:16px;">
+          <a href="products.html" class="btn btn-primary">Explore Showroom <i class="ti ti-arrow-up-right"></i></a>
+          <a href="#showroom-grid-sec" class="btn btn-secondary">View Featured</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="uploads/tesla_s.svg" alt="Apex Featured Performance Sports Car">
+      </div>
+    </div>
+  </section>
+  <!-- Search Filter Widget -->
+  <section class="container" style="margin-bottom: 80px;">
+    <div class="glass-card search-widget">
+      <form id="hero-filter-widget" class="search-form">
+        <div class="filter-group">
+          <label for="filter-make">Manufacturer</label>
+          <select id="filter-make">
+            <option value="">All Brands</option>
+            <option value="Tesla">Tesla</option>
+            <option value="Porsche">Porsche</option>
+            <option value="Ford">Ford</option>
+            <option value="Audi">Audi</option>
+            <option value="Land Rover">Land Rover</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-body">Body Type</label>
+          <select id="filter-body">
+            <option value="">All Types</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Coupe">Coupe</option>
+            <option value="SUV">SUV</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-condition">Condition</label>
+          <select id="filter-condition">
+            <option value="">Any Condition</option>
+            <option value="New">New</option>
+            <option value="Used">Used</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-price">Max Budget ($)</label>
+          <input type="number" id="filter-price" placeholder="e.g. 100000" min="0">
+        </div>
+        <div class="filter-group">
+          <button type="submit" class="btn btn-primary" style="width:100%; height:48px;"><i class="ti ti-search"></i>
+            Search</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  <!-- Featured Car Grid Section -->
+  <section id="showroom-grid-sec" class="container" style="margin-bottom: 80px;">
+    <div class="section-header">
+      <div class="section-title">
+        <h2>Premium <span class="gradient-text">Showroom</span></h2>
+        <p>Hand-picked luxury selections with certified dealership specifications.</p>
+      </div>
+      <a href="products.html" class="btn btn-secondary">See Full Showroom <i class="ti ti-chevron-right"></i></a>
+    </div>
+    <!-- Active Cars Showcase Grid (populated by app.js) -->
+    <div id="home-cars-grid" class="cars-grid"></div>
+  </section>
+  <!-- Why Choose Us / Luxury Experience Section -->
+  <section class="container" style="margin-bottom: 80px;">
+    <div class="section-header" style="justify-content:center; text-align:center; margin-bottom: 60px;">
+      <div class="section-title">
+        <h2>The <span class="gradient-text">Apex Experience</span></h2>
+        <p>Redefining how you acquire premium hypercars and performance vehicles.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:32px;">
+      <div class="glass-card" style="text-align:center;">
+        <i class="ti ti-shield-check"
+          style="font-size:48px; color:hsl(var(--color-primary)); margin-bottom:16px; display:block;"></i>
+        <h3 style="font-size:20px; margin-bottom:12px;">Guaranteed Warranty</h3>
+        <p style="font-size:14px; color:hsl(var(--text-muted));">All listed vehicles pass rigorous mechanical and
+          structural checks with clear diagnostic logs.</p>
+      </div>
+      <div class="glass-card" style="text-align:center;">
+        <i class="ti ti-coin"
+          style="font-size:48px; color:hsl(var(--color-primary)); margin-bottom:16px; display:block;"></i>
+        <h3 style="font-size:20px; margin-bottom:12px;">Sleek Digital Payment</h3>
+        <p style="font-size:14px; color:hsl(var(--text-muted));">Reserve your dream car with a fully refundable secure
+          digital deposit or execute a checkout.</p>
+      </div>
+      <div class="glass-card" style="text-align:center;">
+        <i class="ti ti-headset"
+          style="font-size:48px; color:hsl(var(--color-primary)); margin-bottom:16px; display:block;"></i>
+        <h3 style="font-size:20px; margin-bottom:12px;">Instant Expert Support</h3>
+        <p style="font-size:14px; color:hsl(var(--text-muted));">Our dedicated showroom support agents are online 24/7
+          to solve registrations and details.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Client Footer -->
+  <footer class="client-footer">
+    <div class="container">
+      <h3 style="font-size:22px; font-weight:800; margin-bottom:16px;"><i class="ti ti-car"></i> APEX MOTORS</h3>
+      <p style="max-width:400px; margin: 0 auto 24px;">The world's leading virtual showroom for elite sports, luxury,
+        and electric hypercars.</p>
+      <div
+        style="border-top: 1px solid var(--glass-border); padding-top:24px; font-size:12px; color:hsl(var(--text-muted));">
+        Copyright &copy; 2026 Apex Motors Showroom. Developed for Final Project. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>

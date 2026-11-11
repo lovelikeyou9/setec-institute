@@ -1,0 +1,36 @@
+About
+
+📜 History of DSDM
+
+The Dynamic Systems Development Method (DSDM) was created 
+in 1994 in the United Kingdom as a response to problems with 
+traditional software development methods that were often slow, 
+expensive, and inflexible.
+
+The Dynamic Systems Development Method (DSDM) ត្រូវបានបង្កើតឡើង
+ក្នុងឆ្នាំ 1994 នៅចក្រភព United Kingdom ដើម្បីឆ្លើយតបទៅនឹងបញ្ហាជាមួយ នឹង
+វិធីសាស្ត្រអភិវឌ្ឍន៍ software development methods ដែលជារឿយៗមានភាព slow, expensive,
+និង inflexible
+
+
+⭐ Influence on Modern Agile
+⭐ ឥទ្ធិពល លើ Modern Agile
+
+For manage the process of developing a system for a business.
+សម្រាប់ manage the process នៃ developing a system សម្រាប់ business មួយ.
+
+What DSDM is used for
+
+DSDM is used to manage and organize software development 
+projects, for example:
+DSDM គឺ បានប្រើ ទៅ manage និង រៀបចំ software development 
+projects, for example:
+   - ✅ Develop business software systems
+   - ✅ Manage project teams and tasks
+   - ✅ Plan, build, test, and deliver software
+
+What DSDM is used for
+   - ❌ It does not create a business
+   - ❌ It does not write code itself
+   - ❌ It does not manage employees in a company
+

@@ -1,0 +1,67 @@
+<!-- public/404.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 - Page Not Found</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .error-container {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .error-content {
+            max-width: 600px;
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Simple Navigation -->
+    <nav class="navbar" style="margin-bottom: 0;">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-desktop"></i>
+                <span>ComputerStore</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-message">Page Not Found</h1>
+            <p>The page you're looking for doesn't exist or has been moved.</p>
+            <div style="margin-top: 30px;">
+                <a href="/" class="btn btn-primary" style="margin-right: 10px;">
+                    <i class="fas fa-home"></i> Go Home
+                </a>
+                <a href="/products" class="btn btn-outline">
+                    <i class="fas fa-laptop"></i> Browse Products
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Computer Store</p>
+        </div>
+    </footer>
+</body>
+</html>

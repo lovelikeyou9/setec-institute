@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog - Computer Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-desktop"></i>
+                <span>ComputerStore</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="/" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/products"><i class="fas fa-laptop"></i> Products</a></li>
+                <li><a href="/collections"><i class="fas fa-layer-group"></i> Collections</a></li>
+                <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="search-container">
+                    <form id="searchForm">
+                        <input type="text" class="search-input" placeholder="Search products..." id="searchInput">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+                <a href="/cart" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+
+                <!-- Guest links (shown when not logged in) -->
+                <div class="auth-links" id="guestLinks">
+                    <a href="/login" class="btn btn-outline btn-sm">Login</a>
+                    <a href="/register" class="btn btn-primary btn-sm">Register</a>
+                </div>
+
+                <!-- User links (shown when logged in) -->
+                <div class="user-dropdown" id="userLinks" style="display: none;">
+                    <a href="/profile" id="userName" class="user-link">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/profile"><i class="fas fa-user-circle"></i> Profile</a>
+                        <a href="/orders"><i class="fas fa-box"></i> Orders</a>
+                        <a href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-hero">
+        <div class="container">
+            <h1>Tech Blog</h1>
+            <p>Latest news, reviews, and guides from the world of technology</p>
+        </div>
+    </div>
+
+    <div class="container" style="padding: 4rem 0;">
+        <div class="blog-grid">
+            <!-- Blog Post 1 -->
+            <div class="blog-card">
+                <img src="https://techguided.com/wp-content/uploads/2023/11/How-to-Choose-Parts-for-A-Gaming-PC.png"
+                    alt="Gaming PCs">
+                <div class="blog-card-content">
+                    <h3>Building the Ultimate Gaming PC in 2024</h3>
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> Jan 15, 2024</span>
+                        <span><i class="far fa-user"></i> Alex Chen</span>
+                        <span><i class="far fa-clock"></i> 8 min read</span>
+                    </div>
+                    <p>Discover the best components for building a high-performance gaming PC that will last for years
+                        to come. We break down the latest CPUs, GPUs, and more.</p>
+                    <a href="#" class="btn btn-outline btn-sm mt-2">Read More</a>
+                </div>
+            </div>
+
+            <!-- Blog Post 2 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=300&fit=crop"
+                    alt="Laptops">
+                <div class="blog-card-content">
+                    <h3>Top 5 Laptops for Remote Work in 2024</h3>
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> Jan 10, 2024</span>
+                        <span><i class="far fa-user"></i> Maria Rodriguez</span>
+                        <span><i class="far fa-clock"></i> 6 min read</span>
+                    </div>
+                    <p>Finding the perfect laptop for remote work can be challenging. We've tested and reviewed the best
+                        options for productivity, battery life, and portability.</p>
+                    <a href="#" class="btn btn-outline btn-sm mt-2">Read More</a>
+                </div>
+            </div>
+
+            <!-- Blog Post 3 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&h=300&fit=crop"
+                    alt="Components">
+                <div class="blog-card-content">
+                    <h3>SSD vs HDD: Which Storage Solution is Right for You?</h3>
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> Jan 5, 2024</span>
+                        <span><i class="far fa-user"></i> David Kim</span>
+                        <span><i class="far fa-clock"></i> 10 min read</span>
+                    </div>
+                    <p>A comprehensive comparison of SSD and HDD storage technologies. Learn about speed, reliability,
+                        cost, and which option suits your needs best.</p>
+                    <a href="#" class="btn btn-outline btn-sm mt-2">Read More</a>
+                </div>
+            </div>
+
+            <!-- Blog Post 4 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=600&h=300&fit=crop"
+                    alt="Peripherals">
+                <div class="blog-card-content">
+                    <h3>Mechanical Keyboards: A Beginner's Guide</h3>
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> Dec 28, 2023</span>
+                        <span><i class="far fa-user"></i> Sarah Johnson</span>
+                        <span><i class="far fa-clock"></i> 7 min read</span>
+                    </div>
+                    <p>Everything you need to know about mechanical keyboards - switch types, keycaps, customization
+                        options, and why they're worth the investment.</p>
+                    <a href="#" class="btn btn-outline btn-sm mt-2">Read More</a>
+                </div>
+            </div>
+
+            <!-- Blog Post 5 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600&h=300&fit=crop"
+                    alt="Monitors">
+                <div class="blog-card-content">
+                    <h3>Choosing the Right Monitor for Your Setup</h3>
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> Dec 20, 2023</span>
+                        <span><i class="far fa-user"></i> Alex Chen</span>
+                        <span><i class="far fa-clock"></i> 9 min read</span>
+                    </div>
+                    <p>From resolution and refresh rate to panel types and connectivity - we help you choose the perfect
+                        monitor for gaming, work, or creative tasks.</p>
+                    <a href="#" class="btn btn-outline btn-sm mt-2">Read More</a>
+                </div>
+            </div>
+
+            <!-- Blog Post 6 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=300&fit=crop"
+                    alt="Networking">
+                <div class="blog-card-content">
+                    <h3>Home Networking: Wi-Fi 6 vs Wi-Fi 5 Explained</h3>
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> Dec 15, 2023</span>
+                        <span><i class="far fa-user"></i> Maria Rodriguez</span>
+                        <span><i class="far fa-clock"></i> 8 min read</span>
+                    </div>
+                    <p>Understanding the differences between Wi-Fi 6 and Wi-Fi 5, and whether it's worth upgrading your
+                        home network equipment.</p>
+                    <a href="#" class="btn btn-outline btn-sm mt-2">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="text-center mt-5">
+            <div
+                style="background: white; padding: 3rem; border-radius: 16px; box-shadow: var(--shadow); max-width: 600px; margin: 0 auto;">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p class="mb-3">Get the latest tech news, reviews, and exclusive deals delivered to your inbox.</p>
+                <div class="d-flex gap-2" style="max-width: 400px; margin: 0 auto;">
+                    <input type="email" class="form-control" placeholder="Your email address">
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ComputerStore</h3>
+                    <p>Your one-stop shop for all computer needs.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Blog Categories</h3>
+                    <ul>
+                        <li><a href="#">Gaming</a></li>
+                        <li><a href="#">Hardware</a></li>
+                        <li><a href="#">Software</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> blog@computerstore.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Computer Store Blog</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

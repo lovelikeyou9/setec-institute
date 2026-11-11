@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Computer Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Use the standard navbar from step 2 -->
+    <nav class="navbar">
+        <!-- Copy the navbar from step 2 here -->
+    </nav>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li><i class="fas fa-chevron-right"></i></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><i class="fas fa-chevron-right"></i></li>
+                <li>My Orders</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container" style="padding: 2rem 0;">
+        <h1>My Orders</h1>
+        <p style="color: var(--gray);">Your order history will appear here.</p>
+        
+        <div id="ordersList" style="margin-top: 2rem;">
+            <!-- Orders will be loaded here -->
+            <div class="loading-spinner">Loading orders...</div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Simple order loading logic
+        async function loadOrders() {
+            try {
+                const response = await fetch('/api/auth/me');
+                const userData = await response.json();
+                
+                if (userData.success) {
+                    document.getElementById('ordersList').innerHTML = `
+                        <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: var(--shadow); text-align: center;">
+                            <i class="fas fa-box-open" style="font-size: 3rem; color: var(--gray-light); margin-bottom: 1rem;"></i>
+                            <h3>No Orders Yet</h3>
+                            <p style="color: var(--gray); margin-bottom: 1.5rem;">You haven't placed any orders yet.</p>
+                            <a href="/products" class="btn btn-primary">
+                                <i class="fas fa-shopping-bag"></i> Start Shopping
+                            </a>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading orders:', error);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrders();
+        });
+    </script>
+</body>
+</html>

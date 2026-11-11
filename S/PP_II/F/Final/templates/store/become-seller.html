@@ -1,0 +1,99 @@
+{% extends 'layouts/store.html' %}
+{% block title %}Become a Seller — MMT{% endblock %}
+{% block content %}
+{% set existingSeller = current_user.seller %}
+<div class="container" style="padding-top:1.5rem;max-width:720px">
+  <nav class="breadcrumb">
+    <a href="{{ url('/') }}">Home</a>
+    <span class="sep">/</span>
+    <span>Become a Seller</span>
+  </nav>
+
+  <h1 class="section-title" style="margin-bottom:.35rem">Start Selling on MMT</h1>
+  <p class="section-sub" style="margin-bottom:1.5rem">Reach tech buyers across Cambodia — computers, networking, gaming, cameras, DIY &amp; more.</p>
+
+  {% if not current_user.is_authenticated %}
+    <div class="form-card">
+      <p style="margin-bottom:1rem">You need a customer account before applying to sell.</p>
+      <a class="btn btn-primary" href="{{ url('/login') }}">Login to apply</a>
+      <a class="btn btn-outline" href="{{ url('/register') }}" style="margin-left:.5rem">Register</a>
+    </div>
+  {% else %}
+    {% if current_user.is_authenticated and (not existingSeller) %}
+      <div class="alert alert-info" style="margin-bottom:1.25rem">
+        Applying as <strong>{{ current_user.full_name }}</strong>
+        ({{ current_user.email }}).
+        You must have a registered customer account first — then submit your store application below.
+      </div>
+    {% endif %}
+
+    {% set sellerStatus = ((existingSeller.status or '')|upper|trim) if existingSeller else '' %}
+    {% if existingSeller and sellerStatus != 'REJECTED' %}
+      <div class="form-card">
+        <h3>Application Status</h3>
+        <p style="margin-bottom:1rem">
+          Store: <strong>{{ existingSeller.store_name }}</strong>
+        </p>
+        {% if sellerStatus == 'PENDING' %}
+          <div class="alert alert-info" data-keep-alert>Your application is <strong>PENDING</strong> admin review. We'll notify you once a decision is made.</div>
+        {% elif sellerStatus == 'APPROVED' %}
+          <div class="alert alert-success" data-keep-alert>
+            Congratulations! Your store is <strong>APPROVED</strong>.
+            <a href="{{ url('/seller-dashboard') }}" class="btn btn-primary btn-sm" style="margin-left:.75rem">Go to Seller Center</a>
+          </div>
+        {% elif (sellerStatus == 'SUSPENDED') or (sellerStatus == 'BANNED') %}
+          <div class="alert alert-error" data-keep-alert>
+            Your seller store has been <strong>BANNED</strong> by an administrator.
+            You can still shop as a customer, but you cannot sell until MMT support restores your store.
+          </div>
+        {% endif %}
+      </div>
+    {% else %}
+      {% if existingSeller and sellerStatus == 'REJECTED' %}
+        <div class="alert alert-error" data-keep-alert style="margin-bottom:1.25rem">
+          Your previous application was <strong>REJECTED</strong>.
+          {% if existingSeller.rejection_reason %} Reason: {{ existingSeller.rejection_reason }}.{% endif %}
+          You can update your details and apply again below.
+        </div>
+      {% endif %}
+      <div class="form-card">
+        <h3>{{ 'Re-apply as Seller' if (existingSeller and sellerStatus == 'REJECTED') else 'Seller Application' }}</h3>
+        <form action="{{ url('/become-seller') }}" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="store_name">Store Name *</label>
+              <input type="text" id="store_name" name="store_name" required placeholder="e.g. TechZone PP" value="{{ old('store_name', existingSeller.store_name if existingSeller else '') }}"/>
+            </div>
+            <div class="form-group">
+              <label for="owner_name">Owner Name *</label>
+              <input type="text" id="owner_name" name="owner_name" required placeholder="Full legal name" value="{{ old('owner_name', (existingSeller.owner_name if existingSeller else None) or current_user.full_name) }}"/>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone *</label>
+              <input type="tel" id="phone" name="phone" required placeholder="012 345 678" value="{{ old('phone', (existingSeller.phone if existingSeller else None) or current_user.phone) }}"/>
+            </div>
+            <div class="form-group">
+              <label for="country">Country *</label>
+              <input type="text" id="country" name="country" required value="{{ old('country', (existingSeller.country if existingSeller else None) or 'Cambodia') }}"/>
+            </div>
+            <div class="form-group">
+              <label for="location">City / Location *</label>
+              <input type="text" id="location" name="location" required placeholder="Phnom Penh" value="{{ old('location', existingSeller.location if existingSeller else '') }}"/>
+            </div>
+            <div class="form-group full">
+              <label for="address">Business Address *</label>
+              <input type="text" id="address" name="address" required placeholder="Street, district, city" value="{{ old('address', existingSeller.address if existingSeller else '') }}"/>
+            </div>
+            <div class="form-group full">
+              <label for="description">Store Description</label>
+              <textarea id="description" name="description" rows="3" placeholder="What do you sell?">{{ old('description', existingSeller.description if existingSeller else '') }}</textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-accent" style="margin-top:1rem">{{ 'Submit Again' if (existingSeller and sellerStatus == 'REJECTED') else 'Submit Application' }}</button>
+        </form>
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Computer Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Same Navigation as index.html -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-desktop"></i>
+                <span>ComputerStore</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="/" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/products"><i class="fas fa-laptop"></i> Products</a></li>
+                <li><a href="/collections"><i class="fas fa-layer-group"></i> Collections</a></li>
+                <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="search-container">
+                    <form id="searchForm">
+                        <input type="text" class="search-input" placeholder="Search products..." id="searchInput">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+                <a href="/cart" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+
+                <!-- Guest links (shown when not logged in) -->
+                <div class="auth-links" id="guestLinks">
+                    <a href="/login" class="btn btn-outline btn-sm">Login</a>
+                    <a href="/register" class="btn btn-primary btn-sm">Register</a>
+                </div>
+
+                <!-- User links (shown when logged in) -->
+                <div class="user-dropdown" id="userLinks" style="display: none;">
+                    <a href="/profile.html" id="userName" class="user-link">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/profile.html"><i class="fas fa-user-circle"></i> Profile</a>
+                        <a href="/orders"><i class="fas fa-box"></i> Orders</a>
+                        <a href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Page Content -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li><i class="fas fa-chevron-right"></i></li>
+                <li>Products</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="products-page">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <h3>Filters</h3>
+
+                <div class="filter-group">
+                    <h4>Category</h4>
+                    <select class="form-control" id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Price Range</h4>
+                    <div class="price-range">
+                        <input type="range" min="0" max="5000" value="0" class="slider" id="priceMin">
+                        <input type="range" min="0" max="5000" value="5000" class="slider" id="priceMax">
+                        <div class="price-values">
+                            <span id="minPriceValue">$0</span> -
+                            <span id="maxPriceValue">$5000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Sort By</h4>
+                    <select class="form-control" id="sortBy">
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary btn-block" onclick="applyFilters()">Apply Filters</button>
+                <button class="btn btn-outline btn-block" onclick="clearFilters()">Clear All</button>
+            </aside>
+
+            <!-- Products Grid -->
+            <main class="products-main">
+                <div class="products-header">
+                    <h1>All Products</h1>
+                    <div class="products-count" id="productsCount">Loading...</div>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be loaded here -->
+                </div>
+
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be added here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Same Footer as index.html -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ComputerStore</h3>
+                    <p>Your one-stop shop for all computer needs.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/products">Products</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@computerstore.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Computer Store</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/products.js"></script>
+</body>
+
+</html>

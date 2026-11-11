@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}Seller Center — MMT{% endblock %}</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}"/>
+  <link rel="stylesheet" href="{{ asset('css/storefront.css') }}?v=demo8"/>
+  <link rel="icon" type="image/png" href="{{ asset('images/mme-icon.png') }}"/>
+  {% block head %}{% endblock %}
+</head>
+<body>
+{% include 'partials/store-header.html' %}
+
+{% if flash_msg('message') %}
+  <div class="container" style="padding-top:1rem"><div class="alert alert-success">{{ flash_msg('message') }}</div></div>
+{% endif %}
+{% if flash_msg('error') %}
+  <div class="container" style="padding-top:1rem"><div class="alert alert-error">{{ flash_msg('error') }}</div></div>
+{% endif %}
+{% if (errors is defined and errors is not none) and errors.any() %}
+  <div class="container" style="padding-top:1rem">
+    <div class="alert alert-error">
+      <strong>Could not save:</strong>
+      <ul style="margin:.35rem 0 0;padding-left:1.1rem">
+        {% for e in (errors.all()) %}<li>{{ e }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    {% include 'partials/seller-sidebar.html' %}
+    <div class="dash-main">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</main>
+
+{% block modals %}{% endblock %}
+
+{% include 'partials/store-footer.html' %}
+{% block scripts %}{% endblock %}
+</body>
+</html>

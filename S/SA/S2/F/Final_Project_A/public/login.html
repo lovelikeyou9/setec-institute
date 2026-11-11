@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Sign In | Access Account</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Navigation bar placeholder -->
+  <header id="main-nav"></header>
+  <main class="auth-page">
+    <div class="glass-card auth-card">
+      <div class="auth-header">
+        <h2>Welcome <span class="gradient-text">Back</span></h2>
+        <p>Sign in to access your dashboard and showroom active bookings.</p>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="email@dealer.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Security Password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:12px;"><i class="ti ti-login"></i>
+          Sign In</button>
+      </form>
+
+      <div style="text-align:right; margin-top:16px;">
+        <a href="forgot-password.html" style="font-size:13px; color:hsl(var(--text-muted)); font-weight:500;">Forgot
+          Password?</a>
+      </div>
+      <div class="auth-footer">
+        Don't have an account? <a href="register.html">Register Now</a>
+      </div>
+    </div>
+  </main>
+  <!-- Client Footer -->
+  <footer class="client-footer">
+    <div class="container">
+      <p style="font-size:12px; color:hsl(var(--text-muted));">
+        Copyright &copy; 2026 Apex Motors. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>

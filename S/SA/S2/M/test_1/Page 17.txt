@@ -1,0 +1,39 @@
+When to Use DSDM?
+
+DSDM is an Agile project management and software development method.
+
+
+01
+When Requirements May Change
+
+Use DSDM when project requirements are not fully clear at the 
+beginning or may change during development.
+
+02
+When Fast Delivery is Needed
+
+DSDM is suitable when the project must be delivered quickly.
+
+- Work is divided into short development cycles (iterations).
+- Important features are delivered first.
+
+03
+When Users Can Participate Actively
+
+Use DSDM when users or clients can be involved in the project.
+
+- Users give continuous feedback.
+- Developers improve the system based on feedback.
+
+04
+When the Project Needs Clear Priorities
+
+DSDM uses MoSCoW prioritization:
+- Must Have
+- Should Have
+- Could Have
+- Won’t Have (for now)
+
+Ex: This helps teams focus on important features first.
+
+

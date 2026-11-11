@@ -1,0 +1,11 @@
+{% if current_user.is_authenticated %}
+  {% if current_user.role == 'ADMIN' %}
+    {% include 'partials/admin-sidebar.html' %}
+  {% elif current_user.role == 'SELLER' %}
+    {% include 'partials/seller-sidebar.html' %}
+  {% else %}
+    {% include 'partials/account-sidebar.html' %}
+  {% endif %}
+{% else %}
+  {% include 'partials/account-sidebar.html' %}
+{% endif %}

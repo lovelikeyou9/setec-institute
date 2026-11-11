@@ -1,0 +1,9 @@
+Create user:
+	node -e "const bcrypt=require('bcryptjs'); bcrypt.hash('Admin@1234',10).then(console.log)"
+	INSERT INTO users (name, email, password, role)
+VALUES (
+  'System Admin 2',
+  'admin2@gmail.com',
+  'PASTE_BCRYPT_HASH_HERE',
+  'admin'
+);

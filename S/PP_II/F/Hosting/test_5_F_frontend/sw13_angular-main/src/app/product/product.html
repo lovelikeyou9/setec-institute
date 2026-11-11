@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    @for (product of product_list; track product.title) {
+      <app-product-card
+        [image]="product.image"
+        [name]="product.title"
+        [description]="product.description"
+        [price]="product.price"
+        class="col-md-3 mb-4"
+      ></app-product-card>
+    }
+  </div>
+</div>
+<br>

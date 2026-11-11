@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}My Account — MMT{% endblock %}</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}"/>
+  <link rel="stylesheet" href="{{ asset('css/storefront.css') }}?v=demo10"/>
+  <link rel="icon" type="image/png" href="{{ asset('images/mme-icon.png') }}"/>
+  {% block head %}{% endblock %}
+</head>
+<body>
+{% include 'partials/store-header.html' %}
+
+{% if flash_msg('message') %}
+  <div class="container" style="padding-top:1rem"><div class="alert alert-success">{{ flash_msg('message') }}</div></div>
+{% endif %}
+{% if flash_msg('error') %}
+  <div class="container" style="padding-top:1rem"><div class="alert alert-error">{{ flash_msg('error') }}</div></div>
+{% endif %}
+
+<main class="main-content dash-shell">
+  <div class="dash-layout">
+    {% include 'partials/dash-sidebar.html' %}
+    <div class="dash-main">
+      {% if current_user.is_authenticated and current_user.seller and ((current_user.seller.status or '')|upper) in ['SUSPENDED', 'BANNED'] %}
+        <div class="alert alert-error" data-keep-alert style="margin-bottom:1.25rem">
+          <strong>Seller store banned.</strong>
+          Your store <strong>{{ current_user.seller.store_name }}</strong> was banned by an administrator.
+          You can still shop as a customer, but Seller Center and selling are disabled until an admin unbans you.
+        </div>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</main>
+
+{% block modals %}{% endblock %}
+
+{% include 'partials/store-footer.html' %}
+{% block scripts %}{% endblock %}
+</body>
+</html>

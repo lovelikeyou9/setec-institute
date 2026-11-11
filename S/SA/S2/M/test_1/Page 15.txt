@@ -1,0 +1,48 @@
+Disadvantage
+
+DSDM (Dynamic Systems Development Method) is an Agile project management 
+and software development framework that focuses on fast delivery, user 
+involvement, and iterative development.
+
+
+01
+Requires Active User
+
+- Users must be available frequently.
+- If users are not involved, the project may fail.
+
+02
+Not Suitable Small
+
+- DSDM has many roles and processes.
+- It may be too complex for small or simple projects.
+
+03
+Requires Experience
+
+- Continuous testing and reviews are done during development.
+- Problems can be detected and fixed early.
+
+04
+Higher Cost
+
+- Continuous meetings, testing, and user involvement can increase project cost.
+
+05
+Difficult for Fixed Budget Projects
+
+- Because requirements can change, it may be hard to maintain strict cost control.
+
+06
+Documentation May Be Limited
+
+- Agile focus on working software may reduce detailed documentation.
+
+07
+Not Ideal for Large Distributed Teams
+
+- DSDM requires frequent communication and collaboration.
+- This can be difficult when teams are in different locations.
+
+
+

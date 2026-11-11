@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASUS ROG Strix G15 - TechStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --border: #e2e8f0;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .search-bar {
+            display: flex;
+            flex: 0 1 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px 0 0 6px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: var(--primary-dark);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-actions a {
+            color: var(--secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .header-actions a:hover {
+            color: var(--primary);
+        }
+
+        nav {
+            background: var(--dark);
+            padding: 12px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #93c5fd;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 15px 0;
+            font-size: 14px;
+            color: var(--secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* Product Details */
+        .product-details {
+            display: flex;
+            gap: 40px;
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-gallery {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .main-image {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .image-thumbnails {
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            padding: 5px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            border-color: var(--primary);
+        }
+
+        .thumbnail img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-brand {
+            color: var(--secondary);
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-count {
+            color: var(--secondary);
+        }
+
+        .product-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            margin-bottom: 25px;
+            color: var(--secondary);
+            line-height: 1.7;
+        }
+
+        .product-specs {
+            margin-bottom: 25px;
+        }
+
+        .specs-list {
+            list-style: none;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            width: 150px;
+            flex-shrink: 0;
+        }
+
+        .spec-value {
+            color: var(--secondary);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: #eff6ff;
+        }
+
+        .product-features {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature i {
+            color: var(--success);
+            font-size: 20px;
+        }
+
+        /* Tabs Section */
+        .tabs-section {
+            background: white;
+            border-radius: 8px;
+            margin: 40px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 15px 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .tab-content {
+            padding: 30px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .specs-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .specs-table td {
+            padding: 12px 15px;
+        }
+
+        .specs-table td:first-child {
+            font-weight: 600;
+            width: 200px;
+        }
+
+        .review {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-weight: 600;
+        }
+
+        .review-date {
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        .review-rating {
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        /* Related Products */
+        .related-products {
+            margin: 50px 0;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .product-image img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .product-info-small {
+            padding: 15px;
+        }
+
+        .product-brand-small {
+            color: var(--secondary);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .product-name-small {
+            font-weight: 600;
+            margin-bottom: 10px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .product-price-small {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .product-details {
+                flex-direction: column;
+            }
+            
+            .product-gallery {
+                max-width: 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                flex: none;
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .product-features {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .tabs-header {
+                flex-wrap: wrap;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .specs-list li {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .spec-label {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>TechStore</span>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for computers, brands, components...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#"><i class="fas fa-user"></i> Account</a>
+                    <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> Cart (2)</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Laptops</a></li>
+                    <li><a href="#">Desktops</a></li>
+                    <li><a href="#">Components</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Deals</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="#">Home</a> > <a href="#">Laptops</a> > <a href="#">Gaming Laptops</a> > ASUS ROG Strix G15
+        </div>
+        
+        <!-- Product Details -->
+        <div class="product-details">
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="ASUS ROG Strix G15" id="main-image">
+                </div>
+                <div class="image-thumbnails">
+                    <div class="thumbnail active" data-image="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="ASUS ROG Strix G15 Front">
+                    </div>
+                    <div class="thumbnail" data-image="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="ASUS ROG Strix G15 Back">
+                    </div>
+                    <div class="thumbnail" data-image="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="ASUS ROG Strix G15 Side">
+                    </div>
+                    <div class="thumbnail" data-image="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="ASUS ROG Strix G15 Keyboard">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <div class="product-brand">ASUS</div>
+                <h1 class="product-title">ASUS ROG Strix G15 Gaming Laptop</h1>
+                
+                <div class="product-rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="rating-count">4.5 (128 Reviews)</div>
+                </div>
+                
+                <div class="product-price">$1,499.99</div>
+                
+                <div class="product-description">
+                    The ASUS ROG Strix G15 is a powerful gaming laptop designed for serious gamers. With its high-performance components and advanced cooling system, it delivers smooth gameplay and immersive experiences for the most demanding titles.
+                </div>
+                
+                <div class="product-specs">
+                    <h3>Key Specifications</h3>
+                    <ul class="specs-list">
+                        <li>
+                            <span class="spec-label">Processor:</span>
+                            <span class="spec-value">Intel Core i7-12700H (14 cores, up to 4.7GHz)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Graphics:</span>
+                            <span class="spec-value">NVIDIA GeForce RTX 4060 8GB GDDR6</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Memory:</span>
+                            <span class="spec-value">16GB DDR5 RAM (4800MHz)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Storage:</span>
+                            <span class="spec-value">1TB NVMe PCIe 4.0 SSD</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Display:</span>
+                            <span class="spec-value">15.6" FHD (1920x1080) 165Hz IPS-level</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="product-actions">
+                    <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    <button class="btn btn-secondary"><i class="fas fa-heart"></i> Add to Wishlist</button>
+                </div>
+                
+                <div class="product-features">
+                    <div class="feature">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>Free Shipping</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-undo"></i>
+                        <span>30-Day Returns</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>2-Year Warranty</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabs Section -->
+        <div class="tabs-section">
+            <div class="tabs-header">
+                <div class="tab active" data-tab="specifications">Specifications</div>
+                <div class="tab" data-tab="reviews">Reviews (128)</div>
+                <div class="tab" data-tab="shipping">Shipping & Returns</div>
+            </div>
+            
+            <div class="tab-content active" id="specifications">
+                <h3>Detailed Specifications</h3>
+                <table class="specs-table">
+                    <tr>
+                        <td>Processor</td>
+                        <td>Intel Core i7-12700H (14 cores, 20 threads, up to 4.7GHz)</td>
+                    </tr>
+                    <tr>
+                        <td>Graphics</td>
+                        <td>NVIDIA GeForce RTX 4060 8GB GDDR6 with ROG Boost</td>
+                    </tr>
+                    <tr>
+                        <td>Memory</td>
+                        <td>16GB DDR5 4800MHz (Expandable to 32GB)</td>
+                    </tr>
+                    <tr>
+                        <td>Storage</td>
+                        <td>1TB NVMe PCIe 4.0 SSD (Additional M.2 slot available)</td>
+                    </tr>
+                    <tr>
+                        <td>Display</td>
+                        <td>15.6" FHD (1920x1080) 165Hz IPS-level, 3ms, 100% sRGB</td>
+                    </tr>
+                    <tr>
+                        <td>Operating System</td>
+                        <td>Windows 11 Home</td>
+                    </tr>
+                    <tr>
+                        <td>Keyboard</td>
+                        <td>RGB Backlit Chiclet Keyboard, 1.8mm key travel</td>
+                    </tr>
+                    <tr>
+                        <td>Connectivity</td>
+                        <td>Wi-Fi 6E, Bluetooth 5.2, 1x RJ45, 1x HDMI 2.1, 2x USB 3.2, 1x USB-C</td>
+                    </tr>
+                    <tr>
+                        <td>Audio</td>
+                        <td>Dolby Atmos, Smart Amp Technology, AI Noise Canceling</td>
+                    </tr>
+                    <tr>
+                        <td>Battery</td>
+                        <td>90WHrs, 4-cell Li-ion, 240W AC Adapter</td>
+                    </tr>
+                    <tr>
+                        <td>Dimensions</td>
+                        <td>35.4 x 25.9 x 2.26 ~ 2.72 cm</td>
+                    </tr>
+                    <tr>
+                        <td>Weight</td>
+                        <td>2.3 kg</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="tab-content" id="reviews">
+                <h3>Customer Reviews</h3>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <div class="review-author">Michael T.</div>
+                        <div class="review-date">October 12, 2023</div>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>This laptop is an absolute beast! I've been using it for a month now and it handles all my games at high settings without any issues. The cooling system is impressive - it stays relatively quiet even during long gaming sessions.</p>
+                </div>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <div class="review-author">Sarah J.</div>
+                        <div class="review-date">October 5, 2023</div>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>Great performance and build quality. The display is vibrant and the keyboard feels nice to type on. My only minor complaint is the battery life, but that's expected for a gaming laptop. Overall, very satisfied with my purchase.</p>
+                </div>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <div class="review-author">David L.</div>
+                        <div class="review-date">September 28, 2023</div>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p>Solid gaming laptop for the price. The RTX 4060 performs well in all the games I've tried. The design is sleek and not overly "gamer-y" which I appreciate. Would recommend to anyone looking for a powerful portable gaming solution.</p>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="shipping">
+                <h3>Shipping Information</h3>
+                <p>We offer free standard shipping on all orders over $499. Standard shipping typically takes 3-5 business days. Express shipping options are available at checkout.</p>
+                
+                <h3>Return Policy</h3>
+                <p>We offer a 30-day return policy for all products in original condition. If you're not satisfied with your purchase, you can return it for a full refund or exchange. Please note that customized computers may have different return conditions.</p>
+                
+                <h3>Warranty</h3>
+                <p>All our computers come with a 2-year manufacturer's warranty that covers defects in materials and workmanship. Extended warranty options are available for purchase.</p>
+            </div>
+        </div>
+        
+        <!-- Related Products -->
+        <div class="related-products">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Lenovo Legion 5 Pro">
+                    </div>
+                    <div class="product-info-small">
+                        <div class="product-brand-small">Lenovo</div>
+                        <h3 class="product-name-small">Lenovo Legion 5 Pro</h3>
+                        <div class="product-price-small">$1,799.99</div>
+                        <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Dell G15">
+                    </div>
+                    <div class="product-info-small">
+                        <div class="product-brand-small">Dell</div>
+                        <h3 class="product-name-small">Dell G15 Gaming Laptop</h3>
+                        <div class="product-price-small">$999.99</div>
+                        <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Acer Predator">
+                    </div>
+                    <div class="product-info-small">
+                        <div class="product-brand-small">Acer</div>
+                        <h3 class="product-name-small">Acer Predator Helios 300</h3>
+                        <div class="product-price-small">$1,399.99</div>
+                        <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="MSI Katana">
+                    </div>
+                    <div class="product-info-small">
+                        <div class="product-brand-small">MSI</div>
+                        <h3 class="product-name-small">MSI Katana 15</h3>
+                        <div class="product-price-small">$1,599.99</div>
+                        <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Laptops</a></li>
+                        <li><a href="#">Desktops</a></li>
+                        <li><a href="#">Components</a></li>
+                        <li><a href="#">Monitors</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Warranty</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About TechStore</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Stay Connected</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 TechStore. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current tab and content
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Image thumbnail switching
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainImage = document.getElementById('main-image');
+            
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    const imageUrl = this.getAttribute('data-image');
+                    
+                    // Remove active class from all thumbnails
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to current thumbnail and change main image
+                    this.classList.add('active');
+                    mainImage.src = imageUrl;
+                });
+            });
+            
+            // Add to cart buttons
+            const addToCartButtons = document.querySelectorAll('.btn-primary');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    let productName;
+                    
+                    if (this.closest('.product-info')) {
+                        productName = document.querySelector('.product-title').textContent;
+                    } else {
+                        productName = this.closest('.product-card').querySelector('.product-name-small').textContent;
+                    }
+                    
+                    alert(`Added ${productName} to your cart!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

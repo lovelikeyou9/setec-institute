@@ -1,0 +1,47 @@
+Website resource
+https://themewagon.com/theme-price/free/
+
+https://themewagon.com/themes/free-bootstrap-4-html5-responsive-ecommerce-website-template-ogani/
+
+https://themewagon.com/themes/restoran-free-responsive-bootstrap-5-restaurant-website-template/
+
+https://themewagon.com/themes/oberlo/
+
+https://themewagon.com/themes/eshopper-free-responsive-bootstrap-4-e-commerce-website-template/
+
+https://themewagon.com/themes/free-bootstrap-ecommerce-website-template-coloshop/
+
+https://themewagon.com/themes/inapp/
+
+
+Website no resource
+https://themewagon.com/themes/slick/
+
+
+
+
+admin
+dasher-1.0.0.zip	https://themewagon.com/themes/dasher/
+
+main
+
+product
+
+product-detail
+
+cart
+
+checkout
+
+payment
+
+account-user
+
+checkout
+
+login
+
+create-user
+
+forgot-password
+

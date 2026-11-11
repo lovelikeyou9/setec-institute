@@ -1,0 +1,22 @@
+Summary
+
+01
+Agile
+
+Flexible approach that adapts to changing 
+requirements.
+
+02
+Business-focused
+
+Ensures the system delivers real value to the business.
+
+03
+Time-boxed
+
+Work is completed within fixed time periods to ensure fast delivery.
+
+04
+User-centered
+
+Active user involvement ensures the product meets user needs.

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Checkout | Elite Motors</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --accent-red: #e63946;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --luxury-gold: #c5a059;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            color: var(--primary-dark);
+            background-image: radial-gradient(circle at 10% 20%, rgba(241, 245, 249, 1) 0%, rgba(226, 232, 240, 1) 100%);
+        }
+
+        .checkout-container { max-width: 1200px; margin: 40px auto; }
+
+        /* Card Preview - Glassmorphism */
+        .credit-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-height: 220px;
+            overflow: hidden;
+        }
+        .credit-card:hover { transform: translateY(-5px) rotateX(5deg); }
+        .credit-card::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+        }
+
+        .card-chip {
+            width: 50px; height: 38px;
+            background: linear-gradient(135deg, #ffd700 0%, #c5a059 100%);
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .card-number { font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+        /* Custom Inputs */
+        .form-control {
+            border: 2px solid #e2e8f0;
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.1);
+        }
+
+        /* Cart Styling */
+        .cart-item {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        .cart-item:hover { transform: scale(1.01); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .cart-item img { width: 100px; height: 60px; object-fit: cover; border-radius: 8px; }
+
+        .qty-btn {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.2s;
+        }
+        .qty-btn:hover { background: var(--primary-dark); color: white; }
+
+        /* Totals Sidebar */
+        .summary-card {
+            background: white;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
+            position: sticky; top: 20px;
+        }
+
+        .btn-pay {
+            background: var(--primary-dark);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-pay:hover {
+            background: #1e293b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3);
+        }
+
+        .badge-discount { background: #dcfce7; color: #166534; font-size: 0.8rem; padding: 5px 10px; border-radius: 20px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark py-3">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#"><i class=""></i>ELITE MOTORS</a>
+    </div>
+</nav>
+
+<div class="container checkout-container">
+    <div class="row g-5">
+        <!-- Main Form -->
+        <div class="col-lg-8">
+            <h3 class="mb-4 fw-bold">Secure Checkout</h3>
+            
+            <div class="mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Selected Vehicles</h5>
+                    <span class="text-muted" id="itemCount">0 Items</span>
+                </div>
+                <div id="cartItemsContainer">
+                    <!-- Items injected here -->
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+                <h5 class="mb-4"><i class="fas fa-truck me-2"></i>Delivery Details</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label text-muted small fw-bold">FULL NAME</label>
+                        <input type="text" id="fullname" class="form-control" placeholder="John Doe">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-muted small fw-bold">EMAIL ADDRESS</label>
+                        <input type="email" id="email" class="form-control" placeholder="john@example.com">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label text-muted small fw-bold">SHIPPING ADDRESS</label>
+                        <input type="text" id="address" class="form-control" placeholder="123 Luxury Lane">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-muted small fw-bold">CITY</label>
+                        <input type="text" id="city" class="form-control" placeholder="Beverly Hills">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-muted small fw-bold">SHIPPING METHOD</label>
+                        <select class="form-select form-control" id="shippingMethod" onchange="updateUI()">
+                            <option value="0">Local Pickup (Free)</option>
+                            <option value="500" selected>Enclosed Trailer ($500)</option>
+                            <option value="1500">Air Freight Premium ($1,500)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-muted small fw-bold">ZIP CODE</label>
+                        <input type="text" id="zip" class="form-control" placeholder="90210">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-4 shadow-sm">
+                <h5 class="mb-4"><i class="fas fa-credit-card me-2"></i>Payment Method</h5>
+                
+                <div class="credit-card mx-auto mb-4" id="cardElement">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="card-chip"></div>
+                        <i class="fab fa-cc-visa fa-2x"></i>
+                    </div>
+                    <div class="card-number" id="prev-number">•••• •••• •••• ••••</div>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div>
+                            <div class="small opacity-75">Card Holder</div>
+                            <div class="text-uppercase" id="prev-name">Your Name</div>
+                        </div>
+                        <div class="text-end">
+                            <div class="small opacity-75">Expires</div>
+                            <div id="prev-exp">MM/YY</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label text-muted small fw-bold">CARD NUMBER</label>
+                        <input type="text" id="cardnumber" class="form-control" placeholder="4444 4444 4444 4444" maxlength="19">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-muted small fw-bold">CVV</label>
+                        <input type="text" id="cvv" class="form-control" placeholder="123" maxlength="3">
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label text-muted small fw-bold">CARDHOLDER NAME</label>
+                        <input type="text" id="cardname" class="form-control" placeholder="JOHN DOE">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-muted small fw-bold">EXPIRATION</label>
+                        <input type="text" id="exp" class="form-control" placeholder="MM/YY" maxlength="5">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Summary -->
+        <div class="col-lg-4">
+            <div class="card summary-card p-4">
+                <h4 class="fw-bold mb-4">Order Summary</h4>
+                
+                <div class="mb-4">
+                    <label class="form-label small fw-bold">PROMO CODE</label>
+                    <div class="input-group">
+                        <input type="text" id="promoInput" class="form-control" placeholder="ELITE2024">
+                        <button class="btn btn-dark" onclick="applyPromo()">Apply</button>
+                    </div>
+                    <div id="promoMsg"></div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Subtotal</span>
+                    <span class="fw-bold" id="res-subtotal">$0</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Shipping</span>
+                    <span class="fw-bold" id="res-shipping">$0</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Tax (8.5%)</span>
+                    <span class="fw-bold" id="res-tax">$0</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                    <span class="text-muted">Discount</span>
+                    <span class="text-success fw-bold" id="res-discount">-$0</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <span class="fs-5 fw-bold">Total Amount</span>
+                    <span class="fs-4 fw-bold text-primary" id="res-total">$0</span>
+                </div>
+
+                <button class="btn btn-pay w-100 mb-3" onclick="handleCheckout()">
+                    PLACE ORDER <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+                <p class="text-center text-muted small mb-0">
+                    <i class="fas fa-lock me-1"></i> SSL Encrypted Payment
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initial State
+    let state = {
+        cart: JSON.parse(localStorage.getItem('cart')) || [
+            { id: 1, name: "Porsche 911 GT3", price: 161100, qty: 1, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70" },
+            { id: 2, name: "Tesla Model S Plaid", price: 89990, qty: 1, img: "https://images.unsplash.com/photo-1560958089-b8a1929cea89" }
+        ],
+        discount: 0,
+        promoUsed: false
+    };
+
+    // Render Cart
+    function updateUI() {
+        const container = document.getElementById('cartItemsContainer');
+        container.innerHTML = '';
+        let subtotal = 0;
+
+        state.cart.forEach((item, index) => {
+            subtotal += item.price * item.qty;
+            container.innerHTML += `
+                <div class="cart-item d-flex align-items-center">
+                    <img src="${item.img}" class="me-3 shadow-sm">
+                    <div class="flex-grow-1">
+                        <h6 class="mb-0 fw-bold">${item.name}</h6>
+                        <span class="text-muted small">$${item.price.toLocaleString()}</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 me-4">
+                        <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                        <span class="fw-bold" style="width:20px; text-align:center">${item.qty}</span>
+                        <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                    </div>
+                    <div class="fw-bold me-3">$${(item.price * item.qty).toLocaleString()}</div>
+                    <button class="btn btn-sm text-danger" onclick="removeItem(${index})"><i class="fas fa-trash"></i></button>
+                </div>
+            `;
+        });
+
+        // Calculations
+        const shipping = parseFloat(document.getElementById('shippingMethod').value);
+        const tax = subtotal * 0.085;
+        const discountAmt = subtotal * state.discount;
+        const total = subtotal + shipping + tax - discountAmt;
+
+        // Update DOM
+        document.getElementById('itemCount').innerText = `${state.cart.length} Vehicles`;
+        document.getElementById('res-subtotal').innerText = `$${subtotal.toLocaleString()}`;
+        document.getElementById('res-shipping').innerText = `$${shipping.toLocaleString()}`;
+        document.getElementById('res-tax').innerText = `$${tax.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+        document.getElementById('res-discount').innerText = `-$${discountAmt.toLocaleString()}`;
+        document.getElementById('res-total').innerText = `$${total.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+        
+        localStorage.setItem('cart', JSON.stringify(state.cart));
+    }
+
+    // Logic Functions
+    function updateQty(index, change) {
+        if (state.cart[index].qty + change > 0) {
+            state.cart[index].qty += change;
+            updateUI();
+        }
+    }
+
+    function removeItem(index) {
+        state.cart.splice(index, 1);
+        updateUI();
+    }
+
+    function applyPromo() {
+        const code = document.getElementById('promoInput').value.toUpperCase();
+        if (code === 'ELITE20' && !state.promoUsed) {
+            state.discount = 0.20;
+            state.promoUsed = true;
+            document.getElementById('promoMsg').innerHTML = `<span class="badge-discount mt-2 d-inline-block">20% Discount Applied!</span>`;
+            updateUI();
+            Swal.fire('Success!', '20% discount applied to your order.', 'success');
+        } else {
+            Swal.fire('Invalid Code', 'Try code: ELITE20', 'error');
+        }
+    }
+
+    // Card Input Real-time Preview
+    document.getElementById('cardnumber').addEventListener('input', function(e) {
+        let val = e.target.value.replace(/\D/g, '');
+        val = val.match(/.{1,4}/g)?.join(' ') || '';
+        e.target.value = val;
+        document.getElementById('prev-number').innerText = val || '•••• •••• •••• ••••';
+    });
+
+    document.getElementById('cardname').addEventListener('input', function(e) {
+        document.getElementById('prev-name').innerText = e.target.value || 'YOUR NAME';
+    });
+
+    document.getElementById('exp').addEventListener('input', function(e) {
+        let val = e.target.value.replace(/\D/g, '');
+        if (val.length >= 2) val = val.slice(0,2) + '/' + val.slice(2,4);
+        e.target.value = val;
+        document.getElementById('prev-exp').innerText = val || 'MM/YY';
+    });
+
+    // Checkout Flow
+    function handleCheckout() {
+        const fields = ['fullname', 'email', 'address', 'cardnumber'];
+        let valid = true;
+        
+        fields.forEach(f => {
+            if (!document.getElementById(f).value) valid = false;
+        });
+
+        if (!valid) {
+            return Swal.fire('Incomplete Form', 'Please fill in all required delivery and payment fields.', 'warning');
+        }
+
+        // Simulate Loading
+        Swal.fire({
+            title: 'Processing Payment...',
+            html: 'Authorizing with your bank',
+            timer: 2000,
+            didOpen: () => Swal.showLoading(),
+        }).then(() => {
+            // Confetti Trigger
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#0f172a', '#c5a059', '#e63946']
+            });
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Order Confirmed!',
+                text: 'Your luxury vehicle delivery is being scheduled.',
+                confirmButtonColor: '#0f172a'
+            });
+        });
+    }
+
+    // Init
+    updateUI();
+</script>
+
+</body>
+</html>

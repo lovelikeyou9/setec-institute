@@ -1,0 +1,53 @@
+MoSCoW
+
+DSDM uses MoSCoW method to prioritize requirements
+
+
+01
+Must Have
+
+Must Have requirements are critical and essential for the system to work.
+
+Characteristics:
+- Absolutely necessary
+- System cannot run without it
+- Required for legal, safety, core
+- Highest priority
+
+
+02
+Should Have
+
+Should Have requirements are important but not critical.
+The system can still work without them.
+
+Characteristics:
+- High priority but not essential
+- Can be delayed temporarily
+- System still works without them
+
+
+03
+Could Have
+
+Could Have requirements are desirable but optional. They are
+usually added if there is extra time or resources.
+
+Characteristics:
+- Nice to have
+- Low priority
+- Easy to remove if needed
+
+
+04
+Won’t Have
+
+Won’t Have requirements are features that will not be
+implemented in the current release.
+
+Characteristics:
+- Not included in this version
+- May be implemented later
+- Helps prevent scope creep
+
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Computer Store</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-desktop"></i>
+                <span>ComputerStore</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/products"><i class="fas fa-laptop"></i> Products</a></li>
+                <li><a href="/cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            </ul>
+            
+            <div class="nav-right">
+                <a href="/cart" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container" style="padding: 40px 0;">
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 30px;">
+            
+            <!-- Left Sidebar -->
+            <div class="profile-sidebar" style="background: white; padding: 25px; border-radius: 12px; height: fit-content; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="width: 80px; height: 80px; background: #2563eb; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 15px;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 id="profileName" style="margin-bottom: 5px;">Loading...</h3>
+                    <p id="profileEmail" style="color: #64748b; font-size: 0.9rem;">...</p>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;">
+                        <a href="#" style="display: block; padding: 10px; background: #eff6ff; color: #2563eb; border-radius: 8px; text-decoration: none; font-weight: 500;">
+                            <i class="fas fa-box" style="width: 25px;"></i> My Orders
+                        </a>
+                    </li>
+                    <li>
+                        <button id="logoutBtn" style="width: 100%; text-align: left; padding: 10px; background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1rem;">
+                            <i class="fas fa-sign-out-alt" style="width: 25px;"></i> Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Content (Orders) -->
+            <div class="profile-content">
+                <h2 style="margin-bottom: 20px; color: #1e293b;">My Order History</h2>
+                
+                <!-- Orders will be injected here by JavaScript -->
+                <div id="orders-container">
+                    <p>Loading your orders...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Computer Store</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+    <script src="/js/profile.js"></script>
+</body>
+</html>

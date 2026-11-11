@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+
+<body class="ve-home">
+
+{% include 'front/share/navbar.html' %}
+{% include 'front/share/flash.html' %}
+
+<section class="ve-page-hero">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <p class="ve-eyebrow-sm">User account</p>
+        <h1>My Account</h1>
+        <p class="lead">Welcome back, {{ user.first_name }}! Manage your profile and orders.</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="ve-account-card">
+          <div class="ve-avatar">{{ user.first_name[0] }}{{ user.last_name[0] }}</div>
+          <div>
+            <h2 class="h6 text-white mb-1">{{ user.first_name }} {{ user.last_name }}</h2>
+            <p class="text-white-50 mb-0 small">{{ user.status|capitalize }} customer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ve-section pt-4">
+  <div class="container">
+    <div class="row g-4">
+
+      <aside class="col-lg-4">
+        <div class="ve-card ve-card-padded">
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <div class="ve-avatar">{{ user.first_name[0] }}{{ user.last_name[0] }}</div>
+            <div>
+              <h2 class="h5 fw-bold mb-1">{{ user.first_name }} {{ user.last_name }}</h2>
+              <p class="text-muted mb-0 small">{{ user.email }}</p>
+            </div>
+          </div>
+
+          <nav class="ve-account-menu">
+            <a class="active" href="{{ url_for('account') }}">Dashboard</a>
+            <a href="{{ url_for('cart') }}">Cart</a>
+            <a href="{{ url_for('checkout') }}">Checkout</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+          </nav>
+
+          <div class="ve-secure-note">
+            <strong>Account status</strong>
+            <span>Your account is {{ user.status }}.</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="col-lg-8">
+        <div class="row g-4 mb-4">
+          <div class="col-md-4">
+            <div class="ve-card ve-stat-card">
+              <span>Role</span>
+              <strong style="font-size:1.25rem">{{ user.role|capitalize }}</strong>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="ve-card ve-stat-card">
+              <span>Status</span>
+              <strong style="font-size:1.25rem">{{ user.status|capitalize }}</strong>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="ve-card ve-stat-card">
+              <span>Member since</span>
+              <strong style="font-size:1rem">{{ user.created_at[:10] if user.created_at else '—' }}</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="ve-card ve-card-padded">
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <span class="ve-step-num">1</span>
+            <div>
+              <p class="ve-eyebrow-sm mb-1">Profile</p>
+              <h2 class="h5 fw-bold mb-0">Account details</h2>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="ve-form-label">First name</label>
+              <input class="form-control ve-form-control" type="text" value="{{ user.first_name }}" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="ve-form-label">Last name</label>
+              <input class="form-control ve-form-control" type="text" value="{{ user.last_name }}" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="ve-form-label">Email</label>
+              <input class="form-control ve-form-control" type="email" value="{{ user.email }}" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="ve-form-label">Status</label>
+              <input class="form-control ve-form-control" type="text" value="{{ user.status|capitalize }}" readonly>
+            </div>
+          </div>
+
+          <a href="{{ url_for('products') }}" class="ve-btn-primary text-decoration-none d-inline-block mt-4">Continue shopping</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% include 'front/share/footer.html' %}
+
+</body>
+</html>

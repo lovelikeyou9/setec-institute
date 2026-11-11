@@ -1,0 +1,82 @@
+{% extends 'layouts/account.html' %}
+{% block title %}Checkout — MMT{% endblock %}
+{% block content %}
+<nav class="breadcrumb">
+  <a href="{{ url('/') }}">Home</a>
+  <span class="sep">/</span>
+  <a href="{{ url('/account/orders') }}">Orders</a>
+  <span class="sep">/</span>
+  <span>Checkout</span>
+</nav>
+
+<div class="section-head" style="margin-bottom:1rem">
+  <div>
+    <h1 class="section-title" style="margin-bottom:.35rem">
+      Checkout · {{ checkout['seller_count'] }} seller{{ '' if checkout['seller_count'] == 1 else 's' }}
+    </h1>
+    <p class="section-sub" style="margin:0">
+      Placed {{ date_fmt(checkout['placed_at'], 'd M Y H:i') or '—' }}
+      {% if checkout['payment'] %} · {{ str_replace('_', ' ', checkout['payment']) }}{% endif %}
+      {% if checkout['delivery'] %} · {{ str_replace('_', ' ', checkout['delivery']) }}{% endif %}
+    </p>
+  </div>
+  <div style="text-align:right">
+    <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">Checkout total</div>
+    <strong style="font-size:1.35rem;color:var(--brand)">${{ number_format(checkout['total'], 2) }}</strong>
+  </div>
+</div>
+
+{% if justPlaced %}
+  <div class="alert alert-success" data-keep-alert style="margin-bottom:1.25rem">
+    <strong>Payment received.</strong>
+    MMT created one escrow package per seller so each store can be paid separately.
+  </div>
+{% endif %}
+
+<div class="alert alert-info" data-keep-alert style="margin-bottom:1.25rem">
+  This was <strong>one checkout</strong>. Open a seller row below to track that package’s escrow, shipping, and delivery.
+</div>
+
+<div class="data-table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Order #</th>
+        <th>Seller</th>
+        <th>Items</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in (orders) %}
+        <tr>
+          <td>{{ o.order_number }}</td>
+          <td>
+            {% if o.seller %}
+              <a href="{{ url(('/sellers/' ~ o.seller_id)) }}">{{ o.seller.store_name }}</a>
+            {% else %}
+              —
+            {% endif %}
+          </td>
+          <td>
+            {% for item in (o.items) %}
+              <div style="font-size:.85rem">{{ item.quantity }}× {{ item.product_name }}</div>
+            {% else %}
+              —
+            {% endfor %}
+          </td>
+          <td>{% with status=(o.status) %}{% include 'components/status_pill.html' %}{% endwith %}</td>
+          <td>${{ number_format(o.total, 2) }}</td>
+          <td>
+            <a href="{{ url(('/orders/' ~ o.order_number)) }}" class="btn btn-outline btn-sm">View package</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<a href="{{ url('/account/orders') }}" class="btn btn-outline" style="margin-top:1.25rem">&larr; Back to Orders</a>
+{% endblock %}

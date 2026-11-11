@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+<body class="bg-soft">
+  {% include 'front/share/navbar.html' %}
+
+  <main class="container py-5">
+    <div class="bg-white border rounded-3 p-4 p-md-5 text-center">
+      <p class="eyebrow text-success">Order placed</p>
+      <h1 class="display-5 fw-bold mb-3">Thank you{% if customer_name %}, {{ customer_name }}{% endif %}!</h1>
+      <p class="lead text-muted">Payment method: <strong>{{ payment_method }}</strong></p>
+      <p class="fs-4 fw-bold mb-4">Total paid: ${{ "%.2f"|format(total) }}</p>
+      <p class="text-muted">A Telegram notification was sent to the store admin.</p>
+      <a class="btn btn-teal btn-lg mt-3" href="{{ url_for('front_bp.products') }}">Continue shopping</a>
+    </div>
+  </main>
+
+  {% include 'front/share/footer.html' %}
+</body>
+</html>

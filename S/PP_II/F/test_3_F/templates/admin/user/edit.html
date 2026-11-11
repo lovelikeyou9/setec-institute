@@ -1,0 +1,92 @@
+
+{% extends "admin/master.html" %}
+
+{% block contect %}
+
+  <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="mb-0">User</h3>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-end">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User</li>
+              </ol>
+            </div>
+          </div>
+          <!--end::Row-->
+        </div>
+        <!--end::Container-->
+      </div>
+
+      <div class="app-content">
+        <div class="container-fluid">
+
+          <div class="row">
+
+            <div class="col-md-12">
+              <h3 class="card-title">
+                <a href="{{ url_for('admin_bp.user') }}" class="btn btn-outline-secondary float-right"><i class="bi bi-arrow-left-circle"></i>Back</a>
+              </h3>
+            </div>
+
+            <div class="card-body">
+              <form action="{{ url_for('admin_bp.do_edit_user') }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+{#                {{ user }}#}
+                <div class="form-group mb-3">
+                  <center>
+                    {% if user.profile %}
+                    <img id="image_preview" src="{{ url_for('static', filename='images/user/' ~ user.id ~ '_org_' ~ user.profile) }}" alt="Profile" width="100px" height="100px" style="padding: 10px; border-radius: 50%; object-fit: cover;" onerror="this.src='{{ url_for('static', filename='admin/No_Image_Available.jpg') }}'" >
+                    {% else %}
+                    <img id="image_preview" src="{{ url_for('static', filename='admin/No_Image_Available.jpg') }}" alt="Profile" width="100px" height="100px" style="padding: 10px; border-radius: 50%; object-fit: cover;">
+                    {% endif %}
+                    <input type="file" class="form-control" id="profile" name="image" accept="image/*" onchange="loadFile(event)">
+                  </center>
+                </div>
+
+                <div class="form-group">
+                  <label for="name">Username</label>
+                  <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Leave blank if you don't want to change it" >
+                </div>
+                <label for="role">Role</label>
+                <select
+                  class="form-control" id="role" name="role" required
+                >
+                  <option value="user" {{ 'selected' if user.role == 'user' }}>User</option>
+                  <option value="admin" {{ 'selected' if user.role == 'admin' }}>Admin</option>
+                </select>
+                <div class="separator mb-4"></div>
+                <button type="submit" class="btn btn-primary float-end"><i class="bi bi-cloud-download"></i>Save Change</button>
+                <button type="reset" class="btn btn-danger"><i class="bi bi-x-circle"></i>Reset</button>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+  </main>
+
+  <script>
+    function loadFile(event) {
+      var image = document.getElementById('image_preview');
+      if (event.target.files && event.target.files[0]) {
+        image.src = URL.createObjectURL(event.target.files[0]);
+      }
+    }
+  </script>
+
+{% endblock %}

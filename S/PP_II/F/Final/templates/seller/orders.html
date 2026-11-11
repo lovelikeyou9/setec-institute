@@ -1,0 +1,145 @@
+{% extends 'layouts/seller.html' %}
+{% block title %}Seller Orders — MMT{% endblock %}
+{% block content %}
+<div class="exec-head" style="margin-bottom:1rem">
+  <div>
+    <h1 style="font-size:1.4rem;margin:0">Orders</h1>
+    <p style="margin:.35rem 0 0;color:var(--text-muted);font-size:.9rem">
+      When payment is held, choose which product to refuse (or refuse all), then confirm stock for the rest.
+      After that: <strong>Shipped</strong> → <strong>Out for delivery</strong>. Admin pays you (minus 3%).
+    </p>
+  </div>
+  <div class="exec-head-actions">
+    <a href="{{ url('/seller-dashboard/earnings') }}" class="btn btn-outline btn-sm">Earnings</a>
+  </div>
+</div>
+
+<form class="dash-search" action="{{ url('/seller-dashboard/orders') }}" method="get">
+  <label class="dash-sort">
+    <span>Sort</span>
+    <select name="sort" onchange="this.form.submit()">
+      <option value="newest" {{ 'selected' if req_input('sort', 'newest') == 'newest' }}>Newest first</option>
+      <option value="oldest" {{ 'selected' if req_input('sort') == 'oldest' }}>Oldest first</option>
+      <option value="total_desc" {{ 'selected' if req_input('sort') == 'total_desc' }}>Total: High to Low</option>
+      <option value="total_asc" {{ 'selected' if req_input('sort') == 'total_asc' }}>Total: Low to High</option>
+    </select>
+  </label>
+</form>
+
+{% if orders|length == 0 %}
+  <div class="empty-state">
+    <div class="icon">📦</div>
+    <h3>No orders yet</h3>
+    <p>When customers buy your products, orders show up here.</p>
+  </div>
+{% else %}
+  <div style="display:flex;flex-direction:column;gap:1rem">
+    {% for o in (orders) %}
+      {% set s = o.status %}
+      <div class="form-card" style="margin:0;padding:1rem 1.15rem">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;align-items:flex-start;margin-bottom:.85rem">
+          <div>
+            <div style="font-weight:700;font-size:1.05rem">{{ o.order_number }}</div>
+            <div style="font-size:.88rem;color:var(--text-muted);margin-top:.2rem">
+              {{ o.recipient_name or ((o.user.full_name if (o.user.full_name is defined and o.user.full_name is not none) else 'Buyer')) }}
+              · {{ o.recipient_phone or '—' }}
+              · {{ date_fmt(o.placed_at, 'd M Y') or '—' }}
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:center">
+            {% with status=(o.status) %}{% include 'components/status_pill.html' %}{% endwith %}
+            <strong>${{ number_format(o.total, 2) }}</strong>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--border, #e5e7eb);padding-top:.75rem;margin-bottom:.75rem">
+          <div style="font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.55rem">
+            Products in this order
+            {% if s == 'FUNDS_HELD' %}
+              — refuse the one you cannot ship
+            {% endif %}
+          </div>
+          {% for it in o.items %}
+            {% set refused = (it.line_status or 'ACTIVE') == 'REFUSED' %}
+            <div style="display:grid;grid-template-columns:56px 1fr auto;gap:.75rem;align-items:center;padding:.55rem 0;{% if not loop.last %}border-bottom:1px dashed var(--border, #e5e7eb);{% endif %}{% if refused %}opacity:.65{% endif %}">
+              <img src="{{ it.product_image or asset('images/mme-icon.png') }}" alt=""
+                   style="width:56px;height:56px;object-fit:cover;border-radius:8px;background:#f3f4f6"/>
+              <div>
+                <div style="font-weight:600{% if refused %};text-decoration:line-through{% endif %}">{{ it.product_name }}</div>
+                <div style="font-size:.85rem;color:var(--text-muted);margin-top:.15rem">
+                  Qty {{ it.quantity }} × ${{ number_format(it.unit_price, 2) }}
+                  = <strong>${{ number_format(it.line_total, 2) }}</strong>
+                </div>
+                {% if refused %}
+                  <div style="font-size:.82rem;color:#b45309;margin-top:.3rem">Refused — out of stock (refunded for this product)</div>
+                {% endif %}
+              </div>
+              <div>
+                {% if s == 'FUNDS_HELD' and not refused %}
+                  <form method="post" action="{{ url(('/seller-dashboard/orders/' ~ o.id ~ '/items/' ~ it.id ~ '/decline')) }}"
+                        onsubmit="return confirm('Refuse ONLY this product?\n\n{{ it.product_name }}\n\nCustomer is refunded for this item. Other products stay on the order.');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-outline btn-sm" style="color:#b91c1c;border-color:#fca5a5;white-space:nowrap">
+                      Refuse this product
+                    </button>
+                  </form>
+                {% elif refused %}
+                  <span class="hint-muted" style="font-size:.8rem">Refused</span>
+                {% endif %}
+              </div>
+            </div>
+          {% else %}
+            <p class="hint-muted">No items</p>
+          {% endfor %}
+        </div>
+
+        <div class="table-actions" style="display:flex;flex-wrap:wrap;gap:.45rem;align-items:center">
+          {% if s in ['PAYMENT_CONFIRMED', 'PENDING_PAYMENT'] %}
+            <span class="hint-muted">Waiting for admin hold</span>
+          {% endif %}
+
+          {% if s == 'FUNDS_HELD' %}
+            <form method="post" action="{{ url(('/seller-dashboard/orders/' ~ o.id ~ '/accept')) }}" style="display:inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="btn btn-primary btn-sm">Confirm stock (keep remaining)</button>
+            </form>
+            <form method="post" action="{{ url(('/seller-dashboard/orders/' ~ o.id ~ '/decline-stock')) }}" style="display:inline"
+                  onsubmit="return confirm('Refuse ALL products on this order? Customer will be fully refunded.');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="btn btn-danger btn-sm">Refuse all products</button>
+            </form>
+          {% endif %}
+
+          {% if s == 'SELLER_PROCESSING' %}
+            <form method="post" action="{{ url(('/seller-dashboard/orders/' ~ o.id ~ '/status')) }}" style="display:inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="status" value="SHIPPED"/>
+              <button type="submit" class="btn btn-primary btn-sm">Mark shipped</button>
+            </form>
+          {% endif %}
+
+          {% if s == 'SHIPPED' %}
+            <form method="post" action="{{ url(('/seller-dashboard/orders/' ~ o.id ~ '/status')) }}" style="display:inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="status" value="OUT_FOR_DELIVERY"/>
+              <button type="submit" class="btn btn-primary btn-sm">Out for delivery</button>
+            </form>
+          {% endif %}
+
+          {% if s == 'OUT_FOR_DELIVERY' %}
+            <span class="hint-muted">Waiting for admin: delivered → pay</span>
+          {% endif %}
+          {% if s == 'DELIVERED' %}
+            <span class="hint-muted">Buyer protection — await payout</span>
+          {% endif %}
+          {% if s == 'COMPLETED' %}
+            <span class="hint-ok">Paid (minus 3%)</span>
+          {% endif %}
+
+          <a href="{{ url(('/orders/' ~ o.order_number)) }}" class="btn btn-outline btn-sm">Full details</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

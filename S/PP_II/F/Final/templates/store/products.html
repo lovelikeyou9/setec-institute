@@ -1,0 +1,176 @@
+{% extends 'layouts/store.html' %}
+{% block title %}Products — MMT{% endblock %}
+{% block mainClass %}products-page{% endblock %}
+{% block content %}
+{% set selectedBrandId = selectedBrandId if selectedBrandId is defined else req_int('brand') %}{% set q = req_input('q') %}
+<div class="container">
+  <nav class="breadcrumb">
+    <a href="{{ url('/') }}">Home</a>
+    <span class="sep">/</span>
+    {% if selectedCategory %}
+      <a href="{{ url('/products') }}">Products</a>
+      <span class="sep">/</span>
+      <span>{{ selectedCategory.name }}</span>
+    {% else %}
+      <span>Products</span>
+    {% endif %}
+  </nav>
+
+  <div class="products-hero">
+    <div>
+      <h1 class="products-title">{{ selectedCategory.name if (selectedCategory.name is defined and selectedCategory.name is not none) else 'All Technology' }}</h1>
+      <p class="products-sub">Computers, networking, gaming, cameras, power, DIY &amp; pro IT from verified sellers</p>
+    </div>
+    <button type="button" class="btn btn-outline btn-sm products-filter-toggle" id="productsFilterToggle" aria-expanded="false">Filters</button>
+  </div>
+
+  {% if (not empty(navMenuGroups)) and (navMenuGroups|length) %}
+    <div class="products-chips">
+      <a href="{{ url('/products') }}{% if selectedBrandId %}?brand={{ selectedBrandId }}{% endif %}" class="products-chip {{ 'active' if (not selectedCategory) else '' }}">All</a>
+      {% for g in (navMenuGroups) %}
+        {% set firstId = g['items'][0]['id'] if (g['items'][0]['id'] is defined and g['items'][0]['id'] is not none) else none %}{% set groupIds = (g['items']|map(attribute='id')|list) %}{% set activeGroup = selectedCategory and (selectedCategory.id in groupIds) %}
+        <a href="{{ url('/products') }}?category={{ firstId }}{% if selectedBrandId %}&brand={{ selectedBrandId }}{% endif %}{% if q %}&q={{ q|urlencode }}{% endif %}" class="products-chip {{ 'active' if activeGroup else '' }}">
+          <span>{{ g['icon'] }}</span>
+          <span>{{ g['title'] }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="list-layout">
+    <aside class="filter-panel" id="productsFilterPanel">
+      <div class="filter-panel-head">
+        <h3>Filters</h3>
+        <button type="button" class="filter-panel-close" id="productsFilterClose" aria-label="Close filters">×</button>
+      </div>
+      <form action="{{ url('/products') }}" method="get" id="filterForm">
+        <input type="hidden" name="q" value="{{ q }}"/>
+
+        <div class="filter-group">
+          <h4>Category</h4>
+          <div class="filter-group-scroll">
+            <label>
+              <input type="radio" name="category" value="" {{ 'checked' if not selectedCategory }}/>
+              <span>All categories</span>
+            </label>
+            {% if (not empty(navMenuGroups)) and (navMenuGroups|length) %}
+              {% for gi, g in (navMenuGroups)|kv %}
+                {% set groupIds = (g['items']|map(attribute='id')|list) %}{% set isActive = ((selectedCategory and (selectedCategory.id in groupIds))) or (((not selectedCategory) and (gi == 0))) %}
+                <details class="filter-cat-group" {% if isActive %} open {% endif %}>
+                  <summary class="filter-cat-title">
+                    <span>{{ g['icon'] }}</span>
+                    <span>{{ g['title'] }}</span>
+                  </summary>
+                  {% for item in (g['items']) %}
+                    {% set c = (categories|selectattr('id', 'equalto', item['id'])|first) %}
+                    {% if c %}
+                      <label>
+                        <input type="radio" name="category" value="{{ c.id }}" {{ 'checked' if selectedCategory and (selectedCategory.id == c.id) }}/>
+                        <span>{{ c.name }}</span>
+                      </label>
+                    {% endif %}
+                  {% endfor %}
+                </details>
+              {% endfor %}
+            {% else %}
+              {% for c in (categories) %}
+                <label>
+                  <input type="radio" name="category" value="{{ c.id }}" {{ 'checked' if selectedCategory and (selectedCategory.id == c.id) }}/>
+                  <span>{{ c.name }}</span>
+                </label>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Brand</h4>
+          <div class="filter-group-scroll filter-group-scroll-sm">
+            <label>
+              <input type="radio" name="brand" value="" {{ 'checked' if not selectedBrandId }}/>
+              <span>All brands</span>
+            </label>
+            {% for b in (brands) %}
+              <label>
+                <input type="radio" name="brand" value="{{ b.id }}" {{ 'checked' if selectedBrandId == b.id }}/>
+                <span>{{ b.name }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Price Range</h4>
+          <div class="price-inputs">
+            <input type="number" name="minPrice" placeholder="Min" min="0" step="1" value="{{ req_input('minPrice') }}"/>
+            <span>–</span>
+            <input type="number" name="maxPrice" placeholder="Max" min="0" step="1" value="{{ req_input('maxPrice') }}"/>
+          </div>
+          <label style="margin-top:.5rem"><input type="radio" onclick="document.querySelector('[name=minPrice]').value=0;document.querySelector('[name=maxPrice]').value=100"/> Under $100</label>
+          <label><input type="radio" onclick="document.querySelector('[name=minPrice]').value=100;document.querySelector('[name=maxPrice]').value=500"/> $100 – $500</label>
+          <label><input type="radio" onclick="document.querySelector('[name=minPrice]').value=500;document.querySelector('[name=maxPrice]').value=1000"/> $500 – $1,000</label>
+          <label><input type="radio" onclick="document.querySelector('[name=minPrice]').value=1000;document.querySelector('[name=maxPrice]').value=''"/> $1,000+</label>
+        </div>
+
+        <div class="filter-group">
+          <h4>Seller &amp; Stock</h4>
+          <label>
+            <input type="checkbox" name="inStock" value="1" {{ 'checked' if (req_input('inStock') in ['1', 'true', 'on']) }}/>
+            In Stock
+          </label>
+        </div>
+
+        <input type="hidden" name="sort" value="{{ sort if (sort is defined and sort is not none) else 'recommended' }}"/>
+        <div class="filter-actions">
+          <button type="submit" class="btn btn-primary btn-block">Apply Filters</button>
+          <a href="{{ url('/products') }}" class="btn btn-outline btn-block">Clear All</a>
+        </div>
+      </form>
+    </aside>
+
+    <div class="products-main">
+      <div class="list-toolbar">
+        <div class="list-toolbar-count">
+          <strong>{{ products.total() }}</strong>
+          <span>{{ ' result' if (products.total() == 1) else ' results' }}</span>
+          {% if q %}<span> for "{{ q }}"</span>{% endif %}
+        </div>
+        <form action="{{ url('/products') }}" method="get" class="list-sort-form">
+          {% if q %}<input type="hidden" name="q" value="{{ q }}"/>{% endif %}
+          {% if selectedCategory %}<input type="hidden" name="category" value="{{ selectedCategory.id }}"/>{% endif %}
+          {% if selectedBrandId %}<input type="hidden" name="brand" value="{{ selectedBrandId }}"/>{% endif %}
+          {% if (req_input('minPrice') != none) and (req_input('minPrice') != '') %}<input type="hidden" name="minPrice" value="{{ req_input('minPrice') }}"/>{% endif %}
+          {% if (req_input('maxPrice') != none) and (req_input('maxPrice') != '') %}<input type="hidden" name="maxPrice" value="{{ req_input('maxPrice') }}"/>{% endif %}
+          {% if (req_input('inStock') in ['1', 'true', 'on']) %}<input type="hidden" name="inStock" value="1"/>{% endif %}
+          <label for="sortSelect">Sort by</label>
+          <select name="sort" id="sortSelect" onchange="this.form.submit()">
+            <option value="recommended" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'recommended' }}>Recommended</option>
+            <option value="sold" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'sold' }}>Most Popular</option>
+            <option value="newest" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'newest' }}>Newest</option>
+            <option value="price_asc" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'price_asc' }}>Price: Low to High</option>
+            <option value="price_desc" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'price_desc' }}>Price: High to Low</option>
+            <option value="rating" {{ 'selected' if ((sort if (sort is defined and sort is not none) else '')) == 'rating' }}>Top Rated</option>
+          </select>
+        </form>
+      </div>
+
+      {% if products.total() == 0 %}
+        <div class="empty-state">
+          <div class="icon">🖥️</div>
+          <h3>No products found</h3>
+          <p>Try adjusting your filters or search another technology category.</p>
+          <a href="{{ url('/products') }}" class="btn btn-primary" style="margin-top:1rem">Browse All Products</a>
+        </div>
+      {% else %}
+        <div class="product-grid">
+          {% for product in (products) %}
+            {% with product=(product) %}{% include 'components/product_card.html' %}{% endwith %}
+          {% endfor %}
+        </div>
+        <div class="pagination" style="margin-top:1.5rem">{{ products.links()|safe }}</div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="filter-backdrop" id="productsFilterBackdrop" hidden></div>
+</div>
+{% endblock %}

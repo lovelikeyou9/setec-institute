@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Support | Help Center</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Dynamic Navigation Header -->
+    <header id="main-nav"></header>
+    <main class="container" style="padding-top: 130px; margin-bottom: 80px;">
+        <div class="section-header" style="margin-bottom: 40px;">
+            <div class="section-title">
+                <h2>Customer <span class="gradient-text">Support</span></h2>
+                <p>Log technical inquiries or chat directly with our expert showroom agents.</p>
+            </div>
+            <button onclick="openNewTicketModal()" class="btn btn-primary"><i class="ti ti-plus"></i> Open Support
+                Ticket</button>
+        </div>
+        <!-- Multi-Column Layout -->
+        <div style="display:grid; grid-template-columns: 400px 1fr; gap:32px; align-items: start;">
+
+            <!-- Left Column: Active Tickets List -->
+            <section>
+                <h3
+                    style="font-size:18px; font-weight:700; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--glass-border);">
+                    <i class="ti ti-history"></i> My Tickets</h3>
+                <div id="support-tickets-list" class="tickets-list"></div>
+            </section>
+            <!-- Right Column: Chronological Message Room -->
+            <section id="chat-room-pane" style="display:none;" class="glass-card">
+                <div
+                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--glass-border);">
+                    <h3 id="chat-ticket-subject" style="font-size:18px; font-weight:700;">Select Ticket</h3>
+                    <span id="chat-ticket-status" class="badge badge-reserved">Open</span>
+                </div>
+
+                <!-- Messages Log Container -->
+                <div id="chat-messages-container" class="chat-box"></div>
+
+                <!-- Message Send Form -->
+                <form id="chat-send-form" class="chat-input-row">
+                    <textarea id="chat-message-input" placeholder="Type your support reply here..." required></textarea>
+                    <button type="submit" class="btn btn-primary" style="height:48px; border-radius:8px;"><i
+                            class="ti ti-send"></i> Send</button>
+                </form>
+            </section>
+        </div>
+    </main>
+    <!-- New Ticket Modal overlay -->
+    <div id="ticket-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div onclick="closeNewTicketModal()" class="modal-close"><i class="ti ti-x"></i></div>
+            <h3 style="font-size:22px; font-weight:800; margin-bottom:20px;">Open Support Ticket</h3>
+
+            <form id="new-ticket-form">
+                <div class="form-group">
+                    <label for="ticket-subject">Inquiry Subject</label>
+                    <input type="text" id="ticket-subject" placeholder="Registration, pricing details, custom quote..."
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="ticket-description">Describe Your Problem</label>
+                    <textarea id="ticket-description"
+                        placeholder="Provide complete specifications or context for our showroom agents..."
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;"><i class="ti ti-circle-plus"></i>
+                    Submit Ticket</button>
+            </form>
+        </div>
+    </div>
+    <!-- Client Footer -->
+    <footer class="client-footer">
+        <div class="container">
+            <h3 style="font-size:22px; font-weight:800; margin-bottom:16px;"><i class="ti ti-car"></i> APEX MOTORS</h3>
+            <p
+                style="border-top: 1px solid var(--glass-border); padding-top:24px; font-size:12px; color:hsl(var(--text-muted));">
+                Copyright &copy; 2026 Apex Motors Showroom. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>

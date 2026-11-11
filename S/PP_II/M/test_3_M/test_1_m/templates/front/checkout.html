@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'front/share/header.html' %}
+</head>
+
+<body class="ve-home">
+
+{% include 'front/share/navbar.html' %}
+
+<section class="ve-page-hero">
+  <div class="container">
+    <div class="row align-items-end g-4">
+      <div class="col-lg-8">
+        <p class="ve-eyebrow-sm">Secure checkout</p>
+        <h1>Complete your order</h1>
+        <p class="lead">Add delivery details and pay via QR code.</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="ve-progress">
+          <div>Cart</div>
+          <div class="active">Checkout</div>
+          <div>Payment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ve-section pt-4">
+  <div class="container">
+
+    {% if ordered %}
+    <div class="ve-success-banner">
+      ✓ Your order has been placed successfully! Thank you for shopping with VoltEdge.
+    </div>
+    {% endif %}
+
+    {% if cart_list and not ordered %}
+    <form method="post" action="{{ url_for('do_checkout') }}">
+      <div class="row g-4">
+
+        <div class="col-lg-7">
+          <div class="ve-card ve-card-padded mb-4">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <span class="ve-step-num">1</span>
+              <div>
+                <p class="ve-eyebrow-sm mb-1">Delivery</p>
+                <h2 class="h5 fw-bold mb-0">Shipping information</h2>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="ve-form-label" for="firstName">First name</label>
+                <input name="firstName" class="form-control ve-form-control" id="firstName" type="text" placeholder="Alex" required>
+              </div>
+              <div class="col-md-6">
+                <label class="ve-form-label" for="lastName">Last name</label>
+                <input name="lastName" class="form-control ve-form-control" id="lastName" type="text" placeholder="Morgan" required>
+              </div>
+              <div class="col-md-6">
+                <label class="ve-form-label" for="email">Email</label>
+                <input name="email" class="form-control ve-form-control" id="email" type="email" placeholder="alex@example.com" required>
+              </div>
+              <div class="col-md-6">
+                <label class="ve-form-label" for="phone">Phone</label>
+                <input name="phone" class="form-control ve-form-control" id="phone" type="tel" placeholder="+855 12 345 678" required>
+              </div>
+              <div class="col-12">
+                <label class="ve-form-label" for="address">Address</label>
+                <textarea class="form-control ve-form-control" id="address" name="address" rows="3" placeholder="Street, city, postal code" required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="ve-card ve-card-padded">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <span class="ve-step-num">2</span>
+              <div>
+                <p class="ve-eyebrow-sm mb-1">Payment</p>
+                <h2 class="h5 fw-bold mb-0">QR code payment</h2>
+              </div>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-5">
+                <div class="ve-qr-box">
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=VoltEdge%20payment%20{{ '%.2f'|format(total) }}" alt="QR code payment">
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="ve-payment-row">
+                  <span>Payment amount</span>
+                  <strong>${{ "%.2f"|format(total) }}</strong>
+                </div>
+                <div class="ve-payment-row">
+                  <span>Payment method</span>
+                  <strong>QR bank transfer</strong>
+                </div>
+                <div class="ve-payment-row" style="border-bottom:none">
+                  <span>Reference</span>
+                  <strong>VE-2026-{{ "%.0f"|format(total) }}</strong>
+                </div>
+                <p class="text-muted mt-3 mb-0 small">Scan the QR code with your banking app, then confirm your order below.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="col-lg-5">
+          <div class="ve-card ve-card-padded ve-summary">
+            <p class="ve-eyebrow-sm">Review</p>
+            <h2 class="h5 fw-bold mb-3">Order summary</h2>
+
+            {% for item in cart_list %}
+            <div class="ve-checkout-item">
+              <img src="{{ item.image }}" alt="{{ item.title }}">
+              <div>
+                <h3 class="h6 fw-bold mb-1">{{ item.title[:30] }}{% if item.title|length > 30 %}...{% endif %}</h3>
+                <p class="text-muted mb-0 small">{{ item.category }} &times; {{ item.qty }}</p>
+              </div>
+              <strong>${{ "%.2f"|format(item.price * item.qty) }}</strong>
+            </div>
+            {% endfor %}
+
+            <div class="mt-3">
+              <div class="ve-summary-line"><span>Subtotal</span><strong>${{ "%.2f"|format(total) }}</strong></div>
+              <div class="ve-summary-line"><span>Shipping</span><strong>Free</strong></div>
+              <div class="ve-summary-line total"><span>Total</span><strong>${{ "%.2f"|format(total) }}</strong></div>
+            </div>
+
+            <button type="submit" class="ve-btn-primary w-100 mt-4">Confirm order</button>
+            <a class="ve-btn-outline w-100 text-center d-block mt-2" href="{{ url_for('cart') }}">Back to cart</a>
+
+            <div class="ve-secure-note">
+              <strong>Protected checkout</strong>
+              <span>Your information is encrypted and secure.</span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </form>
+
+    {% elif not ordered %}
+    <div class="ve-card ve-card-padded">
+      <div class="ve-empty">
+        <div class="ve-empty-icon">📦</div>
+        <h3>No items to checkout</h3>
+        <p>Your cart is empty. Add products before checking out.</p>
+        <a href="{{ url_for('products') }}" class="ve-btn-primary text-decoration-none d-inline-block">Browse Products</a>
+      </div>
+    </div>
+    {% else %}
+    <div class="text-center py-4">
+      <a href="{{ url_for('products') }}" class="ve-btn-primary text-decoration-none d-inline-block">Continue Shopping</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% include 'front/share/footer.html' %}
+
+</body>
+</html>

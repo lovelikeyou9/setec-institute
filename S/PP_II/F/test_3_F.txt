@@ -1,0 +1,10 @@
+https://t.me/sv2_6_pp_ii_test_3_f
+
+name: sv2_6_pp_ii_test_3_f_notify
+
+username: sv2_6_pp_ii_test_3_f_notify_bot
+
+Token: 8534615271:AAF5OUxrVNusHF8x166X41uP0ZoNJZzsibg
+
+group_username: @sv2_6_pp_ii_test_3_f
+

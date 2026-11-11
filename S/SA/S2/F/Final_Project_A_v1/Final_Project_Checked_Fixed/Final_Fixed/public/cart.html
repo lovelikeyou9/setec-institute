@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Cart | Luxury Reservation Board</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Dynamic Navigation Bar -->
+    <header id="main-nav"></header>
+    <main class="container" style="padding-top: 130px; margin-bottom: 80px;">
+        <div class="section-header" style="margin-bottom: 32px;">
+            <div class="section-title">
+                <h2 id="cart-count-header">Shopping <span class="gradient-text">Cart</span></h2>
+                <p>Review items before proceeding to mock secure transaction layers.</p>
+            </div>
+        </div>
+        <!-- Cart Layout Grid -->
+        <div class="cart-layout">
+            <!-- Items Container -->
+            <section id="cart-items-wrapper" class="cart-items-list"></section>
+            <!-- Cart Tally Card -->
+            <aside class="checkout-summary">
+                <div class="glass-card">
+                    <h3
+                        style="font-size:18px; font-weight:700; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--glass-border);">
+                        <i class="ti ti-receipt-2"></i> Order Tally</h3>
+
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Estimated Showroom Tax (8%):</span>
+                        <span id="cart-tax">$0.00</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total Due:</span>
+                        <span id="cart-total" style="color:hsl(var(--color-primary));">$0.00</span>
+                    </div>
+
+                    <button id="cart-checkout-btn" class="btn btn-primary" style="width:100%; margin-top:24px;"
+                        disabled><i class="ti ti-credit-card"></i> Proceed to Checkout</button>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- Client Footer -->
+    <footer class="client-footer">
+        <div class="container">
+            <h3 style="font-size:22px; font-weight:800; margin-bottom:16px;"><i class="ti ti-car"></i> APEX MOTORS</h3>
+            <p
+                style="border-top: 1px solid var(--glass-border); padding-top:24px; font-size:12px; color:hsl(var(--text-muted));">
+                Copyright &copy; 2026 Apex Motors Showroom. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>

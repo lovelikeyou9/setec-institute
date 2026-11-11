@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results - Computer Store</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-desktop"></i>
+                <span>ComputerStore</span>
+            </a>
+            
+            <div class="search-container">
+                <form id="searchFormPage">
+                    <input type="text" class="search-input" id="pageSearchInput" placeholder="Search again...">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            
+            <div class="nav-right">
+                <a href="/cart" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding: 40px 0; min-height: 60vh;">
+        <h1 id="searchTitle">Search Results</h1>
+        <p id="searchCount" style="color: #64748b; margin-bottom: 30px;">Searching...</p>
+        
+        <!-- Results Grid -->
+        <div class="products-grid" id="searchResults">
+            <!-- Products will appear here -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Computer Store</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script>
+        // Inline script to handle search logic
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Get the "?q=keyword" from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            
+            if (!query) {
+                document.getElementById('searchTitle').innerText = 'Please enter a search term';
+                document.getElementById('searchCount').innerText = '';
+                return;
+            }
+
+            // Update UI
+            document.getElementById('searchTitle').innerText = `Results for "${query}"`;
+            document.getElementById('pageSearchInput').value = query;
+
+            // 2. Fetch all products
+            const res = await fetch('/api/products');
+            const products = await res.json();
+
+            // 3. Filter products (Client-side search)
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(query.toLowerCase()) || 
+                p.description.toLowerCase().includes(query.toLowerCase())
+            );
+
+            // 4. Display Results
+            const container = document.getElementById('searchResults');
+            document.getElementById('searchCount').innerText = `${filtered.length} products found`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p>No products found matching your search.</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(product => `
+                <div class="card">
+                    <img src="${product.image}" class="card-image" style="height:200px; object-fit:cover; width:100%">
+                    <div class="card-content">
+                        <h3>${product.name}</h3>
+                        <p style="color:#666; font-size:0.9rem">${product.category?.name || 'General'}</p>
+                        <div class="price">$${product.price.toFixed(2)}</div>
+                        <button class="btn btn-primary btn-block" onclick="addToCart('${product._id}')">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Handle Search Form on this page
+            document.getElementById('searchFormPage').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newQuery = document.getElementById('pageSearchInput').value;
+                if(newQuery) window.location.href = `/search?q=${newQuery}`;
+            });
+        });
+    </script>
+</body>
+</html>

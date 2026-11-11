@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & LAYOUT */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background: #f1f5f9;
+            overflow: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #38bdf8;
+        }
+
+        .nav-item {
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94a3b8;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-item:hover {
+            background: #1e293b;
+            color: white;
+        }
+
+        .nav-item.active {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+        }
+
+        .btn-store {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: #1e293b;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-store:hover {
+            background: #334155;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* COMPONENTS */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Hidden by default */
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th:hover {
+            background: #e2e8f0;
+        }
+
+        td {
+            color: #334155;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-pending {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        /* BUTTONS */
+        .action-btn {
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-right: 5px;
+        }
+
+        .edit-btn {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .edit-btn:hover {
+            background: #bfdbfe;
+        }
+
+        .delete-btn {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 8px 15px;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header"><i class="fas fa-shield-alt"></i> AdminPanel</div>
+        <div class="nav-item active" onclick="showSection('orders')"><i class="fas fa-shopping-bag"></i> Orders</div>
+        <div class="nav-item" onclick="showSection('inventory')"><i class="fas fa-boxes"></i> Inventory</div>
+        <div class="nav-item" onclick="showSection('add-product')"><i class="fas fa-plus-circle"></i> Add / Edit Product
+        </div>
+        <div class="sidebar-footer"><a href="/" class="btn-store"><i class="fas fa-external-link-alt"></i> View
+                Store</a></div>
+    </aside>
+
+    <main class="main-content">
+        <!-- ORDERS -->
+        <div id="section-orders" class="section active">
+            <div class="header-row">
+                <h1 class="page-title" style="margin:0;">Customer Orders</h1>
+                <div class="search-bar">
+                    <i class="fas fa-search" style="color:#94a3b8;"></i>
+                    <input type="text" id="orderSearchInput" placeholder="Search orders...">
+                </div>
+            </div>
+
+
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- Added onclick for sorting -->
+                            <th onclick="sortOrders('orderNumber')">Order # <i class="fas fa-sort"></i></th>
+                            <th onclick="sortOrders('customer')">Customer <i class="fas fa-sort"></i></th>
+                            <th onclick="sortOrders('total')">Total <i class="fas fa-sort"></i></th>
+                            <th onclick="sortOrders('status')">Status <i class="fas fa-sort"></i></th>
+                            <th onclick="sortOrders('createdAt')">Date <i class="fas fa-sort"></i></th>
+                            <!-- New Action Column -->
+                            <th width="80">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <tr>
+                            <td colspan="6">Loading orders...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+
+        <!-- INVENTORY -->
+        <div id="section-inventory" class="section">
+            <div class="header-row">
+                <h1 class="page-title" style="margin:0;">Product Inventory</h1>
+                <div style="display:flex; gap:15px;">
+                    <div class="search-bar">
+                        <i class="fas fa-search" style="color:#94a3b8;"></i>
+                        <input type="text" id="productSearchInput" placeholder="Search products...">
+                    </div>
+                    <button onclick="loadInventory()"
+                        style="background:white; border:1px solid #ddd; padding:8px 15px; border-radius:6px; cursor:pointer;"><i
+                            class="fas fa-sync"></i></button>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">Img</th>
+                            <!-- Added onclick events for sorting -->
+                            <th onclick="sortInventory('name')">Name <i class="fas fa-sort"></i></th>
+                            <th onclick="sortInventory('price')">Price <i class="fas fa-sort"></i></th>
+                            <th onclick="sortInventory('quantity')">Stock <i class="fas fa-sort"></i></th>
+                            <th width="100">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <tr>
+                            <td colspan="5">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ADD / EDIT PRODUCT -->
+        <div id="section-add-product" class="section">
+            <h1 class="page-title" id="formTitle">Add New Product</h1>
+            <div class="card" style="max-width: 800px;">
+                <form id="addProductForm">
+                    <!-- HIDDEN ID FIELD TO TRACK EDITS -->
+                    <input type="hidden" id="pId">
+
+                    <div class="form-grid">
+                        <div class="form-group"><label>Product Name</label><input type="text" id="pName"
+                                class="form-control" required></div>
+                        <div class="form-group"><label>Category</label><select id="pCategory"
+                                class="form-control"></select></div>
+                    </div>
+                    <div class="form-group"><label>Description</label><textarea id="pDesc" class="form-control" rows="4"
+                            required></textarea></div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Price ($)</label><input type="number" id="pPrice"
+                                class="form-control" step="0.01" required></div>
+                        <div class="form-group"><label>Stock Quantity</label><input type="number" id="pQty"
+                                class="form-control" required></div>
+                    </div>
+                    <div class="form-group"><label>Image URL</label><input type="text" id="pImage" class="form-control"
+                            required></div>
+
+                    <button type="submit" class="btn-primary" id="saveBtn"><i class="fas fa-save"></i> Save
+                        Product</button>
+                    <button type="button" class="btn-secondary" id="cancelBtn" onclick="resetForm()">Cancel
+                        Edit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/admin.js"></script>
+</body>
+
+</html>

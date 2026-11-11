@@ -1,0 +1,51 @@
+{% extends 'layouts/seller.html' %}
+{% block title %}Brands — Seller{% endblock %}
+{% block content %}
+<h1 style="font-size:1.4rem;margin-bottom:1rem">Brands</h1>
+<p class="section-sub" style="margin-top:-.5rem">Browse brands and open your products for each brand</p>
+
+<form class="dash-search" action="{{ url('/seller-dashboard/brands') }}" method="get">
+  <input type="search" name="q" value="{{ req_input('q') }}" placeholder="Search brands..."/>
+  <label class="dash-sort">
+    <span>Sort</span>
+    <select name="sort" onchange="this.form.submit()">
+      <option value="name_asc" {{ 'selected' if req_input('sort', 'name_asc') == 'name_asc' }}>Name A–Z</option>
+      <option value="name_desc" {{ 'selected' if req_input('sort') == 'name_desc' }}>Name Z–A</option>
+      <option value="products" {{ 'selected' if req_input('sort') == 'products' }}>Most products</option>
+    </select>
+  </label>
+  <button type="submit" class="btn btn-primary btn-sm">Search</button>
+  {% if req_input('q') %}
+    <a href="{{ url('/seller-dashboard/brands') }}" class="btn btn-outline btn-sm">Clear</a>
+  {% endif %}
+</form>
+
+{% set list = brands %}
+
+<div class="data-table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr><th>Logo</th><th>Name</th><th>Slug</th><th>My Products</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for b in (list) %}
+        <tr>
+          <td>
+            {% if b.logo_url %}
+              <img class="table-thumb" src="{{ b.logo_url }}" alt="{{ b.name }}"/>
+            {% else %}
+              <span class="table-thumb-empty">—</span>
+            {% endif %}
+          </td>
+          <td>{{ b.name }}</td>
+          <td>{{ b.slug }}</td>
+          <td>{{ counts[b.id] if (counts[b.id] is defined and counts[b.id] is not none) else 0 }}</td>
+          <td>
+            <a class="btn btn-outline btn-sm" href="{{ url(('/seller-dashboard/products?brand=' ~ b.id)) }}">View products</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

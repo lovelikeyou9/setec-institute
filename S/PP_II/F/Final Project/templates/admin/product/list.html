@@ -1,0 +1,71 @@
+{% extends "admin/master.html" %}
+
+{% block contect %}
+<main class="app-main">
+  <div class="app-content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6"><h3 class="mb-0">Product</h3></div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_bp.dashboard') }}">Home</a></li>
+            <li class="breadcrumb-item active">Product</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <a href="{{ url_for('admin_bp.add_product') }}" class="btn btn-outline-primary">
+            <i class="bi bi-plus-circle"></i> Add Product
+          </a>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Active</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in products %}
+              <tr>
+                <td>{{ p.id }}</td>
+                <td>
+                  {% if p.image %}
+                  <img src="{{ p.image }}" alt="" style="height:48px;width:48px;object-fit:contain">
+                  {% else %}-{% endif %}
+                </td>
+                <td>{{ p.title[:40] }}{% if p.title|length > 40 %}…{% endif %}</td>
+                <td>{{ p.brand.name if p.brand else '-' }}</td>
+                <td>{{ p.category.name if p.category else '-' }}</td>
+                <td>${{ '%.2f'|format(p.price) }}</td>
+                <td>{{ 'Yes' if p.is_active else 'No' }}</td>
+                <td>
+                  <a href="{{ url_for('admin_bp.edit_product', product_id=p.id) }}" class="me-2"><i class="bi bi-pencil-square"></i></a>
+                  <a href="{{ url_for('admin_bp.delete_product', product_id=p.id) }}" class="btn btn-sm btn-outline-danger"
+                     onclick="return confirm('Delete this product?')"><i class="bi bi-trash"></i></a>
+                </td>
+              </tr>
+              {% else %}
+              <tr><td colspan="8" class="text-center text-muted">No products yet. Seed runs on first app start.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
